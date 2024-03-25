@@ -4,12 +4,11 @@ title: About me
 subtitle: Why you'd want to go on a date with me
 ---
 
-My name is Inigo Montoya. I have the following qualities:
-
-- I rock a great mustache
-- I'm extremely loyal to my family
-
-What else do you need?
+- 👋 Hi, I'm **Daya**
+- I'm a **data scientist** with a passion for soccer and basketball.
+- This github account is the way I share my passion for programming through languages:  
+ **Python**, **R**, **SQL**, **Power BI** and **Excel VBA**.  
+- I love working on topics of : Machine Learning, Web Scraping, APIs, Text Mining & NLP, Data Viz and Web App. ⭐
 
 ### My story
 
