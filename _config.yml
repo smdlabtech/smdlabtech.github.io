@@ -5,15 +5,15 @@
 ### the initial set up you won't need to come back to this file often.
 ###########################################################
 
-############################
-# --- Required options --- #
-############################
+#################################
+# --- (1) Required options --- #
+################################
 
 # Name of website
-title: Website owned by smdblabtech
+title: Portofolio
 
 # Your name to show in the footer
-author: Some Person
+author: Daya (smdlabtech)
 
 ###############################################
 # --- List of links in the navigation bar --- #
@@ -24,43 +24,45 @@ navbar-links:
   Resources:
     - Beautiful Jekyll: "https://beautifuljekyll.com"
     - Learn markdown: "https://www.markdowntutorial.com/"
-  Author's home: "https://deanattali.com"
+  Author's home: "https://www.linkedin.com/in/dayasylla/"
 
-################
-# --- Logo --- #
-################
+######################
+# --- (2) LOGOS --- #
+#####################
 
 # Image to show in the navigation bar - works best with a square image
 # Remove this parameter if you don't want an image in the navbar
-avatar: "/assets/img/avatar-icon.png"
+
+##avatar: "/assets/img/avatar-icon.png"
 
 # By default, the image is cut into a circle. You can disable this behaviour by setting 'round-avatar: false'
-round-avatar: true
+#round-avatar: true
+round-avatar: false
 
 # If you want to have an image logo in the top-left corner instead of having the title of the website,
 # then specify the following parameter
 #title-img: /path/to/image
 
 
-#####################################
-# --- Footer social media links --- #
-#####################################
+#########################################
+# --- (3) FOOTER SOCIAL MEDIA LINKS --- #
+#########################################
 
 # Select the social network links that you want to show in the footer.
 # You can change the order that they show up on the page by changing the order here.
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
-  email: "someone@example.com"
+  email: "smdlabtech@gmail.com"
   rss: true  # remove this line if you don't want to show an RSS link at the bottom
   facebook: deanattali
-  github: daattali
-  twitter: daattali
-  patreon: DeanAttali
-  youtube: "@daattali"
-  whatsapp: 15551212
+  github: smdlabtech
+  twitter: smdlabtech
+  patreon: smdlabtech
+  youtube: "@dayasmdlab-tech"
+#  whatsapp: 15551212
 #  medium: yourname
 #  reddit: yourname
-#  linkedin: daattali
+  linkedin: https://www.linkedin.com/in/dayasylla/
 #  xing: yourname
 #  stackoverflow: "3943160/daattali"
 #  snapchat: deanat78
@@ -86,9 +88,9 @@ social-network-links:
 # The URL for the feed will be https://<your_website>/feed.xml
 rss-description: This website is a virtual proof that I'm awesome
 
-###########################
-# --- General options --- #
-###########################
+################################
+# --- (4) GENERAL OPTIONS --- #
+###############################
 
 # Select which social network share links to show in posts
 share-links-active:
@@ -128,7 +130,7 @@ navbar-var-length: false
 #keywords: "my,list,of,keywords"
 
 ######################################
-# --- Colours / background image --- #
+# --- (5) COLORS / BACKGROUND IMAGE --- #
 ######################################
 
 # Personalize the colours in your website. Colour values can be any valid CSS colour
@@ -163,9 +165,9 @@ footer-hover-col: "#0085A1"
 #site-js:
 #  - "/assets/js/custom-script.js"
 
-#################################
-# --- Web Analytics Section --- #
-#################################
+######################################
+# --- (6) WEB ANALYTICS SECTIONS --- #
+######################################
 
 # Fill in your Google Analytics tag ID (or "Measurement ID") to track your website usage
 #gtag: "G-XXXXXXXXXX"
@@ -189,9 +191,9 @@ footer-hover-col: "#0085A1"
 # you should switch to using the `gtag` field above instead.
 #google_analytics: "UA-XXXXXXXX-X"
 
-####################
-# --- Comments --- #
-####################
+#########################
+# --- (7) COMMENTS --- #
+########################
 
 # To use Disqus comments, sign up to https://disqus.com and fill in your Disqus shortname (NOT the userid)
 #disqus: ""
@@ -242,9 +244,9 @@ footer-hover-col: "#0085A1"
 #  emit-metadata: 0
 #  theme: light
 
-################
-# --- Misc --- #
-################
+#####################
+# --- (8) MISC --- #
+#####################
 
 # Ruby Date Format to show dates of posts
 date_format: "%B %-d, %Y"
@@ -257,7 +259,10 @@ date_format: "%B %-d, %Y"
 #################################################################################
 
 # Output options (more information on Jekyll's site)
-timezone: "America/Toronto"
+
+# timezone: "America/Toronto"
+timezone: "France/Paris"
+
 markdown: kramdown
 highlighter: rouge
 permalink: /:year-:month-:day-:title/
@@ -297,6 +302,6 @@ plugins:
   - jekyll-paginate
   - jekyll-sitemap
 
-# Beautiful Jekyll / Dean Attali
+# Beautiful Jekyll / Daya smdlabtech
 # 2fc73a3a967e97599c9763d05e564189
 
