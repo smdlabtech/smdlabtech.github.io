@@ -11,12 +11,6 @@ subtitle: Why you'd want to go on a date with me
 - I love working on topics of : Machine Learning, Web Scraping, APIs, Text Mining & NLP, Data Viz and Web App. ⭐
 
 ### My story
+I was captivated by Denzel Washington's masterful portrayal of Robert McCall, embodying a solitary avenger in an unjust world, which struck a deep chord within me. The film's intense action sequences and the overarching theme of fighting against injustice not only kept me on the edge of my seat but also left a lasting impression of satisfaction and inspiration.  
 
-To be honest, I'm having some trouble remembering right now, so why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Princess_Bride_%28film%29) and it will answer **all** your questions.
-
-
----
-layout: page
-title: About mee
-subtitle: Why you'd want to go on a date with meee
----
+So why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Equalizer_(film)) and it will answer **all** your questions.  
