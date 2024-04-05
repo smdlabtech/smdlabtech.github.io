@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Simulez jusqu'à ce que vous réussissiez
-subtitle: Extrait de Soulshaping de Jeff Brown
+title: Flake it till you make it
+subtitle: Excerpt from Soulshaping by Jeff Brown
 cover-img: /assets/img/path.jpg
 thumbnail-img: /assets/img/thumb.png
 share-img: /assets/img/path.jpg
-tags: [livres, test]
-author: Sharon Smith et Barry Simpson
+tags: [books, test]
+author: Sharon Smith and Barry Simpson
 ---
 
 Dans quelles circonstances devrions-nous quitter un chemin ? Quand est-il essentiel de terminer ce que nous avons commencé ? Si j'achète un sac de cacahuètes et que je fais une réaction allergique, personne ne me blâmerait si je le jetais. Si je mettais fin à une relation avec une femme qui me frappe, personne ne dirait que j'ai un problème d'engagement. Mais si je m'éloigne d'une voie apparemment sûre parce que mon âme a d'autres idées, suis-je un inconstant ?
