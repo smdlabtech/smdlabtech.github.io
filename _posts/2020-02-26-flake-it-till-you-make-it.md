@@ -6,7 +6,7 @@ cover-img: /assets/img/path.jpg
 thumbnail-img: /assets/img/thumb.png
 share-img: /assets/img/path.jpg
 tags: [books, test]
-author: Sharon Smith and Barry Simpson
+author: "daya (@smdlabtech)"
 ---
 
 Dans quelles circonstances devrions-nous quitter un chemin ? Quand est-il essentiel de terminer ce que nous avons commencé ? Si j'achète un sac de cacahuètes et que je fais une réaction allergique, personne ne me blâmerait si je le jetais. Si je mettais fin à une relation avec une femme qui me frappe, personne ne dirait que j'ai un problème d'engagement. Mais si je m'éloigne d'une voie apparemment sûre parce que mon âme a d'autres idées, suis-je un inconstant ?
