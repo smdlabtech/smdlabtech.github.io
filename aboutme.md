@@ -1,10 +1,11 @@
 ---
 layout: page
 title: About me
-cover-img: /assets/img/profil_portofolio.jpg
+# cover-img: /assets/img/profil_portofolio.jpg
 #subtitle: Why you'd want to go on a date with me
 ---
-<img src="assets/img/profil_portofolio.jpg" align="center"></img>
+
+![Portofolio Profil](/assets/img/profil_portofolio.jpg)
 
 - 👋 Hi, I'm **Daya**
 - I'm a **data scientist** with a passion for soccer and basketball.
