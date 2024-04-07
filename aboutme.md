@@ -3,9 +3,7 @@ layout: page
 title: About me
 #subtitle: Why you'd want to go on a date with me
 ---
-<p align="center"> 
-    <img src="assets/img/portofolio-rond.jpg" align="center"></img>
-</p>
+<img src="assets/img/portofolio-rond.jpg" align="center"></img>
 
 - 👋 Hi, I'm **Daya**
 - I'm a **data scientist** with a passion for soccer and basketball.
@@ -22,6 +20,6 @@ So why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Equaliz
 
 Here's my github profile.
 
-<iframe width="600" height="450" src="https://github.com/smdlabtech" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>  
+<iframe width="600" height="450" src="https://github.com/smdlabtech?tab=repositories" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>  
 
 [Open in brownser](https://github.com/smdlabtech?tab=repositories).  
