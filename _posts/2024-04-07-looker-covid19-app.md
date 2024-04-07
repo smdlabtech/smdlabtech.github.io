@@ -2,9 +2,12 @@
 layout: post
 title: "La COVID-19: Réflexions sur la pandémie et son impact mondial"
 subtitle: "Analyse de la crise sanitaire qui a bouleversé le monde"
-author: "daya (@smdlabtech)"
+cover-img: /assets/img/test-rapide-covid.jpg
+thumbnail-img: /assets/img/test-rapide-covid.jpg
+share-img: /assets/img/test-rapide-covid.jpg
 tags: [COVID-19, Pandémie, Santé Publique, Vaccination]
 comments: true
+author: "daya (@smdlabtech)"
 ---
 
 ![Virus COVID-19](/assets/img/coronavirus.jpg)
@@ -45,5 +48,8 @@ En regardant vers l'avenir, il est crucial de tirer des leçons de cette expéri
 
 ---
 
-Cet article ne représente qu'une fraction de l'histoire continue de la COVID-19. Nous resterons attentifs aux développements et aux progrès réalisés dans la lutte contre cette pandémie mondiale.
+Cet article ne représente qu'une fraction de l'histoire continue de la COVID-19. Nous resterons attentifs aux développements et aux progrès réalisés dans la lutte contre cette pandémie mondiale.  
 
+Par ailleurs, voici donc une application qui vous permet de suivre l'évolution de cette pandémie de covid19.
+
+<iframe width="600" height="450" src="https://en.wikipedia.org/wiki/The_Equalizer_(film)" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>

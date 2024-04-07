@@ -20,4 +20,6 @@ So why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Equaliz
 
 ---
 
-<iframe width="600" height="450" src="https://en.wikipedia.org/wiki/The_Equalizer_(film)" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+<iframe width="600" height="450" src="https://en.wikipedia.org/wiki/The_Equalizer_(film)" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>  
+
+[Open in brownser](https://en.wikipedia.org/wiki/The_Equalizer_(film)).  
