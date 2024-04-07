@@ -3,6 +3,9 @@ layout: page
 title: About me
 #subtitle: Why you'd want to go on a date with me
 ---
+<p align="center"> 
+    <img src="assets/img/profil_portofolio.jpg" align="center"></img>
+</p>
 
 - 👋 Hi, I'm **Daya**
 - I'm a **data scientist** with a passion for soccer and basketball.
@@ -14,3 +17,7 @@ title: About me
 I was captivated by Denzel Washington's masterful portrayal of Robert McCall, embodying a solitary avenger in an unjust world, which struck a deep chord within me. The film's intense action sequences and the overarching theme of fighting against injustice not only kept me on the edge of my seat but also left a lasting impression of satisfaction and inspiration.  
 
 So why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Equalizer_(film)) and it will answer **all** your questions.  
+
+---
+
+<iframe width="600" height="450" src="https://lookerstudio.google.com/embed/reporting/49812e15-8500-4f9b-99cc-40242216a197/page/p_96t6epdlfd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
