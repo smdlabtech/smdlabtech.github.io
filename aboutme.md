@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About me
+cover-img: /assets/img/portofolio-rond.jpg
 #subtitle: Why you'd want to go on a date with me
 ---
 <img src="assets/img/portofolio-rond.jpg" align="center"></img>
@@ -18,8 +19,5 @@ So why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Equaliz
 
 ---
 
-Here's my github profile.
-
-<iframe width="600" height="450" src="https://github.com/smdlabtech?tab=repositories" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>  
-
-[Open in brownser](https://github.com/smdlabtech?tab=repositories).  
+Here's my github profile.  
+[Open in brownser](https://github.com/smdlabtech/).  

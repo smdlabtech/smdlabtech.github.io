@@ -55,6 +55,6 @@ Cet article ne représente qu'une fraction de l'histoire continue de la COVID-19
 
 Par ailleurs, voici donc une application qui vous permet de suivre l'évolution de cette pandémie de covid19.
 
-<iframe width="600" height="450" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>  
+<iframe width="600" height="500" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>  
 
 Pour visualiser sur votre navigateur [Cliquez ici ](https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd)
