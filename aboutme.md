@@ -1,16 +1,18 @@
 ---
 layout: page
 title: About me
-cover-img: /assets/img/portofolio-rond.jpg
+cover-img: /assets/img/profil_portofolio.jpg
 #subtitle: Why you'd want to go on a date with me
 ---
-<img src="assets/img/portofolio-rond.jpg" align="center"></img>
+<img src="assets/img/profil_portofolio.jpg" align="center"></img>
 
 - 👋 Hi, I'm **Daya**
 - I'm a **data scientist** with a passion for soccer and basketball.
-- This github portofolio is the way I share my passion for programming through languages:  
+- This portofolio is the way I share my passion for programming through languages:  
  **Python**, **R**, **SQL**, **Power BI** and **Excel VBA**.  
 - I love working on topics of : Machine Learning, Web Scraping, APIs, Text Mining & NLP, Data Viz and Web App. ⭐
+
+
 
 ### Here's a little story
 I was captivated by Denzel Washington's masterful portrayal of Robert McCall, embodying a solitary avenger in an unjust world, which struck a deep chord within me. The film's intense action sequences and the overarching theme of fighting against injustice not only kept me on the edge of my seat but also left a lasting impression of satisfaction and inspiration.  
