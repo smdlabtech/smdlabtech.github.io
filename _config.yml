@@ -21,9 +21,10 @@ author: "daya (@smdlabtech)"
 ###################################################
 
 navbar-links:
-  Home: "home"
-  About Me: "aboutme"
+  #Home: "home"
   Contact : "contact"
+  About Me: "aboutme"
+
  # Resources:
  #   - Beautiful Jekyll: "https://beautifuljekyll.com"
  #   - Learn markdown: "https://www.markdowntutorial.com/"
