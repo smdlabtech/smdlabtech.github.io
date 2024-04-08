@@ -6,15 +6,14 @@ subtitle: This is where I will tell my friends way too much about me.
  
 <div class="projects-grid">
   {% for project in site.projects %}
-  <div class="project">
-    <a href="{{ project.url }}">
+    <div class="project">
       <img src="{{ project.image }}" alt="{{ project.title }}">
       <h3>{{ project.title }}</h3>
-    </a>
-    <p>{{ project.excerpt }}</p>
-  </div>
+      <p>{{ project.content | strip_html | truncatewords: 20 }}</p>
+    </div>
   {% endfor %}
 </div>
+
 
 
   
