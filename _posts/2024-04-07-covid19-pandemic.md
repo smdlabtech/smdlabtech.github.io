@@ -30,29 +30,39 @@ The symptoms of COVID-19 can range from mild to severe and include fever, cough,
 
 ## Testing and Diagnostics
 
+<p style="text-align: justify;"> 
 Testing for COVID-19 is essential for detecting cases, isolating infected individuals, and reducing transmission. There are different types of tests, including molecular tests (such as PCR tests) and rapid antigen tests. Testing strategies have evolved as new tests were developed and approved.
+</p>
 
 ## International Response and Vaccination
 
+<p style="text-align: justify;"> 
 The international response to COVID-19 has varied, with countries adopting strategies ranging from strict lockdowns to more flexible measures. The race to develop a vaccine was unprecedented in its urgency and scale, resulting in several effective vaccines approved for emergency use less than a year after the start of the pandemic.
 
 Mass vaccination campaigns have been a crucial aspect of the pandemic response, aiming to achieve herd immunity and reduce the number of severe cases and deaths.
+</p>
 
 ## Economic and Social Impact
 
+<p style="text-align: justify;"> 
 The pandemic has had a devastating impact on the global economy, leading to massive job losses, supply chain disruptions, and economic recessions in many countries. Social and economic inequalities have been exacerbated, highlighting the challenges of public health and unequal access to care.
+</p>
 
 ## Future Outlook
 
+<p style="text-align: justify;"> 
 As we continue to navigate the complexities of the COVID-19 pandemic, the importance of international cooperation, solidarity, and scientific innovation remains clear. The crisis has underscored the need for strong public health and has prompted reflection on preparedness for future pandemics.
 
 Looking ahead, it is crucial to learn from this experience to build a more resilient world in the face of health crises.
+</p>
 
 ---
 
+<p style="text-align: justify;"> 
 This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic.
 
 Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic.
+</p>
 
 <iframe width="1000" height="600" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
 
