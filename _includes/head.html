@@ -171,26 +171,6 @@
     {% endfor %}
   {% endif %}
 
-
-
-
-
-
-  {% if page.comments and site.staticman.repository and site.staticman.branch %}
-  <link rel="stylesheet" href="{{ "/assets/css/staticman.css" | relative_url }}">
-  {% endif %}
-
-  {% assign favicon_exists = site.static_files | where: "path", "/favicon.ico" | size %}
-  {% if favicon_exists == 1 %}
-  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" />
-  {% endif %}
-
-  {% if page.head-extra %}
-    {% for file in page.head-extra %}
-      {% include {{ file }} %}
-    {% endfor %}
-  {% endif %}
-
   <!-- Lien vers votre feuille de style projects.css -->
   <link rel="stylesheet" href="{{ '/assets/css/projects.css' | relative_url }}">
 
