@@ -54,6 +54,6 @@ This article represents only a fraction of the ongoing story of COVID-19. We wil
 
 Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic.
 
-<iframe width="900" height="600" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+<iframe width="1000" height="600" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
 
 To view in your browser [Click here](https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd)

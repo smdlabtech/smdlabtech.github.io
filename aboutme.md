@@ -5,7 +5,7 @@ title: About me
 #subtitle: Why you'd want to go on a date with me
 ---
 
-![Portofolio Profil](/assets/img/profil_portofolio.jpg)
+![Portofolio Profil](/assets/img/portofolio-rond.jpg)
 
 - 👋 Hi, I'm **Daya**
 - I'm a **data scientist** with a passion for soccer and basketball.
