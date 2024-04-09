@@ -3,7 +3,7 @@ layout: post
 title: "NVIDIA Redefines the Future of Artificial Intelligence with Its Latest Innovation"
 subtitle: "Diving into the technological revolution shaping the future of AI"
 cover-img: /assets/img/nvidia_ai_revolution.webp
-thumbnail-img: /assets/img/nvidia_in_action.webp
+thumbnail-img: /assets/img/nvidia_in_action.jfif
 share-img: /assets/img/nvidia_ai_revolution.webp
 tags: [NVIDIA, Artificial Intelligence, Machine Learning, Technology]
 comments: true
@@ -24,7 +24,7 @@ At the heart of this advancement lies NVIDIA's desire to push performance to its
 
 NVIDIA's innovation opens unprecedented doors for researchers and professionals, broadening the horizons of what is possible in the field of AI. It promises to accelerate the pace of research and development, allowing rapid advances in areas such as machine learning, natural language processing, and many others.
 
-![NVIDIA in Action](/assets/img/nvidia_in_action.webp)
+![NVIDIA in Action](/assets/img/nvidia_in_action.jfif)
 
 ## A Future Redefined by AI
 
