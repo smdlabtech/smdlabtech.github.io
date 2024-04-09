@@ -64,8 +64,10 @@ This article represents only a fraction of the ongoing story of COVID-19. We wil
 
 Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic.  
 Now, if you'd like to see the evolution of covid19 around the world, here's an application that lets you visualize the number of cases.
-
-Here's the application. To view in your browser [Click here](https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd)
 </p>
+
+Here's the application.  
+[Click here](https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd)
+
 
 <iframe width="800" height="400" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
