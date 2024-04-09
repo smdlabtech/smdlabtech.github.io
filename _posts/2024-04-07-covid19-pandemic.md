@@ -17,11 +17,13 @@ Additionally, here is an application that allows you to follow the evolution of 
 Now, if you'd like to see the evolution of covid19 around the world, here's an application that lets you visualize the number of cases.
 </p>
 
-Here's the application.  
+Here's the application, open in your browser.  
 [Click here](https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd)
 
 
 <iframe width="800" height="400" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+
+
 ---
 
 <p > Since its emergence in 2019, COVID-19 has led to global and persistent changes in our lives. Amidst health, economic, and social challenges, the pandemic has revealed the crucial importance of international cooperation. The future, while uncertain, is being shaped by the lessons learned from this unprecedented crisis.
