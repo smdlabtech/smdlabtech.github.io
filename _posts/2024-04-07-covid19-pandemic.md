@@ -35,7 +35,7 @@ Testing for COVID-19 is essential for detecting cases, isolating infected indivi
 </p>
 
 ## International Response and Vaccination
-![Rapid COVID-19 Test](/assets/img/mask-convid19.jpg)
+![Rapid COVID-19 Test](/assets/img/vaccination_et_covid.png)
 
 <p style="text-align: justify;"> 
 The international response to COVID-19 has varied, with countries adopting strategies ranging from strict lockdowns to more flexible measures. The race to develop a vaccine was unprecedented in its urgency and scale, resulting in several effective vaccines approved for emergency use less than a year after the start of the pandemic.
@@ -62,9 +62,10 @@ Looking ahead, it is crucial to learn from this experience to build a more resil
 <p style="text-align: justify;"> 
 This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic.
 
-Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic.
+Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic.  
+Now, if you'd like to see the evolution of covid19 around the world, here's an application that lets you visualize the number of cases.
+
+Here's the application. To view in your browser [Click here](https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd)
 </p>
 
-<iframe width="1000" height="600" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
-
-To view in your browser [Click here](https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd)
+<iframe width="800" height="400" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
