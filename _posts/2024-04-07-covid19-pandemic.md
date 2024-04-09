@@ -3,7 +3,7 @@ layout: post
 title: "COVID-19: Reflections on the Pandemic and Its Global Impact"
 subtitle: "Analysis of the health crisis that has turned the world upside down"
 cover-img: /assets/img/mask-convid19.jpg
-thumbnail-img: /assets/img/test-rapide-covid.jpg
+thumbnail-img: /assets/img/mask-convid19.jpg
 share-img: /assets/img/mask-convid19.jpg
 tags: [COVID-19, Pandemic, Public Health, Vaccination]
 comments: true
@@ -12,11 +12,10 @@ author: "daya (@smdlabtech)"
 
 Since its emergence in 2019, COVID-19 has led to global and persistent changes in our lives. Amidst health, economic, and social challenges, the pandemic has revealed the crucial importance of international cooperation. The future, while uncertain, is being shaped by the lessons learned from this unprecedented crisis.
 
-![COVID-19 Virus](/assets/img/coronavirus.jpg)
-
 The COVID-19 pandemic, caused by the SARS-CoV-2 coronavirus, began as a mysterious case of pneumonia in December 2019 in the city of Wuhan, China. Quickly, the virus spread across continents, causing unprecedented upheaval in every aspect of daily life.
 
 ## Origin and Transmission
+![COVID-19 Virus](/assets/img/coronavirus.jpg)
 
 Coronaviruses are a large family of viruses, some causing illness in humans and others in animals. SARS-CoV-2 is a new virus from this family that had never before been identified in humans.
 
@@ -26,15 +25,17 @@ The virus is primarily transmitted through droplets expelled by an infected pers
 
 The symptoms of COVID-19 can range from mild to severe and include fever, cough, and difficulty breathing. More serious symptoms may include pneumonia, kidney failure, and even death. Some infected people show no symptoms and can transmit the virus without knowing it.
 
-![Rapid COVID-19 Test](/assets/img/test-rapide-covid.jpg)
+
 
 ## Testing and Diagnostics
+![Rapid COVID-19 Test](/assets/img/test-rapide-covid.jpg)
 
 <p style="text-align: justify;"> 
 Testing for COVID-19 is essential for detecting cases, isolating infected individuals, and reducing transmission. There are different types of tests, including molecular tests (such as PCR tests) and rapid antigen tests. Testing strategies have evolved as new tests were developed and approved.
 </p>
 
 ## International Response and Vaccination
+![Rapid COVID-19 Test](/assets/img/mask-convid19.jpg)
 
 <p style="text-align: justify;"> 
 The international response to COVID-19 has varied, with countries adopting strategies ranging from strict lockdowns to more flexible measures. The race to develop a vaccine was unprecedented in its urgency and scale, resulting in several effective vaccines approved for emergency use less than a year after the start of the pandemic.
