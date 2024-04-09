@@ -2,9 +2,9 @@
 layout: post
 title: "NVIDIA Redefines the Future of Artificial Intelligence with Its Latest Innovation"
 subtitle: "Diving into the technological revolution shaping the future of AI"
-cover-img: /assets/img/nvidia_ai_revolution.webp
+cover-img: /assets/img/nvidia_in_action.jfif
 thumbnail-img: /assets/img/nvidia_in_action.jfif
-share-img: /assets/img/nvidia_ai_revolution.webp
+share-img: /assets/img/nvidia_in_action.jfif
 tags: [NVIDIA, Artificial Intelligence, Machine Learning, Technology]
 comments: true
 author: "daya (@smdlabtech)"
