@@ -10,11 +10,6 @@ comments: true
 author: "daya (@smdlabtech)"
 ---
 
-Since its emergence in 2019, COVID-19 has led to global and persistent changes in our lives. Amidst health, economic, and social challenges, the pandemic has revealed the crucial importance of international cooperation. The future, while uncertain, is being shaped by the lessons learned from this unprecedented crisis.
-
-The COVID-19 pandemic, caused by the SARS-CoV-2 coronavirus, began as a mysterious case of pneumonia in December 2019 in the city of Wuhan, China. Quickly, the virus spread across continents, causing unprecedented upheaval in every aspect of daily life.
-
-
 <p style="text-align: justify;"> 
 This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic.
 
@@ -28,6 +23,11 @@ Here's the application.
 
 <iframe width="800" height="400" src="https://lookerstudio.google.com/embed/reporting/058ae97f-74ed-4355-b30d-d29fbad12787/page/p_dkr9e3x2fd" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
 ---
+
+<p > Since its emergence in 2019, COVID-19 has led to global and persistent changes in our lives. Amidst health, economic, and social challenges, the pandemic has revealed the crucial importance of international cooperation. The future, while uncertain, is being shaped by the lessons learned from this unprecedented crisis.
+
+The COVID-19 pandemic, caused by the SARS-CoV-2 coronavirus, began as a mysterious case of pneumonia in December 2019 in the city of Wuhan, China. Quickly, the virus spread across continents, causing unprecedented upheaval in every aspect of daily life.
+</p>
 
 ## Origin and Transmission
 ![COVID-19 Virus](/assets/img/coronavirus.jpg)
