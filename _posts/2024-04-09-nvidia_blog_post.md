@@ -1,4 +1,3 @@
-
 ---
 layout: post
 title: "NVIDIA Redéfinit l'Avenir de l'Intelligence Artificielle avec sa Dernière Innovation"
