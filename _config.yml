@@ -22,7 +22,17 @@ author: "daya (@smdlabtech)"
 
 navbar-links:
   #Home: "home"
-  Contact : "contact"
+  News: "news"
+  Uses cases: "uses_cases"
+  Python: "python"
+  SQL: "sql"
+  R Shiny: "r_shiny"
+  Power BI: "power_bi"
+  Looker: "looker"
+  Excel VBA: "excel_vba"
+  Google Sheets: "gool_sheets"
+  
+  Contact: "contact"
   About Me: "aboutme"
 
  # Resources:
