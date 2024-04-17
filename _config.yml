@@ -25,7 +25,7 @@ navbar-links:
   News: "news"
   Uses cases: "uses_cases"
   Programming: "uses_cases"
-  Dataviz: "dataviz"
+  Dataviz: "mardown/dataviz/"
   Contact: "contact"
   About Me: "aboutme"
 
