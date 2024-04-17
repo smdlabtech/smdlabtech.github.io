@@ -24,14 +24,8 @@ navbar-links:
   #Home: "home"
   News: "news"
   Uses cases: "uses_cases"
-  Python: "python"
-  SQL: "sql"
-  R Shiny: "r_shiny"
-  Power BI: "power_bi"
-  Looker: "looker"
-  Excel VBA: "excel_vba"
-  Google Sheets: "gool_sheets"
-  
+  Programming: "uses_cases"
+  Dataviz: "dataviz"
   Contact: "contact"
   About Me: "aboutme"
 
