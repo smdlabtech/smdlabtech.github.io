@@ -5,6 +5,7 @@ let BeautifulJekyllJS = {
   bigImgEl : null,
   numImgs : null,
 
+  // Fonction d'initialisation -----------------------------//
   init : function() {
     setTimeout(BeautifulJekyllJS.initNavbar, 10);
 
@@ -31,6 +32,7 @@ let BeautifulJekyllJS = {
     BeautifulJekyllJS.initSearch();
   },
 
+  // Fonction Init Navbar -----------------------------//
   initNavbar : function() {
     // Set the navbar-dark/light class based on its background color
     const rgb = $('.navbar').css("background-color").replace(/[^\d,]/g,'').split(",");
@@ -46,6 +48,7 @@ let BeautifulJekyllJS = {
     }
   },
 
+  // Fonction Init Image -----------------------------//
   initImgs : function() {
     // If the page was large images to randomly select from, choose an image
     if ($("#header-big-imgs").length > 0) {
@@ -92,6 +95,7 @@ let BeautifulJekyllJS = {
     }
   },
 
+  // Fonction getImgInfo() -----------------------------//
   getImgInfo : function() {
     const randNum = Math.floor((Math.random() * BeautifulJekyllJS.numImgs) + 1);
     const src = BeautifulJekyllJS.bigImgEl.attr("data-img-src-" + randNum);
@@ -103,6 +107,7 @@ let BeautifulJekyllJS = {
     }
   },
 
+  // Fonction getImgInfo() -----------------------------//
   setImg : function(src, desc) {
     $(".intro-header.big-img").css("background-image", 'url(' + src + ')');
     if (typeof desc !== typeof undefined && desc !== false) {
@@ -112,6 +117,7 @@ let BeautifulJekyllJS = {
     }
   },
 
+  // Fonction initSearch -----------------------------//
   initSearch : function() {
     if (!document.getElementById("beautifuljekyll-search-overlay")) {
       return;

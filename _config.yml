@@ -21,7 +21,7 @@ author: "daya (@smdlabtech)"
 ###################################################
 
 navbar-links:
-  #Home: "home"
+  Home: "home"
   News: "_posts/news"
   Use cases: "_posts/use_cases"
   Programming: "_posts/programming"
