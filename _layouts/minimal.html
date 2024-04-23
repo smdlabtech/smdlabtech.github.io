@@ -16,8 +16,10 @@ common-ext-js:
 <!DOCTYPE html>
 <html lang="{{ page.language | default: site.language | default: 'en' }}">
 
+  <!-- HEAD (HTML)--> 
   {% include head.html %}
 
+  <!-- BODY (HTML)-->
   <body>
 
     <main class="{% if page.full-width %} container-fluid {% else %} container-md {% endif %} main-content">
@@ -41,7 +43,6 @@ common-ext-js:
     </main>
 
     {% include footer-minimal.html %}
-
     {% include footer-scripts.html %}
 
   </body>

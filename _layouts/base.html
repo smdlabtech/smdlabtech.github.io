@@ -21,19 +21,19 @@ common-js:
 
 <!DOCTYPE html>
 <html lang="{{ page.language | default: site.language | default: 'en' }}">
-<!-- Beautiful Jekyll 6.0.1 | Copyright Daya smdlabtech 2024 -->
+  
+<!-- Beautiful Jekyll 6.0.1 | smdlabtech 2024 -->
+<!-- HEAD (HTML)-->
 {% include head.html %}
 
+
+<!-- BODY (HTML)-->
 <body>
   {% include gtm_body.html %}
-
   {% include nav.html %}
-
   {{ content }}
-
   {% include footer.html %}
-
   {% include footer-scripts.html %}
-
 </body>
+
 </html>
