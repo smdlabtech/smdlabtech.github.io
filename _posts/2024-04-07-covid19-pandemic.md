@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "📰COVID-19: Reflections on the Pandemic and Its Global Impact"
+title: "COVID-19: Reflections on the Pandemic and Its Global Impact"
 subtitle: "Analysis of the health crisis that has turned the world upside down"
 
 gh-repo: smdlabtech/tips_git
