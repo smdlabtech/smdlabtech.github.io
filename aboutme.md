@@ -6,6 +6,10 @@ title: About me
 ---
 
 ![Portofolio Profil](/assets/img/portofolio-rond.jpg)
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-informational?style=flat&logo=github&logoColor=white&color=blue)](https://github.com/smdlabtech)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-informational?style=flat&logo=linkedin&logoColor=white&color=blue)](https://www.linkedin.com/in/dayasylla/)
+[![Twitter](https://img.shields.io/badge/Twitter-Follow-informational?style=flat&logo=twitter&logoColor=white&color=1DA1F2)](https://x.com/BrainYadzo/followers)
+
 
 - 👋 Hi, I'm **Daya**
 - I'm a **data scientist** with a passion for soccer and basketball.
