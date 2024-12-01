@@ -10,21 +10,16 @@ title: About me
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-informational?style=flat&logo=linkedin&logoColor=white&color=blue)](https://www.linkedin.com/in/dayasylla/)
 [![Twitter](https://img.shields.io/badge/Twitter-Follow-informational?style=flat&logo=twitter&logoColor=white&color=1DA1F2)](https://x.com/BrainYadzo/followers)
 
-
+# [✨Data Scientist & AI Engineer✨](https://github.com/smdlabtech)
 - 👋 Hi, I'm **Daya**
-- I'm a **data scientist** with a passion for soccer and basketball.
-- This blog is a way to share my passion for Business Intelligence, data science and programming through the languages :  
+- I'm a **data scientist & AI Enginner** with a passion for soccer and basketball. 
+- This account is a way to share my passion for Business Intelligence, data science and programming through the languages :  
  **Python**, **R**, **SQL**, **Javascript** and tools like **Power BI**, **Shiny**, **Streamlit**, **Excel VBA** and **Google Sheets** (via **Google Apps Script**).  
-- I love working on topics of : Web Scraping, Chatbot Assistant, Text Mining & NLP and Web App Machine Learning, Deep Learning and AI Assistant. ⭐  
-
-
-
-### Here's a little story :
-I was captivated by Denzel Washington's masterful portrayal of Robert McCall, embodying a solitary avenger in an unjust world, which struck a deep chord within me. The film's intense action sequences and the overarching theme of fighting against injustice not only kept me on the edge of my seat but also left a lasting impression of satisfaction and inspiration.  
-
-So why don't you just watch [my movie](https://en.wikipedia.org/wiki/The_Equalizer_(film)) and it will answer **all** your questions.  
-
+- 😎 I love working on topics like : Chatbot Assistant, Text Mining & NLP and Web App Machine Learning, Deep Learning and AI Assistant and Web Scraping ⭐  
+<br>
 ---
 
-Here's my github profile.  
-[Open in brownser](https://github.com/smdlabtech/).  
+##  🌎Contact Me :📧
+[![](https://img.shields.io/badge/-Gmail-%2312100E.svg?&style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:smdlabtech@gmail.com)](mailto:smdlabtech@gmail.com)
+[![](https://img.shields.io/badge/linkedin-%2312100E.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dayasylla/)
+---
