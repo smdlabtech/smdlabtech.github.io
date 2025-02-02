@@ -23,10 +23,10 @@ author: "daya (@smdlabtech)"
 navbar-links:
   #Home: "home"
   News: "_posts/news"
-  Use cases: "_posts/use_cases"
-  Programming: "_posts/programming"
-  Dataviz: "_posts/dataviz/index"
-  Contact: "contact"
+  # Use cases: "_posts/use_cases"
+  # Programming: "_posts/programming"
+  # Dataviz: "_posts/dataviz/index"
+  # Contact: "contact"
   About Me: "aboutme"
 
  # Resources:
