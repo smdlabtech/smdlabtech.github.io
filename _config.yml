@@ -27,7 +27,7 @@ navbar-links:
   # Programming: "_posts/programming"
   # Dataviz: "_posts/dataviz/index"
   # Contact: "contact"
-  About Me: "aboutme"
+  About Me: "about"
 
  # Resources:
  #   - Beautiful Jekyll: "https://beautifuljekyll.com"
