@@ -21,7 +21,7 @@ title: About me
 
 ##  🌎Contact Me :📧
 [![](https://img.shields.io/badge/-Gmail-%2312100E.svg?&style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:smdlabtech@gmail.com)](mailto:smdlabtech@gmail.com)
-[![](https://img.shields.io/badge/linkedin-%2312100E.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dayasylla/)
+[![](https://img.shields.io/badge/linkedin-%2312100E.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dayasylla/)  
 ---
     <!--------------------------------------------------->
     <!------ Ajout des élément d'expériences ------------>
@@ -139,5 +139,3 @@ title: About me
         </p>
     </details>
 <br>
-
----
