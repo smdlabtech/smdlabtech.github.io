@@ -253,6 +253,31 @@ footer-hover-col: "#0085A1"
 #  emit-metadata: 0
 #  theme: light
 
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: "dirt" # ou "air", "aqua", "contrast", "dark", "neon", "mint", "plum", "sunrise"
+
+remote_theme: mmistakes/minimal-mistakes@v4.24.0
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-remote-theme
+
+
+# Staticman configuration
+# Staticman is a third-party comment system. You can use it to add comments to your blog posts.
+staticman:
+  repository: "smdlabtech/smdlabtech.github.io"
+  branch: "main" # ou master selon ta branche
+  endpoint: "https://sm-staticman-api.vercel.app/v3/entry/github/ " # ou ton propre endpoint si auto-hébergé
+
+
+description: "Portfolio et blog de Daya, passionné de data science, IA, Python et sports."
+url: "https://smdlabtech.github.io "
+twitter_username: smdlabtech
+github_username: smdlabtech
+
+
 #####################
 # --- (8) MISC --- #
 #####################
@@ -270,7 +295,7 @@ date_format: "%B %-d, %Y"
 # Output options (more information on Jekyll's site)
 
 # timezone: "America/Toronto"
-timezone: "France/Paris"
+timezone: "Europe/Paris"
 
 markdown: kramdown
 highlighter: rouge

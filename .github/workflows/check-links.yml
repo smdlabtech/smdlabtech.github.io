@@ -1,0 +1,11 @@
+name: Check Links
+
+on: [push]
+
+jobs:
+  check-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Check links
+        uses: gabrielfalcao/linkschecker-action@master

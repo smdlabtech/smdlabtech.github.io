@@ -6,6 +6,8 @@ subtitle: "Analysis of the health crisis that has turned the world upside down"
 gh-repo: smdlabtech/tips_git
 gh-badge: [star, fork, follow]
 
+description: "COVID-19: Reflections on the health crisis that has turned the world upside down"
+
 cover-img: /assets/img/mask-convid19.jpg
 thumbnail-img: /assets/img/mask-convid19.jpg
 share-img: /assets/img/mask-convid19.jpg
