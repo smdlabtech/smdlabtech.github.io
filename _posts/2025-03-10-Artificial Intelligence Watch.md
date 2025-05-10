@@ -41,13 +41,11 @@ The French Ombudsman has published a report urging increased vigilance regarding
 
 Professor of ethics Peter Kirchschläger warns about public institutions' reliance on big tech companies, which have historically prioritized profit over user rights. He advocates for more independent and transparent AI regulation. ([Source](https://www.lemonde.fr/idees/article/2024/09/24/peter-kirchschlager-professeur-d-ethique-les-grandes-entreprises-technologiques-se-sont-toujours-montrees-peu-soucieuses-de-nuire-aux-personnes-et-de-violer-leurs-droits_6330688_3232.html))
 
----
 
 📢 **Conclusion**: AI is shaping the future at a rapid pace, bringing major innovations while also presenting significant challenges. We will continue to monitor developments to understand how these advances impact our daily lives.
 
 📩 Stay tuned for more AI trend updates! 🚀
 
----
 
 ## 📚 Cited Sources
 
