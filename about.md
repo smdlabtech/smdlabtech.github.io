@@ -18,6 +18,11 @@ title: About me
 - 😎 I love working on topics like : Chatbot Assistant, Text Mining & NLP and Web App Machine Learning, Deep Learning and AI Assistant and Web Scraping ⭐  
 <br>
 ---
+
+##  🌎Contact Me :📧
+[![](https://img.shields.io/badge/-Gmail-%2312100E.svg?&style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:smdlabtech@gmail.com)](mailto:smdlabtech@gmail.com)
+[![](https://img.shields.io/badge/linkedin-%2312100E.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dayasylla/)
+---
     <!--------------------------------------------------->
     <!------ Ajout des élément d'expériences ------------>
     <!--------------------------------------------------->
@@ -81,21 +86,21 @@ title: About me
     <summary>**Certified** on 2024 : [[Microsoft] | Power BI PL300](https://learn.microsoft.com/fr-fr/users/dayasylla-9672/credentials/certification/data-analyst-associate)
     </summary>
     <p style="text-align:center;"> 
-    <img width="700" src="_Certifcations_and_Badges/_Microsoft Certifications/Certifications/PL300 - Power BI/img/Certification Power BI.png">
+    <img width="700" src="__Certifcations_and_Badges/_Microsoft Certifications/Certifications/PL300 - Power BI/img/Certification Power BI.png">
     </p>
     </details> 
     <!--(B) : Alteryx Designer Core Certification-->
     <details>
         <summary>**Certified** on 2023 : [[Alteryx] | Designer Core Certification](https://www.credly.com/badges/a35bc2bc-8641-4461-979b-264bd2385d51/linked_in?t=ryathr)</summary>
         <p style="text-align:center;"> 
-            <img width="700" src="_Certifcations_and_Badges/Alteryx/Certificate/Certificate.png">
+            <img width="700" src="__Certifcations_and_Badges/Alteryx/Certificate/Certificate.png">
         </p>
     </details>
     <!--(C) : Scival -->
     <details>
         <summary>**Certified** on 2021 : [[Elsevier] | Scival](https://www.credential.net/727bbd2e-bfec-4ce2-a52f-66ebd7871f77#gs.5dm3h8)</summary>
         <p style="text-align:center;"> 
-            <img width="700" src="_Certifcations_and_Badges/_Microsoft Certifications/Badges/PNG/Badge (3).png">
+            <img width="700" src="__Certifcations_and_Badges/_Microsoft Certifications/Badges/PNG/Badge (3).png">
         </p>
     </details>
 <br>
@@ -109,35 +114,30 @@ title: About me
     <summary>**Earned** on 2024 : [[Microsoft] | Ecrire des Formules DAX](https://learn.microsoft.com/fr-fr/training/modules/dax-power-bi-write-formulas/)
     </summary>
     <p style="text-align:center;"> 
-    <img width="700" src="_Certifcations_and_Badges/_Microsoft Certifications/Badges/PNG/Badge (1).png">
+    <img width="700" src="__Certifcations_and_Badges/_Microsoft Certifications/Badges/PNG/Badge (1).png">
     </p>
     </details> 
     <!--(2) : [Microsoft] | Principe de base de l'IA Générative -->
     <details>
         <summary>**Earned** on 2024 : [[Microsoft] | Principe de base de l'IA Générative](https://learn.microsoft.com/fr-fr/training/modules/fundamentals-generative-ai/)</summary>
         <p style="text-align:center;"> 
-            <img width="700" src="_Certifcations_and_Badges/_Microsoft Certifications/Badges/PNG/Badge (2).png">
+            <img width="700" src="__Certifcations_and_Badges/_Microsoft Certifications/Badges/PNG/Badge (2).png">
         </p>
     </details>
     <!--(3) : [Microsoft] | Ecrire des Formules DAX pour le modèles Power BI Desktop -->
     <details>
         <summary>**Earned** on 2024 : [[Microsoft] | Ecrire des Formules DAX pour le modèles Power BI Desktop](https://www.credential.net/727bbd2e-bfec-4ce2-a52f-66ebd7871f77#gs.5dm3h8)</summary>
         <p style="text-align:center;"> 
-            <img width="700" src="_Certifcations_and_Badges/_Microsoft Certifications/Badges/PNG/Badge (3).png">
+            <img width="700" src="__Certifcations_and_Badges/_Microsoft Certifications/Badges/PNG/Badge (3).png">
         </p>
     </details>
     <!--(4) : SAS - CY Cergy Paris Université Academic Specialization in Business Analytics & Statistical Data Analysis -->
     <details>
         <summary>**Earned** on 2022 : [[SAS] Specialization in Business Analytics & Statistical Data Analysis](https://www.credential.net/727bbd2e-bfec-4ce2-a52f-66ebd7871f77#gs.5dm3h8)</summary>
         <p style="text-align:center;"> 
-            <img width="700" src="_Certifcations_and_Badges/Others/Badges/PNG/sas-cy-badge.png">
+            <img width="700" src="__Certifcations_and_Badges/Others/Badges/PNG/sas-cy-badge.png">
         </p>
     </details>
 <br>
 
----
-
-##  🌎Contact Me :📧
-[![](https://img.shields.io/badge/-Gmail-%2312100E.svg?&style=for-the-badge&logo=Gmail&logoColor=white&link=mailto:smdlabtech@gmail.com)](mailto:smdlabtech@gmail.com)
-[![](https://img.shields.io/badge/linkedin-%2312100E.svg?&style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/dayasylla/)
 ---
