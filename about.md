@@ -17,7 +17,6 @@ title: About me
  **Python**, **R**, **SQL**, **Javascript** and tools like **Power BI**, **Shiny**, **Streamlit**, **Excel VBA** and **Google Sheets** (via **Google Apps Script**).  
 - 😎 I love working on topics like : Chatbot Assistant, Text Mining & NLP and Web App Machine Learning, Deep Learning and AI Assistant and Web Scraping ⭐  
 <br>
----
     <!--------------------------------------------------->
     <!------ Ajout des élément d'expériences ------------>
     <!--------------------------------------------------->
