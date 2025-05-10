@@ -1,12 +1,14 @@
 ---
+layout: post
 title: "Artificial Intelligence Watch: News & Updates"
 subtitle: "An overview of key trends and innovations in AI"
+description: "COVID-19: Reflections on the health crisis that has turned the world upside down"
 cover-img: /assets/img/ia_veille.jpg
 thumbnail-img: /assets/img/ia_veille.jpg
 share-img: /assets/img/ia_veille.jpg
 tags: [Artificial Intelligence, Technology, Machine Learning, Innovation]
 comments: true
-author: "Daya (@smdlabtech)"
+author: "daya (@smdlabtech)"
 ---
 
 ![AI Watch](https://tse3.mm.bing.net/th?id=OIP.NvLD-hpcyRESG2WZrU66PQHaDt&pid=Api)
