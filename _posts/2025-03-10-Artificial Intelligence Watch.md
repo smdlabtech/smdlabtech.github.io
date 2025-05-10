@@ -3,9 +3,9 @@ layout: post
 title: "Artificial Intelligence Watch: News & Updates"
 subtitle: "An overview of key trends and innovations in AI"
 description: "COVID-19: Reflections on the health crisis that has turned the world upside down"
-cover-img: /assets/img/ia_veille.jpg
-thumbnail-img: /assets/img/ia_veille.jpg
-share-img: /assets/img/ia_veille.jpg
+cover-img: /assets/img/ia_veille.png
+thumbnail-img: /assets/img/ia_veille.png
+share-img: /assets/img/ia_veille.png
 tags: [Artificial Intelligence, Technology, Machine Learning, Innovation]
 comments: true
 author: "daya (@smdlabtech)"
