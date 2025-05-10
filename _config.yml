@@ -253,15 +253,18 @@ footer-hover-col: "#0085A1"
 #  emit-metadata: 0
 #  theme: light
 
-theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "dirt" # ou "air", "aqua", "contrast", "dark", "neon", "mint", "plum", "sunrise"
 
-remote_theme: mmistakes/minimal-mistakes@v4.24.0
-plugins:
-  - jekyll-feed
-  - jekyll-seo-tag
-  - jekyll-sitemap
-  - jekyll-remote-theme
+
+
+# theme: minimal-mistakes-jekyll
+# minimal_mistakes_skin: "dirt" # ou "air", "aqua", "contrast", "dark", "neon", "mint", "plum", "sunrise"
+
+# remote_theme: mmistakes/minimal-mistakes@v4.24.0
+# plugins:
+#   - jekyll-feed
+#   - jekyll-seo-tag
+#   - jekyll-sitemap
+#   - jekyll-remote-theme
 
 
 # Staticman configuration
