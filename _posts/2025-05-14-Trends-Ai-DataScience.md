@@ -3,9 +3,9 @@ layout: post
 title: "Panorama 2025: Key Trends in Data Science & Artificial Intelligence"
 subtitle: "Towards more ethical, efficient, and integrated AI"
 description: "An overview of major developments in Data Science and Artificial Intelligence for 2025"
-cover-img: /assets/img/ia\_data\_2025.png
-thumbnail-img: /assets/img/ia\_data\_2025.png
-share-img: /assets/img/ia\_data\_2025.png
+cover-img: /assets/img/ia\_data\ia_data_2025.png
+thumbnail-img: /assets/img/ia\_data\ia_data_2025.png
+share-img: /assets/img/ia\_data\ia_data_2025.png
 tags: \[Data Science, Artificial Intelligence, Trends 2025, Ethical AI, MLOps]
 comments: true
 author: "daya (@smdlabtech)"
