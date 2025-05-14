@@ -1,5 +1,4 @@
 ---
-
 layout: post
 title: "Panorama 2025: Key Trends in Data Science & Artificial Intelligence"
 subtitle: "Towards more ethical, efficient, and integrated AI"
@@ -12,9 +11,9 @@ comments: true
 author: "daya (@smdlabtech)"
 ----------------------------
 
-![AI Trends 2025](https://www.ringover.fr/blog/ai-trends)
+In 2025, Data Science and Artificial Intelligence are converging towards more mature, responsible, and integrated practices. This post explores key technological, ethical, and industrial trends to anticipate tomorrow's challenges and opportunities.
 
-> In 2025, Data Science and Artificial Intelligence are converging towards more mature, responsible, and integrated practices. This post explores key technological, ethical, and industrial trends to anticipate tomorrow's challenges and opportunities.
+![AI Trends 2025](https://www.ringover.fr/blog/ai-trends)
 
 ## 📈 Introduction
 
