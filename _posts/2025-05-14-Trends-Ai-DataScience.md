@@ -12,8 +12,7 @@ author: "daya (@smdlabtech)"
 ----------------------------
 
 In 2025, Data Science and Artificial Intelligence are converging towards more mature, responsible, and integrated practices. This post explores key technological, ethical, and industrial trends to anticipate tomorrow's challenges and opportunities.
-
-![AI Trends 2025](https://cdn.storifyme.xyz/accounts/cashify-in-0561312/assets/f-1292195-ai-95021680594603197.webp?t=1680596504000)
+![Trends 2025](https://tse3.mm.bing.net/th?id=OIP.NvLD-hpcyRESG2WZrU66PQHaDt&pid=Api)
 
 ## 📈 Introduction
 
