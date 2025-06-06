@@ -2,14 +2,17 @@
 layout: post
 title: "Build an Advanced RAG Pipeline with Qdrant, LlamaIndex, and Metadata Filtering"
 subtitle: "From Smart Ingestion to Orchestrated Hybrid Search"
+
 description: "Learn how to build a high-performance RAG pipeline using smart ingestion, embeddings, Qdrant vector indexing, advanced metadata filtering, prompt enhancement, and orchestrated retrieval agents."
-cover-img: /assets/img/rag\_pipeline\_cover.png
-thumbnail-img: /assets/img/rag\_pipeline\_cover.png
-share-img: /assets/img/rag\_pipeline\_cover.png
+
+cover-img: /assets/img/rag-pipeline-cover.png
+thumbnail-img: /assets/img/rag-pipeline-cover.png
+share-img: /assets/img/rag-pipeline-cover.png
 tags: \[RAG, Qdrant, LlamaIndex, Vector Search, Metadata Filtering, Hybrid Search, LangChain]
 comments: true
 author: "daya (@smdlabtech)"
-----------------------------
+---
+
 
 ![Pipeline RAG](https://tse3.mm.bing.net/th?id=OIP.NvLD-hpcyRESG2WZrU66PQHaDt\&pid=Api)
 
