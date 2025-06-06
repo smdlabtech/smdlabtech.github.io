@@ -176,7 +176,7 @@ To do so, press `.` on any page of your GitHub repository to open the online edi
 
 You can download the complete `POST.md` file by clicking the link below:
 
-[📄 Download POST.md](./Rag_file_method.md)
+[📄 Download POST.md](./POST.md)
 
 
 Feel free to adapt this pipeline to your specific needs and experiment with different configurations to optimize performance.
