@@ -1,11 +1,8 @@
-
-
 ---
-
 layout: post
-title: "Construire un pipeline RAG avancé avec Qdrant, LlamaIndex et filtrage par métadonnées"
-subtitle: "De l'ingestion intelligente à la recherche hybride orchestrée"
-description: "Découvrez comment assembler un pipeline RAG performant en combinant ingestion optimisée, embeddings, indexation vectorielle avec Qdrant, filtrage avancé par métadonnées, amélioration des prompts et agents de retrieval orchestrés."
+title: "Build an Advanced RAG Pipeline with Qdrant, LlamaIndex, and Metadata Filtering"
+subtitle: "From Smart Ingestion to Orchestrated Hybrid Search"
+description: "Learn how to build a high-performance RAG pipeline using smart ingestion, embeddings, Qdrant vector indexing, advanced metadata filtering, prompt enhancement, and orchestrated retrieval agents."
 cover-img: /assets/img/rag\_pipeline\_cover.png
 thumbnail-img: /assets/img/rag\_pipeline\_cover.png
 share-img: /assets/img/rag\_pipeline\_cover.png
@@ -20,58 +17,58 @@ author: "daya (@smdlabtech)"
 
 ## 🚀 Introduction
 
-Dans cet article, nous allons explorer la construction d'un pipeline de **Retrieval-Augmented Generation (RAG)** avancé en combinant plusieurs technologies clés :
+In this post, we'll explore how to build an advanced **Retrieval-Augmented Generation (RAG)** pipeline by combining several key technologies:
 
-* **Ingestion intelligente** avec nettoyage, découpage (chunking) et enrichissement des métadonnées.
-* **Génération d'embeddings** pour représenter les documents dans un espace vectoriel.
-* **Indexation vectorielle** avec **Qdrant**, une base de données vectorielle performante.
-* **Filtrage avancé par métadonnées** pour affiner les résultats de recherche.
-* **Amélioration des prompts** pour guider efficacement les modèles de langage.
-* **Agents de retrieval orchestrés** pour une récupération d'information contextuelle et pertinente.
-
----
-
-## 🧹 Étape 1 : Ingestion des données
-
-La première étape consiste à préparer les données :
-
-* **Nettoyage** : suppression des caractères spéciaux, des balises HTML, etc.
-* **Découpage (chunking)** : division des documents en segments de taille appropriée pour l'indexation.
-* **Enrichissement des métadonnées** : ajout d'informations contextuelles telles que la source, la date, l'auteur, etc.
-
-Ces métadonnées seront essentielles pour le filtrage avancé lors de la recherche.
+* **Smart ingestion** with cleaning, chunking, and metadata enrichment.
+* **Embedding generation** to represent documents in a vector space.
+* **Vector indexing** using **Qdrant**, a high-performance vector database.
+* **Advanced metadata filtering** to refine search results.
+* **Prompt enhancement** to better guide language models.
+* **Orchestrated retrieval agents** for contextual and relevant information retrieval.
 
 ---
 
-## 🧠 Étape 2 : Génération des embeddings
+## 🧹 Step 1: Data Ingestion
 
-Les segments de texte sont ensuite transformés en vecteurs numériques (embeddings) à l'aide de modèles de langage tels que :
+The first step is to prepare the data:
+
+* **Cleaning**: removing special characters, HTML tags, etc.
+* **Chunking**: splitting documents into appropriately sized segments.
+* **Metadata enrichment**: adding contextual information like source, date, author, etc.
+
+These metadata are crucial for advanced filtering during retrieval.
+
+---
+
+## 🧠 Step 2: Embedding Generation
+
+Text segments are transformed into numeric vectors (embeddings) using language models such as:
 
 * **OpenAI**
 * **Cohere**
 * **Hugging Face Transformers**
 
-Ces vecteurs capturent la sémantique des textes et permettent une recherche basée sur la similarité.
+These vectors capture semantic meaning and enable similarity-based search.
 
 ---
 
-## 📃 Étape 3 : Indexation avec Qdrant
+## 📃 Step 3: Indexing with Qdrant
 
-Les embeddings sont stockés dans **Qdrant**, une base de données vectorielle performante qui offre :
+Embeddings are stored in **Qdrant**, a performant vector database offering:
 
-* **Recherche vectorielle rapide**
-* **Filtrage par métadonnées**
-* **Support pour la recherche hybride**
+* **Fast vector search**
+* **Metadata-based filtering**
+* **Hybrid search support**
 
-Qdrant permet d'effectuer des recherches efficaces en combinant la similarité vectorielle et les filtres basés sur les métadonnées.
+Qdrant enables effective searches combining vector similarity and metadata filters.
 
 ---
 
-## 🔍 Étape 4 : Filtrage avancé par métadonnées
+## 🔍 Step 4: Advanced Metadata Filtering
 
-Le filtrage par métadonnées permet de restreindre les résultats de recherche en fonction de critères spécifiques.
+Metadata filtering restricts search results based on specific criteria.
 
-Par exemple, pour rechercher des documents de la catégorie "laptop" avec un prix inférieur ou égal à 1000 :
+For example, to search for documents in the "laptop" category with price <= 1000:
 
 ```json
 {
@@ -96,48 +93,48 @@ Par exemple, pour rechercher des documents de la catégorie "laptop" avec un pri
 }
 ```
 
-Ce filtrage améliore la précision des résultats et réduit la charge computationnelle.
+This filtering improves result accuracy and reduces computational load.
 
 ---
 
-## 🧪 Étape 5 : Amélioration des prompts
+## 🧪 Step 5: Prompt Enhancement
 
-L'amélioration des prompts consiste à guider le modèle de langage pour obtenir des réponses plus pertinentes.
+Prompt enhancement involves guiding the language model for more relevant answers.
 
-Techniques utilisées :
+Techniques used:
 
-* **Few-shot prompting** : fournir des exemples dans le prompt.
-* **Chain-of-thought prompting** : encourager le modèle à raisonner étape par étape.
-* **Self-ask prompting** : permettre au modèle de poser des questions intermédiaires.
+* **Few-shot prompting**: include examples in the prompt.
+* **Chain-of-thought prompting**: encourage step-by-step reasoning.
+* **Self-ask prompting**: let the model pose intermediate questions.
 
-Ces techniques améliorent la qualité des réponses générées.
-
----
-
-## 🤖 Étape 6 : Agents de retrieval orchestrés
-
-Les agents de retrieval orchestrés coordonnent les différentes étapes du pipeline pour fournir des réponses contextuelles :
-
-1. **Analyse de la requête**
-2. **Recherche dans Qdrant avec filtrage par métadonnées**
-3. **Récupération des documents pertinents**
-4. **Génération de la réponse avec le modèle de langage**
-
-Cette orchestration assure une récupération d'information efficace et pertinente.
+These techniques boost response quality.
 
 ---
 
-## 📈 Résultats et performances
+## 🤖 Step 6: Orchestrated Retrieval Agents
 
-L'utilisation de Qdrant avec filtrage par métadonnées et recherche hybride offre :
+Orchestrated agents coordinate various pipeline steps to deliver contextual answers:
 
-* **Amélioration de la précision des résultats**
-* **Réduction du temps de réponse**
-* **Scalabilité pour de grands volumes de données**
+1. **Query analysis**
+2. **Search in Qdrant with metadata filtering**
+3. **Retrieve relevant documents**
+4. **Generate the answer using a language model**
+
+This orchestration ensures efficient and relevant information retrieval.
 
 ---
 
-## 🧹 Exemple de code avec LlamaIndex et Qdrant
+## 📈 Results and Performance
+
+Using Qdrant with metadata filtering and hybrid search offers:
+
+* **Improved result accuracy**
+* **Faster response times**
+* **Scalability for large datasets**
+
+---
+
+## 🧹 Example Code with LlamaIndex and Qdrant
 
 ```python
 from llama_index.core import VectorStoreIndex, StorageContext
@@ -158,19 +155,19 @@ index = VectorStoreIndex.from_documents(
 )
 ```
 
-Ce code crée un index hybride combinant recherche dense et sparse.
+This code builds a hybrid index combining dense and sparse search.
 
 ---
 
 ## 🧹 Conclusion
 
-En combinant ingestion intelligente, embeddings, indexation vectorielle avec Qdrant, filtrage avancé par métadonnées, amélioration des prompts et agents de retrieval orchestrés, il est possible de construire un pipeline RAG performant et évolutif.
+By combining smart ingestion, embeddings, Qdrant vector indexing, advanced metadata filtering, prompt enhancement, and orchestrated retrieval agents, you can build a high-performance and scalable RAG pipeline.
 
-Ces techniques permettent de fournir des réponses précises et contextuelles, essentielles pour les applications modernes d'IA.
+These techniques enable precise and contextual responses, essential for modern AI applications.
 
 ---
 
-## 📚 Références
+## 📚 References
 
 1. Qdrant Filtering Guide: [https://qdrant.tech/articles/vector-search-filtering/](https://qdrant.tech/articles/vector-search-filtering/)
 2. Hybrid Search with Qdrant: [https://qdrant.tech/articles/hybrid-search/](https://qdrant.tech/articles/hybrid-search/)
@@ -179,20 +176,20 @@ Ces techniques permettent de fournir des réponses précises et contextuelles, e
 
 ---
 
-## 💻 Développement et déploiement
+## 💻 Development and Deployment
 
-Vous pouvez éditer et tester ce pipeline directement sur GitHub en utilisant [github.dev](https://github.dev).
+You can edit and test this pipeline directly on GitHub using [github.dev](https://github.dev).
 
-Pour cela, appuyez sur la touche `.` sur n'importe quelle page de votre dépôt GitHub pour ouvrir l'éditeur en ligne.
-
----
-
-## 📅 Téléchargement du fichier POST.md
-
-Vous pouvez télécharger le fichier `POST.md` complet en cliquant sur le lien ci-dessous :
-
-[📄 Télécharger POST.md](./POST.md)
+To do so, press `.` on any page of your GitHub repository to open the online editor.
 
 ---
 
-N'hésitez pas à adapter ce pipeline à vos besoins spécifiques et à expérimenter avec différentes configurations pour optimiser les performances.
+## 📅 Download POST.md File
+
+You can download the complete `POST.md` file by clicking the link below:
+
+[📄 Download POST.md](./POST.md)
+
+---
+
+Feel free to adapt this pipeline to your specific needs and experiment with different configurations to optimize performance.
