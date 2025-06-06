@@ -8,7 +8,7 @@ description: "Learn how to build a high-performance RAG pipeline using smart ing
 cover-img: /assets/img/rag-pipeline-cover.png
 thumbnail-img: /assets/img/rag-pipeline-cover.png
 share-img: /assets/img/rag-pipeline-cover.png
-tags: \[RAG, Qdrant, LlamaIndex, Vector Search, Metadata Filtering, Hybrid Search, LangChain]
+tags: [RAG, Qdrant, LlamaIndex, Vector Search, Metadata Filtering, Hybrid Search, LangChain]
 comments: true
 author: "daya (@smdlabtech)"
 ---
