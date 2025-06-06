@@ -13,6 +13,7 @@ comments: true
 author: "daya (@smdlabtech)"
 ---
 
+Learn how to build a high-performance RAG pipeline using smart ingestion, embeddings, Qdrant vector indexing, advanced metadata filtering, prompt enhancement, and orchestrated retrieval agents.
 
 ![Pipeline RAG](https://tse3.mm.bing.net/th?id=OIP.NvLD-hpcyRESG2WZrU66PQHaDt\&pid=Api)
 
