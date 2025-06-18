@@ -6,6 +6,10 @@
 [![YouTube](https://img.shields.io/badge/YouTube-Subscribe-informational?style=flat&logo=youtube&logoColor=white&color=FF0000)](https://www.youtube.com/channel/votre-chaîne)
 
 
+---
+Analyse la qualité du code et des vulnérabilité sur [SonarQube.io](https://sonarcloud.io/project/overview?id=smdlabtech_smdlabtech.github.io)    
+
+
 - 👋 Hi, I'm **Daya**
 - I'm a **data scientist** with a passion for soccer and basketball.
 - This github account is the way I share my passion for programming through languages:  
