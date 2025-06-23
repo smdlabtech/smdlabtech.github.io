@@ -9,6 +9,8 @@
   badges:
     - "![Stars](https://img.shields.io/github/stars/smdlabtech/mon-super-projet?style=social)"
     - "![License](https://img.shields.io/github/license/smdlabtech/mon-super-projet)"
+  permalink: /mon-titre-personnalise/
+  categories: [ai]
 
 - name: DataViz Explorer
   description: Outil interactif de visualisation de données.
@@ -17,4 +19,5 @@
     - JS
     - OpenData
   github: smdlabtech/dataviz-explorer
-  website: https://datavizexplorer.com 
+  website: https://datavizexplorer.com
+  categories: [dataviz, 2025] 
