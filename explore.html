@@ -1,0 +1,45 @@
+---
+layout: default
+title: Explorer les articles
+---
+
+<div class="explore-header">
+  <h1>Explorer les articles</h1>
+  <div id="explore-filters">
+    <select id="filter-year">
+      <option value="">Année</option>
+    </select>
+    <select id="filter-category">
+      <option value="">Thématique</option>
+    </select>
+    <select id="filter-tag">
+      <option value="">Tag</option>
+    </select>
+    <input class="search" placeholder="Recherche..." />
+  </div>
+</div>
+
+<div id="articles-list">
+  <ul class="list">
+    {% for article in site.data.articles %}
+    <li class="article-card"
+        data-year="{{ article.date | date: '%Y' }}"
+        data-category="{{ article.categories | join: ',' }}"
+        data-tags="{{ article.tags | join: ',' }}">
+      <a href="{{ article.permalink }}">
+        <h2 class="title">{{ article.title }}</h2>
+        <p class="excerpt">{{ article.excerpt | truncate: 160 }}</p>
+        <div class="meta">
+          <span class="date">{{ article.date | date: "%d/%m/%Y" }}</span>
+          <span class="categories">{{ article.categories | join: ', ' }}</span>
+          <span class="tags">{{ article.tags | join: ', ' }}</span>
+        </div>
+      </a>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/2.3.1/list.min.js"></script>
+<script src="/assets/js/explore-filters.js"></script> 

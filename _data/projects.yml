@@ -1,0 +1,11 @@
+- name: Mon Super Projet
+  description: Un projet innovant en IA pour la santé.
+  tags: [IA, Santé, Python]
+  github: smdlabtech/mon-super-projet
+  website: https://monsuperprojet.com
+
+- name: DataViz Explorer
+  description: Outil interactif de visualisation de données.
+  tags: [DataViz, JS, OpenData]
+  github: smdlabtech/dataviz-explorer
+  website: https://datavizexplorer.com 
