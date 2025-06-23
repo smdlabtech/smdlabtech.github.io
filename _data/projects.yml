@@ -7,9 +7,8 @@
   github: smdlabtech/mon-super-projet
   website: https://monsuperprojet.com
   badges:
-    - ![Stars](https://img.shields.io/github/stars/smdlabtech/mon-super-projet?style=social)
-    - ![License](https://img.shields.io/github/license/smdlabtech/mon-super-projet)
-
+    - "![Stars](https://img.shields.io/github/stars/smdlabtech/mon-super-projet?style=social)"
+    - "![License](https://img.shields.io/github/license/smdlabtech/mon-super-projet)"
 
 - name: DataViz Explorer
   description: Outil interactif de visualisation de données.

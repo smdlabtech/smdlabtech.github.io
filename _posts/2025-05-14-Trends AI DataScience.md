@@ -9,7 +9,7 @@ share-img: /assets/img/ia_data_2025.png
 tags: \[Data Science, Artificial Intelligence, Trends 2025, Ethical AI, MLOps]
 comments: true
 author: "daya (@smdlabtech)"
-----------------------------
+---
 
 In 2025, Data Science and Artificial Intelligence are converging towards more mature, responsible, and integrated practices. This post explores key technological, ethical, and industrial trends to anticipate tomorrow's challenges and opportunities.
 ![Trends 2025](https://tse3.mm.bing.net/th?id=OIP.NvLD-hpcyRESG2WZrU66PQHaDt&pid=Api)
