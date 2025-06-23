@@ -33,15 +33,9 @@ document.addEventListener("DOMContentLoaded", function () {
   fillSelect('filter-tag', tags);
 
   // Filtres
-  document.getElementById('filter-year').addEventListener('change', function () {
-    filterArticles();
-  });
-  document.getElementById('filter-category').addEventListener('change', function () {
-    filterArticles();
-  });
-  document.getElementById('filter-tag').addEventListener('change', function () {
-    filterArticles();
-  });
+  document.getElementById('filter-year').addEventListener('change', filterArticles);
+  document.getElementById('filter-category').addEventListener('change', filterArticles);
+  document.getElementById('filter-tag').addEventListener('change', filterArticles);
 
   function filterArticles() {
     const year = document.getElementById('filter-year').value;
