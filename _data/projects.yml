@@ -20,4 +20,12 @@
     - OpenData
   github: smdlabtech/dataviz-explorer
   website: https://datavizexplorer.com
-  categories: [dataviz, 2025] 
+  categories: [dataviz, 2025]
+
+
+
+- title: "Nom du projet"  # Titre du projet
+  description: "Brève description"
+  tags: [ai, fastapi]
+  github_url: "https://github.com/smdlabtech/eu-vat-validator"
+  website_url: "https://eu-vat-validator.com" 

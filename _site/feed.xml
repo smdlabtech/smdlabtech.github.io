@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    
+    <title>smdlabtech&apos;s blog</title>
+    
+    
+    <description>This website is a virtual proof that I&apos;m awesome</description>
+    
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml" />
+    
+    
+      <item>
+        <title>Build an Advanced RAG Pipeline with Qdrant, LlamaIndex, and Metadata Filtering</title>
+        <description>
+          From Smart Ingestion to Orchestrated Hybrid Search - 
+          Learn how to build a high-performance RAG pipeline using smart ingestion, embeddings, Qdrant vector indexing, advanced metadata filtering, prompt enhancement, and orchestrated retrieval agents. 🚀 Introduction In this post, we’ll explore how to build an advanced Retrieval-Augmented Generation (RAG) pipeline by combining several key technologies: 🧹 Smart ingestion: cleaning, chunking,...
+        </description>
+        <pubDate>Fri, 06 Jun 2025 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2025-06-06-Descriptions-RAG/</link>
+        <guid isPermaLink="true">http://localhost:4000/2025-06-06-Descriptions-RAG/</guid>
+      </item>
+    
+      <item>
+        <title>Panorama 2025: Key Trends in Data Science &amp; Artificial Intelligence</title>
+        <description>
+          Towards more ethical, efficient, and integrated AI - 
+          In 2025, Data Science and Artificial Intelligence are converging towards more mature, responsible, and integrated practices. This post explores key technological, ethical, and industrial trends to anticipate tomorrow’s challenges and opportunities. 📈 Introduction The year 2025 marks a crucial turning point in the evolution of Data Science and Artificial Intelligence...
+        </description>
+        <pubDate>Wed, 14 May 2025 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2025-05-14-Trends-AI-DataScience/</link>
+        <guid isPermaLink="true">http://localhost:4000/2025-05-14-Trends-AI-DataScience/</guid>
+      </item>
+    
+      <item>
+        <title>Artificial Intelligence Watch: News &amp; Updates</title>
+        <description>
+          An overview of key trends and innovations in AI - 
+          Artificial intelligence (AI) is evolving at a rapid pace, influencing various industries and raising new ethical and technological questions. Let’s explore the latest developments and key trends in this ever-changing field. 🏛️ AI Action Summit in Paris In February 2025, Paris hosted a global summit bringing together experts, policymakers, and...
+        </description>
+        <pubDate>Mon, 10 Mar 2025 00:00:00 +0100</pubDate>
+        <link>http://localhost:4000/2025-03-10-Artificial-Intelligence-Watch/</link>
+        <guid isPermaLink="true">http://localhost:4000/2025-03-10-Artificial-Intelligence-Watch/</guid>
+      </item>
+    
+      <item>
+        <title>NVIDIA Redefines the Future of Artificial Intelligence with Its Latest Innovation</title>
+        <description>
+          Diving into the technological revolution shaping the future of AI - 
+          Since its recent announcement, NVIDIA’s new innovation has captured everyone’s imagination, promising to propel artificial intelligence (AI) to previously unexplored heights. This progress, combining power and innovation, is intended to redefine our perspectives on the future capabilities of AI. NVIDIA’s latest creation, a processor of phenomenal power, has been specially...
+        </description>
+        <pubDate>Tue, 09 Apr 2024 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2024-04-09-nvidia_blog_post/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024-04-09-nvidia_blog_post/</guid>
+      </item>
+    
+      <item>
+        <title>COVID-19: Reflections on the Pandemic and Its Global Impact</title>
+        <description>
+          Analysis of the health crisis that has turned the world upside down - 
+          This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic. Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic. Now, if you&apos;d like to see...
+        </description>
+        <pubDate>Sun, 07 Apr 2024 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2024-04-07-covid19-pandemic/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024-04-07-covid19-pandemic/</guid>
+      </item>
+    
+      <item>
+        <title>COVID-19: Reflections on the Pandemic and Its Global Impact</title>
+        <description>
+          Analysis of the health crisis that has turned the world upside down - 
+          This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic. Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic. Now, if you&apos;d like to see...
+        </description>
+        <pubDate>Sun, 07 Apr 2024 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2024-04-07-covid19-pandemic/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024-04-07-covid19-pandemic/</guid>
+      </item>
+    
+      <item>
+        <title>COVID-19: Reflections on the Pandemic and Its Global Impact</title>
+        <description>
+          Analysis of the health crisis that has turned the world upside down - 
+          This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic. Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic. Now, if you&apos;d like to see...
+        </description>
+        <pubDate>Sun, 07 Apr 2024 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2024-04-07-covid19-pandemic/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024-04-07-covid19-pandemic/</guid>
+      </item>
+    
+      <item>
+        <title>COVID-19: Reflections on the Pandemic and Its Global Impact</title>
+        <description>
+          Analysis of the health crisis that has turned the world upside down - 
+          This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic. Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic. Now, if you&apos;d like to see...
+        </description>
+        <pubDate>Sun, 07 Apr 2024 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2024-04-07-covid19-pandemic/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024-04-07-covid19-pandemic/</guid>
+      </item>
+    
+      <item>
+        <title>COVID-19: Reflections on the Pandemic and Its Global Impact</title>
+        <description>
+          Analysis of the health crisis that has turned the world upside down - 
+          This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic. Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic. Now, if you&apos;d like to see...
+        </description>
+        <pubDate>Sun, 07 Apr 2024 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2024-04-07-covid19-pandemic/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024-04-07-covid19-pandemic/</guid>
+      </item>
+    
+      <item>
+        <title>COVID-19: Reflections on the Pandemic and Its Global Impact</title>
+        <description>
+          Analysis of the health crisis that has turned the world upside down - 
+          This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic. Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic. Now, if you&apos;d like to see...
+        </description>
+        <pubDate>Sun, 07 Apr 2024 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2024-04-07-covid19-pandemic/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024-04-07-covid19-pandemic/</guid>
+      </item>
+    
+      <item>
+        <title>COVID-19: Reflections on the Pandemic and Its Global Impact</title>
+        <description>
+          Analysis of the health crisis that has turned the world upside down - 
+          This article represents only a fraction of the ongoing story of COVID-19. We will remain attentive to developments and progress made in the fight against this global pandemic. Additionally, here is an application that allows you to follow the evolution of this COVID-19 pandemic. Now, if you&apos;d like to see...
+        </description>
+        <pubDate>Sun, 07 Apr 2024 00:00:00 +0200</pubDate>
+        <link>http://localhost:4000/2024-04-07-covid19-pandemic/</link>
+        <guid isPermaLink="true">http://localhost:4000/2024-04-07-covid19-pandemic/</guid>
+      </item>
+    
+  </channel>
+</rss>
