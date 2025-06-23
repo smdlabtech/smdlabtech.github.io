@@ -4,10 +4,6 @@
     <a class="navbar-brand navbar-brand-logo" href="{{ '/' | absolute_url }}"><img alt="{{ site.title }} Logo" src="{{ site.title-img | relative_url}}"/></a>
   {%- elsif site.title -%}
     <a class="navbar-brand" href="{{ '/' | absolute_url }}">{{ site.title }}</a>
-    <div class="navbar-toggles d-inline-flex align-items-center" style="gap:0.5rem; margin-left:0.5rem;">
-      <button id="toggle-dark" title="Mode sombre/clair" style="font-size:1.5rem;background:none;border:none;cursor:pointer;">🌙</button>
-      <button id="toggle-width" title="Largeur centrée/étendue" style="font-size:1.5rem;background:none;border:none;cursor:pointer;">🖥️</button>
-    </div>
   {%- endif -%}
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +39,10 @@
         </li>
       {%- endif -%}
     </ul>
+    <div class="navbar-toggles d-inline-flex align-items-center" style="gap:0.5rem; margin-left:1rem;">
+      <button id="toggle-dark" title="Mode sombre/clair" style="font-size:1.5rem;background:none;border:none;cursor:pointer;">🌙</button>
+      <button id="toggle-width" title="Largeur centrée/étendue" style="font-size:1.5rem;background:none;border:none;cursor:pointer;">🖥️</button>
+    </div>
   </div>
 
   {% if site.navbar-extra %}
