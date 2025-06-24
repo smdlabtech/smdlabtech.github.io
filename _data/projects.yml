@@ -22,8 +22,7 @@
   website: https://datavizexplorer.com
   categories: [dataviz, 2025]
 
-
-
+  
 - title: "Nom du projet"  # Titre du projet
   description: "Brève description"
   tags: [ai, fastapi]
