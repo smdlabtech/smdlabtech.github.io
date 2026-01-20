@@ -5,7 +5,7 @@
 /__github
 /cloudbuild
 /test
-/docs
+# /docs - Garder la documentation
 /scripts
 docker-compose.yml
 .env.production
@@ -114,6 +114,10 @@ venv.bak/
 .sass-cache/
 .jekyll-cache/
 .jekyll-metadata
+app/_site/
+app/site/
+_site/
+site/
 
 # Jekyll dependencies
 .bundle/
@@ -184,6 +188,8 @@ monitoring/grafana/data/
 *.tmp
 *.temp
 *.bak
+*.bak2
+*.backup
 *.swp
 *~
 
