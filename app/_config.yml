@@ -1,3 +1,4 @@
+---
 ###########################################################
 ### Welcome to Beautiful Jekyll!
 ### This config file is meant for settings that affect your entire website. When you first
@@ -11,7 +12,7 @@
 ################################
 
 # Name of website
-title: "Daya's blog"
+title: "Daya - Data Scientist & AI Enthusiast"
 
 # Your name to show in the footer
 author: "daya (@smdlabtech)"
@@ -87,7 +88,7 @@ social-network-links:
 #  bluesky: yourname
 #  ORCID: your ORCID ID
 #  google-scholar: your google scholar
-#  discord: "invite_code" or "users/userid" or "invite/invite_code" 
+#  discord: "invite_code" or "users/userid" or "invite/invite_code"
 #  kaggle: yourname
 #  hackerrank: yourname
 #  gitlab: yourname
@@ -166,7 +167,7 @@ footer-hover-col: "#0085A1"
 # Suggest a colour for mobile browsers to use as the browser's theme. This is only supported by a few mobile browsers.
 #mobile-theme-col: "#0085A1"
 
-# For any extra visual customization, you can include additional CSS files in every page on your site. List any custom CSS files here
+# Social media links (optional - uncomment and add your links)
 site-css:
   - "/assets/css/custom-styles.css"
 
@@ -224,23 +225,23 @@ site-css:
 #  label: blog-comments # Label that will be assigned to GitHub Issues created by Utterances
 
 # To use Staticman comments, uncomment the following section. You may leave the reCaptcha
-# section commented if you aren't using reCaptcha for spam protection. 
-# Using Staticman requires advanced knowledge, please consult 
-# https://github.com/eduardoboucas/staticman/ and https://staticman.net/ for further 
-# instructions. For any support with staticman please direct questions to staticman and 
+# section commented if you aren't using reCaptcha for spam protection.
+# Using Staticman requires advanced knowledge, please consult
+# https://github.com/eduardoboucas/staticman/ and https://staticman.net/ for further
+# instructions. For any support with staticman please direct questions to staticman and
 # not to BeautifulJekyll.
 #staticman:
 #  repository : # GitHub username/repository eg. "daya_smdlabtech/beautiful-jekyll"
-#  branch     : master # If you're not using `master` branch, then you also need to update the `branch` parameter in `staticman.yml`
+# Exclude these files from production site
 #  endpoint   : # URL of your deployment, with a trailing slash eg. "https://<your-api>/v3/entry/github/"
-#  reCaptcha:   # (optional, set these parameters in `staticman.yml` as well) 
+#  reCaptcha:   # (optional, set these parameters in `staticman.yml` as well)
 #    siteKey  : # You need to apply for a site key on Google
 #    secret   : # Encrypt your password by going to https://<your-own-api>/v3/encrypt/<your-site-secret>
 
 # To use giscus comments:
-# (0) Uncomment the following giscus section, (1) Enable Discussions in your GitHub repository, 
+# (0) Uncomment the following giscus section, (1) Enable Discussions in your GitHub repository,
 # (2) Install the giscus app in your repository (details at https://giscus.app),
-# (3) Fill in *all* the parameters below 
+# (3) Fill in *all* the parameters below
 # See more details about giscus and each of the following parameters at https://giscus.app
 #giscus:
 #  hostname: giscus.app # Replace with your giscus instance's hostname if self-hosting
@@ -306,6 +307,28 @@ exclude:
   - README.md
   - screenshot.png
   - docs/
+  - .gitignore
+  - .dockerignore
+  - Dockerfile
+  - requirements.txt
+  - requirements-dev.txt
+  - pyproject.toml
+  - run.py
+  - __init__.py
+  - .flaskenv
+  - .python-version
+  - .venv/
+  - venv/
+  - src/
+  - scripts/
+  - api/
+  - data-flask/
+  - .jekyll-cache/
+  - _site/
+  - site/
+  - ANALYSE_STRUCTURE.md
+  - NETTOYAGE_COMPLET.md
+  - PROBLEMES_Jekyll.md
 
 plugins:
   - jekyll-paginate
@@ -313,4 +336,3 @@ plugins:
 
 # Beautiful Jekyll / Daya smdlabtech
 # 2fc73a3a967e97599c9763d05e564189
-
