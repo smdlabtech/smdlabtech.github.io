@@ -6,6 +6,9 @@
 ### the initial set up you won't need to come back to this file often.
 ###########################################################
 
+# URL configuration for GitHub Pages
+url: "https://smdlabtech.github.io"
+baseurl: ""
 
 #################################
 # --- (0) Required options --- #

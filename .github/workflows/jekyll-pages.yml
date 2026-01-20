@@ -51,14 +51,14 @@ jobs:
       - name: Build Jekyll site
         working-directory: app
         run: |
-          bundle exec jekyll build --destination ../_site_build
+          bundle exec jekyll build
         env:
           JEKYLL_ENV: production
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site_build
+          path: app/_site
 
   deploy:
     name: Deploy to GitHub Pages
