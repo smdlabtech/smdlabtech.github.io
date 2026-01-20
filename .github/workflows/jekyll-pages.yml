@@ -52,10 +52,28 @@ jobs:
         working-directory: app
         run: |
           echo "🔨 Building Jekyll site from app/ directory..."
-          bundle exec jekyll build
+          bundle exec jekyll build --verbose
           echo "✅ Build completed successfully"
+          echo "📁 Checking build output..."
+          ls -la _site/ | head -10
         env:
           JEKYLL_ENV: production
+
+      - name: Verify build output
+        run: |
+          echo "🔍 Verifying build output..."
+          if [ ! -d "app/_site" ]; then
+            echo "❌ Error: _site directory not found!"
+            exit 1
+          fi
+          if [ ! -f "app/_site/index.html" ]; then
+            echo "❌ Error: index.html not found in _site!"
+            exit 1
+          fi
+          echo "✅ Build output verified"
+          echo "📊 Build statistics:"
+          find app/_site -type f | wc -l | xargs echo "Total files:"
+          du -sh app/_site | xargs echo "Total size:"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
