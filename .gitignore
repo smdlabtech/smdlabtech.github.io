@@ -4,7 +4,6 @@
 
 /__github
 /cloudbuild
-.github
 /test
 /docs
 /scripts
