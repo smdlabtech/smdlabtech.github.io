@@ -1,0 +1,180 @@
+---
+layout: base
+title: Explorer les Articles
+---
+
+<!-- Explore Header -->
+<section class="explore-header">
+  <div class="explore-header-content">
+    <h1 class="explore-title">Explorer les Articles</h1>
+    <p class="explore-subtitle">
+      Parcourez tous les articles par catégorie, tag ou recherchez un sujet spécifique
+    </p>
+  </div>
+</section>
+
+<!-- Explore Search Enhanced -->
+<section class="explore-search-section">
+  <div class="explore-search-container">
+    <div class="search-bar-enhanced">
+      <div class="search-input-wrapper">
+        <i class="fas fa-search search-icon-enhanced"></i>
+        <input 
+          type="search" 
+          id="explore-search-input" 
+          class="search-input-enhanced"
+          placeholder="Rechercher un article, un tag, une catégorie..."
+          aria-label="Rechercher un article"
+          autocomplete="off"
+        >
+        <button class="search-clear-button" aria-label="Effacer la recherche">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Explore Categories -->
+<section class="explore-categories-section">
+  <div class="explore-categories-container">
+    <h2 class="explore-section-title">Explorer par Catégorie</h2>
+    <div class="explore-categories-grid">
+      <a href="/tags/data-analytics" class="explore-category-card">
+        <span class="explore-category-icon">📊</span>
+        <h3 class="explore-category-title">Data Analytics</h3>
+        <p class="explore-category-description">
+          Analyses de données, visualisations et insights business
+        </p>
+        <span class="explore-category-count">
+          {{ site.tags['data-analytics'] | size }} articles
+        </span>
+      </a>
+      
+      <a href="/tags/data-science" class="explore-category-card">
+        <span class="explore-category-icon">🔬</span>
+        <h3 class="explore-category-title">Data Science</h3>
+        <p class="explore-category-description">
+          Machine Learning, statistiques et méthodes avancées
+        </p>
+        <span class="explore-category-count">
+          {{ site.tags['data-science'] | size }} articles
+        </span>
+      </a>
+      
+      <a href="/tags/intelligence-artificielle" class="explore-category-card">
+        <span class="explore-category-icon">🤖</span>
+        <h3 class="explore-category-title">Intelligence Artificielle</h3>
+        <p class="explore-category-description">
+          IA générative, LLMs, RAG et applications pratiques
+        </p>
+        <span class="explore-category-count">
+          {{ site.tags['intelligence-artificielle'] | size }} articles
+        </span>
+      </a>
+      
+      <a href="/tags/data-engineering" class="explore-category-card">
+        <span class="explore-category-icon">⚙️</span>
+        <h3 class="explore-category-title">Data Engineering</h3>
+        <p class="explore-category-description">
+          Pipelines, ETL, architectures et infrastructures data
+        </p>
+        <span class="explore-category-count">
+          {{ site.tags['data-engineering'] | size }} articles
+        </span>
+      </a>
+      
+      <a href="/tags/business-intelligence" class="explore-category-card">
+        <span class="explore-category-icon">💼</span>
+        <h3 class="explore-category-title">Business Intelligence</h3>
+        <p class="explore-category-description">
+          Tableaux de bord, KPIs et décisions basées sur la data
+        </p>
+        <span class="explore-category-count">
+          {{ site.tags['business-intelligence'] | size }} articles
+        </span>
+      </a>
+      
+      <a href="/tags" class="explore-category-card">
+        <span class="explore-category-icon">🏷️</span>
+        <h3 class="explore-category-title">Toutes les Catégories</h3>
+        <p class="explore-category-description">
+          Voir tous les articles et tags disponibles
+        </p>
+        <span class="explore-category-count">
+          {{ site.posts | size }} articles
+        </span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Explore Topics -->
+<section class="explore-topics-section">
+  <div class="explore-topics-container">
+    <h2 class="explore-section-title">Tags Populaires</h2>
+    <div class="explore-topics-grid">
+      {% assign sorted_tags = site.tags | sort %}
+      {% for tag in sorted_tags limit: 20 %}
+        {% assign tag_name = tag[0] %}
+        {% assign tag_posts = tag[1] %}
+        <a href="/tags/{{ tag_name | slugify }}" class="explore-topic-item">
+          <div class="explore-topic-name">{{ tag_name }}</div>
+          <div class="explore-topic-count">{{ tag_posts.size }} article{{ tag_posts.size | pluralize }}</div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<script>
+// Explore Search Functionality
+(function() {
+  const searchInput = document.getElementById('explore-search-input');
+  const categoryCards = document.querySelectorAll('.explore-category-card');
+  const topicItems = document.querySelectorAll('.explore-topic-item');
+  
+  if (!searchInput) return;
+  
+  function performSearch(query) {
+    const lowerQuery = query.toLowerCase().trim();
+    
+    if (!lowerQuery) {
+      categoryCards.forEach(card => card.style.display = 'block');
+      topicItems.forEach(item => item.style.display = 'block');
+      return;
+    }
+    
+    // Search in categories
+    categoryCards.forEach(card => {
+      const title = card.querySelector('.explore-category-title')?.textContent.toLowerCase() || '';
+      const description = card.querySelector('.explore-category-description')?.textContent.toLowerCase() || '';
+      
+      if (title.includes(lowerQuery) || description.includes(lowerQuery)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    
+    // Search in topics
+    topicItems.forEach(item => {
+      const name = item.querySelector('.explore-topic-name')?.textContent.toLowerCase() || '';
+      
+      if (name.includes(lowerQuery)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+  
+  let debounceTimer;
+  searchInput.addEventListener('input', function(e) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      performSearch(e.target.value);
+    }, 200);
+  });
+})();
+</script>

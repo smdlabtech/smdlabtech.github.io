@@ -1,0 +1,426 @@
+/**
+ * DataBird Sections Styles
+ * Sections supplémentaires inspirées de DataBird
+ */
+
+/* ============================================
+   Training Cards Section
+   ============================================ */
+
+.trainings-section-databird {
+  padding: var(--ds-spacing-20) var(--ds-spacing-4);
+  background: var(--ds-bg);
+}
+
+.trainings-grid-databird {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: var(--ds-spacing-6);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.training-card-databird {
+  background: var(--ds-bg);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-spacing-6);
+  transition: all var(--ds-transition-base);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.training-card-databird::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--ds-primary), var(--ds-secondary));
+  transform: scaleX(0);
+  transition: transform var(--ds-transition-base);
+}
+
+.training-card-databird:hover::before {
+  transform: scaleX(1);
+}
+
+.training-card-databird:hover {
+  border-color: var(--ds-primary);
+  transform: translateY(-8px);
+  box-shadow: 0 16px 48px rgba(227, 30, 36, 0.15);
+}
+
+.training-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ds-spacing-4);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+.training-card-icon {
+  width: 56px;
+  height: 56px;
+  background: var(--ds-primary-lighter);
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ds-font-size-2xl);
+  flex-shrink: 0;
+  transition: all var(--ds-transition-base);
+}
+
+.training-card-databird:hover .training-card-icon {
+  background: var(--ds-primary);
+  transform: scale(1.1) rotate(5deg);
+}
+
+.training-card-title-wrapper {
+  flex: 1;
+}
+
+.training-card-title {
+  font-size: var(--ds-font-size-xl);
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-text);
+  margin-bottom: var(--ds-spacing-2);
+  line-height: var(--ds-line-height-tight);
+}
+
+.training-card-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-1);
+  padding: var(--ds-spacing-1) var(--ds-spacing-3);
+  background: var(--ds-success-lighter);
+  color: var(--ds-success-dark);
+  border-radius: var(--ds-radius-full);
+  font-size: var(--ds-font-size-xs);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.training-card-description {
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-line-height-relaxed);
+  margin-bottom: var(--ds-spacing-6);
+  flex: 1;
+}
+
+.training-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--ds-spacing-4);
+  border-top: 1px solid var(--ds-border);
+}
+
+.training-card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+  color: var(--ds-primary);
+  font-weight: var(--ds-font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--ds-transition-fast);
+}
+
+.training-card-link:hover {
+  gap: var(--ds-spacing-3);
+  color: var(--ds-primary-dark);
+}
+
+.training-card-arrow {
+  transition: transform var(--ds-transition-fast);
+}
+
+.training-card-link:hover .training-card-arrow {
+  transform: translateX(4px);
+}
+
+/* ============================================
+   Category Icons DataBird Style
+   ============================================ */
+
+.category-icon-databird {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ds-font-size-3xl);
+  margin-bottom: var(--ds-spacing-4);
+  transition: all var(--ds-transition-base);
+}
+
+.category-icon-databird.analytics {
+  background: linear-gradient(135deg, #3B82F6, #1E40AF);
+  color: white;
+}
+
+.category-icon-databird.science {
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+  color: white;
+}
+
+.category-icon-databird.engineering {
+  background: linear-gradient(135deg, #10B981, #059669);
+  color: white;
+}
+
+.category-icon-databird.ai {
+  background: linear-gradient(135deg, #F59E0B, #D97706);
+  color: white;
+}
+
+.category-icon-databird.bi {
+  background: linear-gradient(135deg, #EF4444, #DC2626);
+  color: white;
+}
+
+/* ============================================
+   Blog Post Header DataBird Style
+   ============================================ */
+
+.blog-post-header-databird {
+  padding: var(--ds-spacing-12) var(--ds-spacing-4);
+  background: linear-gradient(135deg, var(--ds-bg) 0%, var(--ds-bg-secondary) 100%);
+  border-bottom: 1px solid var(--ds-border);
+}
+
+.blog-post-header-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.blog-post-breadcrumb-databird {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+  margin-bottom: var(--ds-spacing-6);
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text-secondary);
+}
+
+.blog-post-breadcrumb-databird a {
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-transition-fast);
+}
+
+.blog-post-breadcrumb-databird a:hover {
+  color: var(--ds-primary);
+}
+
+.blog-post-title-databird {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--ds-font-weight-black);
+  color: var(--ds-text);
+  margin-bottom: var(--ds-spacing-4);
+  line-height: var(--ds-line-height-tight);
+}
+
+.blog-post-meta-databird {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-6);
+  flex-wrap: wrap;
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text-secondary);
+}
+
+.blog-post-meta-item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+}
+
+.blog-post-tags-databird {
+  display: flex;
+  gap: var(--ds-spacing-2);
+  flex-wrap: wrap;
+  margin-top: var(--ds-spacing-4);
+}
+
+.blog-post-tag-databird {
+  padding: var(--ds-spacing-1) var(--ds-spacing-3);
+  background: var(--ds-primary-lighter);
+  color: var(--ds-primary);
+  border-radius: var(--ds-radius-full);
+  font-size: var(--ds-font-size-xs);
+  font-weight: var(--ds-font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--ds-transition-fast);
+}
+
+.blog-post-tag-databird:hover {
+  background: var(--ds-primary);
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   Newsletter Section DataBird Style
+   ============================================ */
+
+.newsletter-section-databird {
+  padding: var(--ds-spacing-16) var(--ds-spacing-4);
+  background: var(--ds-bg-secondary);
+  border-top: 1px solid var(--ds-border);
+  border-bottom: 1px solid var(--ds-border);
+}
+
+.newsletter-content-databird {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.newsletter-title-databird {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-text);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+.newsletter-description-databird {
+  font-size: var(--ds-font-size-lg);
+  color: var(--ds-text-secondary);
+  margin-bottom: var(--ds-spacing-8);
+  line-height: var(--ds-line-height-relaxed);
+}
+
+.newsletter-form-databird {
+  display: flex;
+  gap: var(--ds-spacing-3);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-input-databird {
+  flex: 1;
+  padding: var(--ds-spacing-4);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  font-size: var(--ds-font-size-base);
+  background: var(--ds-bg);
+  color: var(--ds-text);
+  transition: all var(--ds-transition-base);
+}
+
+.newsletter-input-databird:focus {
+  outline: none;
+  border-color: var(--ds-primary);
+  box-shadow: 0 0 0 3px var(--ds-primary-lighter);
+}
+
+.newsletter-button-databird {
+  padding: var(--ds-spacing-4) var(--ds-spacing-8);
+  background: var(--ds-primary);
+  color: white;
+  border: 2px solid var(--ds-primary);
+  border-radius: var(--ds-radius-lg);
+  font-weight: var(--ds-font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-transition-base);
+  white-space: nowrap;
+}
+
+.newsletter-button-databird:hover {
+  background: var(--ds-primary-dark);
+  border-color: var(--ds-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+/* ============================================
+   Resources Section DataBird Style
+   ============================================ */
+
+.resources-section-databird {
+  padding: var(--ds-spacing-20) var(--ds-spacing-4);
+  background: var(--ds-bg);
+}
+
+.resources-grid-databird {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--ds-spacing-6);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.resource-card-databird {
+  background: var(--ds-bg);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  padding: var(--ds-spacing-6);
+  transition: all var(--ds-transition-base);
+  text-align: center;
+}
+
+.resource-card-databird:hover {
+  border-color: var(--ds-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(227, 30, 36, 0.15);
+}
+
+.resource-card-icon-databird {
+  width: 64px;
+  height: 64px;
+  background: var(--ds-primary-lighter);
+  border-radius: var(--ds-radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ds-font-size-3xl);
+  margin: 0 auto var(--ds-spacing-4);
+  transition: all var(--ds-transition-base);
+}
+
+.resource-card-databird:hover .resource-card-icon-databird {
+  background: var(--ds-primary);
+  transform: scale(1.1);
+}
+
+.resource-card-title-databird {
+  font-size: var(--ds-font-size-lg);
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-text);
+  margin-bottom: var(--ds-spacing-2);
+}
+
+.resource-card-description-databird {
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-sm);
+  line-height: var(--ds-line-height-relaxed);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+  .trainings-grid-databird,
+  .resources-grid-databird {
+    grid-template-columns: 1fr;
+  }
+  
+  .newsletter-form-databird {
+    flex-direction: column;
+  }
+  
+  .newsletter-button-databird {
+    width: 100%;
+  }
+  
+  .blog-post-meta-databird {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--ds-spacing-3);
+  }
+}

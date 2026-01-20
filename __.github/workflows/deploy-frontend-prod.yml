@@ -1,0 +1,554 @@
+# Workflow GitHub Actions pour déployer le frontend vers Cloud Run
+# Utilise Service Account Key (GCP_SA_KEY) depuis GitHub Secrets pour l'authentification
+
+name: Deploy Frontend to Cloud Run (Production)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "frontend/**"
+      - "cloudbuild/frontend.yaml"
+      - ".github/workflows/deploy-frontend-prod.yml"
+  workflow_dispatch:
+
+env:
+  SERVICE_NAME: github-ai-search-frontend
+  BACKEND_SERVICE_NAME: github-ai-search-backend
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID || 'bq-small-corp' }}
+  REGION: ${{ vars.GCP_REGION || 'europe-west1' }}
+  AR_REPO: github-ai-search
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Frontend Code
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verify files before changing directory
+        run: |
+          echo "Root directory contents:"
+          ls -la | head -20
+          echo "Checking frontend/lib/ from root:"
+          ls -la frontend/lib/ 2>&1 | head -10 || echo "frontend/lib/ not found from root"
+          echo "Git tracked files in frontend/lib/:"
+          git ls-files frontend/lib/ | head -10
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Verify lib files are present
+        run: |
+          echo "Current directory: $(pwd)"
+          echo "Checking lib directory:"
+          ls -la lib/ 2>&1 || echo "lib/ not found"
+          echo "Checking lib/utils.ts:"
+          test -f lib/utils.ts && echo "✅ lib/utils.ts exists" || echo "❌ lib/utils.ts missing"
+          echo "Checking lib/hooks/use-backend-status.ts:"
+          test -f lib/hooks/use-backend-status.ts && echo "✅ lib/hooks/use-backend-status.ts exists" || echo "❌ lib/hooks/use-backend-status.ts missing"
+          echo "Git status of lib/:"
+          git ls-files lib/ | head -10 || echo "No files tracked in lib/"
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps --prefer-offline --no-audit
+
+      - name: Run linter
+        run: npm run lint || true
+
+      - name: Type check
+        run: npm run type-check || true
+
+      - name: Build application
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BACKEND_URL: http://localhost:8080
+          NODE_ENV: production
+
+      - name: Check for security vulnerabilities
+        continue-on-error: true
+        run: npm audit --audit-level=moderate || true
+
+  build-and-deploy:
+    name: Build and Deploy to Cloud Run
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Authentification via Service Account Key (depuis GitHub Secrets)
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          install_components: 'gke-gcloud-auth-plugin'
+
+      - name: Verify GCP authentication and project
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+        run: |
+          set -e
+          
+          echo "Verifying GCP configuration..."
+          echo "PROJECT_ID from env: ${PROJECT_ID}"
+          
+          if [ -z "$PROJECT_ID" ]; then
+            echo "❌ PROJECT_ID is not set in environment"
+            echo "Please configure GCP_PROJECT_ID in GitHub repository variables"
+            echo "Or it will use default value: bq-small-corp"
+            exit 1
+          fi
+          
+          CURRENT_PROJECT=$(gcloud config get-value project 2>/dev/null || echo "")
+          echo "Current GCP project: ${CURRENT_PROJECT}"
+          
+          if [ -z "$CURRENT_PROJECT" ] || [ "$CURRENT_PROJECT" != "$PROJECT_ID" ]; then
+            echo "Setting GCP project to $PROJECT_ID..."
+            gcloud config set project "$PROJECT_ID"
+          fi
+          
+          gcloud auth list
+          echo "✅ GCP authentication verified"
+
+      # Récupérer l'URL du backend
+      - name: Get backend service URL
+        id: get-backend-url
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          REGION: ${{ env.REGION }}
+          BACKEND_SERVICE_NAME: ${{ env.BACKEND_SERVICE_NAME }}
+        run: |
+          set -e
+          
+          # Vérifier que les variables sont définies
+          if [ -z "$PROJECT_ID" ]; then
+            echo "❌ PROJECT_ID is not set"
+            exit 1
+          fi
+          
+          # Vérifier que le projet est configuré
+          CURRENT_PROJECT=$(gcloud config get-value project 2>/dev/null || echo "")
+          if [ -z "$CURRENT_PROJECT" ] || [ "$CURRENT_PROJECT" != "$PROJECT_ID" ]; then
+            echo "Setting GCP project to $PROJECT_ID..."
+            gcloud config set project "$PROJECT_ID"
+          fi
+          
+          # Essayer de récupérer l'URL du backend
+          BACKEND_URL=$(gcloud run services describe "$BACKEND_SERVICE_NAME" \
+            --region="$REGION" \
+            --project="$PROJECT_ID" \
+            --format='value(status.url)' 2>/dev/null || echo "")
+          
+          if [ -z "$BACKEND_URL" ]; then
+            echo "⚠️  Backend service not found, using fallback URL"
+            BACKEND_URL="https://${BACKEND_SERVICE_NAME}-${REGION}.a.run.app"
+            echo "Using fallback URL: ${BACKEND_URL}"
+          else
+            echo "✅ Backend URL found: ${BACKEND_URL}"
+          fi
+          
+          echo "url=${BACKEND_URL}" >> "$GITHUB_OUTPUT"
+          echo "✅ Backend URL: ${BACKEND_URL}"
+
+      # Calculer SHORT_SHA
+      - name: Calculate SHORT_SHA
+        id: sha
+        run: |
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          echo "short_sha=${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+          echo "✅ SHORT_SHA: ${SHORT_SHA}"
+
+      # Build et push via Cloud Build (depuis la racine du repo)
+      - name: Build and push Docker image via Cloud Build
+        id: build
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          REGION: ${{ env.REGION }}
+          AR_REPO: ${{ env.AR_REPO }}
+          SERVICE_NAME: ${{ env.SERVICE_NAME }}
+        run: |
+          set -e
+          
+          # Vérifier que les variables sont définies
+          if [ -z "$PROJECT_ID" ]; then
+            echo "❌ PROJECT_ID is not set"
+            exit 1
+          fi
+          
+          echo "🚀 Building and pushing image via Cloud Build..."
+          echo "📁 Using Cloud Build config: cloudbuild/frontend.yaml"
+          
+          # Récupérer l'URL du backend pour le build
+          BACKEND_URL="${{ steps.get-backend-url.outputs.url }}"
+          
+          if [ -z "$BACKEND_URL" ]; then
+            echo "❌ Backend URL not available"
+            exit 1
+          fi
+          
+          echo "🔗 Using backend URL for build: ${BACKEND_URL}"
+          
+          # Soumettre le build depuis la racine du repo
+          gcloud builds submit . \
+            --config=cloudbuild/frontend.yaml \
+            --substitutions=_SHORT_SHA=${{ steps.sha.outputs.short_sha }},_COMMIT_SHA=${{ github.sha }},_BRANCH_NAME=${{ github.ref_name }},_BACKEND_URL=${BACKEND_URL} \
+            --project="$PROJECT_ID" \
+            --region="$REGION"
+          
+          # Construire l'URL de l'image
+          IMAGE_URL="${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/${SERVICE_NAME}:${{ steps.sha.outputs.short_sha }}"
+          
+          echo "image_url=${IMAGE_URL}" >> "$GITHUB_OUTPUT"
+          echo "✅ Image built and pushed: ${IMAGE_URL}"
+
+      # Déployer sur Cloud Run
+      - name: Deploy to Cloud Run
+        id: deploy
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          REGION: ${{ env.REGION }}
+          SERVICE_NAME: ${{ env.SERVICE_NAME }}
+        run: |
+          set -e
+          
+          # Vérifier que les variables sont définies
+          if [ -z "$PROJECT_ID" ]; then
+            echo "❌ PROJECT_ID is not set"
+            exit 1
+          fi
+          
+          IMAGE_URL="${{ steps.build.outputs.image_url }}"
+          BACKEND_URL="${{ steps.get-backend-url.outputs.url }}"
+          
+          echo "🚀 Deploying to Cloud Run..."
+          echo "📦 Image: ${IMAGE_URL}"
+          echo "🔗 Backend URL: ${BACKEND_URL}"
+          
+          gcloud run deploy "$SERVICE_NAME" \
+            --image="${IMAGE_URL}" \
+            --region="$REGION" \
+            --platform=managed \
+            --allow-unauthenticated \
+            --project="$PROJECT_ID" \
+            --port=3000 \
+            --cpu=1 \
+            --memory=1Gi \
+            --min-instances=0 \
+            --max-instances=10 \
+            --timeout=300s \
+            --concurrency=80 \
+            --set-env-vars="NEXT_PUBLIC_BACKEND_URL=${BACKEND_URL},NEXT_PUBLIC_DEBUG_MODE=false,NODE_ENV=production" \
+            --quiet
+          
+          echo "✅ Deployment successful"
+
+      # Récupérer l'URL du service
+      - name: Get service URL
+        id: get-url
+        run: |
+          URL=$(gcloud run services describe ${SERVICE_NAME} \
+            --region=${REGION} \
+            --project=${PROJECT_ID} \
+            --format='value(status.url)')
+          
+          echo "url=${URL}" >> "$GITHUB_OUTPUT"
+          echo "🌐 Service URL: ${URL}"
+
+      # Mettre à jour CORS du backend
+      - name: Update Backend CORS
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          REGION: ${{ env.REGION }}
+          BACKEND_SERVICE_NAME: ${{ env.BACKEND_SERVICE_NAME }}
+        run: |
+          set -e
+          
+          # Vérifier que les variables sont définies
+          if [ -z "$PROJECT_ID" ]; then
+            echo "❌ PROJECT_ID is not set"
+            exit 1
+          fi
+          
+          # Vérifier que le projet est configuré
+          CURRENT_PROJECT=$(gcloud config get-value project 2>/dev/null || echo "")
+          if [ -z "$CURRENT_PROJECT" ] || [ "$CURRENT_PROJECT" != "$PROJECT_ID" ]; then
+            echo "Setting GCP project to $PROJECT_ID..."
+            gcloud config set project "$PROJECT_ID"
+          fi
+
+          FRONTEND_URL="${{ steps.get-url.outputs.url }}"
+          
+          if [ -z "$FRONTEND_URL" ]; then
+            echo "⚠️  Frontend URL not available, skipping CORS update"
+            exit 0
+          fi
+          
+          echo "🔄 Updating backend CORS with frontend URL: ${FRONTEND_URL}"
+          
+          # Vérifier que le backend existe avant de mettre à jour CORS
+          if gcloud run services describe "$BACKEND_SERVICE_NAME" --region="$REGION" --project="$PROJECT_ID" >/dev/null 2>&1; then
+            gcloud run services update "$BACKEND_SERVICE_NAME" \
+              --region="$REGION" \
+              --project="$PROJECT_ID" \
+              --update-env-vars="CORS_ORIGINS=${FRONTEND_URL},http://localhost:3000" \
+              --quiet
+            echo "✅ CORS updated"
+          else
+            echo "⚠️  Backend service not found, skipping CORS update"
+          fi
+
+      # Health check avec exponential backoff
+      - name: Wait for service to be ready
+        id: health-check
+        run: |
+          # Vérifier que le projet est configuré
+          CURRENT_PROJECT=$(gcloud config get-value project 2>/dev/null || echo "")
+          if [ -z "$CURRENT_PROJECT" ] || [ "$CURRENT_PROJECT" != "${PROJECT_ID}" ]; then
+            gcloud config set project ${PROJECT_ID}
+          fi
+
+          URL="${{ steps.get-url.outputs.url }}"
+          if [ -z "$URL" ]; then
+            echo "❌ Service URL not available"
+            echo "healthy=false" >> "$GITHUB_OUTPUT"
+            exit 1
+          fi
+          
+          echo "⏳ Waiting for service to be ready..."
+          
+          # Initial wait
+          sleep 20
+          
+          MAX_RETRIES=10
+          RETRY_COUNT=0
+          INITIAL_DELAY=5
+          MAX_DELAY=60
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            # Exponential backoff
+            DELAY=$((INITIAL_DELAY * (1 << RETRY_COUNT)))
+            if [ $DELAY -gt $MAX_DELAY ]; then
+              DELAY=$MAX_DELAY
+            fi
+            
+            if curl -f -s --max-time 10 "${URL}" >/dev/null 2>&1; then
+              echo "✅ Service is ready!"
+              echo "healthy=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            else
+              RETRY_COUNT=$((RETRY_COUNT+1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "⏳ Service not ready, retrying in ${DELAY}s... ($RETRY_COUNT/$MAX_RETRIES)"
+                sleep $DELAY
+              fi
+            fi
+          done
+          
+          echo "❌ Service health check failed after $MAX_RETRIES attempts"
+          echo "healthy=false" >> "$GITHUB_OUTPUT"
+          
+          # Afficher les logs récents
+          echo "📋 Recent logs:"
+          gcloud run logs read ${SERVICE_NAME} \
+            --region=${REGION} \
+            --project=${PROJECT_ID} \
+            --limit=50 \
+            --format="table(timestamp,severity,textPayload)" || true
+          
+          exit 1
+
+      # Smoke tests améliorés
+      - name: Run smoke tests
+        id: smoke-tests
+        if: steps.health-check.outputs.healthy == 'true'
+        run: |
+          URL="${{ steps.get-url.outputs.url }}"
+          
+          echo "🧪 Running comprehensive smoke tests..."
+          
+          TESTS_PASSED=0
+          TESTS_FAILED=0
+          
+          # Test 1: Homepage
+          echo "Test 1: Homepage..."
+          if curl -f -s --max-time 10 "${URL}" >/dev/null 2>&1; then
+            echo "✅ Homepage test passed"
+            TESTS_PASSED=$((TESTS_PASSED+1))
+          else
+            echo "❌ Homepage test failed"
+            TESTS_FAILED=$((TESTS_FAILED+1))
+          fi
+          
+          # Test 2: Vérifier que le contenu HTML est valide
+          echo "Test 2: HTML content validation..."
+          HTML_CONTENT=$(curl -s --max-time 10 "${URL}" | head -n 20)
+          if echo "$HTML_CONTENT" | grep -q "<!DOCTYPE html\|<html"; then
+            echo "✅ HTML content test passed"
+            TESTS_PASSED=$((TESTS_PASSED+1))
+          else
+            echo "⚠️  HTML content test failed (non-critical)"
+            TESTS_FAILED=$((TESTS_FAILED+1))
+          fi
+          
+          # Test 3: Vérifier que Next.js est actif
+          echo "Test 3: Next.js runtime check..."
+          if curl -s --max-time 10 "${URL}" | grep -q "next\|_next"; then
+            echo "✅ Next.js runtime test passed"
+            TESTS_PASSED=$((TESTS_PASSED+1))
+          else
+            echo "⚠️  Next.js runtime test inconclusive (non-critical)"
+            TESTS_FAILED=$((TESTS_FAILED+1))
+          fi
+          
+          echo ""
+          echo "📊 Test Summary: $TESTS_PASSED passed, $TESTS_FAILED failed"
+          
+          if [ $TESTS_FAILED -gt 1 ]; then
+            echo "❌ Too many tests failed, deployment may be unstable"
+            exit 1
+          fi
+          
+          echo "tests_passed=${TESTS_PASSED}" >> "$GITHUB_OUTPUT"
+          echo "tests_failed=${TESTS_FAILED}" >> "$GITHUB_OUTPUT"
+
+      # Rollback automatique en cas d'échec
+      - name: Rollback on failure
+        if: failure() && steps.health-check.outputs.healthy != 'true'
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          REGION: ${{ env.REGION }}
+          SERVICE_NAME: ${{ env.SERVICE_NAME }}
+        run: |
+          set -e
+          
+          echo "🔄 Attempting automatic rollback..."
+          
+          # Vérifier que les variables sont définies
+          if [ -z "$PROJECT_ID" ]; then
+            echo "❌ PROJECT_ID is not set, skipping rollback"
+            exit 0
+          fi
+          
+          # Vérifier que le projet est configuré
+          CURRENT_PROJECT=$(gcloud config get-value project 2>/dev/null || echo "")
+          if [ -z "$CURRENT_PROJECT" ] || [ "$CURRENT_PROJECT" != "$PROJECT_ID" ]; then
+            echo "Setting GCP project to $PROJECT_ID..."
+            gcloud config set project "$PROJECT_ID"
+          fi
+
+          # Vérifier que le service existe avant de lister les revisions
+          if gcloud run services describe "$SERVICE_NAME" --region="$REGION" --project="$PROJECT_ID" >/dev/null 2>&1; then
+            PREVIOUS_REVISION=$(gcloud run revisions list \
+              --service="$SERVICE_NAME" \
+              --region="$REGION" \
+              --project="$PROJECT_ID" \
+              --format="value(name)" \
+              --limit=2 \
+              --sort-by=~metadata.creationTimestamp | tail -n 1)
+
+            if [ -n "$PREVIOUS_REVISION" ]; then
+              echo "📦 Rolling back to: ${PREVIOUS_REVISION}"
+              gcloud run services update-traffic "$SERVICE_NAME" \
+                --to-revisions=${PREVIOUS_REVISION}=100 \
+                --region="$REGION" \
+                --project="$PROJECT_ID" \
+                --quiet
+              echo "✅ Rollback completed"
+            else
+              echo "⚠️  No previous revision found for rollback"
+            fi
+          else
+            echo "⚠️  Service $SERVICE_NAME does not exist yet, skipping rollback"
+          fi
+
+      # Cleanup des anciennes images
+      - name: Cleanup old images
+        if: success()
+        continue-on-error: true
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          REGION: ${{ env.REGION }}
+          AR_REPO: ${{ env.AR_REPO }}
+          SERVICE_NAME: ${{ env.SERVICE_NAME }}
+        run: |
+          set -e
+          
+          # Vérifier que les variables sont définies
+          if [ -z "$PROJECT_ID" ]; then
+            echo "⚠️  PROJECT_ID is not set, skipping cleanup"
+            exit 0
+          fi
+          
+          echo "🧹 Cleaning up old images (keeping last 10)..."
+          
+          IMAGES=$(gcloud artifacts docker images list \
+            ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/${SERVICE_NAME} \
+            --project="$PROJECT_ID" \
+            --format="value(package,version,create_time)" \
+            --sort-by=~CREATE_TIME)
+          
+          IMAGE_COUNT=$(echo "$IMAGES" | wc -l | tr -d ' ')
+          
+          if [ "$IMAGE_COUNT" -gt 10 ]; then
+            echo "$IMAGES" | tail -n +11 | while IFS=$'\t' read -r package version create_time; do
+              echo "🗑️  Deleting old image: ${package}:${version}"
+              gcloud artifacts docker images delete \
+                ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/${SERVICE_NAME}@${version} \
+                --project="$PROJECT_ID" \
+                --quiet || true
+            done
+            echo "✅ Cleanup completed"
+          else
+            echo "ℹ️  Only $IMAGE_COUNT images found, no cleanup needed"
+          fi
+
+      # Résumé du déploiement
+      - name: Deployment summary
+        if: always()
+        run: |
+          URL="${{ steps.get-url.outputs.url }}"
+          BACKEND_URL="${{ steps.get-backend-url.outputs.url }}"
+          IMAGE_URL="${{ steps.build.outputs.image_url }}"
+          HEALTH_STATUS="${{ steps.health-check.outputs.healthy }}"
+          TESTS_PASSED="${{ steps.smoke-tests.outputs.tests_passed }}"
+          TESTS_FAILED="${{ steps.smoke-tests.outputs.tests_failed }}"
+          
+          if [ "$HEALTH_STATUS" = "true" ]; then
+            echo "## 🎨 Frontend Deployment Successful" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Frontend URL:** ${URL}" >> $GITHUB_STEP_SUMMARY
+            echo "**Backend API:** ${BACKEND_URL}" >> $GITHUB_STEP_SUMMARY
+            echo "**Image:** \`${IMAGE_URL}\`" >> $GITHUB_STEP_SUMMARY
+            if [ -n "$TESTS_PASSED" ]; then
+              echo "**Smoke Tests:** ✅ $TESTS_PASSED passed, ⚠️ $TESTS_FAILED failed" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "🚀 Your application is ready!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ❌ Frontend Deployment Failed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Status:** Health check failed" >> $GITHUB_STEP_SUMMARY
+            echo "**Image:** \`${IMAGE_URL}\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ Please check the logs and consider rolling back." >> $GITHUB_STEP_SUMMARY
+          fi
+

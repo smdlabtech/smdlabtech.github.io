@@ -1,0 +1,196 @@
+---
+layout: base
+---
+
+{% assign tag_name = page.tag | default: page.title | downcase %}
+{% assign tag_posts = site.posts | where_exp: "post", "post.tags contains tag_name" %}
+
+<!-- Tag Header Section -->
+<section class="tag-header-section">
+  <div class="container-databird">
+    <nav aria-label="Breadcrumb" class="breadcrumb-databird">
+      <div class="breadcrumb-databird-content">
+        <a href="{{ '/' | relative_url }}" class="breadcrumb-item">Accueil</a>
+        <span class="breadcrumb-separator">/</span>
+        <a href="{{ '/tags/' | relative_url }}" class="breadcrumb-item">Tags</a>
+        <span class="breadcrumb-separator">/</span>
+        <span class="breadcrumb-item active">{{ page.title }}</span>
+      </div>
+    </nav>
+    
+    <div class="tag-header-content">
+      <div class="tag-icon-wrapper">
+        {% if page.icon %}
+          <div class="tag-icon-large">{{ page.icon }}</div>
+        {% else %}
+          <div class="tag-icon-large">📊</div>
+        {% endif %}
+      </div>
+      
+      <h1 class="tag-title">{{ page.title }}</h1>
+      
+      {% if page.description %}
+        <p class="tag-description">{{ page.description }}</p>
+      {% endif %}
+      
+      <div class="tag-stats">
+        <div class="tag-stat-item">
+          <span class="tag-stat-value">{{ tag_posts.size }}</span>
+          <span class="tag-stat-label">Articles</span>
+        </div>
+        {% if page.last-updated %}
+          <div class="tag-stat-item">
+            <span class="tag-stat-value">{{ page.last-updated }}</span>
+            <span class="tag-stat-label">Dernière mise à jour</span>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Tag Content -->
+{% if page.content %}
+<section class="tag-intro-section">
+  <div class="container-databird">
+    <div class="tag-intro-content">
+      {{ content }}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Featured Posts -->
+{% assign featured_posts = tag_posts | where: "featured", true | limit: 3 %}
+{% if featured_posts.size > 0 %}
+<section class="tag-featured-section">
+  <div class="container-databird">
+    <h2 class="section-title">Articles à la Une</h2>
+    <div class="featured-posts-grid">
+      {% for post in featured_posts %}
+      <article class="featured-post-card">
+        {% if post.cover-img or post.thumbnail-img %}
+          {% assign image = post.cover-img | default: post.thumbnail-img %}
+          {% if image.first %}
+            {% assign image = image[0].first.first %}
+          {% endif %}
+          <img src="{{ image | relative_url }}" alt="{{ post.title }}" class="featured-post-image" loading="lazy">
+        {% else %}
+          <div class="featured-post-image" style="background: linear-gradient(135deg, #E31E24 0%, #1E40AF 100%);"></div>
+        {% endif %}
+        
+        <div class="featured-post-content">
+          <h3 class="featured-post-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+          </h3>
+          
+          {% if post.excerpt %}
+            <p class="featured-post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+          {% endif %}
+          
+          <div class="featured-post-meta">
+            <span>
+              <i class="far fa-calendar" aria-hidden="true"></i>
+              {{ post.date | date: "%d/%m/%Y" }}
+            </span>
+            {% if post.author %}
+              <span>
+                <i class="far fa-user" aria-hidden="true"></i>
+                {{ post.author }}
+              </span>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- All Posts Grid -->
+<section class="tag-posts-section">
+  <div class="container-databird">
+    <div class="tag-posts-header">
+      <h2 class="section-title">Tous les Articles</h2>
+      <p class="section-subtitle">
+        {{ tag_posts.size }} article{{ tag_posts.size | pluralize: 's' }} dans cette catégorie
+      </p>
+    </div>
+    
+    {% if tag_posts.size > 0 %}
+      <div class="blog-grid-databird">
+        {% for post in tag_posts %}
+        <article class="blog-card-databird">
+          {% if post.cover-img or post.thumbnail-img %}
+            {% assign image = post.cover-img | default: post.thumbnail-img %}
+            {% if image.first %}
+              {% assign image = image[0].first.first %}
+            {% endif %}
+            <img src="{{ image | relative_url }}" alt="{{ post.title }}" class="blog-card-image" loading="lazy">
+          {% else %}
+            <div class="blog-card-image" style="background: linear-gradient(135deg, #E31E24 0%, #1E40AF 100%);"></div>
+          {% endif %}
+          
+          <div class="blog-card-content">
+            {% if post.tags %}
+              <span class="blog-card-tag">{{ post.tags[0] }}</span>
+            {% endif %}
+            
+            <h2 class="blog-card-title">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+            </h2>
+            
+            {% if post.excerpt %}
+              <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+            {% endif %}
+            
+            <div class="blog-card-meta">
+              <span class="blog-card-date">
+                <i class="far fa-calendar" aria-hidden="true"></i>
+                {{ post.date | date: "%d/%m/%Y" }}
+              </span>
+              {% if post.author %}
+                <span class="blog-card-author">
+                  <i class="far fa-user" aria-hidden="true"></i>
+                  {{ post.author }}
+                </span>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="empty-state">
+        <div class="empty-state-icon">📭</div>
+        <h3 class="empty-state-title">Aucun article trouvé</h3>
+        <p class="empty-state-description">
+          Il n'y a pas encore d'articles dans cette catégorie. Revenez bientôt !
+        </p>
+        <a href="{{ '/' | relative_url }}" class="cta-button cta-button-primary">
+          Retour à l'accueil
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Related Tags -->
+{% assign all_tags = site.posts | map: 'tags' | flatten | uniq | sort %}
+{% assign related_tags = all_tags | where_exp: "tag", "tag != tag_name" | limit: 5 %}
+{% if related_tags.size > 0 %}
+<section class="related-tags-section">
+  <div class="container-databird">
+    <h2 class="section-title">Catégories Similaires</h2>
+    <div class="tags-cloud">
+      {% for tag in related_tags %}
+        <a href="/tags/{{ tag | slugify }}" class="tag-cloud-item">
+          {{ tag }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}

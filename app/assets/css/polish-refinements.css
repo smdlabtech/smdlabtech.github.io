@@ -1,0 +1,600 @@
+/**
+ * Polish & Refinements CSS
+ * Ajustements fins et optimisations subtiles
+ * Perfectionnement des détails
+ * 
+ * Note: Les options de largeur layout-wide/layout-centered ont été supprimées
+ * pour une expérience plus fluide et responsive automatique
+ */
+
+/* ============================================
+   Optimisations de Performance
+   ============================================ */
+* {
+  will-change: auto;
+}
+
+.animate-on-scroll,
+.reveal-on-scroll,
+.card-3d {
+  will-change: transform, opacity;
+}
+
+/* ============================================
+   Ajustements Typographiques Fins
+   ============================================ */
+.hero-title {
+  font-feature-settings: "kern" 1, "liga" 1;
+  text-rendering: optimizeLegibility;
+  letter-spacing: -0.02em;
+}
+
+.post-title {
+  font-feature-settings: "kern" 1;
+  text-rendering: optimizeLegibility;
+}
+
+/* ============================================
+   Espacements Harmonieux
+   ============================================ */
+.post-preview {
+  margin-bottom: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.hero-section {
+  padding: clamp(3rem, 8vw, 6rem) var(--spacing-md);
+}
+
+/* ============================================
+   Transitions Affinées
+   ============================================ */
+.nav-link,
+.btn,
+.post-preview {
+  transition: 
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* ============================================
+   Focus States Améliorés
+   ============================================ */
+:focus-visible {
+  outline: 2px solid var(--color-link);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+  transition: outline-offset 0.1s ease;
+}
+
+:focus-visible:active {
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Loading States Subtils
+   ============================================ */
+.loading-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 0%,
+    var(--color-bg-tertiary) 50%,
+    var(--color-bg-secondary) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: var(--radius-md);
+}
+
+/* ============================================
+   Hover States Affinés
+   ============================================ */
+.post-preview:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.post-preview:active {
+  transform: translateY(0);
+}
+
+/* ============================================
+   Scrollbar Personnalisée Globale
+   ============================================ */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: var(--radius-full);
+  border: 2px solid var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-text-muted);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-border) var(--color-bg-secondary);
+}
+
+/* ============================================
+   Image Optimization
+   ============================================ */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+img[loading="lazy"] {
+  content-visibility: auto;
+}
+
+/* ============================================
+   Container Queries (si supporté)
+   ============================================ */
+@container (min-width: 600px) {
+  .post-preview {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: var(--spacing-lg);
+  }
+}
+
+/* ============================================
+   Reduced Motion Respect
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .morphing-bg,
+  .particles-container {
+    display: none;
+  }
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .navbar,
+  .footer,
+  .back-to-top,
+  .bookmark-btn,
+  .fab-container,
+  .toc-floating {
+    display: none !important;
+  }
+  
+  .blog-post {
+    max-width: 100%;
+    font-size: 12pt;
+    line-height: 1.6;
+  }
+  
+  a {
+    text-decoration: underline;
+  }
+  
+  a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+  }
+}
+
+/* ============================================
+   High Contrast Mode Support
+   ============================================ */
+@media (prefers-contrast: high) {
+  :root {
+    --color-border: #000000;
+    --color-text-primary: #000000;
+    --color-bg-primary: #ffffff;
+  }
+  
+  .dark-mode {
+    --color-border: #ffffff;
+    --color-text-primary: #ffffff;
+    --color-bg-primary: #000000;
+  }
+  
+  .btn,
+  .post-preview {
+    border-width: 2px;
+  }
+}
+
+/* ============================================
+   Touch Target Sizes
+   ============================================ */
+@media (pointer: coarse) {
+  .btn,
+  .nav-link,
+  .bookmark-btn,
+  .fab-item {
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+/* ============================================
+   Color Scheme Support
+   ============================================ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --color-bg-primary: #0d1117;
+    --color-bg-secondary: #161b22;
+    --color-text-primary: #c9d1d9;
+  }
+}
+
+/* ============================================
+   Viewport Units Fix
+   ============================================ */
+.hero-section {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height - fallback */
+}
+
+@supports (height: 100dvh) {
+  .hero-section {
+    min-height: 100dvh;
+  }
+}
+
+@media (max-height: 500px) {
+  .hero-section {
+    min-height: auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+  }
+}
+
+/* ============================================
+   Content Visibility
+   ============================================ */
+.post-preview:not(.visible) {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
+/* ============================================
+   Font Loading Optimization
+   ============================================ */
+@font-face {
+  font-display: swap; /* Pour les fonts custom si ajoutées */
+}
+
+/* ============================================
+   Subtle Shadows Refinement
+   ============================================ */
+.shadow-modern {
+  box-shadow: 
+    0 1px 3px 0 rgba(0, 0, 0, 0.1),
+    0 1px 2px -1px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-modern:hover {
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* ============================================
+   Border Radius Consistency
+   ============================================ */
+.btn,
+.card,
+.post-preview,
+.code-block-wrapper {
+  border-radius: var(--radius-md);
+}
+
+.btn-lg {
+  border-radius: var(--radius-lg);
+}
+
+/* ============================================
+   Line Height Optimization
+   ============================================ */
+.blog-post {
+  line-height: 1.75; /* Optimal pour la lecture */
+}
+
+.blog-post p {
+  margin-bottom: 1.5em;
+}
+
+.blog-post h2,
+.blog-post h3 {
+  margin-top: 2em;
+  margin-bottom: 1em;
+  line-height: 1.3;
+}
+
+/* ============================================
+   Link Underline Refinement
+   ============================================ */
+.blog-post a {
+  text-decoration: underline;
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 2px;
+  text-decoration-color: var(--color-link);
+  transition: text-decoration-color var(--transition-fast);
+}
+
+.blog-post a:hover {
+  text-decoration-color: var(--color-link-hover);
+}
+
+/* ============================================
+   Code Block Refinement
+   ============================================ */
+.code-block-wrapper pre {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  tab-size: 2;
+}
+
+.code-block-wrapper code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+}
+
+/* ============================================
+   Table Styles
+   ============================================ */
+.blog-post table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-lg) 0;
+  font-size: 0.9em;
+}
+
+.blog-post th,
+.blog-post td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.blog-post th {
+  background: var(--color-bg-secondary);
+  font-weight: 600;
+}
+
+.blog-post tr:nth-child(even) {
+  background: var(--color-bg-secondary);
+}
+
+/* ============================================
+   Blockquote Refinement
+   ============================================ */
+.blog-post blockquote {
+  border-left: 4px solid var(--color-link);
+  padding-left: var(--spacing-lg);
+  margin: var(--spacing-lg) 0;
+  font-style: italic;
+  color: var(--color-text-secondary);
+  background: var(--color-bg-secondary);
+  padding: var(--spacing-md) var(--spacing-lg);
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================
+   List Refinement
+   ============================================ */
+.blog-post ul,
+.blog-post ol {
+  padding-left: var(--spacing-xl);
+  margin: var(--spacing-md) 0;
+}
+
+.blog-post li {
+  margin-bottom: var(--spacing-xs);
+  line-height: 1.7;
+}
+
+.blog-post ul li {
+  list-style-type: disc;
+}
+
+.blog-post ol li {
+  list-style-type: decimal;
+}
+
+/* ============================================
+   Responsive Typography
+   ============================================ */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: clamp(1.75rem, 6vw, 2.5rem);
+  }
+  
+  .post-title {
+    font-size: clamp(1.25rem, 4vw, 1.75rem);
+  }
+  
+  .blog-post {
+    font-size: 1rem;
+  }
+}
+
+/* ============================================
+   Container Max Widths
+   ============================================ */
+.container-md {
+  max-width: 768px;
+}
+
+.container-lg {
+  max-width: 1024px;
+}
+
+/* ============================================
+   Z-Index Management
+   ============================================ */
+:root {
+  --z-base: 1;
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  --z-notification: 1080;
+}
+
+/* ============================================
+   Aspect Ratio Preservation
+   ============================================ */
+.post-image img,
+.image-zoom-container img {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
+/* ============================================
+   Smooth Color Transitions
+   ============================================ */
+* {
+  transition: 
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+/* Exclure les éléments qui ne doivent pas transitionner */
+img,
+svg,
+video,
+iframe,
+canvas,
+object,
+embed {
+  transition: none;
+}
+
+/* ============================================
+   Selection Colors
+   ============================================ */
+::selection {
+  background: rgba(0, 138, 255, 0.2);
+  color: var(--color-text-primary);
+}
+
+::-moz-selection {
+  background: rgba(0, 138, 255, 0.2);
+  color: var(--color-text-primary);
+}
+
+/* ============================================
+   Placeholder Styling
+   ============================================ */
+input::placeholder,
+textarea::placeholder {
+  color: var(--color-text-muted);
+  opacity: 0.7;
+  transition: opacity var(--transition-fast);
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  opacity: 0.5;
+}
+
+/* ============================================
+   Loading States
+   ============================================ */
+.btn:disabled,
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================
+   Empty States
+   ============================================ */
+.empty-state {
+  text-align: center;
+  padding: var(--spacing-3xl);
+  color: var(--color-text-secondary);
+}
+
+.empty-state-icon {
+  font-size: 4rem;
+  opacity: 0.3;
+  margin-bottom: var(--spacing-lg);
+}
+
+/* ============================================
+   Skeleton Loading
+   ============================================ */
+.skeleton {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ============================================
+   Focus Within
+   ============================================ */
+.form-group:focus-within label {
+  color: var(--color-link);
+}
+
+/* ============================================
+   Aspect Ratio Images
+   ============================================ */
+img[width][height] {
+  aspect-ratio: attr(width) / attr(height);
+}
+
+/* ============================================
+   Text Balance (si supporté)
+   ============================================ */
+@supports (text-wrap: balance) {
+  .hero-title,
+  .post-title {
+    text-wrap: balance;
+  }
+}

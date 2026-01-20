@@ -1,0 +1,452 @@
+# Workflow GitHub Actions pour déployer le backend vers Cloud Run
+# Utilise Service Account Key (GCP_SA_KEY) depuis GitHub Secrets pour l'authentification
+
+name: Deploy Backend to Cloud Run (Production)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - "backend/**"
+      - "cloudbuild/backend.yaml"
+      - ".github/workflows/deploy-backend-prod.yml"
+  workflow_dispatch:
+
+env:
+  SERVICE_NAME: github-ai-search-backend
+  PROJECT_ID: ${{ vars.GCP_PROJECT_ID || 'bq-small-corp' }}
+  REGION: ${{ vars.GCP_REGION || 'europe-west1' }}
+  AR_REPO: github-ai-search
+  RUNTIME_SA_NAME: cr-github-ai-search
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Validate Backend Code
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint with flake8
+        continue-on-error: true
+        run: |
+          pip install flake8
+          flake8 app --count --select=E9,F63,F7,F82 --show-source --statistics
+          flake8 app --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+
+      - name: Type check
+        continue-on-error: true
+        run: |
+          pip install mypy
+          mypy app --ignore-missing-imports || true
+
+      - name: Compile Python code
+        run: python -m compileall app
+
+  build-and-deploy:
+    name: Build and Deploy to Cloud Run
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Authentification via Service Account Key (depuis GitHub Secrets)
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Cloud SDK
+        uses: google-github-actions/setup-gcloud@v2
+        with:
+          project_id: ${{ env.PROJECT_ID }}
+          install_components: 'gke-gcloud-auth-plugin'
+
+      - name: Verify GCP authentication and project
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+        run: |
+          set -e
+          
+          echo "Verifying GCP configuration..."
+          echo "PROJECT_ID from env: ${PROJECT_ID}"
+          
+          if [ -z "$PROJECT_ID" ]; then
+            echo "❌ PROJECT_ID is not set in environment"
+            echo "Please configure GCP_PROJECT_ID in GitHub repository variables"
+            echo "Or it will use default value: bq-small-corp"
+            exit 1
+          fi
+          
+          CURRENT_PROJECT=$(gcloud config get-value project 2>/dev/null || echo "")
+          echo "Current GCP project: ${CURRENT_PROJECT}"
+          
+          if [ -z "$CURRENT_PROJECT" ] || [ "$CURRENT_PROJECT" != "$PROJECT_ID" ]; then
+            echo "Setting GCP project to $PROJECT_ID..."
+            gcloud config set project "$PROJECT_ID"
+          fi
+          
+          gcloud auth list
+          echo "✅ GCP authentication verified"
+
+      # Calculer SHORT_SHA
+      - name: Calculate SHORT_SHA
+        id: sha
+        run: |
+          SHORT_SHA=$(echo "${{ github.sha }}" | cut -c1-7)
+          echo "short_sha=${SHORT_SHA}" >> "$GITHUB_OUTPUT"
+          echo "✅ SHORT_SHA: ${SHORT_SHA}"
+
+      # Build et push via Cloud Build (depuis la racine du repo)
+      - name: Build and push Docker image via Cloud Build
+        id: build
+        env:
+          PROJECT_ID: ${{ env.PROJECT_ID }}
+          REGION: ${{ env.REGION }}
+          AR_REPO: ${{ env.AR_REPO }}
+          SERVICE_NAME: ${{ env.SERVICE_NAME }}
+        run: |
+          set -e
+          
+          # Vérifier que les variables sont définies
+          if [ -z "$PROJECT_ID" ]; then
+            echo "❌ PROJECT_ID is not set"
+            exit 1
+          fi
+          
+          echo "🚀 Building and pushing image via Cloud Build..."
+          echo "📁 Using Cloud Build config: cloudbuild/backend.yaml"
+          
+          # Soumettre le build depuis la racine du repo
+          gcloud builds submit . \
+            --config=cloudbuild/backend.yaml \
+            --substitutions=_SHORT_SHA=${{ steps.sha.outputs.short_sha }},_COMMIT_SHA=${{ github.sha }},_BRANCH_NAME=${{ github.ref_name }} \
+            --project="$PROJECT_ID" \
+            --region="$REGION"
+          
+          # Construire l'URL de l'image
+          IMAGE_URL="${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/${SERVICE_NAME}:${{ steps.sha.outputs.short_sha }}"
+          
+          echo "image_url=${IMAGE_URL}" >> "$GITHUB_OUTPUT"
+          echo "✅ Image built and pushed: ${IMAGE_URL}"
+
+      # Vérifier quels secrets existent dans Secret Manager
+      - name: Check available secrets
+        id: secrets-check
+        run: |
+          set -e
+          
+          # Liste des secrets requis et optionnels
+          REQUIRED_SECRETS=("GEMINI_API_KEY")
+          OPTIONAL_SECRETS=("GITHUB_TOKEN" "FIREBASE_API_KEY" "FIREBASE_AUTH_DOMAIN" "FIREBASE_PROJECT_ID" "SLACK_WEBHOOK_URL")
+          
+          SECRETS_LIST=""
+          
+          # Vérifier les secrets requis
+          for secret in "${REQUIRED_SECRETS[@]}"; do
+            if gcloud secrets describe ${secret} --project=${{ env.PROJECT_ID }} --format="value(name)" >/dev/null 2>&1; then
+              if [ -z "$SECRETS_LIST" ]; then
+                SECRETS_LIST="${secret}=${secret}:latest"
+              else
+                SECRETS_LIST="${SECRETS_LIST},${secret}=${secret}:latest"
+              fi
+              echo "✅ Found required secret: ${secret}"
+            else
+              echo "❌ Required secret not found: ${secret}"
+              exit 1
+            fi
+          done
+          
+          # Vérifier les secrets optionnels
+          for secret in "${OPTIONAL_SECRETS[@]}"; do
+            if gcloud secrets describe ${secret} --project=${{ env.PROJECT_ID }} --format="value(name)" >/dev/null 2>&1; then
+              SECRETS_LIST="${SECRETS_LIST},${secret}=${secret}:latest"
+              echo "✅ Found optional secret: ${secret}"
+            else
+              echo "⚠️  Optional secret not found: ${secret} (skipping)"
+            fi
+          done
+          
+          echo "secrets_list=${SECRETS_LIST}" >> "$GITHUB_OUTPUT"
+          echo "📋 Secrets to mount: ${SECRETS_LIST}"
+
+      # Récupérer l'email du runtime SA
+      - name: Get runtime service account email
+        id: runtime-sa
+        run: |
+          RUNTIME_SA_EMAIL="${RUNTIME_SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
+          echo "runtime_sa_email=${RUNTIME_SA_EMAIL}" >> "$GITHUB_OUTPUT"
+          echo "✅ Runtime SA: ${RUNTIME_SA_EMAIL}"
+
+      # Déployer sur Cloud Run
+      - name: Deploy to Cloud Run
+        id: deploy
+        run: |
+          set -e
+          
+          IMAGE_URL="${{ steps.build.outputs.image_url }}"
+          RUNTIME_SA_EMAIL="${{ steps.runtime-sa.outputs.runtime_sa_email }}"
+          SECRETS_LIST="${{ steps.secrets-check.outputs.secrets_list }}"
+          
+          echo "🚀 Deploying to Cloud Run..."
+          echo "📦 Image: ${IMAGE_URL}"
+          echo "🔐 Runtime SA: ${RUNTIME_SA_EMAIL}"
+          echo "🔑 Secrets: ${SECRETS_LIST}"
+          
+          # Construire la commande de déploiement
+          DEPLOY_CMD="gcloud run deploy ${SERVICE_NAME} \
+            --image=\"${IMAGE_URL}\" \
+            --region=${REGION} \
+            --platform=managed \
+            --allow-unauthenticated \
+            --project=${PROJECT_ID} \
+            --service-account=${RUNTIME_SA_EMAIL} \
+            --port=8080 \
+            --timeout=900s \
+            --cpu=1 \
+            --memory=1Gi \
+            --min-instances=0 \
+            --max-instances=3 \
+            --concurrency=80 \
+            --set-secrets=\"${SECRETS_LIST}\" \
+            --set-env-vars=\"ENVIRONMENT=production,ENABLE_METRICS=true,LOG_LEVEL=INFO,GITHUB_API_URL=https://api.github.com,GITHUB_TIMEOUT_SECONDS=12,GCP_PROJECT_ID=${PROJECT_ID},GCP_REGION=${REGION}\" \
+            --quiet"
+          
+          eval $DEPLOY_CMD
+          
+          echo "✅ Deployment successful"
+
+      # Récupérer l'URL du service
+      - name: Get service URL
+        id: get-url
+        run: |
+          URL=$(gcloud run services describe ${SERVICE_NAME} \
+            --region=${REGION} \
+            --project=${PROJECT_ID} \
+            --format='value(status.url)')
+          
+          echo "url=${URL}" >> "$GITHUB_OUTPUT"
+          echo "🌐 Service URL: ${URL}"
+
+      # Health check avec exponential backoff
+      - name: Wait for service to be ready
+        id: health-check
+        run: |
+          URL="${{ steps.get-url.outputs.url }}"
+          echo "⏳ Waiting for service to be ready..."
+          
+          # Initial wait
+          sleep 30
+          
+          MAX_RETRIES=15
+          RETRY_COUNT=0
+          INITIAL_DELAY=5
+          MAX_DELAY=60
+          
+          while [ $RETRY_COUNT -lt $MAX_RETRIES ]; do
+            # Exponential backoff: delay = min(INITIAL_DELAY * 2^RETRY_COUNT, MAX_DELAY)
+            DELAY=$((INITIAL_DELAY * (1 << RETRY_COUNT)))
+            if [ $DELAY -gt $MAX_DELAY ]; then
+              DELAY=$MAX_DELAY
+            fi
+            
+            if curl -f -s --max-time 10 "${URL}/api/health" >/dev/null 2>&1; then
+              echo "✅ Health check passed!"
+              echo "healthy=true" >> "$GITHUB_OUTPUT"
+              exit 0
+            else
+              RETRY_COUNT=$((RETRY_COUNT+1))
+              if [ $RETRY_COUNT -lt $MAX_RETRIES ]; then
+                echo "⏳ Health check failed, retrying in ${DELAY}s... ($RETRY_COUNT/$MAX_RETRIES)"
+                sleep $DELAY
+              fi
+            fi
+          done
+          
+          echo "❌ Health check failed after $MAX_RETRIES attempts"
+          echo "healthy=false" >> "$GITHUB_OUTPUT"
+          
+          # Afficher les logs récents
+          echo "📋 Recent logs:"
+          gcloud run logs read ${SERVICE_NAME} \
+            --region=${REGION} \
+            --project=${PROJECT_ID} \
+            --limit=50 \
+            --format="table(timestamp,severity,textPayload)" || true
+          
+          exit 1
+
+      # Smoke tests améliorés
+      - name: Run smoke tests
+        id: smoke-tests
+        if: steps.health-check.outputs.healthy == 'true'
+        run: |
+          URL="${{ steps.get-url.outputs.url }}"
+          
+          echo "🧪 Running comprehensive smoke tests..."
+          
+          TESTS_PASSED=0
+          TESTS_FAILED=0
+          
+          # Test 1: Health endpoint
+          echo "Test 1: Health endpoint..."
+          HEALTH_RESPONSE=$(curl -s --max-time 10 "${URL}/api/health")
+          if echo "$HEALTH_RESPONSE" | grep -q "ok\|OK\|status"; then
+            echo "✅ Health endpoint test passed"
+            TESTS_PASSED=$((TESTS_PASSED+1))
+          else
+            echo "❌ Health endpoint test failed"
+            echo "Response: $HEALTH_RESPONSE"
+            TESTS_FAILED=$((TESTS_FAILED+1))
+          fi
+          
+          # Test 2: API docs endpoint
+          echo "Test 2: API docs endpoint..."
+          if curl -f -s --max-time 10 "${URL}/docs" >/dev/null 2>&1; then
+            echo "✅ API docs endpoint test passed"
+            TESTS_PASSED=$((TESTS_PASSED+1))
+          else
+            echo "⚠️  API docs endpoint test failed (non-critical)"
+            TESTS_FAILED=$((TESTS_FAILED+1))
+          fi
+          
+          # Test 3: Status endpoint
+          echo "Test 3: Status endpoint..."
+          STATUS_RESPONSE=$(curl -s --max-time 10 "${URL}/api/status")
+          if [ -n "$STATUS_RESPONSE" ] && echo "$STATUS_RESPONSE" | grep -q "status\|version"; then
+            echo "✅ Status endpoint test passed"
+            TESTS_PASSED=$((TESTS_PASSED+1))
+          else
+            echo "⚠️  Status endpoint test failed (non-critical)"
+            TESTS_FAILED=$((TESTS_FAILED+1))
+          fi
+          
+          # Test 4: Metrics endpoint (si disponible)
+          echo "Test 4: Metrics endpoint..."
+          if curl -f -s --max-time 10 "${URL}/api/metrics" >/dev/null 2>&1; then
+            echo "✅ Metrics endpoint test passed"
+            TESTS_PASSED=$((TESTS_PASSED+1))
+          else
+            echo "⚠️  Metrics endpoint test failed (non-critical)"
+            TESTS_FAILED=$((TESTS_FAILED+1))
+          fi
+          
+          echo ""
+          echo "📊 Test Summary: $TESTS_PASSED passed, $TESTS_FAILED failed"
+          
+          if [ $TESTS_FAILED -gt 1 ]; then
+            echo "❌ Too many tests failed, deployment may be unstable"
+            exit 1
+          fi
+          
+          echo "tests_passed=${TESTS_PASSED}" >> "$GITHUB_OUTPUT"
+          echo "tests_failed=${TESTS_FAILED}" >> "$GITHUB_OUTPUT"
+
+      # Rollback automatique en cas d'échec
+      - name: Rollback on failure
+        if: failure() && steps.health-check.outputs.healthy != 'true'
+        run: |
+          echo "🔄 Attempting automatic rollback..."
+          
+          # Récupérer la revision précédente
+          PREVIOUS_REVISION=$(gcloud run revisions list \
+            --service=${SERVICE_NAME} \
+            --region=${REGION} \
+            --project=${PROJECT_ID} \
+            --format="value(name)" \
+            --limit=2 \
+            --sort-by=~metadata.creationTimestamp | tail -n 1)
+          
+          if [ -n "$PREVIOUS_REVISION" ]; then
+            echo "📦 Rolling back to: ${PREVIOUS_REVISION}"
+            gcloud run services update-traffic ${SERVICE_NAME} \
+              --to-revisions=${PREVIOUS_REVISION}=100 \
+              --region=${REGION} \
+              --project=${PROJECT_ID} \
+              --quiet
+            echo "✅ Rollback completed"
+          else
+            echo "⚠️  No previous revision found for rollback"
+          fi
+
+      # Résumé du déploiement
+      - name: Deployment summary
+        if: always()
+        run: |
+          URL="${{ steps.get-url.outputs.url }}"
+          IMAGE_URL="${{ steps.build.outputs.image_url }}"
+          HEALTH_STATUS="${{ steps.health-check.outputs.healthy }}"
+          TESTS_PASSED="${{ steps.smoke-tests.outputs.tests_passed }}"
+          TESTS_FAILED="${{ steps.smoke-tests.outputs.tests_failed }}"
+          
+          if [ "$HEALTH_STATUS" = "true" ]; then
+            echo "## 🚀 Backend Deployment Successful" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Service URL:** ${URL}" >> $GITHUB_STEP_SUMMARY
+            echo "**Image:** \`${IMAGE_URL}\`" >> $GITHUB_STEP_SUMMARY
+            echo "**API Docs:** ${URL}/docs" >> $GITHUB_STEP_SUMMARY
+            echo "**Health Check:** ${URL}/api/health" >> $GITHUB_STEP_SUMMARY
+            echo "**Metrics:** ${URL}/api/metrics" >> $GITHUB_STEP_SUMMARY
+            if [ -n "$TESTS_PASSED" ]; then
+              echo "**Smoke Tests:** ✅ $TESTS_PASSED passed, ⚠️ $TESTS_FAILED failed" >> $GITHUB_STEP_SUMMARY
+            fi
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "✅ Deployment completed successfully!" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ❌ Backend Deployment Failed" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "**Status:** Health check failed" >> $GITHUB_STEP_SUMMARY
+            echo "**Image:** \`${IMAGE_URL}\`" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ Please check the logs and consider rolling back." >> $GITHUB_STEP_SUMMARY
+          fi
+
+      # Cleanup des anciennes images (garder les 10 dernières)
+      - name: Cleanup old images
+        if: success()
+        continue-on-error: true
+        run: |
+          echo "🧹 Cleaning up old images (keeping last 10)..."
+          
+          # Lister toutes les images et les trier par date
+          IMAGES=$(gcloud artifacts docker images list \
+            ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/${SERVICE_NAME} \
+            --project=${PROJECT_ID} \
+            --format="value(package,version,create_time)" \
+            --sort-by=~CREATE_TIME)
+          
+          # Compter le nombre d'images
+          IMAGE_COUNT=$(echo "$IMAGES" | wc -l | tr -d ' ')
+          
+          if [ "$IMAGE_COUNT" -gt 10 ]; then
+            # Supprimer les images au-delà des 10 dernières
+            echo "$IMAGES" | tail -n +11 | while IFS=$'\t' read -r package version create_time; do
+              echo "🗑️  Deleting old image: ${package}:${version}"
+              gcloud artifacts docker images delete \
+                ${REGION}-docker.pkg.dev/${PROJECT_ID}/${AR_REPO}/${SERVICE_NAME}@${version} \
+                --project=${PROJECT_ID} \
+                --quiet || true
+            done
+            echo "✅ Cleanup completed"
+          else
+            echo "ℹ️  Only $IMAGE_COUNT images found, no cleanup needed"
+          fi
+

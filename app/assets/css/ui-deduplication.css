@@ -1,0 +1,194 @@
+/**
+ * UI Deduplication
+ * Réduction de la redondance dans l'UI
+ */
+
+/* ============================================
+   Unified Section Styles
+   ============================================ */
+.section-title,
+.latest-posts-title-enhanced,
+.popular-topics-title-enhanced,
+.section-title-unified {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: var(--db-text);
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.section-subtitle,
+.section-subtitle-unified {
+  font-size: 1.125rem;
+  color: var(--db-text-secondary);
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* ============================================
+   Unified Card Styles
+   ============================================ */
+.blog-card-databird,
+.featured-post-card,
+.topic-card-enhanced,
+.category-card,
+.card-unified {
+  background: var(--db-bg);
+  border: 1px solid var(--db-border);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.blog-card-databird:hover,
+.featured-post-card:hover,
+.topic-card-enhanced:hover,
+.category-card:hover,
+.card-unified:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--db-shadow-hover);
+  border-color: var(--db-primary);
+}
+
+/* ============================================
+   Unified Button Styles
+   ============================================ */
+.btn,
+.cta-button-enhanced,
+.newsletter-button,
+.hero-search-button,
+.btn-unified {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primary,
+.cta-button-enhanced,
+.newsletter-button {
+  background: var(--db-primary);
+  color: white;
+}
+
+.btn-primary:hover,
+.cta-button-enhanced:hover,
+.newsletter-button:hover {
+  background: var(--db-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+/* ============================================
+   Unified Icon Styles
+   ============================================ */
+.icon-wrapper,
+.topic-icon-enhanced,
+.category-icon,
+.newsletter-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 12px;
+  background: var(--db-bg-secondary);
+  color: var(--db-primary);
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   Unified Badge Styles
+   ============================================ */
+.badge,
+.blog-card-tag,
+.category-badge-enhanced,
+.topic-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--db-bg-secondary);
+  border: 1px solid var(--db-border);
+  border-radius: 24px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--db-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.2s ease;
+}
+
+.badge:hover,
+.blog-card-tag:hover,
+.category-badge-enhanced:hover {
+  background: var(--db-primary);
+  color: white;
+  border-color: var(--db-primary);
+}
+
+/* ============================================
+   Unified Meta Styles
+   ============================================ */
+.meta,
+.blog-card-meta,
+.featured-post-meta,
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--db-text-secondary);
+  flex-wrap: wrap;
+}
+
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.meta-item i {
+  color: var(--db-primary);
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   Unified Grid Styles
+   ============================================ */
+.grid,
+.blog-grid-databird,
+.topics-grid,
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .grid,
+  .blog-grid-databird,
+  .topics-grid,
+  .categories-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ============================================
+   Remove Duplicate Styles
+   ============================================ */
+/* Consolidation des styles répétitifs */

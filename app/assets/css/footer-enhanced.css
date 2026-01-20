@@ -1,0 +1,410 @@
+/**
+ * Footer Enhanced
+ * Footer amélioré et moderne pour la landing page
+ */
+
+/* ============================================
+   Footer Container
+   ============================================ */
+.footer-databird {
+  background: var(--db-bg-secondary);
+  border-top: 1px solid var(--db-border);
+  padding: 4rem 0 2rem;
+  margin-top: 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-databird::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%,
+    var(--db-primary) 50%,
+    transparent 100%
+  );
+  opacity: 0.3;
+}
+
+.footer-databird-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* ============================================
+   Footer Grid
+   ============================================ */
+.footer-databird-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .footer-databird-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ============================================
+   Footer Column
+   ============================================ */
+.footer-databird-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-databird-column h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--db-text);
+  margin-bottom: 1.25rem;
+  position: relative;
+  padding-bottom: 0.75rem;
+}
+
+.footer-databird-column h4::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40px;
+  height: 2px;
+  background: var(--db-primary);
+  border-radius: 2px;
+}
+
+.footer-databird-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.footer-databird-column li {
+  display: flex;
+  align-items: center;
+}
+
+.footer-databird-column a {
+  color: var(--db-text-secondary);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+  padding: 0.25rem 0;
+}
+
+.footer-databird-column a::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--db-primary);
+  transition: width 0.3s ease;
+}
+
+.footer-databird-column a:hover {
+  color: var(--db-primary);
+  transform: translateX(4px);
+}
+
+.footer-databird-column a:hover::before {
+  width: 100%;
+}
+
+/* ============================================
+   Footer Bottom
+   ============================================ */
+.footer-databird-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--db-border);
+  flex-wrap: wrap;
+  gap: 1.5rem;
+}
+
+.footer-databird-copyright {
+  color: var(--db-text-muted);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-databird-copyright::before {
+  content: '©';
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+/* ============================================
+   Footer Social
+   ============================================ */
+.footer-databird-social {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer-databird-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--db-bg);
+  border: 1px solid var(--db-border);
+  border-radius: 10px;
+  color: var(--db-text-secondary);
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.footer-databird-social a::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: var(--db-primary);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  opacity: 0.1;
+}
+
+.footer-databird-social a:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.footer-databird-social a:hover {
+  background: var(--db-primary);
+  color: white;
+  border-color: var(--db-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+.footer-databird-social a i {
+  position: relative;
+  z-index: 1;
+  font-size: 1.125rem;
+}
+
+/* ============================================
+   Footer Newsletter Section
+   ============================================ */
+.footer-newsletter {
+  background: var(--db-bg);
+  border: 1px solid var(--db-border);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.footer-newsletter h4 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--db-text);
+  margin-bottom: 0.75rem;
+}
+
+.footer-newsletter p {
+  color: var(--db-text-secondary);
+  font-size: 0.9375rem;
+  margin-bottom: 1.5rem;
+}
+
+.footer-newsletter-form {
+  display: flex;
+  gap: 0.75rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.footer-newsletter-form input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--db-border);
+  border-radius: 8px;
+  background: var(--db-bg);
+  color: var(--db-text);
+  font-size: 0.9375rem;
+  transition: all 0.2s ease;
+}
+
+.footer-newsletter-form input:focus {
+  outline: none;
+  border-color: var(--db-primary);
+  box-shadow: 0 0 0 3px rgba(227, 30, 36, 0.1);
+}
+
+.footer-newsletter-form button {
+  padding: 0.75rem 1.5rem;
+  background: var(--db-primary);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.footer-newsletter-form button:hover {
+  background: rgba(227, 30, 36, 0.9);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+/* ============================================
+   Footer Back to Top
+   ============================================ */
+.footer-back-to-top {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 48px;
+  height: 48px;
+  background: var(--db-primary);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+  z-index: 100;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+}
+
+.footer-back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.footer-back-to-top:hover {
+  background: rgba(227, 30, 36, 0.9);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(227, 30, 36, 0.4);
+}
+
+.footer-back-to-top i {
+  font-size: 1.25rem;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .footer-databird {
+    padding: 3rem 0 1.5rem;
+    margin-top: 4rem;
+  }
+
+  .footer-databird-content {
+    padding: 0 1.5rem;
+  }
+
+  .footer-databird-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .footer-databird-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .footer-newsletter-form {
+    flex-direction: column;
+  }
+
+  .footer-newsletter-form button {
+    width: 100%;
+  }
+
+  .footer-back-to-top {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-databird-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .footer-databird-social {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+/* ============================================
+   Dark Mode
+   ============================================ */
+.dark-mode .footer-databird {
+  background: var(--db-bg-secondary);
+  border-top-color: var(--db-border);
+}
+
+.dark-mode .footer-newsletter {
+  background: var(--db-bg);
+  border-color: var(--db-border);
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+.footer-databird a:focus-visible,
+.footer-databird-social a:focus-visible,
+.footer-back-to-top:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .footer-databird {
+    display: none;
+  }
+
+  .footer-back-to-top {
+    display: none;
+  }
+}

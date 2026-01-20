@@ -1,0 +1,68 @@
+# Prometheus Configuration for Flask Portfolio
+# This configuration scrapes metrics from the Flask backend
+
+global:
+  # How frequently to scrape targets
+  scrape_interval: 15s
+  # How frequently to evaluate rules
+  evaluation_interval: 15s
+  # External labels to add to any time series
+  external_labels:
+    cluster: 'flask-portfolio'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+            - alertmanager:9093
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - alerts.yml
+
+# Scrape configurations
+scrape_configs:
+  # Scrape the Flask Portfolio Backend
+  - job_name: "flask-portfolio-backend"
+    # Metrics endpoint path
+    metrics_path: /metrics
+    # Scrape interval for this job (overrides global)
+    scrape_interval: 15s
+    # Scrape timeout
+    scrape_timeout: 10s
+    # HTTP scheme
+    scheme: http
+    # Static targets
+    static_configs:
+      - targets:
+          # Backend service name in docker-compose network
+          # Use 'backend:8080' when running in docker-compose
+          # Use 'host.docker.internal:8080' when backend runs on host
+          - backend:8080
+        labels:
+          service: "flask-portfolio-backend"
+          environment: "production"
+          application: "flask-portfolio"
+    
+    # Optional: Relabel configurations
+    relabel_configs:
+      # Add instance label from target
+      - source_labels: [__address__]
+        target_label: instance
+        regex: '([^:]+):\d+'
+        replacement: '${1}'
+    
+    # Optional: Metric relabeling
+    metric_relabel_configs:
+      # Keep only Flask metrics
+      - source_labels: [__name__]
+        regex: 'flask_.*'
+        action: keep
+
+  # Scrape Prometheus itself
+  - job_name: "prometheus"
+    static_configs:
+      - targets:
+          - localhost:9090

@@ -1,0 +1,91 @@
+/**
+ * Disable Unnecessary Animations
+ * Désactivation des animations inutiles pour un design épuré
+ */
+
+/* Désactiver toutes les animations par défaut */
+*,
+*::before,
+*::after {
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+  transition-duration: 0.1s !important;
+  transition-delay: 0s !important;
+}
+
+/* Garder uniquement les transitions essentielles */
+a,
+button,
+.nav-link,
+.btn {
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease !important;
+}
+
+/* Désactiver les animations complexes */
+.animate-on-scroll,
+.reveal-on-scroll,
+.stagger-item,
+.split-text,
+.text-reveal,
+.morphing-bg,
+.particles-container,
+.cursor-trail,
+.shimmer,
+.confetti {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* Désactiver les effets 3D */
+.card-3d,
+.card-3d:hover {
+  transform: none !important;
+  perspective: none !important;
+}
+
+/* Désactiver les effets magnétiques */
+.magnetic,
+.magnetic:hover {
+  transform: none !important;
+}
+
+/* Désactiver les animations de hover complexes */
+.post-preview:hover,
+.card:hover {
+  transform: translateY(-2px) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+/* Garder uniquement les transitions de base */
+:focus-visible {
+  transition: outline-offset 0.1s ease !important;
+}
+
+/* Désactiver les animations de scroll */
+@keyframes fadeIn,
+@keyframes slideIn,
+@keyframes slideUp,
+@keyframes shimmer,
+@keyframes morph,
+@keyframes confetti-fall {
+  from, to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Progress bar simple */
+.reading-progress-bar,
+.scroll-progress-circle-progress {
+  transition: width 0.1s linear !important;
+}
+
+/* Toast notifications - garder mais simplifier */
+.toast-premium,
+.notification-item {
+  animation: none !important;
+  opacity: 1 !important;
+  transform: none !important;
+}

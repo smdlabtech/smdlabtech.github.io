@@ -1,0 +1,695 @@
+/**
+ * Advanced Enhancements
+ * Améliorations avancées pour une expérience utilisateur exceptionnelle
+ */
+
+/* ============================================
+   Micro-interactions & Animations
+   ============================================ */
+
+/* Ripple effect pour tous les boutons */
+button,
+a.btn,
+.navbar-databird-cta,
+.hero-search-button,
+.filter-tag {
+  position: relative;
+  overflow: hidden;
+}
+
+button::after,
+a.btn::after,
+.navbar-databird-cta::after,
+.hero-search-button::after,
+.filter-tag::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s ease, height 0.6s ease;
+  pointer-events: none;
+}
+
+button:active::after,
+a.btn:active::after,
+.navbar-databird-cta:active::after,
+.hero-search-button:active::after,
+.filter-tag:active::after {
+  width: 300px;
+  height: 300px;
+  opacity: 0;
+}
+
+/* Shine effect pour les cards */
+.blog-card-databird,
+.featured-post-card,
+.topic-card-enhanced,
+.category-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.blog-card-databird::before,
+.featured-post-card::before,
+.topic-card-enhanced::before,
+.category-card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.1) 50%,
+    transparent 70%
+  );
+  transform: rotate(45deg);
+  transition: transform 0.6s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.blog-card-databird:hover::before,
+.featured-post-card:hover::before,
+.topic-card-enhanced:hover::before,
+.category-card:hover::before {
+  transform: translate(50%, 50%) rotate(45deg);
+}
+
+/* ============================================
+   Enhanced Focus States
+   ============================================ */
+
+*:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 2px;
+}
+
+/* Focus ring animation */
+@keyframes focusRing {
+  0% {
+    box-shadow: 0 0 0 0 rgba(227, 30, 36, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(227, 30, 36, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0 8px rgba(227, 30, 36, 0);
+  }
+}
+
+button:focus-visible,
+a.btn:focus-visible,
+input:focus-visible {
+  animation: focusRing 0.6s ease-out;
+}
+
+/* ============================================
+   Loading States
+   ============================================ */
+
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 3px solid var(--db-primary);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Skeleton loading */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--db-bg-secondary) 25%,
+    var(--db-bg) 50%,
+    var(--db-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================
+   Enhanced Scroll Animations
+   ============================================ */
+
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fade-in-left {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fade-in-right {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-in-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scale-in {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.scale-in.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================================
+   Enhanced Tooltips
+   ============================================ */
+
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]::before,
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  padding: 0.5rem 0.75rem;
+  background: var(--db-text);
+  color: var(--db-bg);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+[data-tooltip]::after {
+  content: '';
+  bottom: calc(100% - 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid var(--db-text);
+  background: transparent;
+  padding: 0;
+  box-shadow: none;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+[data-tooltip]:hover::after {
+  transform: translateX(-50%);
+}
+
+/* ============================================
+   Enhanced Badges
+   ============================================ */
+
+.badge-enhanced {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  background: var(--db-primary);
+  color: white;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.badge-enhanced:hover::before {
+  left: 100%;
+}
+
+.badge-enhanced:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+/* ============================================
+   Enhanced Forms
+   ============================================ */
+
+input[type="text"],
+input[type="email"],
+input[type="search"],
+input[type="password"],
+textarea,
+select {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="search"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.15);
+}
+
+/* Input with floating label effect */
+.input-group {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.input-group label {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  color: var(--db-text-secondary);
+  font-size: 0.9375rem;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background: var(--db-bg);
+  padding: 0 0.5rem;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: 0.8125rem;
+  color: var(--db-primary);
+}
+
+.input-group input {
+  padding: 0.875rem 1rem;
+  width: 100%;
+  border: 2px solid var(--db-border);
+  border-radius: 8px;
+  background: var(--db-bg);
+  color: var(--db-text);
+  font-size: 0.9375rem;
+}
+
+.input-group input:focus {
+  border-color: var(--db-primary);
+  outline: none;
+}
+
+/* ============================================
+   Enhanced Tables
+   ============================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: var(--db-bg);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+table thead {
+  background: var(--db-bg-secondary);
+}
+
+table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: var(--db-text);
+  border-bottom: 2px solid var(--db-border);
+}
+
+table td {
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid var(--db-border);
+  color: var(--db-text-secondary);
+}
+
+table tbody tr {
+  transition: background 0.2s ease;
+}
+
+table tbody tr:hover {
+  background: var(--db-bg-secondary);
+}
+
+table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* ============================================
+   Enhanced Code Blocks
+   ============================================ */
+
+pre {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+pre::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--db-primary) 0%,
+    #FF6B6B 25%,
+    #4ECDC4 50%,
+    #45B7D1 75%,
+    var(--db-primary) 100%
+  );
+  background-size: 200% 100%;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================================
+   Enhanced Blockquotes
+   ============================================ */
+
+blockquote {
+  position: relative;
+  padding: 1.5rem 1.5rem 1.5rem 3rem;
+  margin: 1.5rem 0;
+  background: var(--db-bg-secondary);
+  border-left: 4px solid var(--db-primary);
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: var(--db-text-secondary);
+}
+
+blockquote::before {
+  content: '"';
+  position: absolute;
+  top: 0.5rem;
+  left: 0.75rem;
+  font-size: 3rem;
+  color: var(--db-primary);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+}
+
+blockquote cite {
+  display: block;
+  margin-top: 0.75rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  color: var(--db-text-muted);
+}
+
+blockquote cite::before {
+  content: '— ';
+}
+
+/* ============================================
+   Enhanced Images
+   ============================================ */
+
+img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Image with overlay on hover */
+.image-overlay {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.image-overlay::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(227, 30, 36, 0.1);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.image-overlay:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   Enhanced Links
+   ============================================ */
+
+a:not(.btn):not(.navbar-databird-nav-link):not(.navbar-databird-cta) {
+  position: relative;
+  text-decoration: none;
+  color: var(--db-primary);
+  transition: color 0.3s ease;
+}
+
+a:not(.btn):not(.navbar-databird-nav-link):not(.navbar-databird-cta)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--db-primary);
+  transition: width 0.3s ease;
+}
+
+a:not(.btn):not(.navbar-databird-nav-link):not(.navbar-databird-cta):hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   Enhanced Navigation Links
+   ============================================ */
+
+.navbar-databird-nav-link {
+  position: relative;
+}
+
+.navbar-databird-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--db-primary);
+  transition: width 0.3s ease;
+}
+
+.navbar-databird-nav-link:hover::after,
+.navbar-databird-nav-link.active::after {
+  width: 100%;
+}
+
+/* ============================================
+   Performance Optimizations
+   ============================================ */
+
+/* Will-change pour les éléments animés */
+.blog-card-databird,
+.featured-post-card,
+.topic-card-enhanced,
+.category-card,
+button,
+a.btn {
+  will-change: transform;
+}
+
+/* GPU acceleration */
+.blog-card-databird:hover,
+.featured-post-card:hover,
+.topic-card-enhanced:hover,
+.category-card:hover {
+  transform: translateY(-4px) translateZ(0);
+}
+
+/* ============================================
+   Reduced Motion Support
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .fade-in-up,
+  .fade-in-left,
+  .fade-in-right,
+  .scale-in {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ============================================
+   Print Optimizations
+   ============================================ */
+
+@media print {
+  button::after,
+  a.btn::after,
+  .navbar-databird-cta::after,
+  .hero-search-button::after,
+  .filter-tag::after {
+    display: none;
+  }
+
+  .blog-card-databird::before,
+  .featured-post-card::before,
+  .topic-card-enhanced::before,
+  .category-card::before {
+    display: none;
+  }
+
+  img:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ============================================
+   Responsive Enhancements
+   ============================================ */
+
+@media (max-width: 768px) {
+  [data-tooltip]::before,
+  [data-tooltip]::after {
+    display: none;
+  }
+
+  .badge-enhanced {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  blockquote {
+    padding: 1rem 1rem 1rem 2rem;
+  }
+
+  blockquote::before {
+    font-size: 2rem;
+    left: 0.5rem;
+  }
+}

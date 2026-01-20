@@ -1,0 +1,106 @@
+---
+layout: page
+---
+
+{{ content }}
+
+{% assign posts = paginator.posts | default: site.posts %}
+
+<!-- Blog Posts Grid - Style DataBird -->
+<div class="container-databird">
+  <div class="blog-grid-databird">
+    {% for post in posts %}
+    <article class="blog-card-databird">
+      {%- capture thumbnail -%}
+        {% if post.thumbnail-img %}
+          {{ post.thumbnail-img }}
+        {% elsif post.cover-img %}
+          {% if post.cover-img.first %}
+            {{ post.cover-img[0].first.first }}
+          {% else %}
+            {{ post.cover-img }}
+          {% endif %}
+        {% else %}
+        {% endif %}
+      {% endcapture %}
+      {% assign thumbnail=thumbnail | strip %}
+      
+      {% if thumbnail != "" %}
+        <img src="{{ thumbnail | relative_url }}" alt="{{ post.title }}" class="blog-card-image" loading="lazy">
+      {% else %}
+        <div class="blog-card-image" style="background: linear-gradient(135deg, #008AFF 0%, #0085A1 100%);"></div>
+      {% endif %}
+      
+      <div class="blog-card-content">
+        {% if post.tags and post.tags.size > 0 %}
+          <span class="blog-card-tag">{{ post.tags[0] }}</span>
+        {% endif %}
+        
+        <h2 class="blog-card-title">
+          <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+        </h2>
+        
+        {% if post.excerpt %}
+          <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
+        {% elsif post.subtitle %}
+          <p class="blog-card-excerpt">{{ post.subtitle | strip_html | truncatewords: 25 }}</p>
+        {% endif %}
+        
+        <div class="blog-card-meta">
+          <span class="blog-card-date">
+            <i class="far fa-calendar" aria-hidden="true"></i>
+            {{ post.date | date: "%d/%m/%Y" }}
+          </span>
+          {% if post.author %}
+            <span class="blog-card-author">
+              <i class="far fa-user" aria-hidden="true"></i>
+              {{ post.author }}
+            </span>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Pagination -->
+{% if paginator.total_pages > 1 %}
+<nav aria-label="Navigation des pages" class="container-databird" style="padding: 3rem 0; text-align: center;">
+  <ul class="pagination justify-content-center">
+    {% if paginator.previous_page %}
+      <li class="page-item">
+        <a class="page-link" href="{{ paginator.previous_page_path | relative_url }}" aria-label="Page précédente">
+          <i class="fas fa-chevron-left" aria-hidden="true"></i>
+          Précédent
+        </a>
+      </li>
+    {% endif %}
+    
+    {% for page in (1..paginator.total_pages) %}
+      {% if page == paginator.page %}
+        <li class="page-item active">
+          <span class="page-link">{{ page }}</span>
+        </li>
+      {% elsif page == 1 %}
+        <li class="page-item">
+          <a class="page-link" href="{{ '/' | relative_url }}">{{ page }}</a>
+        </li>
+      {% else %}
+        <li class="page-item">
+          <a class="page-link" href="{{ site.paginate_path | relative_url | replace: ':num', page }}">{{ page }}</a>
+        </li>
+      {% endif %}
+    {% endfor %}
+    
+    {% if paginator.next_page %}
+      <li class="page-item">
+        <a class="page-link" href="{{ paginator.next_page_path | relative_url }}" aria-label="Page suivante">
+          Suivant
+          <i class="fas fa-chevron-right" aria-hidden="true"></i>
+        </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}

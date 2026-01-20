@@ -1,0 +1,165 @@
+/**
+ * Social Share Enhanced
+ * Partage social amélioré
+ */
+
+/* ============================================
+   Social Share Container
+   ============================================ */
+.social-share-enhanced {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.social-share-label {
+  font-weight: 600;
+  color: var(--db-text);
+  font-size: 0.9375rem;
+  margin-right: 0.5rem;
+}
+
+.social-share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  border: 1px solid var(--db-border);
+  background: var(--db-bg);
+  color: var(--db-text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.social-share-button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s, height 0.4s;
+}
+
+.social-share-button:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+.social-share-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-color: currentColor;
+}
+
+.social-share-button i {
+  position: relative;
+  z-index: 1;
+}
+
+.social-share-button-twitter {
+  color: #1DA1F2;
+}
+
+.social-share-button-twitter:hover {
+  background: #1DA1F2;
+  color: white;
+  border-color: #1DA1F2;
+}
+
+.social-share-button-facebook {
+  color: #1877F2;
+}
+
+.social-share-button-facebook:hover {
+  background: #1877F2;
+  color: white;
+  border-color: #1877F2;
+}
+
+.social-share-button-linkedin {
+  color: #0A66C2;
+}
+
+.social-share-button-linkedin:hover {
+  background: #0A66C2;
+  color: white;
+  border-color: #0A66C2;
+}
+
+.social-share-button-whatsapp {
+  color: #25D366;
+}
+
+.social-share-button-whatsapp:hover {
+  background: #25D366;
+  color: white;
+  border-color: #25D366;
+}
+
+.social-share-button-email {
+  color: var(--db-primary);
+}
+
+.social-share-button-email:hover {
+  background: var(--db-primary);
+  color: white;
+  border-color: var(--db-primary);
+}
+
+.social-share-button-copy {
+  color: var(--db-text);
+}
+
+.social-share-button-copy:hover {
+  background: var(--db-primary);
+  color: white;
+  border-color: var(--db-primary);
+}
+
+.social-share-button-copy.copied {
+  background: #10b981;
+  color: white;
+  border-color: #10b981;
+}
+
+/* ============================================
+   Social Share Floating
+   ============================================ */
+.social-share-floating {
+  position: fixed;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.social-share-floating .social-share-button {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 1024px) {
+  .social-share-floating {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .social-share-enhanced {
+    justify-content: center;
+  }
+}

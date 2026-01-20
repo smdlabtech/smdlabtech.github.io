@@ -1,0 +1,106 @@
+<!-- Cookie Consent Banner -->
+<div id="cookie-consent-banner" class="cookie-consent-banner" role="dialog" aria-labelledby="cookie-consent-title" aria-live="polite">
+  <div class="cookie-consent-content">
+    <div class="cookie-consent-text">
+      <div class="cookie-consent-title" id="cookie-consent-title">Gestion des cookies</div>
+      <div class="cookie-consent-description">
+        Nous utilisons des cookies pour améliorer votre expérience, analyser le trafic et personnaliser le contenu. 
+        En continuant, vous acceptez notre utilisation des cookies. 
+        <a href="/privacy" id="cookie-settings-link">En savoir plus</a>
+      </div>
+    </div>
+    <div class="cookie-consent-actions">
+      <button type="button" class="cookie-consent-btn cookie-consent-btn-decline" id="cookie-decline-btn" aria-label="Refuser les cookies">
+        Refuser
+      </button>
+      <button type="button" class="cookie-consent-btn cookie-consent-btn-settings" id="cookie-settings-btn" aria-label="Paramètres des cookies">
+        Paramètres
+      </button>
+      <button type="button" class="cookie-consent-btn cookie-consent-btn-accept" id="cookie-accept-btn" aria-label="Accepter tous les cookies">
+        Accepter
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Settings Modal -->
+<div id="cookie-settings-modal" class="cookie-settings-modal" role="dialog" aria-labelledby="cookie-settings-title" aria-modal="true">
+  <div class="cookie-settings-content">
+    <div class="cookie-settings-header">
+      <h2 class="cookie-settings-title" id="cookie-settings-title">Paramètres des cookies</h2>
+      <button type="button" class="cookie-settings-close" id="cookie-settings-close" aria-label="Fermer">
+        <i class="fas fa-times"></i>
+      </button>
+    </div>
+    
+    <div class="cookie-settings-group">
+      <div class="cookie-settings-group-title">Cookies nécessaires</div>
+      <div class="cookie-settings-group-description">
+        Ces cookies sont essentiels au fonctionnement du site et ne peuvent pas être désactivés.
+      </div>
+      <div class="cookie-toggle">
+        <div class="cookie-toggle-label">
+          <div class="cookie-toggle-name">Cookies nécessaires</div>
+          <div class="cookie-toggle-description">Authentification, sécurité, préférences</div>
+        </div>
+        <div class="cookie-toggle-switch active" style="pointer-events: none;">
+          <input type="checkbox" id="cookie-necessary" checked disabled style="display: none;">
+        </div>
+      </div>
+    </div>
+    
+    <div class="cookie-settings-group">
+      <div class="cookie-settings-group-title">Cookies analytiques</div>
+      <div class="cookie-settings-group-description">
+        Ces cookies nous aident à comprendre comment les visiteurs interagissent avec notre site.
+      </div>
+      <div class="cookie-toggle">
+        <div class="cookie-toggle-label">
+          <div class="cookie-toggle-name">Analytics</div>
+          <div class="cookie-toggle-description">Google Analytics, statistiques</div>
+        </div>
+        <input type="checkbox" id="cookie-analytics" style="display: none;">
+        <div class="cookie-toggle-switch" data-toggle="cookie-analytics"></div>
+      </div>
+    </div>
+    
+    <div class="cookie-settings-group">
+      <div class="cookie-settings-group-title">Cookies marketing</div>
+      <div class="cookie-settings-group-description">
+        Ces cookies sont utilisés pour vous proposer des publicités personnalisées.
+      </div>
+      <div class="cookie-toggle">
+        <div class="cookie-toggle-label">
+          <div class="cookie-toggle-name">Marketing</div>
+          <div class="cookie-toggle-description">Publicités ciblées, réseaux sociaux</div>
+        </div>
+        <input type="checkbox" id="cookie-marketing" style="display: none;">
+        <div class="cookie-toggle-switch" data-toggle="cookie-marketing"></div>
+      </div>
+    </div>
+    
+    <div class="cookie-settings-group">
+      <div class="cookie-settings-group-title">Cookies fonctionnels</div>
+      <div class="cookie-settings-group-description">
+        Ces cookies permettent d'améliorer les fonctionnalités du site.
+      </div>
+      <div class="cookie-toggle">
+        <div class="cookie-toggle-label">
+          <div class="cookie-toggle-name">Fonctionnels</div>
+          <div class="cookie-toggle-description">Préférences, personnalisation</div>
+        </div>
+        <input type="checkbox" id="cookie-functional" style="display: none;">
+        <div class="cookie-toggle-switch" data-toggle="cookie-functional"></div>
+      </div>
+    </div>
+    
+    <div class="cookie-settings-actions">
+      <button type="button" class="cookie-consent-btn cookie-consent-btn-decline" onclick="cookieConsent.declineAll()">
+        Tout refuser
+      </button>
+      <button type="button" class="cookie-consent-btn cookie-consent-btn-accept" id="cookie-settings-save">
+        Enregistrer les préférences
+      </button>
+    </div>
+  </div>
+</div>

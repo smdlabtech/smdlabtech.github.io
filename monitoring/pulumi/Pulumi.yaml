@@ -1,0 +1,3 @@
+name: html2pptx-observability
+runtime: nodejs
+description: "Infra Cloud Run + monitoring pour HTML2PPTX"

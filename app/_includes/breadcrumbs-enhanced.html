@@ -1,0 +1,38 @@
+{% if page.breadcrumbs != false %}
+<nav class="breadcrumbs-enhanced" aria-label="Breadcrumb">
+  <div class="breadcrumbs-container">
+    <ol class="breadcrumbs-list">
+      <li class="breadcrumbs-item">
+        <a href="/" class="breadcrumbs-link">
+          <i class="fas fa-home"></i>
+          <span>Accueil</span>
+        </a>
+      </li>
+      
+      {% if page.categories %}
+        {% for category in page.categories limit: 1 %}
+          <li class="breadcrumbs-item">
+            <a href="/tags/{{ category | slugify }}" class="breadcrumbs-link">
+              {{ category }}
+            </a>
+          </li>
+        {% endfor %}
+      {% endif %}
+      
+      {% if page.tag %}
+        <li class="breadcrumbs-item">
+          <a href="/tags/{{ page.tag | slugify }}" class="breadcrumbs-link">
+            {{ page.tag }}
+          </a>
+        </li>
+      {% endif %}
+      
+      {% if page.title %}
+        <li class="breadcrumbs-item">
+          <span class="breadcrumbs-current">{{ page.title }}</span>
+        </li>
+      {% endif %}
+    </ol>
+  </div>
+</nav>
+{% endif %}

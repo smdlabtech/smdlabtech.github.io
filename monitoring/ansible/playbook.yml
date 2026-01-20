@@ -1,0 +1,13 @@
+- name: Gestion des secrets & config HTML2PPTX
+  hosts: local
+  vars:
+    project_id: bq-small-corp
+    service_name: html-2pptx-backend
+  tasks:
+    - name: Générer un fichier .env à partir de variables vaultées
+      copy:
+        dest: "../backend/.env"
+        content: |
+          ENVIRONMENT=prod
+          ENABLE_METRICS=true
+          OPENAI_API_KEY={{ openai_api_key }}

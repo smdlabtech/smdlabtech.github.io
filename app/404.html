@@ -1,0 +1,55 @@
+---
+layout: base
+title: Page Non Trouvée
+permalink: /404.html
+---
+
+<div class="error-404-container">
+  <div class="error-404-content">
+    <div class="error-404-number">404</div>
+    <h1 class="error-404-title">Page Non Trouvée</h1>
+    <p class="error-404-description">
+      Désolé, la page que vous recherchez n'existe pas ou a été déplacée.
+      <br>
+      Essayez de rechercher ou retournez à la page d'accueil.
+    </p>
+    
+    <div class="error-404-search">
+      <i class="fas fa-search error-404-search-icon"></i>
+      <input 
+        type="search" 
+        class="error-404-search-input" 
+        placeholder="Rechercher un article..."
+        id="404-search-input"
+      >
+    </div>
+    
+    <div class="error-404-actions">
+      <a href="/" class="error-404-button">
+        <i class="fas fa-home"></i>
+        Retour à l'accueil
+      </a>
+      <a href="/explore" class="error-404-button error-404-button-secondary">
+        <i class="fas fa-compass"></i>
+        Explorer les articles
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+// 404 Search Functionality
+(function() {
+  const searchInput = document.getElementById('404-search-input');
+  if (!searchInput) return;
+  
+  searchInput.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') {
+      const query = this.value.trim();
+      if (query) {
+        window.location.href = '/?search=' + encodeURIComponent(query);
+      }
+    }
+  });
+})();
+</script>

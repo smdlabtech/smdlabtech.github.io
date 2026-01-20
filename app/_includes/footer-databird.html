@@ -1,0 +1,99 @@
+<footer class="footer-databird">
+  <div class="footer-databird-content">
+    <!-- Newsletter Section -->
+    <div class="footer-newsletter">
+      <h4 data-i18n="sections.newsletter.title">Recevez nos prochains articles</h4>
+      <p data-i18n="sections.newsletter.description">
+        Inscrivez-vous à notre newsletter pour recevoir les derniers articles directement dans votre boîte mail.
+      </p>
+      <form class="footer-newsletter-form" data-newsletter-form data-source="footer" action="#" method="post" novalidate>
+        <input 
+          type="email" 
+          name="email" 
+          placeholder="Votre adresse email"
+          data-i18n-placeholder="sections.newsletter.placeholder"
+          required
+          aria-label="Adresse email"
+        >
+        <button type="submit" data-i18n="sections.newsletter.button">
+          S'inscrire
+        </button>
+      </form>
+    </div>
+
+    <!-- Footer Grid -->
+    <div class="footer-databird-grid">
+      <div class="footer-databird-column">
+        <h4 data-i18n="footer.navigation">Navigation</h4>
+        <ul>
+          <li><a href="{{ '/' | absolute_url }}" data-i18n="nav.home">Accueil</a></li>
+          <li><a href="{{ '/about/' | absolute_url }}" data-i18n="nav.about">À propos</a></li>
+          <li><a href="{{ '/tags/' | absolute_url }}" data-i18n="nav.tags">Tags</a></li>
+          <li><a href="{{ '/explore/' | absolute_url }}" data-i18n="nav.explore">Explorer</a></li>
+          <li><a href="{{ '/projects/' | absolute_url }}" data-i18n="nav.projects">Projets</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-databird-column">
+        <h4 data-i18n="footer.resources">Ressources</h4>
+        <ul>
+          <li><a href="{{ '/feed.xml' | absolute_url }}">RSS Feed</a></li>
+          {% if site.github %}
+          <li><a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          {% endif %}
+          {% if site.linkedin %}
+          <li><a href="https://linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+          {% endif %}
+          {% if site.twitter %}
+          <li><a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener noreferrer">Twitter</a></li>
+          {% endif %}
+        </ul>
+      </div>
+      
+      <div class="footer-databird-column">
+        <h4 data-i18n="footer.contact">Contact</h4>
+        <ul>
+          {% if site.email %}
+          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+          {% endif %}
+          <li><a href="{{ '/' | absolute_url }}#contact" data-i18n="nav.contact">Formulaire de contact</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-databird-column">
+        <h4 data-i18n="footer.about">À propos</h4>
+        <ul>
+          <li><a href="{{ '/about/' | absolute_url }}" data-i18n="footer.who-are-we">Qui sommes-nous ?</a></li>
+          <li><a href="{{ '/tags/' | absolute_url }}" data-i18n="footer.all-articles">Tous les articles</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <!-- Footer Bottom -->
+    <div class="footer-databird-bottom">
+      <div class="footer-databird-copyright">
+        © {{ 'now' | date: "%Y" }} {{ site.title | default: "Blog" }}. <span data-i18n="footer.copyright">Tous droits réservés.</span>
+      </div>
+      <div class="footer-databird-social">
+        {% if site.github %}
+        <a href="https://github.com/{{ site.github }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <i class="fab fa-github"></i>
+        </a>
+        {% endif %}
+        {% if site.linkedin %}
+        <a href="https://linkedin.com/in/{{ site.linkedin }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin"></i>
+        </a>
+        {% endif %}
+        {% if site.twitter %}
+        <a href="https://twitter.com/{{ site.twitter }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/js/footer-enhanced.js"></script>
+<script src="/assets/js/theme-toggle.js"></script>

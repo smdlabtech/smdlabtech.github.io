@@ -1,0 +1,52 @@
+<!-- Social Share Moderne -->
+<div class="social-share-modern">
+  <span class="me-2"><strong>Partager :</strong></span>
+  {% assign page_url = page.url | absolute_url %}
+  {% assign page_title = page.title | url_encode %}
+  {% assign page_description = page.description | default: site.description | url_encode %}
+  
+  <a href="https://twitter.com/intent/tweet?url={{ page_url }}&text={{ page_title }}" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="social-share-btn social-share-btn--twitter"
+     data-url="{{ page_url }}"
+     data-title="{{ page_title }}">
+    <i class="fab fa-twitter"></i>
+    <span class="d-none d-sm-inline">Twitter</span>
+  </a>
+  
+  <a href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="social-share-btn social-share-btn--facebook"
+     data-url="{{ page_url }}">
+    <i class="fab fa-facebook"></i>
+    <span class="d-none d-sm-inline">Facebook</span>
+  </a>
+  
+  <a href="https://www.linkedin.com/shareArticle?mini=true&url={{ page_url }}&title={{ page_title }}" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="social-share-btn social-share-btn--linkedin"
+     data-url="{{ page_url }}">
+    <i class="fab fa-linkedin"></i>
+    <span class="d-none d-sm-inline">LinkedIn</span>
+  </a>
+  
+  <a href="https://wa.me/?text={{ page_title }}%20{{ page_url }}" 
+     target="_blank" 
+     rel="noopener noreferrer"
+     class="social-share-btn social-share-btn--whatsapp"
+     data-url="{{ page_url }}">
+    <i class="fab fa-whatsapp"></i>
+    <span class="d-none d-sm-inline">WhatsApp</span>
+  </a>
+  
+  <button type="button"
+          class="social-share-btn social-share-btn--copy"
+          data-url="{{ page_url }}"
+          title="Copier le lien">
+    <i class="fas fa-link"></i>
+    <span class="d-none d-sm-inline">Copier</span>
+  </button>
+</div>

@@ -1,0 +1,394 @@
+/**
+ * About Page Styles
+ * Styles pour la page About améliorée
+ * Inspiré de DataBird
+ */
+
+/* ============================================
+   About Header
+   ============================================ */
+.about-header {
+  background: linear-gradient(135deg, var(--db-primary) 0%, var(--db-secondary) 100%);
+  color: white;
+  padding: 5rem 0 4rem;
+  text-align: center;
+  margin-top: 0;
+}
+
+.about-header-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.about-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  margin-bottom: 1rem;
+  color: white;
+  letter-spacing: -0.02em;
+}
+
+.about-subtitle {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.7;
+  opacity: 0.95;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   About Profile Section
+   ============================================ */
+.about-profile-section {
+  padding: 4rem 0;
+  background: var(--db-bg);
+}
+
+.about-profile-wrapper {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.about-avatar-wrapper {
+  position: sticky;
+  top: 120px;
+  text-align: center;
+}
+
+.about-avatar {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 16px;
+  box-shadow: 0 12px 32px var(--db-shadow-hover);
+  margin-bottom: 1.5rem;
+  object-fit: cover;
+  aspect-ratio: 1;
+  border: 4px solid var(--db-border);
+  transition: all 0.3s ease;
+}
+
+.about-avatar:hover {
+  transform: scale(1.02);
+  box-shadow: 0 16px 40px var(--db-shadow-hover);
+  border-color: var(--db-primary);
+}
+
+.about-social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.about-social-link {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--db-bg-secondary);
+  border: 1px solid var(--db-border);
+  border-radius: 10px;
+  color: var(--db-text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  font-size: 1.25rem;
+}
+
+.about-social-link:hover {
+  background: var(--db-primary);
+  color: white;
+  border-color: var(--db-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+/* ============================================
+   About Content
+   ============================================ */
+.about-content-wrapper {
+  padding: 2rem 0;
+}
+
+.about-content {
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--db-text);
+}
+
+.about-content h1,
+.about-content h2,
+.about-content h3 {
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: var(--db-text);
+  line-height: 1.3;
+}
+
+.about-content h1 {
+  font-size: 2.5rem;
+  border-bottom: 3px solid var(--db-primary);
+  padding-bottom: 0.5rem;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+  border-bottom: 2px solid var(--db-border);
+  padding-bottom: 0.5rem;
+}
+
+.about-content h3 {
+  font-size: 1.5rem;
+}
+
+.about-content p {
+  margin-bottom: 1.5rem;
+}
+
+.about-content ul,
+.about-content ol {
+  margin: 1.5rem 0;
+  padding-left: 2rem;
+}
+
+.about-content li {
+  margin: 0.75rem 0;
+  line-height: 1.7;
+}
+
+.about-content strong {
+  color: var(--db-text);
+  font-weight: 600;
+}
+
+.about-content a {
+  color: var(--db-primary);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.about-content a:hover {
+  border-bottom-color: var(--db-primary);
+}
+
+.about-content details {
+  margin: 1.5rem 0;
+  padding: 1.5rem;
+  background: var(--db-bg-secondary);
+  border: 1px solid var(--db-border);
+  border-radius: 12px;
+}
+
+.about-content summary {
+  font-weight: 600;
+  color: var(--db-text);
+  cursor: pointer;
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+.about-content summary:hover {
+  background: var(--db-bg);
+}
+
+.about-content details[open] summary {
+  margin-bottom: 1rem;
+}
+
+/* ============================================
+   Skills Section
+   ============================================ */
+.about-skills-section {
+  padding: 4rem 0;
+  background: var(--db-bg-secondary);
+  border-top: 1px solid var(--db-border);
+  border-bottom: 1px solid var(--db-border);
+}
+
+.about-skills-grid {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.about-skill-card {
+  background: var(--db-bg);
+  border: 1px solid var(--db-border);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.2s ease;
+}
+
+.about-skill-card:hover {
+  border-color: var(--db-primary);
+  box-shadow: 0 8px 24px var(--db-shadow-hover);
+  transform: translateY(-4px);
+}
+
+.about-skill-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.about-skill-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  color: var(--db-text);
+}
+
+.about-skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about-skill-list li {
+  padding: 0.5rem 0;
+  color: var(--db-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.about-skill-list li::before {
+  content: '✓';
+  color: var(--db-primary);
+  font-weight: 700;
+}
+
+/* ============================================
+   Contact Section
+   ============================================ */
+.about-contact-section {
+  padding: 4rem 0;
+  background: var(--db-bg);
+  text-align: center;
+}
+
+.about-contact-content {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.about-contact-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--db-text);
+}
+
+.about-contact-description {
+  font-size: 1.125rem;
+  color: var(--db-text-secondary);
+  margin-bottom: 2rem;
+  line-height: 1.7;
+}
+
+.about-contact-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.about-contact-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 2rem;
+  background: var(--db-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.about-contact-button:hover {
+  background: var(--db-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+  color: white;
+}
+
+.about-contact-button-secondary {
+  background: transparent;
+  color: var(--db-primary);
+  border: 2px solid var(--db-primary);
+}
+
+.about-contact-button-secondary:hover {
+  background: var(--db-primary);
+  color: white;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 1024px) {
+  .about-profile-wrapper {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  
+  .about-avatar-wrapper {
+    position: relative;
+    top: 0;
+  }
+  
+  .about-avatar {
+    max-width: 250px;
+    margin: 0 auto 1.5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .about-header {
+    padding: 3rem 0 2.5rem;
+  }
+  
+  .about-profile-section,
+  .about-skills-section,
+  .about-contact-section {
+    padding: 3rem 0;
+  }
+  
+  .about-profile-wrapper,
+  .about-skills-grid,
+  .about-contact-content {
+    padding: 0 1.25rem;
+  }
+  
+  .about-skills-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .about-contact-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .about-contact-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

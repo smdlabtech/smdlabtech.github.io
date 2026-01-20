@@ -1,0 +1,259 @@
+/**
+ * Language Switcher Styles
+ * Styles pour le sélecteur de langue FR/EN
+ */
+
+/* ============================================
+   Language Switcher Container
+   ============================================ */
+.language-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.language-switcher button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 0.75rem;
+  border: 2px solid var(--db-border);
+  background: var(--db-bg);
+  color: var(--db-text);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 44px;
+  min-height: 44px;
+  font-family: inherit;
+}
+
+.language-switcher button:hover {
+  border-color: var(--db-primary);
+  background: var(--db-bg-secondary);
+  transform: translateY(-1px);
+}
+
+.language-switcher button.active {
+  background: var(--db-primary);
+  color: white;
+  border-color: var(--db-primary);
+  box-shadow: 0 2px 8px rgba(227, 30, 36, 0.3);
+}
+
+.language-switcher button:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 2px;
+}
+
+.language-switcher button[aria-pressed="true"] {
+  background: var(--db-primary);
+  color: white;
+}
+
+/* ============================================
+   Language Switcher in Navbar
+   ============================================ */
+.navbar-databird .language-switcher {
+  margin-left: 1rem;
+}
+
+.navbar-databird .language-switcher button {
+  padding: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.navbar-databird .language-switcher button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.navbar-databird .language-switcher button.active {
+  background: var(--db-primary);
+  border-color: var(--db-primary);
+  color: white;
+}
+
+/* ============================================
+   Language Switcher Dropdown (Alternative)
+   ============================================ */
+.language-switcher-dropdown {
+  position: relative;
+}
+
+.language-switcher-dropdown button {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--db-border);
+  background: var(--db-bg);
+  color: var(--db-text);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 80px;
+}
+
+.language-switcher-dropdown button::after {
+  content: '▼';
+  font-size: 0.625rem;
+  margin-left: 0.5rem;
+  transition: transform 0.2s ease;
+}
+
+.language-switcher-dropdown.open button::after {
+  transform: rotate(180deg);
+}
+
+.language-switcher-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  background: var(--db-bg);
+  border: 1px solid var(--db-border);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  min-width: 120px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.2s ease;
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.language-switcher-dropdown.open .language-switcher-dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.language-switcher-dropdown-menu button {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  border-radius: 0;
+  text-align: left;
+  background: transparent;
+  color: var(--db-text);
+  cursor: pointer;
+  transition: background 0.2s ease;
+  min-width: auto;
+}
+
+.language-switcher-dropdown-menu button:hover {
+  background: var(--db-bg-secondary);
+}
+
+.language-switcher-dropdown-menu button.active {
+  background: var(--db-primary);
+  color: white;
+}
+
+/* ============================================
+   Mobile Language Switcher
+   ============================================ */
+@media (max-width: 768px) {
+  .navbar-databird .language-switcher {
+    margin-left: 0;
+    margin-top: 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .language-switcher button {
+    flex: 1;
+    max-width: 80px;
+  }
+}
+
+/* ============================================
+   Dark Mode
+   ============================================ */
+.dark-mode .language-switcher button {
+  background: var(--db-bg-secondary);
+  border-color: var(--db-border);
+  color: var(--db-text);
+}
+
+.dark-mode .language-switcher button:hover {
+  background: var(--db-bg-tertiary);
+  border-color: var(--db-primary);
+}
+
+.dark-mode .language-switcher button.active {
+  background: var(--db-primary);
+  color: white;
+}
+
+.dark-mode .language-switcher-dropdown-menu {
+  background: var(--db-bg-secondary);
+  border-color: var(--db-border);
+}
+
+.dark-mode .language-switcher-dropdown-menu button {
+  color: var(--db-text);
+}
+
+.dark-mode .language-switcher-dropdown-menu button:hover {
+  background: var(--db-bg-tertiary);
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+.language-switcher button[aria-pressed="true"] {
+  background: var(--db-primary);
+  color: white;
+}
+
+.language-switcher button:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ============================================
+   Animation
+   ============================================ */
+.language-switcher button {
+  position: relative;
+  overflow: hidden;
+}
+
+.language-switcher button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.language-switcher button:active::before {
+  width: 200px;
+  height: 200px;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .language-switcher {
+    display: none;
+  }
+}

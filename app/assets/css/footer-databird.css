@@ -1,0 +1,112 @@
+/**
+ * Footer DataBird Style
+ * Footer épuré et professionnel inspiré de DataBird
+ */
+
+.footer-databird {
+  background: var(--db-bg-secondary);
+  border-top: 1px solid var(--db-border);
+  padding: 4rem 0 2rem;
+  margin-top: 5rem;
+}
+
+.footer-databird-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-databird-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+.footer-databird-column h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--db-text);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.footer-databird-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-databird-column ul li {
+  margin-bottom: 0.75rem;
+}
+
+.footer-databird-column ul li a {
+  color: var(--db-text-secondary);
+  text-decoration: none;
+  font-size: 0.9375rem;
+  transition: color 0.2s ease;
+  display: inline-block;
+}
+
+.footer-databird-column ul li a:hover {
+  color: var(--db-primary);
+}
+
+.footer-databird-bottom {
+  padding-top: 2rem;
+  border-top: 1px solid var(--db-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-databird-copyright {
+  font-size: 0.875rem;
+  color: var(--db-text-muted);
+}
+
+.footer-databird-social {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.footer-databird-social a {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--db-bg);
+  border: 1px solid var(--db-border);
+  color: var(--db-text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.footer-databird-social a:hover {
+  background: var(--db-primary);
+  color: white;
+  border-color: var(--db-primary);
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .footer-databird {
+    padding: 3rem 0 1.5rem;
+  }
+  
+  .footer-databird-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  
+  .footer-databird-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+}

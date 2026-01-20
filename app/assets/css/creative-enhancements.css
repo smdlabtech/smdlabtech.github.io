@@ -1,0 +1,734 @@
+/**
+ * Creative Enhancements CSS
+ * Fonctionnalités créatives et innovantes
+ * Design unique et moderne
+ */
+
+/* ============================================
+   Bookmark System avec Animation
+   ============================================ */
+.bookmark-btn {
+  position: fixed;
+  top: 120px;
+  right: 2rem;
+  width: 56px;
+  height: 56px;
+  background: var(--color-bg-primary);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 999;
+  box-shadow: var(--shadow-lg);
+  transition: all var(--transition-base);
+  backdrop-filter: blur(10px);
+}
+
+.bookmark-btn:hover {
+  transform: scale(1.1) rotate(5deg);
+  border-color: var(--color-link);
+  box-shadow: var(--shadow-xl);
+}
+
+.bookmark-btn.active {
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  border-color: #ffd700;
+  color: #333;
+  animation: bookmarkPulse 0.6s ease-out;
+}
+
+.bookmark-btn.active i {
+  animation: bookmarkBounce 0.6s ease-out;
+}
+
+@keyframes bookmarkPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1.1); }
+}
+
+@keyframes bookmarkBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.bookmark-notification {
+  position: fixed;
+  top: 200px;
+  right: 2rem;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-xl);
+  z-index: 10000;
+  opacity: 0;
+  transform: translateX(100px);
+  transition: all var(--transition-base);
+}
+
+.bookmark-notification.show {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* ============================================
+   Mode Zen avec Musique
+   ============================================ */
+.zen-mode {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  z-index: 20000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-3xl);
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-slow);
+}
+
+.zen-mode.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.zen-content {
+  max-width: 800px;
+  text-align: center;
+  color: white;
+  animation: zenFadeIn 1s ease-out;
+}
+
+.zen-content h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+  margin-bottom: var(--spacing-xl);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.zen-controls {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.zen-btn {
+  padding: var(--spacing-md) var(--spacing-xl);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-full);
+  color: white;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  font-weight: 600;
+}
+
+.zen-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes zenFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Text-to-Speech Controls
+   ============================================ */
+.tts-controls {
+  position: fixed;
+  bottom: 140px;
+  right: 2rem;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  box-shadow: var(--shadow-xl);
+  z-index: 999;
+  display: flex;
+  gap: var(--spacing-sm);
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--transition-base);
+}
+
+.tts-controls.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.tts-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  border: none;
+  background: var(--color-link);
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-fast);
+}
+
+.tts-btn:hover {
+  background: var(--color-link-hover);
+  transform: scale(1.1);
+}
+
+.tts-btn.active {
+  background: #10b981;
+  animation: ttsPulse 2s infinite;
+}
+
+@keyframes ttsPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+  50% { box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+}
+
+.tts-speed {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.875rem;
+}
+
+/* ============================================
+   Citation Partageable
+   ============================================ */
+.quote-highlight {
+  position: relative;
+  padding: var(--spacing-lg);
+  margin: var(--spacing-xl) 0;
+  background: var(--color-bg-secondary);
+  border-left: 4px solid var(--color-link);
+  border-radius: var(--radius-md);
+  font-style: italic;
+  font-size: 1.125rem;
+  line-height: 1.8;
+  color: var(--color-text-primary);
+}
+
+.quote-highlight::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  font-size: 4rem;
+  color: var(--color-link);
+  opacity: 0.2;
+  font-family: Georgia, serif;
+}
+
+.quote-actions {
+  display: flex;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+  flex-wrap: wrap;
+}
+
+.quote-btn {
+  padding: var(--spacing-xs) var(--spacing-md);
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.quote-btn:hover {
+  background: var(--color-link);
+  color: white;
+  border-color: var(--color-link);
+  transform: translateY(-2px);
+}
+
+/* ============================================
+   Notes Personnelles
+   ============================================ */
+.personal-notes {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 300px;
+  max-height: 400px;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all var(--transition-base);
+}
+
+.personal-notes.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.notes-header {
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notes-content {
+  padding: var(--spacing-md);
+  flex: 1;
+  overflow-y: auto;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+.notes-input {
+  width: 100%;
+  min-height: 100px;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-secondary);
+  color: var(--color-text-primary);
+  font-family: inherit;
+  resize: vertical;
+}
+
+.notes-toggle {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 50px;
+  height: 50px;
+  background: var(--color-link);
+  color: white;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  z-index: 998;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.notes-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-xl);
+}
+
+/* ============================================
+   Particles Background
+   ============================================ */
+.particles-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0.3;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--color-link);
+  border-radius: 50%;
+  animation: floatParticle 20s infinite;
+}
+
+@keyframes floatParticle {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Confetti Animation
+   ============================================ */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  background: var(--color-link);
+  position: absolute;
+  animation: confettiFall 3s linear forwards;
+  z-index: 10000;
+}
+
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100vh) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Glitch Text Effect
+   ============================================ */
+.glitch-text {
+  position: relative;
+  display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-text::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch-text::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim2 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% { clip: rect(31px, 9999px, 94px, 0); }
+  20% { clip: rect(31px, 9999px, 94px, 0); }
+  21% { clip: rect(54px, 9999px, 94px, 0); }
+  40% { clip: rect(54px, 9999px, 94px, 0); }
+  41% { clip: rect(31px, 9999px, 94px, 0); }
+  60% { clip: rect(31px, 9999px, 94px, 0); }
+  61% { clip: rect(54px, 9999px, 94px, 0); }
+  80% { clip: rect(54px, 9999px, 94px, 0); }
+  81% { clip: rect(31px, 9999px, 94px, 0); }
+  100% { clip: rect(31px, 9999px, 94px, 0); }
+}
+
+@keyframes glitch-anim2 {
+  0% { clip: rect(65px, 9999px, 100px, 0); }
+  20% { clip: rect(65px, 9999px, 100px, 0); }
+  21% { clip: rect(31px, 9999px, 100px, 0); }
+  40% { clip: rect(31px, 9999px, 100px, 0); }
+  41% { clip: rect(65px, 9999px, 100px, 0); }
+  60% { clip: rect(65px, 9999px, 100px, 0); }
+  61% { clip: rect(31px, 9999px, 100px, 0); }
+  80% { clip: rect(31px, 9999px, 100px, 0); }
+  81% { clip: rect(65px, 9999px, 100px, 0); }
+  100% { clip: rect(65px, 9999px, 100px, 0); }
+}
+
+/* ============================================
+   Gradient Text Animation
+   ============================================ */
+.gradient-text-animated {
+  background: linear-gradient(
+    90deg,
+    var(--color-link),
+    var(--color-accent),
+    #ff6b6b,
+    var(--color-link)
+  );
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ============================================
+   Reading Stats Avancées
+   ============================================ */
+.reading-stats-advanced {
+  position: fixed;
+  top: 120px;
+  left: 2rem;
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-xl);
+  z-index: 999;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-20px);
+  transition: all var(--transition-base);
+}
+
+.reading-stats-advanced.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+.stat-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.stat-item:last-child {
+  border-bottom: none;
+}
+
+.stat-label {
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+}
+
+.stat-value {
+  font-weight: 600;
+  color: var(--color-link);
+}
+
+.stat-progress {
+  width: 100%;
+  height: 4px;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-full);
+  margin-top: var(--spacing-xs);
+  overflow: hidden;
+}
+
+.stat-progress-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-link), var(--color-accent));
+  border-radius: var(--radius-full);
+  transition: width var(--transition-base);
+}
+
+/* ============================================
+   Distraction-Free Mode Ultra
+   ============================================ */
+.distraction-free {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--color-bg-primary);
+  z-index: 15000;
+  overflow-y: auto;
+  padding: var(--spacing-3xl);
+}
+
+.distraction-free-content {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 1.25rem;
+  line-height: 2;
+  color: var(--color-text-primary);
+}
+
+.distraction-free-header {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg-primary);
+  padding: var(--spacing-lg) 0;
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--spacing-xl);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1;
+  backdrop-filter: blur(10px);
+}
+
+/* ============================================
+   Cursor Personnalisé
+   ============================================ */
+.custom-cursor {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-link);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.1s ease;
+  display: none;
+}
+
+.custom-cursor.active {
+  display: block;
+}
+
+.custom-cursor-dot {
+  width: 4px;
+  height: 4px;
+  background: var(--color-link);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10001;
+  transition: transform 0.05s ease;
+  display: none;
+}
+
+.custom-cursor-dot.active {
+  display: block;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 1024px) {
+  .bookmark-btn,
+  .tts-controls,
+  .reading-stats-advanced {
+    display: none;
+  }
+  
+  .personal-notes {
+    width: calc(100% - 4rem);
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .zen-mode {
+    padding: var(--spacing-lg);
+  }
+  
+  .personal-notes {
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+  }
+  
+  .notes-toggle {
+    bottom: 1rem;
+    left: 1rem;
+  }
+}
+
+/* ============================================
+   Feature Showcase Cards
+   ============================================ */
+.feature-showcase {
+  padding: var(--spacing-3xl) 0;
+  background: var(--color-bg-secondary);
+  margin: var(--spacing-3xl) 0;
+  border-radius: var(--radius-xl);
+}
+
+.feature-card {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  text-align: center;
+  transition: all var(--transition-base);
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 138, 255, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.feature-card:hover::before {
+  left: 100%;
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+  border-color: var(--color-link);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  color: var(--color-link);
+  margin-bottom: var(--spacing-md);
+  transition: transform var(--transition-base);
+  display: inline-block;
+}
+
+.feature-card:hover .feature-icon {
+  transform: scale(1.2) rotate(5deg);
+  color: var(--color-accent);
+}
+
+.feature-card h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--color-text-primary);
+}
+
+.feature-card p {
+  color: var(--color-text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  margin: 0;
+}

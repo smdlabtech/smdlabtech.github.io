@@ -1,0 +1,366 @@
+# Alertmanager Configuration
+# Enhanced configuration with hierarchical routing, multiple receivers, and best practices
+#
+# Environment variables can be used for sensitive data:
+# - SLACK_WEBHOOK_URL
+# - SMTP_HOST, SMTP_USER, SMTP_PASSWORD
+# - PAGERDUTY_SERVICE_KEY
+# - WEBHOOK_URL
+
+global:
+  # Time to wait before sending a notification again if it has already been sent successfully
+  resolve_timeout: 5m
+  
+  # SMTP configuration (use environment variables in production)
+  # smtp_smarthost: '${SMTP_HOST}:${SMTP_PORT}'
+  # smtp_from: '${ALERT_EMAIL_FROM}'
+  # smtp_auth_username: '${SMTP_USER}'
+  # smtp_auth_password: '${SMTP_PASSWORD}'
+  # smtp_require_tls: true
+  
+  # HTTP configuration for webhooks
+  http_config:
+    follow_redirects: true
+
+# Templates for customizing alert messages
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# Route tree for alert routing
+route:
+  # Default receiver for unmatched alerts
+  receiver: default
+  
+  # Group alerts by these labels
+  group_by: ['alertname', 'cluster', 'service', 'severity']
+  
+  # Wait time before sending first notification for a group
+  group_wait: 30s
+  
+  # Wait time before sending notification about new alerts in a group
+  group_interval: 5m
+  
+  # Minimum time between two notifications for the same group
+  repeat_interval: 12h
+  
+  # Child routes for specific alert routing
+  routes:
+    # Critical alerts - immediate notification to on-call
+    - match:
+        severity: critical
+      receiver: critical-alerts
+      group_wait: 10s
+      group_interval: 2m
+      repeat_interval: 1h
+      continue: false
+      routes:
+        # Backend down - highest priority
+        - match:
+            alertname: BackendDown
+          receiver: critical-oncall
+          group_wait: 0s
+          repeat_interval: 30m
+    
+    # Warning alerts - notify during business hours
+    - match:
+        severity: warning
+      receiver: warning-alerts
+      group_wait: 1m
+      group_interval: 10m
+      repeat_interval: 6h
+      continue: false
+    
+    # Info alerts - log only
+    - match:
+        severity: info
+      receiver: info-alerts
+      group_wait: 5m
+      group_interval: 30m
+      repeat_interval: 24h
+      continue: false
+    
+    # Service-specific routes
+    - match:
+        service: github-ai-search-backend
+      receiver: backend-team
+      group_by: ['alertname', 'severity']
+      continue: true
+    
+    # High error rate - special handling
+    - match:
+        alertname: HighErrorRate
+      receiver: error-rate-alerts
+      group_wait: 2m
+      repeat_interval: 2h
+      continue: false
+
+# Inhibition rules - suppress certain alerts when others are firing
+inhibit_rules:
+  # Suppress warning alerts when critical alerts are firing
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'service']
+  
+  # Suppress info alerts when warning or critical alerts are firing
+  - source_match:
+      severity: 'warning'
+    target_match:
+      severity: 'info'
+    equal: ['alertname', 'service']
+
+# Receivers - define notification channels
+receivers:
+  # Default receiver - fallback for unmatched alerts
+  - name: default
+#    slack_configs:
+#      - api_url: '${SLACK_WEBHOOK_URL}'
+#        channel: '#alerts-general'
+#        send_resolved: true
+#        title: '🚨 Alert: {{ .GroupLabels.alertname }}'
+#        text: |
+          {{ range .Alerts }}
+          *Status*: {{ .Status }}
+          *Severity*: {{ .Labels.severity }}
+          *Service*: {{ .Labels.service }}
+          *Alert*: {{ .Labels.alertname }}
+          
+          *Summary*: {{ .Annotations.summary }}
+          *Description*: {{ .Annotations.description }}
+          
+          *Started*: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ if .EndsAt }}*Resolved*: {{ .EndsAt.Format "2006-01-02 15:04:05" }}{{ end }}
+          {{ end }}
+#        color: '{{ if eq .Status "firing" }}danger{{ else }}good{{ end }}'
+    
+    email_configs:
+      - to: '${ALERT_EMAIL_TO}'
+#        send_resolved: true
+        headers:
+          Subject: 'Alert: {{ .GroupLabels.alertname }}'
+        html: |
+          <h2>Alert: {{ .GroupLabels.alertname }}</h2>
+          <table border="1" cellpadding="5">
+            <tr><th>Status</th><td>{{ .Status }}</td></tr>
+            <tr><th>Severity</th><td>{{ .GroupLabels.severity }}</td></tr>
+            <tr><th>Service</th><td>{{ .GroupLabels.service }}</td></tr>
+          </table>
+          <h3>Alerts:</h3>
+          <ul>
+          {{ range .Alerts }}
+            <li>
+              <strong>{{ .Labels.alertname }}</strong><br/>
+              {{ .Annotations.summary }}<br/>
+              <em>{{ .Annotations.description }}</em>
+            </li>
+          {{ end }}
+          </ul>
+
+  # Critical alerts receiver - immediate notification
+  - name: critical-alerts
+#    slack_configs:
+#      - api_url: '${SLACK_WEBHOOK_URL}'
+#        channel: '#alerts-critical'
+#        send_resolved: true
+#        title: '🔥 CRITICAL: {{ .GroupLabels.alertname }}'
+#        text: |
+          {{ range .Alerts }}
+          ⚠️ *CRITICAL ALERT* ⚠️
+          
+          *Service*: {{ .Labels.service }}
+          *Alert*: {{ .Labels.alertname }}
+          *Status*: {{ .Status }}
+          
+          *Summary*: {{ .Annotations.summary }}
+          *Description*: {{ .Annotations.description }}
+          
+          *Started*: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ if .EndsAt }}*Resolved*: {{ .EndsAt.Format "2006-01-02 15:04:05" }}{{ end }}
+          
+          *Labels*:
+          {{ range .Labels.SortedPairs }}  • {{ .Name }}: {{ .Value }}
+          {{ end }}
+          {{ end }}
+#        color: 'danger'
+    
+    email_configs:
+      - to: '${ALERT_EMAIL_CRITICAL}'
+#        send_resolved: true
+        headers:
+          Subject: '🔥 CRITICAL: {{ .GroupLabels.alertname }}'
+        html: |
+          <div style="background-color: #fee; padding: 20px; border: 2px solid #f00;">
+            <h1 style="color: #c00;">🔥 CRITICAL ALERT</h1>
+            <h2>{{ .GroupLabels.alertname }}</h2>
+            <table border="1" cellpadding="5" style="border-collapse: collapse;">
+              <tr><th>Status</th><td><strong>{{ .Status }}</strong></td></tr>
+              <tr><th>Severity</th><td><strong>{{ .GroupLabels.severity }}</strong></td></tr>
+              <tr><th>Service</th><td>{{ .GroupLabels.service }}</td></tr>
+            </table>
+            <h3>Alerts:</h3>
+            <ul>
+            {{ range .Alerts }}
+              <li>
+                <strong>{{ .Labels.alertname }}</strong><br/>
+                {{ .Annotations.summary }}<br/>
+                <em>{{ .Annotations.description }}</em><br/>
+                Started: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+              </li>
+            {{ end }}
+            </ul>
+          </div>
+    
+    # Webhook for integration with external systems (PagerDuty, OpsGenie, etc.)
+    # Uncomment and configure when needed
+    # webhook_configs:
+    #   - url: '${WEBHOOK_URL}'
+    #     send_resolved: true
+    #     # http_config with bearer token (if needed)
+    #     # http_config:
+    #     #   bearer_token: '${WEBHOOK_BEARER_TOKEN}'
+
+  # Critical on-call receiver - for highest priority alerts
+  - name: critical-oncall
+    # Slack configuration - uncomment when SLACK_WEBHOOK_URL is set
+    # slack_configs:
+    #   - api_url: '${SLACK_WEBHOOK_URL}'
+    #     channel: '#oncall-critical'
+    #     send_resolved: true
+    #     title: '🚨 ON-CALL: {{ .GroupLabels.alertname }}'
+#        text: |
+          @here @channel
+          
+          🚨 *ON-CALL ALERT* 🚨
+          
+          {{ range .Alerts }}
+          *Service*: {{ .Labels.service }}
+          *Alert*: {{ .Labels.alertname }}
+          
+          *Summary*: {{ .Annotations.summary }}
+          *Description*: {{ .Annotations.description }}
+          
+          *Started*: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+#        color: 'danger'
+    
+    email_configs:
+      - to: '${ONCALL_EMAIL}'
+#        send_resolved: true
+        headers:
+          Subject: '🚨 ON-CALL: {{ .GroupLabels.alertname }}'
+          Priority: 'urgent'
+        html: |
+          <div style="background-color: #fee; padding: 20px; border: 3px solid #f00;">
+            <h1 style="color: #c00;">🚨 ON-CALL ALERT</h1>
+            <h2>{{ .GroupLabels.alertname }}</h2>
+            <p><strong>Immediate attention required!</strong></p>
+            {{ range .Alerts }}
+            <div style="background: #fff; padding: 10px; margin: 10px 0; border-left: 4px solid #f00;">
+              <h3>{{ .Labels.alertname }}</h3>
+              <p><strong>Service:</strong> {{ .Labels.service }}</p>
+              <p><strong>Summary:</strong> {{ .Annotations.summary }}</p>
+              <p><strong>Description:</strong> {{ .Annotations.description }}</p>
+              <p><strong>Started:</strong> {{ .StartsAt.Format "2006-01-02 15:04:05" }}</p>
+            </div>
+            {{ end }}
+          </div>
+    
+    # PagerDuty integration (optional)
+    # pagerduty_configs:
+    #   - service_key: '${PAGERDUTY_SERVICE_KEY}'
+    #     description: '{{ .GroupLabels.alertname }}: {{ .CommonAnnotations.summary }}'
+
+  # Warning alerts receiver
+  - name: warning-alerts
+#    slack_configs:
+#      - api_url: '${SLACK_WEBHOOK_URL}'
+#        channel: '#alerts-warning'
+#        send_resolved: true
+#        title: '⚠️ Warning: {{ .GroupLabels.alertname }}'
+#        text: |
+          {{ range .Alerts }}
+          *Service*: {{ .Labels.service }}
+          *Alert*: {{ .Labels.alertname }}
+          *Status*: {{ .Status }}
+          
+          *Summary*: {{ .Annotations.summary }}
+          *Description*: {{ .Annotations.description }}
+          
+          *Started*: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+#        color: 'warning'
+    
+    email_configs:
+      - to: '${ALERT_EMAIL_WARNING}'
+#        send_resolved: true
+        headers:
+          Subject: '⚠️ Warning: {{ .GroupLabels.alertname }}'
+
+  # Info alerts receiver - logging only
+  - name: info-alerts
+#    slack_configs:
+#      - api_url: '${SLACK_WEBHOOK_URL}'
+#        channel: '#alerts-info'
+#        send_resolved: false
+#        title: 'ℹ️ Info: {{ .GroupLabels.alertname }}'
+#        text: |
+          {{ range .Alerts }}
+          *Service*: {{ .Labels.service }}
+          *Alert*: {{ .Labels.alertname }}
+          *Summary*: {{ .Annotations.summary }}
+          {{ end }}
+#        color: 'good'
+
+  # Backend team specific receiver
+  - name: backend-team
+#    slack_configs:
+#      - api_url: '${SLACK_WEBHOOK_URL}'
+#        channel: '#backend-alerts'
+#        send_resolved: true
+#        title: '🔧 Backend: {{ .GroupLabels.alertname }}'
+#        text: |
+          {{ range .Alerts }}
+          *Service*: {{ .Labels.service }}
+          *Severity*: {{ .Labels.severity }}
+          *Alert*: {{ .Labels.alertname }}
+          
+          *Summary*: {{ .Annotations.summary }}
+          *Description*: {{ .Annotations.description }}
+          
+          *Started*: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+#        color: '{{ if eq .Status "firing" }}{{ if eq .GroupLabels.severity "critical" }}danger{{ else }}warning{{ end }}{{ else }}good{{ end }}'
+    
+    email_configs:
+      - to: '${BACKEND_TEAM_EMAIL}'
+#        send_resolved: true
+        headers:
+          Subject: 'Backend Alert: {{ .GroupLabels.alertname }}'
+
+  # Error rate specific receiver
+  - name: error-rate-alerts
+#    slack_configs:
+#      - api_url: '${SLACK_WEBHOOK_URL}'
+#        channel: '#alerts-errors'
+#        send_resolved: true
+#        title: '📊 High Error Rate: {{ .GroupLabels.alertname }}'
+#        text: |
+          {{ range .Alerts }}
+          ⚠️ *High Error Rate Detected*
+          
+          *Service*: {{ .Labels.service }}
+          *Alert*: {{ .Labels.alertname }}
+          
+          *Summary*: {{ .Annotations.summary }}
+          *Description*: {{ .Annotations.description }}
+          
+          *Started*: {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+          {{ end }}
+#        color: 'warning'
+    
+    email_configs:
+      - to: '${ALERT_EMAIL_ERRORS}'
+#        send_resolved: true
+        headers:
+          Subject: 'High Error Rate: {{ .GroupLabels.alertname }}'

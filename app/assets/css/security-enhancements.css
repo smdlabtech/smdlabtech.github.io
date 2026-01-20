@@ -1,0 +1,302 @@
+/**
+ * Sécurité Renforcée
+ * Améliorations de sécurité pour la plateforme
+ */
+
+/* ============================================
+   Security Headers Indicators
+   ============================================ */
+
+.security-indicator {
+  position: fixed;
+  bottom: var(--ds-spacing-4);
+  right: var(--ds-spacing-4);
+  width: 12px;
+  height: 12px;
+  border-radius: var(--ds-radius-full);
+  background: var(--ds-success);
+  box-shadow: 0 0 0 2px var(--ds-bg), 0 0 0 4px var(--ds-success);
+  z-index: var(--ds-z-tooltip);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.security-indicator.insecure {
+  background: var(--ds-error);
+  box-shadow: 0 0 0 2px var(--ds-bg), 0 0 0 4px var(--ds-error);
+}
+
+/* ============================================
+   Content Security Policy
+   ============================================ */
+
+/* Styles for CSP violations (if any) */
+.csp-violation {
+  display: none; /* Hidden by default */
+}
+
+/* ============================================
+   Secure Forms
+   ============================================ */
+
+.secure-form {
+  position: relative;
+}
+
+.secure-form-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+  padding: var(--ds-spacing-2) var(--ds-spacing-4);
+  background: var(--ds-success-lighter);
+  border: 1px solid var(--ds-success);
+  border-radius: var(--ds-radius-md);
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-success-dark);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+.secure-form-indicator i {
+  color: var(--ds-success);
+}
+
+/* ============================================
+   Password Strength Indicator
+   ============================================ */
+
+.password-strength {
+  margin-top: var(--ds-spacing-2);
+}
+
+.password-strength-bar {
+  height: 4px;
+  background: var(--ds-bg-secondary);
+  border-radius: var(--ds-radius-full);
+  overflow: hidden;
+  margin-bottom: var(--ds-spacing-2);
+}
+
+.password-strength-fill {
+  height: 100%;
+  width: 0%;
+  transition: width var(--ds-transition-base), background-color var(--ds-transition-base);
+  border-radius: var(--ds-radius-full);
+}
+
+.password-strength-fill.weak {
+  width: 33%;
+  background: var(--ds-error);
+}
+
+.password-strength-fill.medium {
+  width: 66%;
+  background: var(--ds-warning);
+}
+
+.password-strength-fill.strong {
+  width: 100%;
+  background: var(--ds-success);
+}
+
+.password-strength-text {
+  font-size: var(--ds-font-size-xs);
+  color: var(--ds-text-secondary);
+}
+
+.password-strength-text.weak {
+  color: var(--ds-error);
+}
+
+.password-strength-text.medium {
+  color: var(--ds-warning);
+}
+
+.password-strength-text.strong {
+  color: var(--ds-success);
+}
+
+/* ============================================
+   Rate Limiting Indicators
+   ============================================ */
+
+.rate-limit-warning {
+  background: var(--ds-warning-lighter);
+  border: 1px solid var(--ds-warning);
+  border-radius: var(--ds-radius-lg);
+  padding: var(--ds-spacing-4);
+  margin: var(--ds-spacing-4) 0;
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-3);
+  color: var(--ds-warning-dark);
+}
+
+.rate-limit-warning i {
+  color: var(--ds-warning);
+  font-size: var(--ds-font-size-xl);
+  flex-shrink: 0;
+}
+
+.rate-limit-exceeded {
+  background: var(--ds-error-lighter);
+  border: 1px solid var(--ds-error);
+  color: var(--ds-error-dark);
+}
+
+.rate-limit-exceeded i {
+  color: var(--ds-error);
+}
+
+/* ============================================
+   CSRF Protection
+   ============================================ */
+
+.csrf-token {
+  display: none; /* Hidden but present in DOM */
+}
+
+/* ============================================
+   XSS Protection Indicators
+   ============================================ */
+
+.xss-protected {
+  /* Content is sanitized */
+}
+
+.xss-warning {
+  background: var(--ds-error-lighter);
+  border: 1px solid var(--ds-error);
+  border-radius: var(--ds-radius-md);
+  padding: var(--ds-spacing-3);
+  margin: var(--ds-spacing-2) 0;
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-error-dark);
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+}
+
+.xss-warning i {
+  color: var(--ds-error);
+}
+
+/* ============================================
+   Secure Connection Indicator
+   ============================================ */
+
+.secure-connection {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+  padding: var(--ds-spacing-2) var(--ds-spacing-4);
+  background: var(--ds-success-lighter);
+  border: 1px solid var(--ds-success);
+  border-radius: var(--ds-radius-md);
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-success-dark);
+}
+
+.secure-connection i {
+  color: var(--ds-success);
+}
+
+.insecure-connection {
+  background: var(--ds-error-lighter);
+  border-color: var(--ds-error);
+  color: var(--ds-error-dark);
+}
+
+.insecure-connection i {
+  color: var(--ds-error);
+}
+
+/* ============================================
+   Input Validation
+   ============================================ */
+
+input:invalid,
+textarea:invalid,
+select:invalid {
+  border-color: var(--ds-error);
+}
+
+input:valid,
+textarea:valid,
+select:valid {
+  border-color: var(--ds-success);
+}
+
+.validation-message {
+  font-size: var(--ds-font-size-xs);
+  margin-top: var(--ds-spacing-1);
+  display: block;
+}
+
+.validation-message.error {
+  color: var(--ds-error);
+}
+
+.validation-message.success {
+  color: var(--ds-success);
+}
+
+/* ============================================
+   Security Badge
+   ============================================ */
+
+.security-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+  padding: var(--ds-spacing-2) var(--ds-spacing-4);
+  background: var(--ds-bg-secondary);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-full);
+  font-size: var(--ds-font-size-xs);
+  color: var(--ds-text-secondary);
+}
+
+.security-badge.secure {
+  background: var(--ds-success-lighter);
+  border-color: var(--ds-success);
+  color: var(--ds-success-dark);
+}
+
+.security-badge i {
+  color: var(--ds-success);
+}
+
+/* ============================================
+   Privacy Mode
+   ============================================ */
+
+.privacy-mode {
+  /* Styles for privacy mode */
+}
+
+.privacy-mode * {
+  /* Disable tracking in privacy mode */
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+  .security-indicator {
+    bottom: var(--ds-spacing-2);
+    right: var(--ds-spacing-2);
+  }
+}
+
+/* ============================================
+   Print
+   ============================================ */
+
+@media print {
+  .security-indicator,
+  .secure-form-indicator,
+  .rate-limit-warning,
+  .secure-connection {
+    display: none;
+  }
+}

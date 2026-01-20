@@ -1,0 +1,88 @@
+/**
+ * Blog Cards Synchronization
+ * Synchronisation de l'apparition des cartes blog
+ */
+
+/* ============================================
+   Blog Cards - Apparition Ensemble
+   ============================================ */
+
+.blog-grid-databird.stagger-container,
+.blog-grid-databird {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--ds-spacing-6);
+}
+
+.blog-card-databird,
+.blog-card-databird-enhanced {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.blog-card-databird.animated,
+.blog-card-databird-enhanced.animated,
+.blog-card-databird.in-view,
+.blog-card-databird-enhanced.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   Stagger Container - Toutes ensemble
+   ============================================ */
+
+.stagger-container .stagger-item,
+.stagger-container .blog-card-databird,
+.stagger-container .blog-card-databird-enhanced {
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.stagger-container.in-view .stagger-item,
+.stagger-container.in-view .blog-card-databird,
+.stagger-container.in-view .blog-card-databird-enhanced {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ============================================
+   Animation Group
+   ============================================ */
+
+.animation-group {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.animation-group.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   Force All Cards Together
+   ============================================ */
+
+#blog-posts .blog-card-databird,
+#blog-posts .blog-card-databird-enhanced {
+  animation: none !important;
+  transition: opacity 0.6s ease, transform 0.6s ease !important;
+}
+
+#blog-posts.in-view .blog-card-databird,
+#blog-posts.in-view .blog-card-databird-enhanced {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+  .blog-grid-databird {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,47 @@
+<!-- Schema.org Structured Data -->
+{% if page.layout == 'post' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "{{ page.title | strip_html | xml_escape }}",
+  "description": "{{ description | strip_html | xml_escape }}",
+  "image": "{% if page.cover-img %}{{ page.cover-img | absolute_url }}{% else %}{{ '/assets/img/arriere_plan_p.jpg' | absolute_url }}{% endif %}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ author | strip_html }}",
+    "url": "{{ '/' | absolute_url }}"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ site.title }}",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "{{ '/assets/img/avatar-icon.png' | absolute_url }}"
+    }
+  },
+  "datePublished": "{{ page.date | date: '%Y-%m-%d' }}",
+  "dateModified": "{{ page.last_modified_at | default: page.date | date: '%Y-%m-%d' }}",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "{{ page.url | absolute_url }}"
+  }
+}
+</script>
+{% endif %}
+
+{% if page.layout == 'home' or page.layout == 'page' %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "{{ site.title }}",
+  "url": "{{ '/' | absolute_url }}",
+  "description": "{{ site.description | default: description | strip_html | xml_escape }}",
+  "author": {
+    "@type": "Person",
+    "name": "{{ author | strip_html }}"
+  }
+}
+</script>
+{% endif %}

@@ -1,0 +1,12 @@
+<!-- Tag Filters -->
+<div class="tag-filters">
+  <button class="tag-filter-btn active" data-tag="all" aria-label="Tous les articles">
+    <i class="fas fa-th"></i> Tous
+  </button>
+  {% assign all_tags = site.posts | map: 'tags' | flatten | uniq | sort %}
+  {% for tag in all_tags %}
+    <button class="tag-filter-btn" data-tag="{{ tag | downcase }}" aria-label="Filtrer par {{ tag }}">
+      {{ tag }}
+    </button>
+  {% endfor %}
+</div>

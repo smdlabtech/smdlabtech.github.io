@@ -1,0 +1,130 @@
+---
+layout: base
+title: Mes Projets
+---
+
+<!-- Projects Header -->
+<section class="projects-header">
+  <div class="projects-header-content">
+    <h1 class="projects-title">Mes Projets</h1>
+    <p class="projects-subtitle">
+      Découvrez mes projets en Data Science, Intelligence Artificielle et développement web
+    </p>
+  </div>
+</section>
+
+<!-- Projects Section -->
+<section class="projects-section">
+  <div class="projects-container">
+    <!-- Filters -->
+    <div class="projects-filters" id="projects-filters">
+      <button class="projects-filter-btn active" data-filter="all">Tous les projets</button>
+      <button class="projects-filter-btn" data-filter="data-science">Data Science</button>
+      <button class="projects-filter-btn" data-filter="machine-learning">Machine Learning</button>
+      <button class="projects-filter-btn" data-filter="web-app">Web App</button>
+      <button class="projects-filter-btn" data-filter="automation">Automation</button>
+      <button class="projects-filter-btn" data-filter="visualization">Visualization</button>
+    </div>
+
+    <!-- Projects Grid -->
+    <div class="projects-grid" id="projects-list">
+      {% if site.data.projects %}
+        {% for project in site.data.projects %}
+        <div class="project-card" data-category="{{ project.category | default: 'all' }}">
+          {% if project.image %}
+            <img src="{{ project.image | relative_url }}" alt="{{ project.title }}" class="project-card-image">
+          {% else %}
+            <div class="project-card-image" style="background: linear-gradient(135deg, var(--db-primary) 0%, var(--db-secondary) 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 3rem;">
+              <i class="fas fa-code"></i>
+            </div>
+          {% endif %}
+          
+          <div class="project-card-content">
+            <div class="project-card-tags">
+              {% if project.tags %}
+                {% for tag in project.tags %}
+                  <span class="project-card-tag">{{ tag }}</span>
+                {% endfor %}
+              {% endif %}
+            </div>
+            
+            <h3 class="project-card-title">
+              <a href="{{ project.url | default: project.github_url | default: '#' }}" target="_blank" rel="noopener noreferrer">
+                {{ project.title }}
+              </a>
+            </h3>
+            
+            <p class="project-card-description">
+              {{ project.description | default: 'Aucune description disponible.' }}
+            </p>
+            
+            <div class="project-card-footer">
+              <div class="project-card-links">
+                {% if project.github_url %}
+                  <a href="{{ project.github_url }}" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                    GitHub
+                  </a>
+                {% endif %}
+                {% if project.url %}
+                  <a href="{{ project.url }}" class="project-card-link" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt"></i>
+                    Voir
+                  </a>
+                {% endif %}
+              </div>
+              {% if project.date %}
+                <span class="project-card-date">{{ project.date | date: "%Y" }}</span>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="projects-empty">
+          <span class="projects-empty-icon">📁</span>
+          <h3 class="projects-empty-title">Aucun projet disponible</h3>
+          <p class="projects-empty-description">
+            Les projets seront bientôt ajoutés. Revenez plus tard !
+          </p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<script>
+// Projects Filter Functionality
+(function() {
+  const filterButtons = document.querySelectorAll('.projects-filter-btn');
+  const projectCards = document.querySelectorAll('.project-card');
+  
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const filter = this.dataset.filter;
+      
+      // Update active button
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Filter projects
+      projectCards.forEach(card => {
+        const category = card.dataset.category || 'all';
+        if (filter === 'all' || category === filter) {
+          card.style.display = 'flex';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 10);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+})();
+</script>

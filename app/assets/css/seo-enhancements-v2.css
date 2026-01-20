@@ -1,0 +1,366 @@
+/**
+ * Améliorations SEO V2
+ * Optimisations SEO supplémentaires
+ */
+
+/* ============================================
+   Structured Data Visual
+   ============================================ */
+
+/* Amélioration de la lisibilité pour les moteurs de recherche */
+article {
+  position: relative;
+}
+
+article::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--ds-primary);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+article:focus-within::before {
+  opacity: 0.3;
+}
+
+/* ============================================
+   Heading Hierarchy
+   ============================================ */
+
+/* Hiérarchie claire des titres */
+h1 {
+  font-size: clamp(var(--ds-font-size-4xl), 5vw, var(--ds-font-size-6xl));
+  font-weight: var(--ds-font-weight-extrabold);
+  margin-bottom: var(--ds-spacing-6);
+}
+
+h2 {
+  font-size: clamp(var(--ds-font-size-3xl), 4vw, var(--ds-font-size-4xl));
+  font-weight: var(--ds-font-weight-bold);
+  margin-top: var(--ds-spacing-8);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+h3 {
+  font-size: clamp(var(--ds-font-size-2xl), 3vw, var(--ds-font-size-3xl));
+  font-weight: var(--ds-font-weight-bold);
+  margin-top: var(--ds-spacing-6);
+  margin-bottom: var(--ds-spacing-3);
+}
+
+/* ============================================
+   Semantic HTML Enhancement
+   ============================================ */
+
+/* Amélioration visuelle des éléments sémantiques */
+main {
+  min-height: 60vh;
+}
+
+article {
+  margin-bottom: var(--ds-spacing-8);
+}
+
+section {
+  margin-bottom: var(--ds-spacing-12);
+}
+
+/* ============================================
+   Link Optimization
+   ============================================ */
+
+/* Amélioration des liens pour le SEO */
+a[href^="http"]::after {
+  content: '';
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 4px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2'%3E%3Cpath d='M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6'/%3E%3Cpolyline points='15 3 21 3 21 9'/%3E%3Cline x1='10' y1='14' x2='21' y2='3'/%3E%3C/svg%3E");
+  background-size: contain;
+  opacity: 0.5;
+}
+
+a[href^="http"]:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   Image SEO
+   ============================================ */
+
+/* Amélioration des images pour le SEO */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+img[alt=""] {
+  border: 2px dashed var(--ds-error);
+  opacity: 0.7;
+}
+
+/* ============================================
+   Breadcrumb SEO
+   ============================================ */
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text-secondary);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+.breadcrumb-item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+}
+
+.breadcrumb-item:not(:last-child)::after {
+  content: '/';
+  color: var(--ds-text-muted);
+  margin-left: var(--ds-spacing-2);
+}
+
+.breadcrumb-item a {
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-transition-fast);
+}
+
+.breadcrumb-item a:hover {
+  color: var(--ds-primary);
+}
+
+.breadcrumb-item.active {
+  color: var(--ds-text);
+  font-weight: var(--ds-font-weight-medium);
+}
+
+/* ============================================
+   Schema.org Visual Indicators
+   ============================================ */
+
+/* Indicateurs visuels pour les données structurées */
+[itemscope] {
+  position: relative;
+}
+
+[itemtype]::before {
+  content: '📊';
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  font-size: 12px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+[itemtype]:hover::before {
+  opacity: 0.3;
+}
+
+/* ============================================
+   Meta Information Display
+   ============================================ */
+
+.meta-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-4);
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text-secondary);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+.meta-info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+}
+
+.meta-info-item i {
+  color: var(--ds-primary);
+  font-size: var(--ds-font-size-xs);
+}
+
+/* ============================================
+   Reading Time Indicator
+   ============================================ */
+
+.reading-time {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+  padding: var(--ds-spacing-1) var(--ds-spacing-3);
+  background-color: var(--ds-bg-secondary);
+  border-radius: var(--ds-radius-full);
+  font-size: var(--ds-font-size-xs);
+  color: var(--ds-text-secondary);
+}
+
+.reading-time i {
+  color: var(--ds-primary);
+}
+
+/* ============================================
+   Article Structure
+   ============================================ */
+
+.article-header {
+  margin-bottom: var(--ds-spacing-8);
+}
+
+.article-title {
+  font-size: clamp(var(--ds-font-size-3xl), 5vw, var(--ds-font-size-5xl));
+  font-weight: var(--ds-font-weight-extrabold);
+  line-height: var(--ds-line-height-tight);
+  margin-bottom: var(--ds-spacing-4);
+  color: var(--ds-text);
+}
+
+.article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-4);
+  margin-bottom: var(--ds-spacing-6);
+  padding-bottom: var(--ds-spacing-4);
+  border-bottom: 1px solid var(--ds-border);
+}
+
+.article-content {
+  max-width: 800px;
+  margin: 0 auto;
+  line-height: var(--ds-line-height-relaxed);
+}
+
+.article-footer {
+  margin-top: var(--ds-spacing-8);
+  padding-top: var(--ds-spacing-6);
+  border-top: 1px solid var(--ds-border);
+}
+
+/* ============================================
+   Tag Cloud SEO
+   ============================================ */
+
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-2);
+  margin: var(--ds-spacing-6) 0;
+}
+
+.tag-cloud-item {
+  display: inline-block;
+  padding: var(--ds-spacing-2) var(--ds-spacing-4);
+  background-color: var(--ds-bg-secondary);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-full);
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text);
+  text-decoration: none;
+  transition: all var(--ds-transition-fast);
+}
+
+.tag-cloud-item:hover {
+  background-color: var(--ds-primary);
+  color: white;
+  border-color: var(--ds-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--ds-shadow-md);
+}
+
+/* ============================================
+   Related Content
+   ============================================ */
+
+.related-content {
+  margin-top: var(--ds-spacing-12);
+  padding-top: var(--ds-spacing-8);
+  border-top: 2px solid var(--ds-border);
+}
+
+.related-content-title {
+  font-size: var(--ds-font-size-2xl);
+  font-weight: var(--ds-font-weight-bold);
+  margin-bottom: var(--ds-spacing-6);
+  color: var(--ds-text);
+}
+
+.related-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--ds-spacing-6);
+}
+
+/* ============================================
+   Social Sharing SEO
+   ============================================ */
+
+.social-share {
+  display: flex;
+  gap: var(--ds-spacing-3);
+  margin: var(--ds-spacing-6) 0;
+}
+
+.social-share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--ds-bg-secondary);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-text);
+  text-decoration: none;
+  transition: all var(--ds-transition-fast);
+}
+
+.social-share-button:hover {
+  background-color: var(--ds-primary);
+  color: white;
+  border-color: var(--ds-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--ds-shadow-md);
+}
+
+/* ============================================
+   Print Optimizations
+   ============================================ */
+
+@media print {
+  .navbar-databird,
+  .footer-databird,
+  .social-share,
+  button,
+  .btn {
+    display: none !important;
+  }
+  
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+  }
+  
+  .article-content {
+    max-width: 100%;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+  }
+  
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+}

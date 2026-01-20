@@ -1,0 +1,323 @@
+<nav class="navbar-databird" role="navigation" aria-label="Navigation principale">
+  <div class="navbar-databird-content">
+    <!-- Brand/Logo -->
+    {%- if site.title-img -%}
+      <a class="navbar-databird-brand" href="{{ '/' | absolute_url }}" aria-label="Accueil">
+        <img src="{{ site.title-img | relative_url }}" alt="{{ site.title }} Logo">
+        <span>{{ site.title }}</span>
+      </a>
+    {%- elsif site.title -%}
+      <a class="navbar-databird-brand" href="{{ '/' | absolute_url }}" aria-label="Accueil">
+        {{ site.title }}
+      </a>
+    {%- endif -%}
+
+    <!-- Desktop Navigation -->
+    <ul class="navbar-databird-nav">
+      <li class="navbar-databird-nav-item">
+        <a href="{{ '/' | relative_url }}" class="navbar-databird-nav-link {% if page.url == '/' %}active{% endif %}" data-i18n="nav.home">
+          Accueil
+        </a>
+      </li>
+      
+      <!-- Categories Dropdown -->
+      <li class="navbar-databird-nav-item navbar-databird-dropdown">
+        <a href="#" class="navbar-databird-nav-link" aria-haspopup="true" aria-expanded="false" id="categories-dropdown-trigger" data-i18n="nav.categories">
+          Catégories
+          <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+        </a>
+        <ul class="navbar-databird-dropdown-menu" role="menu" id="categories-dropdown">
+          <li role="none">
+            <a href="/tags/data-analytics" class="navbar-databird-dropdown-item" role="menuitem">
+              <i class="fas fa-chart-bar" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Data Analytics
+            </a>
+          </li>
+          <li role="none">
+            <a href="/tags/data-science" class="navbar-databird-dropdown-item" role="menuitem">
+              <i class="fas fa-flask" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Data Science
+            </a>
+          </li>
+          <li role="none">
+            <a href="/tags/intelligence-artificielle" class="navbar-databird-dropdown-item" role="menuitem">
+              <i class="fas fa-robot" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Intelligence Artificielle
+            </a>
+          </li>
+          <li role="none">
+            <a href="/tags/data-engineering" class="navbar-databird-dropdown-item" role="menuitem">
+              <i class="fas fa-cogs" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Data Engineering
+            </a>
+          </li>
+          <li role="none">
+            <a href="/tags/business-intelligence" class="navbar-databird-dropdown-item" role="menuitem">
+              <i class="fas fa-briefcase" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Business Intelligence
+            </a>
+          </li>
+          <li role="separator" style="height: 1px; background: var(--db-border); margin: 0.5rem 0;"></li>
+          <li role="none">
+            <a href="/tags/" class="navbar-databird-dropdown-item" role="menuitem" style="font-weight: 600; color: var(--db-primary);" data-i18n="nav.allCategories">
+              <i class="fas fa-tags" style="margin-right: 0.5rem;"></i>
+              Toutes les catégories
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      {%- for link in site.navbar-links -%}
+        {%- if link[1].first %}
+          <li class="navbar-databird-nav-item navbar-databird-dropdown">
+            <a href="#" class="navbar-databird-nav-link" aria-haspopup="true" aria-expanded="false">
+              {{ link[0] }}
+              <i class="fas fa-chevron-down" style="font-size: 0.75rem;"></i>
+            </a>
+            <ul class="navbar-databird-dropdown-menu" role="menu">
+              {%- for childlink in link[1] -%}
+                {%- for linkparts in childlink %}
+                  <li role="none">
+                    <a href="{{ linkparts[1] | relative_url }}" class="navbar-databird-dropdown-item" role="menuitem">
+                      {{ linkparts[0] }}
+                    </a>
+                  </li>
+                {%- endfor -%}
+              {%- endfor %}
+            </ul>
+          </li>
+        {% else %}
+          <li class="navbar-databird-nav-item">
+            <a href="{{ link[1] | relative_url }}" class="navbar-databird-nav-link {% if page.url == link[1] %}active{% endif %}">
+              {{ link[0] }}
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      
+      <li class="navbar-databird-nav-item">
+        <a href="/tags/" class="navbar-databird-nav-link {% if page.url contains '/tags' %}active{% endif %}" data-i18n="nav.tags">
+          Tags
+        </a>
+      </li>
+      <li class="navbar-databird-nav-item">
+        <a href="#contact" class="navbar-databird-nav-link" data-i18n="nav.contact">
+          Contact
+        </a>
+      </li>
+    </ul>
+
+    <!-- Actions -->
+    <div class="navbar-databird-actions">
+      <!-- Search Button - Premier -->
+      <button class="navbar-search-button navbar-databird-search-btn" type="button" aria-label="Rechercher" data-search-trigger data-i18n-aria="nav.search">
+        <i class="fas fa-search"></i>
+        <span class="search-badge"></span>
+      </button>
+      
+      <!-- Theme Toggle - Light/Dark -->
+      <button class="navbar-theme-toggle" type="button" id="toggle-dark" aria-label="Changer de thème" aria-pressed="false">
+        <i class="fas fa-moon theme-toggle-icon"></i>
+      </button>
+      
+      <!-- Language Switcher -->
+      <div class="language-switcher" role="group" aria-label="Language selector">
+        <button type="button" data-lang="fr" aria-label="Français" aria-pressed="false">
+          <span>FR</span>
+        </button>
+        <button type="button" data-lang="en" aria-label="English" aria-pressed="false">
+          <span>EN</span>
+        </button>
+      </div>
+       
+      <!-- CTA Button -->
+      <a href="/about/" class="navbar-databird-cta" data-i18n="nav.about">
+        À propos
+        <i class="fas fa-arrow-right" style="font-size: 0.875rem;"></i>
+      </a>
+    </div>
+
+    <!-- Mobile Toggle -->
+    <button class="navbar-databird-toggle" id="mobile-menu-toggle" aria-label="Menu mobile" aria-expanded="false" data-i18n-aria="nav.menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="navbar-databird-mobile" id="mobile-menu">
+    <ul class="navbar-databird-mobile-nav">
+      <li>
+        <a href="{{ '/' | relative_url }}" class="navbar-databird-mobile-nav-link {% if page.url == '/' %}active{% endif %}" data-i18n="nav.home">
+          Accueil
+        </a>
+      </li>
+      
+      <li>
+        <a href="#" class="navbar-databird-mobile-nav-link mobile-categories-trigger" data-i18n="nav.categories">
+          Catégories
+          <i class="fas fa-chevron-down" style="float: right; margin-top: 0.25rem;"></i>
+        </a>
+        <ul class="navbar-databird-mobile-subnav" style="display: none;">
+          <li>
+            <a href="/tags/data-analytics" class="navbar-databird-mobile-nav-link" style="padding-left: 2rem;">
+              <i class="fas fa-chart-bar" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Data Analytics
+            </a>
+          </li>
+          <li>
+            <a href="/tags/data-science" class="navbar-databird-mobile-nav-link" style="padding-left: 2rem;">
+              <i class="fas fa-flask" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Data Science
+            </a>
+          </li>
+          <li>
+            <a href="/tags/intelligence-artificielle" class="navbar-databird-mobile-nav-link" style="padding-left: 2rem;">
+              <i class="fas fa-robot" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Intelligence Artificielle
+            </a>
+          </li>
+          <li>
+            <a href="/tags/data-engineering" class="navbar-databird-mobile-nav-link" style="padding-left: 2rem;">
+              <i class="fas fa-cogs" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Data Engineering
+            </a>
+          </li>
+          <li>
+            <a href="/tags/business-intelligence" class="navbar-databird-mobile-nav-link" style="padding-left: 2rem;">
+              <i class="fas fa-briefcase" style="margin-right: 0.5rem; color: var(--db-primary);"></i>
+              Business Intelligence
+            </a>
+          </li>
+          <li>
+            <a href="/tags/" class="navbar-databird-mobile-nav-link" style="padding-left: 2rem; font-weight: 600; color: var(--db-primary);" data-i18n="nav.allCategories">
+              <i class="fas fa-tags" style="margin-right: 0.5rem;"></i>
+              Toutes les catégories
+            </a>
+          </li>
+        </ul>
+      </li>
+      
+      {%- for link in site.navbar-links -%}
+        {%- if link[1].first %}
+          {%- for childlink in link[1] -%}
+            {%- for linkparts in childlink %}
+              <li>
+                <a href="{{ linkparts[1] | relative_url }}" class="navbar-databird-mobile-nav-link">
+                  {{ linkparts[0] }}
+                </a>
+              </li>
+            {%- endfor -%}
+          {%- endfor %}
+        {% else %}
+          <li>
+            <a href="{{ link[1] | relative_url }}" class="navbar-databird-mobile-nav-link {% if page.url == link[1] %}active{% endif %}">
+              {{ link[0] }}
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+      
+      <li>
+        <a href="/tags/" class="navbar-databird-mobile-nav-link {% if page.url contains '/tags' %}active{% endif %}" data-i18n="nav.tags">
+          Tags
+        </a>
+      </li>
+      <li>
+        <a href="#contact" class="navbar-databird-mobile-nav-link" data-i18n="nav.contact">
+          Contact
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+{% include search.html %}
+
+<script>
+// Mobile menu toggle
+document.addEventListener('DOMContentLoaded', function() {
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  
+  if (toggle && menu) {
+    toggle.addEventListener('click', function() {
+      toggle.classList.toggle('active');
+      menu.classList.toggle('active');
+      toggle.setAttribute('aria-expanded', toggle.classList.contains('active'));
+    });
+    
+    // Close on link click (except submenu triggers)
+    menu.querySelectorAll('a').forEach(link => {
+      if (!link.classList.contains('mobile-categories-trigger')) {
+        link.addEventListener('click', () => {
+          toggle.classList.remove('active');
+          menu.classList.remove('active');
+          toggle.setAttribute('aria-expanded', 'false');
+        });
+      }
+    });
+  }
+  
+  // Mobile categories submenu toggle
+  const mobileCategoriesTrigger = document.querySelector('.mobile-categories-trigger');
+  if (mobileCategoriesTrigger) {
+    mobileCategoriesTrigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      const subnav = this.nextElementSibling;
+      if (subnav) {
+        const isVisible = subnav.style.display === 'block';
+        subnav.style.display = isVisible ? 'none' : 'block';
+        const icon = this.querySelector('i');
+        if (icon) {
+          icon.style.transform = isVisible ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      }
+    });
+  }
+  
+  // Dropdown keyboard navigation
+  const dropdownTriggers = document.querySelectorAll('.navbar-databird-dropdown > .navbar-databird-nav-link');
+  dropdownTriggers.forEach(trigger => {
+    trigger.addEventListener('click', function(e) {
+      e.preventDefault();
+      const dropdown = this.nextElementSibling;
+      const isOpen = dropdown.classList.contains('show');
+      
+      // Close all dropdowns
+      document.querySelectorAll('.navbar-databird-dropdown-menu').forEach(menu => {
+        menu.classList.remove('show');
+      });
+      
+      // Toggle current dropdown
+      if (!isOpen) {
+        dropdown.classList.add('show');
+        this.setAttribute('aria-expanded', 'true');
+      } else {
+        this.setAttribute('aria-expanded', 'false');
+      }
+    });
+    
+    // Close on click outside
+    document.addEventListener('click', function(e) {
+      if (!trigger.contains(e.target) && !trigger.nextElementSibling.contains(e.target)) {
+        trigger.nextElementSibling.classList.remove('show');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+  
+  // Navbar scroll effect
+  const navbar = document.querySelector('.navbar-databird');
+  if (navbar) {
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 50) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    }, { passive: true });
+  }
+});
+</script>

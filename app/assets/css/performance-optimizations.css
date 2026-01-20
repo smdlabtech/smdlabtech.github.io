@@ -1,0 +1,183 @@
+/**
+ * Optimisations de Performance
+ * Optimisations CSS pour améliorer les performances
+ */
+
+/* ============================================
+   GPU Acceleration
+   ============================================ */
+
+/* Éléments animés avec GPU acceleration */
+.blog-card-databird,
+.featured-post-card,
+.topic-card-enhanced,
+.category-card,
+button,
+.btn,
+.navbar-databird-cta {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* ============================================
+   Containment CSS
+   ============================================ */
+
+/* Containment pour améliorer les performances de rendu */
+.blog-grid-databird,
+.featured-posts-grid,
+.topics-grid,
+.categories-grid {
+  contain: layout style paint;
+}
+
+/* ============================================
+   Lazy Loading Styles
+   ============================================ */
+
+/* Styles pour les images en lazy loading */
+img[loading="lazy"] {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+img[loading="lazy"].loaded {
+  opacity: 1;
+}
+
+/* Placeholder pour images en chargement */
+img[data-src] {
+  background: var(--ds-bg-secondary);
+  min-height: 200px;
+}
+
+/* ============================================
+   Content Visibility
+   ============================================ */
+
+/* Optimisation pour le contenu hors écran */
+.off-screen {
+  content-visibility: auto;
+  contain-intrinsic-size: 200px;
+}
+
+/* ============================================
+   Optimisation des Animations
+   ============================================ */
+
+/* Utilisation de transform et opacity pour de meilleures performances */
+@keyframes optimizedFadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Préférence pour les animations réduites */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ============================================
+   Optimisation des Fonts
+   ============================================ */
+
+/* Font-display pour améliorer le chargement */
+@font-face {
+  font-family: 'Optimized Font';
+  font-display: swap;
+}
+
+/* ============================================
+   Optimisation des Images
+   ============================================ */
+
+/* Images responsives avec srcset */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ============================================
+   Debounce Scroll Events
+   ============================================ */
+
+/* Styles pour réduire les recalculs lors du scroll */
+.sticky-element {
+  position: sticky;
+  top: 0;
+  will-change: transform;
+}
+
+/* ============================================
+   Optimisation des Selectors
+   ============================================ */
+
+/* Utilisation de classes simples pour de meilleures performances */
+.optimized-selector {
+  /* Préférer les classes simples aux sélecteurs complexes */
+}
+
+/* ============================================
+   Critical CSS Inline
+   ============================================ */
+
+/* Styles critiques pour le above-the-fold content */
+.hero-section-databird {
+  /* Styles critiques inline */
+}
+
+/* ============================================
+   Resource Hints
+   ============================================ */
+
+/* Preconnect pour les ressources externes */
+/* À ajouter dans le <head> */
+/*
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+*/
+
+/* ============================================
+   Optimisation des Media Queries
+   ============================================ */
+
+/* Media queries optimisées */
+@media (min-width: 768px) {
+  /* Styles pour tablette et desktop */
+}
+
+@media (min-width: 1024px) {
+  /* Styles pour desktop */
+}
+
+@media (min-width: 1280px) {
+  /* Styles pour large desktop */
+}
+
+/* ============================================
+   Optimisation des Transitions
+   ============================================ */
+
+/* Transitions optimisées avec transform et opacity */
+.optimized-transition {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Éviter les transitions sur width/height */
+.avoid-layout-transition {
+  /* Utiliser transform au lieu de width/height */
+}

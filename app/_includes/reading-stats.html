@@ -1,0 +1,23 @@
+<!-- Reading Stats -->
+<div class="reading-stats">
+  <div class="reading-stat">
+    <i class="far fa-clock"></i>
+    <span class="reading-time">Calcul en cours...</span>
+  </div>
+  {% if page.date %}
+  <div class="reading-stat">
+    <i class="far fa-calendar"></i>
+    <span>{{ page.date | date: "%d %B %Y" }}</span>
+  </div>
+  {% endif %}
+  {% if page.author %}
+  <div class="reading-stat">
+    <i class="far fa-user"></i>
+    <span>{{ page.author }}</span>
+  </div>
+  {% endif %}
+  <div class="reading-stat">
+    <i class="far fa-eye"></i>
+    <span class="view-count">0</span> vues
+  </div>
+</div>

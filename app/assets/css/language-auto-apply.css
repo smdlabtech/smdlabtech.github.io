@@ -1,0 +1,151 @@
+/**
+ * Language Auto-Apply Styles
+ * Styles pour l'application automatique de la langue
+ */
+
+/* ============================================
+   Language Indicator
+   ============================================ */
+[data-lang="fr"] body::before,
+[data-lang="en"] body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 4px;
+  height: 100vh;
+  background: var(--db-primary);
+  z-index: 10000;
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+[data-lang="en"] body::before {
+  background: var(--db-secondary);
+}
+
+/* ============================================
+   Translation Loading State
+   ============================================ */
+.translating {
+  opacity: 0.7;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.translated {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================
+   Language-Specific Typography
+   ============================================ */
+[data-lang="fr"] {
+  font-variant-numeric: normal;
+}
+
+[data-lang="en"] {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================
+   RTL Support (for future languages)
+   ============================================ */
+[dir="rtl"] {
+  direction: rtl;
+  text-align: right;
+}
+
+[dir="rtl"] .navbar-databird-nav {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .language-switcher {
+  flex-direction: row-reverse;
+}
+
+/* ============================================
+   Language Switcher Enhanced
+   ============================================ */
+.language-switcher {
+  position: relative;
+}
+
+.language-switcher::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--db-primary);
+  transition: width 0.3s ease;
+}
+
+.language-switcher:hover::after {
+  width: 100%;
+}
+
+/* ============================================
+   Translated Content Indicator
+   ============================================ */
+[data-i18n],
+[data-i18n-html],
+[data-i18n-aria],
+[data-i18n-placeholder],
+[data-i18n-title] {
+  transition: all 0.2s ease;
+}
+
+[data-i18n]:hover,
+[data-i18n-html]:hover {
+  outline: 1px dashed rgba(227, 30, 36, 0.3);
+  outline-offset: 2px;
+}
+
+/* Development mode only */
+body.dev-mode [data-i18n]:hover::after {
+  content: attr(data-i18n);
+  position: absolute;
+  background: var(--db-primary);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  z-index: 10000;
+  pointer-events: none;
+  margin-top: 0.5rem;
+}
+
+/* ============================================
+   Language-Specific Spacing
+   ============================================ */
+[data-lang="fr"] {
+  letter-spacing: 0;
+}
+
+[data-lang="en"] {
+  letter-spacing: 0.01em;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  [data-lang]::before {
+    display: none;
+  }
+  
+  .language-switcher {
+    display: none;
+  }
+}

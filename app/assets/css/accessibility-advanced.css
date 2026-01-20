@@ -1,0 +1,392 @@
+/**
+ * Accessibilité Avancée
+ * Améliorations d'accessibilité avancées pour WCAG 2.1 AAA
+ */
+
+/* ============================================
+   High Contrast Mode
+   ============================================ */
+
+@media (prefers-contrast: high) {
+  :root {
+    --ds-primary: #000000;
+    --ds-text: #000000;
+    --ds-bg: #FFFFFF;
+    --ds-border: #000000;
+  }
+  
+  .dark-mode {
+    --ds-primary: #FFFFFF;
+    --ds-text: #FFFFFF;
+    --ds-bg: #000000;
+    --ds-border: #FFFFFF;
+  }
+  
+  * {
+    border-width: 2px !important;
+  }
+  
+  button,
+  .btn,
+  a {
+    text-decoration: underline;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .parallax,
+  .parallax-element {
+    transform: none !important;
+  }
+}
+
+/* ============================================
+   Focus Management
+   ============================================ */
+
+/* Focus visible amélioré */
+*:focus-visible {
+  outline: 3px solid var(--ds-primary);
+  outline-offset: 3px;
+  border-radius: var(--ds-radius-sm);
+  box-shadow: 0 0 0 1px var(--ds-bg), 0 0 0 4px var(--ds-primary);
+}
+
+/* Focus trap pour modals */
+.focus-trap-start,
+.focus-trap-end {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ============================================
+   Skip Links
+   ============================================ */
+
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--ds-primary);
+  color: white;
+  padding: var(--ds-spacing-3) var(--ds-spacing-6);
+  text-decoration: none;
+  border-radius: 0 0 var(--ds-radius-md) 0;
+  z-index: var(--ds-z-tooltip);
+  font-weight: var(--ds-font-weight-semibold);
+  transition: top var(--ds-transition-base);
+}
+
+.skip-link:focus {
+  top: 0;
+  outline: 3px solid var(--ds-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   ARIA Live Regions
+   ============================================ */
+
+.aria-live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.aria-live[aria-live="polite"],
+.aria-live[aria-live="assertive"] {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: var(--ds-spacing-2);
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================
+   Screen Reader Only
+   ============================================ */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: var(--ds-spacing-2);
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================
+   Keyboard Navigation
+   ============================================ */
+
+/* Amélioration de la navigation au clavier */
+.keyboard-nav *:focus {
+  outline: 3px solid var(--ds-primary);
+  outline-offset: 3px;
+}
+
+/* Indicateur de focus pour les éléments interactifs */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid var(--ds-primary);
+  outline-offset: 3px;
+  border-radius: var(--ds-radius-sm);
+}
+
+/* ============================================
+   Color Contrast
+   ============================================ */
+
+/* Vérification du contraste pour les textes */
+.text-low-contrast {
+  color: var(--ds-text-muted);
+}
+
+/* Amélioration du contraste pour les liens */
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+a:focus,
+a:hover {
+  text-decoration-thickness: 2px;
+}
+
+/* ============================================
+   Form Accessibility
+   ============================================ */
+
+/* Labels obligatoires visuellement */
+label.required::after {
+  content: ' *';
+  color: var(--ds-error);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+/* Messages d'erreur accessibles */
+.error-message {
+  color: var(--ds-error);
+  font-size: var(--ds-font-size-sm);
+  margin-top: var(--ds-spacing-1);
+  display: block;
+}
+
+.error-message::before {
+  content: '⚠️ ';
+  aria-label: 'Erreur: ';
+}
+
+/* Champs en erreur */
+input.error,
+textarea.error,
+select.error {
+  border-color: var(--ds-error);
+  border-width: 2px;
+}
+
+input.error:focus,
+textarea.error:focus,
+select.error:focus {
+  outline-color: var(--ds-error);
+  box-shadow: 0 0 0 3px var(--ds-error-light);
+}
+
+/* ============================================
+   Image Accessibility
+   ============================================ */
+
+/* Images sans alt */
+img:not([alt]) {
+  border: 2px dashed var(--ds-error);
+  opacity: 0.7;
+}
+
+/* Images décoratives */
+img[role="presentation"],
+img[alt=""] {
+  border: none;
+}
+
+/* ============================================
+   Table Accessibility
+   ============================================ */
+
+table {
+  caption-side: top;
+}
+
+table caption {
+  font-weight: var(--ds-font-weight-bold);
+  margin-bottom: var(--ds-spacing-2);
+  text-align: left;
+}
+
+/* Headers de table accessibles */
+th[scope="col"],
+th[scope="row"] {
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+/* ============================================
+   Landmark Regions
+   ============================================ */
+
+main {
+  outline: none;
+}
+
+main:focus {
+  outline: 2px dashed var(--ds-primary);
+  outline-offset: var(--ds-spacing-2);
+}
+
+/* ============================================
+   Loading States Accessibles
+   ============================================ */
+
+.loading-announcement {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.loading-announcement[aria-live="polite"] {
+  position: static;
+  width: auto;
+  height: auto;
+  padding: var(--ds-spacing-2);
+  margin: 0;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* ============================================
+   Touch Target Sizes
+   ============================================ */
+
+/* Taille minimale des zones tactiles (44x44px) */
+button,
+.btn,
+a.btn,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+.navbar-databird-nav-link,
+.filter-tag {
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--ds-spacing-3) var(--ds-spacing-4);
+}
+
+/* ============================================
+   Text Size
+   ============================================ */
+
+/* Support pour le zoom jusqu'à 200% */
+@media (min-width: 1280px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* ============================================
+   Print Accessibility
+   ============================================ */
+
+@media print {
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.8em;
+    color: #666;
+  }
+  
+  a[href^="#"]::after {
+    content: "";
+  }
+  
+  /* Afficher les URLs pour l'accessibilité */
+  .print-urls a::after {
+    content: " (" attr(href) ")";
+  }
+}
+
+/* ============================================
+   Dark Mode Accessibility
+   ============================================ */
+
+.dark-mode {
+  /* Amélioration du contraste en dark mode */
+  --ds-text: #F1F5F9;
+  --ds-text-secondary: #CBD5E1;
+  --ds-border: #475569;
+}
+
+/* ============================================
+   Animation Controls
+   ============================================ */
+
+/* Contrôle des animations */
+.pause-animations * {
+  animation-play-state: paused !important;
+}
+
+.reduce-animations * {
+  animation-duration: 0.01ms !important;
+  transition-duration: 0.01ms !important;
+}

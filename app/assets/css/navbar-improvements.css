@@ -1,0 +1,250 @@
+/**
+ * Navbar Improvements CSS
+ * Améliorations de la barre de navigation
+ */
+
+/* ============================================
+   Navbar Enhanced - DataBird Style
+   ============================================ */
+.navbar-custom {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.98) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  border-bottom: 1px solid var(--db-border, #e5e7eb);
+  padding: 1rem 0;
+}
+
+.dark-mode .navbar-custom {
+  background: rgba(15, 23, 42, 0.98) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  border-bottom-color: var(--db-border, #334155);
+}
+
+/* Navbar on Scroll */
+.navbar-custom.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.dark-mode .navbar-custom.scrolled {
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* ============================================
+   Navbar Brand Enhanced
+   ============================================ */
+.navbar-brand {
+  font-weight: 600;
+  font-size: 1.25rem;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+  color: var(--color-text-primary, #212529) !important;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
+.dark-mode .navbar-brand {
+  color: #eee !important;
+}
+
+.navbar-brand-logo img {
+  height: 40px;
+  transition: transform 0.2s ease;
+}
+
+.navbar-brand-logo:hover img {
+  transform: scale(1.1);
+}
+
+/* ============================================
+   Nav Links Enhanced
+   ============================================ */
+.navbar-nav .nav-link {
+  position: relative;
+  padding: 0.5rem 1.25rem !important;
+  font-weight: 600;
+  color: var(--db-text, #1a1a1a) !important;
+  transition: color 0.2s ease;
+  font-size: 0.9375rem;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2.5px;
+  background: var(--db-primary, #E31E24);
+  transform: translateX(-50%);
+  transition: width 0.2s ease;
+  border-radius: 2px;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link:focus,
+.navbar-nav .nav-link.active {
+  color: var(--db-primary, #E31E24) !important;
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link:focus::after,
+.navbar-nav .nav-link.active::after {
+  width: 70%;
+}
+
+.dark-mode .navbar-nav .nav-link {
+  color: #eee !important;
+}
+
+.dark-mode .navbar-nav .nav-link:hover,
+.dark-mode .navbar-nav .nav-link:focus {
+  color: var(--color-link, #008AFF) !important;
+}
+
+/* ============================================
+   Dropdown Enhanced
+   ============================================ */
+.dropdown-menu {
+  border: 1px solid var(--color-border, #dee2e6);
+  border-radius: var(--radius-md, 0.5rem);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.dark-mode .dropdown-menu {
+  background: #2d2d2d;
+  border-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.dropdown-item {
+  padding: 0.5rem 1.5rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover,
+.dropdown-item:focus {
+  background: var(--color-bg-secondary, #f8f9fa);
+  color: var(--color-link, #008AFF);
+}
+
+.dark-mode .dropdown-item:hover,
+.dark-mode .dropdown-item:focus {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-link, #008AFF);
+}
+
+/* ============================================
+   Search Icon Enhanced
+   ============================================ */
+#nav-search-link {
+  position: relative;
+}
+
+#nav-search-icon {
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+#nav-search-link:hover #nav-search-icon {
+  transform: scale(1.2);
+  color: var(--color-link, #008AFF);
+}
+
+/* ============================================
+   Navbar Toggler Enhanced
+   ============================================ */
+.navbar-toggler {
+  border: 1px solid var(--color-border, #dee2e6);
+  border-radius: var(--radius-sm, 0.25rem);
+  padding: 0.375rem 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.navbar-toggler:hover,
+.navbar-toggler:focus {
+  border-color: var(--color-link, #008AFF);
+  box-shadow: 0 0 0 3px rgba(0, 138, 255, 0.1);
+  outline: none;
+}
+
+.navbar-toggler-icon {
+  transition: transform 0.3s ease;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  transform: rotate(90deg);
+}
+
+/* ============================================
+   Avatar Enhanced
+   ============================================ */
+.avatar-container {
+  position: relative;
+}
+
+.avatar-img {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 50%;
+}
+
+.avatar-img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px rgba(0, 138, 255, 0.3);
+}
+
+.avatar-img-border {
+  border: 2px solid var(--color-border, #dee2e6);
+  border-radius: 50%;
+  padding: 2px;
+  transition: border-color 0.2s ease;
+}
+
+.avatar-img-border:hover {
+  border-color: var(--color-link, #008AFF);
+}
+
+/* ============================================
+   Responsive Improvements
+   ============================================ */
+@media (max-width: 1199px) {
+  .navbar-nav {
+    padding-top: 1rem;
+  }
+  
+  .navbar-toggles {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--color-border, #dee2e6);
+  }
+  
+  .dark-mode .navbar-toggles {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand {
+    font-size: 1.1rem;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 0.75rem 1rem !important;
+  }
+}
+
+/* ============================================
+   Smooth Transitions
+   ============================================ */
+.navbar-custom,
+.navbar-brand,
+.navbar-nav .nav-link,
+.theme-toggle {
+  will-change: transform, opacity;
+}

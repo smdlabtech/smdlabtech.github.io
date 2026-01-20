@@ -1,0 +1,27 @@
+{
+  "name": "Daya's Blog - Data Science & AI",
+  "short_name": "Daya's Blog",
+  "description": "Blog dédié à la Data Science, Business Intelligence et Intelligence Artificielle",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#008AFF",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/assets/img/avatar-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/img/avatar-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["education", "technology", "blog"],
+  "lang": "fr",
+  "dir": "ltr"
+}

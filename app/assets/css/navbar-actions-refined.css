@@ -1,0 +1,262 @@
+/**
+ * Navbar Actions Refined
+ * Styles raffinés pour les actions de la navbar
+ */
+
+/* ============================================
+   Navbar Actions Container
+   ============================================ */
+.navbar-databird-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+/* ============================================
+   Language Switcher in Navbar
+   ============================================ */
+.navbar-databird-actions .language-switcher {
+  margin: 0;
+  order: 1;
+}
+
+/* ============================================
+   Search Button - Synchronisé avec Language Switcher
+   ============================================ */
+.navbar-search-button,
+.navbar-databird-search-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid var(--ds-primary);
+  background: white;
+  color: var(--ds-primary);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+  order: 2;
+}
+
+.navbar-search-button::before,
+.navbar-databird-search-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(227, 30, 36, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.navbar-search-button:hover::before,
+.navbar-databird-search-btn:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.navbar-search-button:hover,
+.navbar-databird-search-btn:hover {
+  background: rgba(227, 30, 36, 0.05);
+  color: var(--ds-primary);
+  border-color: var(--ds-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(227, 30, 36, 0.2);
+}
+
+.navbar-search-button:active,
+.navbar-databird-search-btn:active {
+  transform: translateY(0);
+  background: rgba(227, 30, 36, 0.1);
+}
+
+.navbar-search-button i,
+.navbar-databird-search-btn i {
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  color: inherit;
+}
+
+.navbar-search-button .search-badge,
+.navbar-databird-search-btn .search-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  width: 8px;
+  height: 8px;
+  background: var(--db-primary);
+  border-radius: 50%;
+  border: 2px solid white;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navbar-search-button.has-results .search-badge,
+.navbar-databird-search-btn.has-results .search-badge {
+  opacity: 1;
+}
+
+.navbar-search-button:focus-visible,
+.navbar-databird-search-btn:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   CTA Button
+   ============================================ */
+.navbar-databird-cta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background: var(--db-primary);
+  color: white;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  order: 3;
+  white-space: nowrap;
+}
+
+.navbar-databird-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.navbar-databird-cta:hover {
+  background: rgba(227, 30, 36, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(227, 30, 36, 0.4);
+}
+
+.navbar-databird-cta:hover::before {
+  opacity: 1;
+}
+
+.navbar-databird-cta:active {
+  transform: translateY(0);
+}
+
+.navbar-databird-cta i {
+  transition: transform 0.3s ease;
+}
+
+.navbar-databird-cta:hover i {
+  transform: translateX(2px);
+}
+
+.navbar-databird-cta:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 992px) {
+  .navbar-databird-actions {
+    gap: 0.5rem;
+  }
+  
+  .navbar-databird-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+  
+  .navbar-search-button,
+  .navbar-databird-search-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-databird-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin: 0.5rem 0 0 0;
+    padding-top: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .navbar-databird-actions .language-switcher {
+    width: 100%;
+    justify-content: center;
+    margin: 0;
+  }
+  
+  .navbar-search-button,
+  .navbar-databird-search-btn {
+    order: 2;
+  }
+  
+  .navbar-databird-cta {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ============================================
+   Dark Mode - Synchronisé avec Language Switcher
+   ============================================ */
+.dark-mode .navbar-search-button,
+.dark-mode .navbar-databird-search-btn {
+  background: white;
+  color: var(--ds-primary);
+  border-color: var(--ds-primary);
+}
+
+.dark-mode .navbar-search-button:hover,
+.dark-mode .navbar-databird-search-btn:hover {
+  background: rgba(227, 30, 36, 0.05);
+  color: var(--ds-primary);
+  border-color: var(--ds-primary);
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+.navbar-search-button[aria-label],
+.navbar-databird-search-btn[aria-label] {
+  /* Ensure screen readers can identify the button */
+}
+
+.navbar-databird-cta:focus-visible,
+.navbar-search-button:focus-visible,
+.navbar-databird-search-btn:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .navbar-databird-actions {
+    display: none;
+  }
+}

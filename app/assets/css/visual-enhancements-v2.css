@@ -1,0 +1,719 @@
+/**
+ * Améliorations Visuelles V2
+ * Améliorations visuelles avancées pour une expérience exceptionnelle
+ */
+
+/* ============================================
+   Glassmorphism Effects
+   ============================================ */
+
+.glass-effect {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.dark-mode .glass-effect {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================
+   Gradient Text Effects
+   ============================================ */
+
+.gradient-text {
+  background: linear-gradient(
+    135deg,
+    var(--ds-primary) 0%,
+    #FF6B6B 25%,
+    #4ECDC4 50%,
+    #45B7D1 75%,
+    var(--ds-primary) 100%
+  );
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: gradientShift 8s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* ============================================
+   Neumorphism Effects
+   ============================================ */
+
+.neumorphism {
+  background: var(--ds-bg);
+  border-radius: var(--ds-radius-xl);
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.1),
+    -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode .neumorphism {
+  box-shadow: 
+    8px 8px 16px rgba(0, 0, 0, 0.5),
+    -8px -8px 16px rgba(255, 255, 255, 0.05);
+}
+
+.neumorphism-inset {
+  background: var(--ds-bg);
+  border-radius: var(--ds-radius-xl);
+  box-shadow: 
+    inset 8px 8px 16px rgba(0, 0, 0, 0.1),
+    inset -8px -8px 16px rgba(255, 255, 255, 0.8);
+}
+
+/* ============================================
+   Animated Backgrounds
+   ============================================ */
+
+.animated-bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.animated-bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(227, 30, 36, 0.1) 50%,
+    transparent 70%
+  );
+  animation: bgMove 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes bgMove {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  100% {
+    transform: translate(50%, 50%) rotate(360deg);
+  }
+}
+
+/* ============================================
+   Floating Elements
+   ============================================ */
+
+.floating {
+  animation: floating 3s ease-in-out infinite;
+}
+
+@keyframes floating {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.floating-delayed {
+  animation: floating 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* ============================================
+   Parallax Effects
+   ============================================ */
+
+.parallax-container {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+}
+
+.parallax-element {
+  position: absolute;
+  width: 100%;
+  height: 120%;
+  will-change: transform;
+}
+
+/* ============================================
+   3D Transform Effects
+   ============================================ */
+
+.card-3d {
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  transition: transform var(--ds-transition-base);
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg);
+}
+
+/* ============================================
+   Morphing Shapes
+   ============================================ */
+
+.morphing-shape {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: morphing 8s ease-in-out infinite;
+  background: linear-gradient(135deg, var(--ds-primary), var(--ds-secondary));
+  opacity: 0.1;
+}
+
+@keyframes morphing {
+  0%, 100% {
+    border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  }
+  25% {
+    border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+  }
+  50% {
+    border-radius: 50% 50% 50% 50% / 50% 50% 50% 50%;
+  }
+  75% {
+    border-radius: 70% 30% 60% 40% / 40% 60% 30% 70%;
+  }
+}
+
+/* ============================================
+   Particle Effects
+   ============================================ */
+
+.particles-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: var(--ds-primary);
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: particleFloat 10s linear infinite;
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(100vh) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-100vh) translateX(100px);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Glitch Effect
+   ============================================ */
+
+.glitch {
+  position: relative;
+  color: var(--ds-text);
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 var(--ds-primary);
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 var(--ds-secondary), 2px 2px var(--ds-primary);
+  animation: glitch-anim2 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitch-anim {
+  0% {
+    clip: rect(31px, 9999px, 94px, 0);
+    transform: skew(0.5deg);
+  }
+  5% {
+    clip: rect(75px, 9999px, 53px, 0);
+    transform: skew(0.5deg);
+  }
+  10% {
+    clip: rect(58px, 9999px, 99px, 0);
+    transform: skew(0.5deg);
+  }
+  15% {
+    clip: rect(30px, 9999px, 87px, 0);
+    transform: skew(0.5deg);
+  }
+  20% {
+    clip: rect(89px, 9999px, 96px, 0);
+    transform: skew(0.5deg);
+  }
+  25% {
+    clip: rect(23px, 9999px, 89px, 0);
+    transform: skew(0.5deg);
+  }
+  30% {
+    clip: rect(19px, 9999px, 10px, 0);
+    transform: skew(0.5deg);
+  }
+  35% {
+    clip: rect(11px, 9999px, 14px, 0);
+    transform: skew(0.5deg);
+  }
+  40% {
+    clip: rect(88px, 9999px, 6px, 0);
+    transform: skew(0.5deg);
+  }
+  45% {
+    clip: rect(95px, 9999px, 66px, 0);
+    transform: skew(0.5deg);
+  }
+  50% {
+    clip: rect(90px, 9999px, 79px, 0);
+    transform: skew(0.5deg);
+  }
+  55% {
+    clip: rect(54px, 9999px, 50px, 0);
+    transform: skew(0.5deg);
+  }
+  60% {
+    clip: rect(10px, 9999px, 81px, 0);
+    transform: skew(0.5deg);
+  }
+  65% {
+    clip: rect(70px, 9999px, 98px, 0);
+    transform: skew(0.5deg);
+  }
+  70% {
+    clip: rect(8px, 9999px, 95px, 0);
+    transform: skew(0.5deg);
+  }
+  75% {
+    clip: rect(14px, 9999px, 79px, 0);
+    transform: skew(0.5deg);
+  }
+  80% {
+    clip: rect(60px, 9999px, 92px, 0);
+    transform: skew(0.5deg);
+  }
+  85% {
+    clip: rect(23px, 9999px, 30px, 0);
+    transform: skew(0.5deg);
+  }
+  90% {
+    clip: rect(19px, 9999px, 24px, 0);
+    transform: skew(0.5deg);
+  }
+  95% {
+    clip: rect(90px, 9999px, 100px, 0);
+    transform: skew(0.5deg);
+  }
+  100% {
+    clip: rect(80px, 9999px, 69px, 0);
+    transform: skew(0.5deg);
+  }
+}
+
+@keyframes glitch-anim2 {
+  0% {
+    clip: rect(65px, 9999px, 100px, 0);
+    transform: skew(0.5deg);
+  }
+  5% {
+    clip: rect(96px, 9999px, 34px, 0);
+    transform: skew(0.5deg);
+  }
+  10% {
+    clip: rect(64px, 9999px, 90px, 0);
+    transform: skew(0.5deg);
+  }
+  15% {
+    clip: rect(33px, 9999px, 86px, 0);
+    transform: skew(0.5deg);
+  }
+  20% {
+    clip: rect(79px, 9999px, 13px, 0);
+    transform: skew(0.5deg);
+  }
+  25% {
+    clip: rect(17px, 9999px, 37px, 0);
+    transform: skew(0.5deg);
+  }
+  30% {
+    clip: rect(55px, 9999px, 53px, 0);
+    transform: skew(0.5deg);
+  }
+  35% {
+    clip: rect(10px, 9999px, 83px, 0);
+    transform: skew(0.5deg);
+  }
+  40% {
+    clip: rect(58px, 9999px, 97px, 0);
+    transform: skew(0.5deg);
+  }
+  45% {
+    clip: rect(23px, 9999px, 30px, 0);
+    transform: skew(0.5deg);
+  }
+  50% {
+    clip: rect(19px, 9999px, 24px, 0);
+    transform: skew(0.5deg);
+  }
+  55% {
+    clip: rect(90px, 9999px, 100px, 0);
+    transform: skew(0.5deg);
+  }
+  60% {
+    clip: rect(80px, 9999px, 69px, 0);
+    transform: skew(0.5deg);
+  }
+  65% {
+    clip: rect(65px, 9999px, 100px, 0);
+    transform: skew(0.5deg);
+  }
+  70% {
+    clip: rect(96px, 9999px, 34px, 0);
+    transform: skew(0.5deg);
+  }
+  75% {
+    clip: rect(64px, 9999px, 90px, 0);
+    transform: skew(0.5deg);
+  }
+  80% {
+    clip: rect(33px, 9999px, 86px, 0);
+    transform: skew(0.5deg);
+  }
+  85% {
+    clip: rect(79px, 9999px, 13px, 0);
+    transform: skew(0.5deg);
+  }
+  90% {
+    clip: rect(17px, 9999px, 37px, 0);
+    transform: skew(0.5deg);
+  }
+  95% {
+    clip: rect(55px, 9999px, 53px, 0);
+    transform: skew(0.5deg);
+  }
+  100% {
+    clip: rect(10px, 9999px, 83px, 0);
+    transform: skew(0.5deg);
+  }
+}
+
+/* ============================================
+   Text Reveal Animation
+   ============================================ */
+
+.text-reveal {
+  position: relative;
+  overflow: hidden;
+}
+
+.text-reveal::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--ds-bg);
+  transform: translateX(-100%);
+  animation: textReveal 1s ease-out forwards;
+}
+
+@keyframes textReveal {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* ============================================
+   Split Text Animation
+   ============================================ */
+
+.split-text {
+  display: inline-block;
+}
+
+.split-text span {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: splitTextReveal 0.6s ease-out forwards;
+}
+
+.split-text span:nth-child(1) { animation-delay: 0.1s; }
+.split-text span:nth-child(2) { animation-delay: 0.2s; }
+.split-text span:nth-child(3) { animation-delay: 0.3s; }
+.split-text span:nth-child(4) { animation-delay: 0.4s; }
+.split-text span:nth-child(5) { animation-delay: 0.5s; }
+
+@keyframes splitTextReveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Magnetic Hover Effect
+   ============================================ */
+
+.magnetic {
+  transition: transform var(--ds-transition-base);
+  will-change: transform;
+}
+
+/* JavaScript required for full magnetic effect */
+
+/* ============================================
+   Cursor Effects
+   ============================================ */
+
+.custom-cursor {
+  cursor: none;
+}
+
+.custom-cursor-dot {
+  position: fixed;
+  width: 8px;
+  height: 8px;
+  background: var(--ds-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease;
+}
+
+.custom-cursor-outline {
+  position: fixed;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--ds-primary);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: all 0.15s ease;
+}
+
+.custom-cursor-outline.hover {
+  width: 60px;
+  height: 60px;
+  background: rgba(227, 30, 36, 0.1);
+}
+
+/* ============================================
+   Scroll Progress Indicator
+   ============================================ */
+
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--ds-primary),
+    var(--ds-secondary)
+  );
+  z-index: 10000;
+  transition: width 0.1s ease;
+}
+
+/* ============================================
+   Reading Progress Bar
+   ============================================ */
+
+.reading-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 4px;
+  background: var(--ds-primary);
+  z-index: 10000;
+  box-shadow: 0 0 10px rgba(227, 30, 36, 0.5);
+}
+
+/* ============================================
+   Backdrop Blur Effects
+   ============================================ */
+
+.backdrop-blur {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.8);
+}
+
+.dark-mode .backdrop-blur {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+/* ============================================
+   Gradient Borders
+   ============================================ */
+
+.gradient-border {
+  position: relative;
+  background: var(--ds-bg);
+  border-radius: var(--ds-radius-lg);
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--ds-primary), var(--ds-secondary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+/* ============================================
+   Shimmer Effect
+   ============================================ */
+
+.shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* ============================================
+   Holographic Effect
+   ============================================ */
+
+.holographic {
+  background: linear-gradient(
+    135deg,
+    #ff006e 0%,
+    #8338ec 25%,
+    #3a86ff 50%,
+    #06ffa5 75%,
+    #ffbe0b 100%
+  );
+  background-size: 400% 400%;
+  animation: holographic 8s ease infinite;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes holographic {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 768px) {
+  .parallax-container {
+    height: 50vh;
+  }
+  
+  .card-3d:hover {
+    transform: none;
+  }
+  
+  .custom-cursor,
+  .custom-cursor-dot,
+  .custom-cursor-outline {
+    display: none;
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .floating,
+  .floating-delayed,
+  .morphing-shape,
+  .particle,
+  .glitch::before,
+  .glitch::after,
+  .text-reveal::before,
+  .split-text span,
+  .shimmer::after {
+    animation: none !important;
+  }
+  
+  .gradient-text,
+  .holographic {
+    animation: none !important;
+    background: var(--ds-primary);
+    -webkit-text-fill-color: var(--ds-primary);
+    color: var(--ds-primary);
+  }
+}

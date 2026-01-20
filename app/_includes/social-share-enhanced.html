@@ -1,0 +1,87 @@
+{% assign page_url = page.url | absolute_url %}
+{% assign page_title = page.title | default: site.title | url_encode %}
+{% assign page_description = page.excerpt | default: page.description | default: site.description | url_encode %}
+
+<div class="social-share-enhanced">
+  <span class="social-share-label">Partager :</span>
+  
+  <a 
+    href="https://twitter.com/intent/tweet?url={{ page_url }}&text={{ page_title }}"
+    class="social-share-button social-share-button-twitter"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Partager sur Twitter"
+    data-tooltip-enhanced="Partager sur Twitter"
+  >
+    <i class="fab fa-twitter"></i>
+  </a>
+  
+  <a 
+    href="https://www.facebook.com/sharer/sharer.php?u={{ page_url }}"
+    class="social-share-button social-share-button-facebook"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Partager sur Facebook"
+    data-tooltip-enhanced="Partager sur Facebook"
+  >
+    <i class="fab fa-facebook-f"></i>
+  </a>
+  
+  <a 
+    href="https://www.linkedin.com/shareArticle?mini=true&url={{ page_url }}&title={{ page_title }}&summary={{ page_description }}"
+    class="social-share-button social-share-button-linkedin"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Partager sur LinkedIn"
+    data-tooltip-enhanced="Partager sur LinkedIn"
+  >
+    <i class="fab fa-linkedin-in"></i>
+  </a>
+  
+  <a 
+    href="https://wa.me/?text={{ page_title }}%20{{ page_url }}"
+    class="social-share-button social-share-button-whatsapp"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Partager sur WhatsApp"
+    data-tooltip-enhanced="Partager sur WhatsApp"
+  >
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <a 
+    href="mailto:?subject={{ page_title }}&body={{ page_url }}"
+    class="social-share-button social-share-button-email"
+    aria-label="Partager par email"
+    data-tooltip-enhanced="Partager par email"
+  >
+    <i class="fas fa-envelope"></i>
+  </a>
+  
+  <button 
+    class="social-share-button social-share-button-copy"
+    onclick="copyToClipboard('{{ page_url }}', this)"
+    aria-label="Copier le lien"
+    data-tooltip-enhanced="Copier le lien"
+  >
+    <i class="fas fa-link"></i>
+  </button>
+</div>
+
+<script>
+function copyToClipboard(text, button) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(text).then(() => {
+      const icon = button.querySelector('i');
+      const originalClass = icon.className;
+      icon.className = 'fas fa-check';
+      button.classList.add('copied');
+      
+      setTimeout(() => {
+        icon.className = originalClass;
+        button.classList.remove('copied');
+      }, 2000);
+    });
+  }
+}
+</script>
