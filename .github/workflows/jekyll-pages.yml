@@ -51,7 +51,9 @@ jobs:
       - name: Build Jekyll site
         working-directory: app
         run: |
+          echo "🔨 Building Jekyll site from app/ directory..."
           bundle exec jekyll build
+          echo "✅ Build completed successfully"
         env:
           JEKYLL_ENV: production
 
