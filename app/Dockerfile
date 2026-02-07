@@ -1,5 +1,5 @@
 # Multi-stage build pour optimiser la taille de l'image
-FROM python:3.11-slim as builder
+FROM python:3.11-slim AS builder
 
 # Variables d'environnement
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -57,4 +57,3 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
 # Commande de démarrage avec Gunicorn
 # Note: run.py crée l'app via create_app()
 CMD ["gunicorn", "--config", "src/gunicorn_config.py", "--pythonpath", "/app", "run:app"]
-

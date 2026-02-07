@@ -200,12 +200,14 @@ jobs:
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
+      # Image sous namespace de l'actor pour éviter "Create organization package" sur GHCR.
+      # Cloud Run : rendre le package public (GitHub Packages > smdlabtech.github.io).
       - name: Extract metadata
         id: meta
         uses: docker/metadata-action@v5
         with:
           images: |
-            ghcr.io/${{ github.repository }}
+            ghcr.io/${{ github.actor }}/smdlabtech.github.io
           tags: |
             type=sha,prefix=
             type=ref,event=branch
@@ -233,7 +235,7 @@ jobs:
       - name: Scan image for vulnerabilities
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: ghcr.io/${{ github.repository }}:${{ github.sha }}
+          image-ref: ghcr.io/${{ github.actor }}/smdlabtech.github.io:${{ github.sha }}
           format: 'sarif'
           output: 'trivy-results.sarif'
         continue-on-error: true
@@ -297,7 +299,7 @@ jobs:
       - name: Deploy to Cloud Run
         id: deploy
         run: |
-          IMAGE="ghcr.io/${{ github.repository }}:${{ github.sha }}"
+          IMAGE="ghcr.io/${{ github.actor }}/smdlabtech.github.io:${{ github.sha }}"
 
           gcloud run deploy ${{ env.SERVICE_NAME }} \
             --image="${IMAGE}" \
