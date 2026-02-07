@@ -2,6 +2,9 @@
 layout: base
 ---
 
+<!-- Read progress bar -->
+<div class="read-progress-bar" id="read-progress" role="presentation" aria-hidden="true"></div>
+
 <!-- Post Header -->
 <section class="post-header-databird">
   <div class="post-header-content">
@@ -9,24 +12,24 @@ layout: base
       <a href="{{ '/' | relative_url }}">Blog</a>
       <span class="post-breadcrumb-separator">></span>
       {% if page.tags.size > 0 %}
-        <a href="/tags/{{ page.tags[0] | slugify }}">{{ page.tags[0] }}</a>
+        <a href="/tags/#{{ page.tags[0] | slugify }}">{{ page.tags[0] }}</a>
         <span class="post-breadcrumb-separator">></span>
       {% endif %}
       <span>{{ page.title }}</span>
     </nav>
-    
+
     {% if page.tags.size > 0 %}
       <div class="post-category-badge">
-        <a href="/tags/{{ page.tags[0] | slugify }}">{{ page.tags[0] }}</a>
+        <a href="/tags/#{{ page.tags[0] | slugify }}">{{ page.tags[0] }}</a>
       </div>
     {% endif %}
-    
+
     <h1 class="post-title-databird">{{ page.title }}</h1>
-    
+
     {% if page.subtitle or page.excerpt %}
       <p class="post-subtitle-databird">{{ page.subtitle | default: page.excerpt | strip_html | truncatewords: 30 }}</p>
     {% endif %}
-    
+
     <div class="post-meta-databird">
       {% if page.author %}
         <div class="post-meta-item">
@@ -34,8 +37,13 @@ layout: base
         </div>
       {% endif %}
       <div class="post-meta-item">
-        <span class="post-meta-label">Mis à jour le</span>
         <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%-d/%-m/%Y" }}</time>
+      </div>
+      {% assign words = page.content | strip_html | number_of_words %}
+      {% assign read_time = words | divided_by: 200 %}{% if read_time < 1 %}{% assign read_time = 1 %}{% endif %}
+      <div class="post-meta-item post-meta-readtime">
+        <i class="far fa-clock" aria-hidden="true"></i>
+        <span>{{ read_time }} min de lecture</span>
       </div>
     </div>
   </div>
@@ -51,10 +59,10 @@ layout: base
 <!-- Post Content -->
 <div class="post-content-wrapper-databird">
   <div class="post-content-main">
-    <article class="post-content-databird">
+    <article class="post-content-databird prose">
       {{ content }}
     </article>
-    
+
     <!-- Post Footer Actions -->
     <div class="post-footer-actions">
       {% if page.tags.size > 0 %}
@@ -62,14 +70,14 @@ layout: base
           <h3 class="post-section-title">Catégories</h3>
           <div class="post-tags-databird">
             {% for tag in page.tags %}
-              <a href="/tags/{{ tag | slugify }}" class="post-tag-item">
+              <a href="/tags/#{{ tag | slugify }}" class="post-tag-item">
                 {{ tag }}
               </a>
             {% endfor %}
           </div>
         </div>
       {% endif %}
-      
+
       {% if page.social-share %}
         <div class="post-share-section">
           <h3 class="post-section-title">Partager cet article</h3>
@@ -78,7 +86,7 @@ layout: base
       {% endif %}
     </div>
   </div>
-  
+
   <!-- Sidebar with TOC -->
   <aside class="post-sidebar-databird" id="post-sidebar">
     <div class="post-toc-wrapper">
@@ -115,16 +123,16 @@ layout: base
               {% else %}
                 <div class="related-article-image" style="background: linear-gradient(135deg, #E31E24 0%, #1E40AF 100%);"></div>
               {% endif %}
-              
+
               <div class="related-article-content">
                 {% if related_post.tags %}
                   <span class="related-article-tag">{{ related_post.tags[0] }}</span>
                 {% endif %}
-                
+
                 <h3 class="related-article-title">
                   <a href="{{ related_post.url | relative_url }}">{{ related_post.title }}</a>
                 </h3>
-                
+
                 <div class="related-article-meta">
                   <span>
                     <time datetime="{{ related_post.date | date_to_xmlschema }}">{{ related_post.date | date: "%-d/%-m/%Y" }}</time>
@@ -178,7 +186,7 @@ layout: base
       </div>
     </div>
   {% endif %}
-  
+
   <!-- Post Navigation -->
   {% if page.previous.url or page.next.url %}
     <nav class="post-navigation">
@@ -190,7 +198,7 @@ layout: base
       {% else %}
         <div></div>
       {% endif %}
-      
+
       {% if page.next.url %}
         <a href="{{ page.next.url | relative_url }}" class="post-nav-item next">
           <span class="post-nav-label">Article suivant</span>
@@ -199,6 +207,39 @@ layout: base
       {% endif %}
     </nav>
   {% endif %}
-  
+
   {% include comments.html %}
 </footer>
+
+<script>
+(function() {
+  // Read progress bar
+  var progress = document.getElementById('read-progress');
+  if (progress) {
+    window.addEventListener('scroll', function() {
+      var body = document.body, html = document.documentElement;
+      var max = Math.max(body.scrollHeight, body.offsetHeight, html.clientHeight, html.scrollHeight, html.offsetHeight) - window.innerHeight;
+      progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    });
+  }
+  // Copy button for code blocks
+  document.querySelectorAll('.post-content-databird pre').forEach(function(pre) {
+    if (pre.querySelector('.copy-code-btn')) return;
+    var code = pre.querySelector('code');
+    var text = code ? code.textContent : pre.textContent;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-code-btn';
+    btn.setAttribute('aria-label', 'Copier le code');
+    btn.innerHTML = '<i class="fas fa-copy"></i> Copier';
+    btn.onclick = function() {
+      navigator.clipboard.writeText(text).then(function() {
+        btn.innerHTML = '<i class="fas fa-check"></i> Copié !';
+        setTimeout(function() { btn.innerHTML = '<i class="fas fa-copy"></i> Copier'; }, 2000);
+      });
+    };
+    pre.style.position = 'relative';
+    pre.appendChild(btn);
+  });
+})();
+</script>

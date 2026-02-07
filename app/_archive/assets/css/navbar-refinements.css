@@ -1,0 +1,140 @@
+/**
+ * Navbar Refinements
+ * Améliorations et raffinements pour la navbar
+ */
+
+/* ============================================
+   Navbar Actions Layout
+   ============================================ */
+.navbar-databird-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   Language Switcher Positioning
+   ============================================ */
+.navbar-databird-actions .language-switcher {
+  flex-shrink: 0;
+}
+
+/* ============================================
+   Search Button Positioning
+   ============================================ */
+.navbar-databird-actions .navbar-search-button,
+.navbar-databird-actions .navbar-databird-search-btn {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+/* ============================================
+   CTA Button Positioning
+   ============================================ */
+.navbar-databird-actions .navbar-databird-cta {
+  flex-shrink: 0;
+  position: relative;
+}
+
+/* ============================================
+   Responsive Adjustments
+   ============================================ */
+@media (max-width: 1200px) {
+  .navbar-databird-actions {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-databird-actions {
+    gap: 0.5rem;
+  }
+
+  .navbar-databird-cta {
+    padding: 0.5rem 1rem;
+    font-size: 0.8125rem;
+  }
+
+  .navbar-databird-cta span {
+    display: none;
+  }
+
+  .navbar-databird-cta i {
+    margin: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-databird-actions {
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .navbar-databird-actions .language-switcher {
+    flex: 1;
+    max-width: none;
+  }
+
+  .navbar-search-button,
+  .navbar-databird-search-btn {
+    flex-shrink: 0;
+  }
+
+  .navbar-databird-cta {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .navbar-databird-cta span {
+    display: inline;
+  }
+}
+
+/* ============================================
+   Spacing Consistency
+   ============================================ */
+.navbar-databird-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .navbar-databird-content {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+}
+
+/* ============================================
+   Visual Hierarchy
+   ============================================ */
+.navbar-databird-actions > * {
+  position: relative;
+  z-index: 1;
+}
+
+.navbar-databird-actions > *:hover {
+  z-index: 2;
+}
+
+/* ============================================
+   Smooth Transitions
+   ============================================ */
+.navbar-databird-actions > * {
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar-databird-actions > *:hover {
+  transform: translateY(-1px);
+}
+
+.navbar-databird-actions > *:active {
+  transform: translateY(0);
+}

@@ -1,0 +1,388 @@
+/**
+ * SEO Avancé
+ * Optimisations SEO supplémentaires
+ */
+
+/* ============================================
+   Structured Data Indicators
+   ============================================ */
+
+.structured-data-indicator {
+  display: none; /* Hidden but accessible to crawlers */
+}
+
+/* ============================================
+   Heading Hierarchy
+   ============================================ */
+
+/* Ensure proper heading hierarchy */
+h1 {
+  font-size: var(--ds-font-size-4xl);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-tight);
+  margin-bottom: var(--ds-spacing-6);
+}
+
+h2 {
+  font-size: var(--ds-font-size-3xl);
+  font-weight: var(--ds-font-weight-bold);
+  line-height: var(--ds-line-height-tight);
+  margin-top: var(--ds-spacing-8);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+h3 {
+  font-size: var(--ds-font-size-2xl);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  margin-top: var(--ds-spacing-6);
+  margin-bottom: var(--ds-spacing-3);
+}
+
+h4 {
+  font-size: var(--ds-font-size-xl);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  margin-top: var(--ds-spacing-4);
+  margin-bottom: var(--ds-spacing-2);
+}
+
+h5 {
+  font-size: var(--ds-font-size-lg);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  margin-top: var(--ds-spacing-3);
+  margin-bottom: var(--ds-spacing-2);
+}
+
+h6 {
+  font-size: var(--ds-font-size-base);
+  font-weight: var(--ds-font-weight-semibold);
+  line-height: var(--ds-line-height-tight);
+  margin-top: var(--ds-spacing-2);
+  margin-bottom: var(--ds-spacing-1);
+}
+
+/* ============================================
+   Semantic HTML Enhancement
+   ============================================ */
+
+article {
+  display: block;
+}
+
+section {
+  display: block;
+}
+
+aside {
+  display: block;
+}
+
+nav {
+  display: block;
+}
+
+/* ============================================
+   Link Optimization
+   ============================================ */
+
+/* Internal links */
+a[href^="/"],
+a[href^="./"],
+a[href^="../"] {
+  /* Internal link styling */
+}
+
+/* External links */
+a[href^="http"]:not([href*="smdlabtech.github.io"]) {
+  /* External link styling */
+  position: relative;
+}
+
+a[href^="http"]:not([href*="smdlabtech.github.io"])::after {
+  content: ' ↗';
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+/* ============================================
+   Image SEO
+   ============================================ */
+
+img {
+  /* Ensure alt attributes are present */
+}
+
+img:not([alt]) {
+  border: 2px dashed var(--ds-error);
+  opacity: 0.7;
+}
+
+/* Decorative images */
+img[role="presentation"],
+img[alt=""] {
+  border: none;
+}
+
+/* ============================================
+   Breadcrumb SEO
+   ============================================ */
+
+.breadcrumb-seo {
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  padding: 0;
+  margin: var(--ds-spacing-4) 0;
+  font-size: var(--ds-font-size-sm);
+}
+
+.breadcrumb-seo li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.breadcrumb-seo li:not(:last-child)::after {
+  content: '/';
+  margin: 0 var(--ds-spacing-2);
+  color: var(--ds-text-muted);
+}
+
+.breadcrumb-seo a {
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  transition: color var(--ds-transition-fast);
+}
+
+.breadcrumb-seo a:hover {
+  color: var(--ds-primary);
+}
+
+.breadcrumb-seo [aria-current="page"] {
+  color: var(--ds-text);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+/* ============================================
+   Schema.org Markup
+   ============================================ */
+
+.schema-org {
+  display: none; /* Hidden but accessible to crawlers */
+}
+
+/* ============================================
+   Meta Information Display
+   ============================================ */
+
+.meta-info {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-4);
+  padding: var(--ds-spacing-4);
+  background: var(--ds-bg-secondary);
+  border-radius: var(--ds-radius-md);
+  margin: var(--ds-spacing-6) 0;
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text-secondary);
+}
+
+.meta-info-item {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+}
+
+.meta-info-item i {
+  color: var(--ds-primary);
+}
+
+/* ============================================
+   Reading Time
+   ============================================ */
+
+.reading-time-seo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ds-spacing-2);
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text-secondary);
+}
+
+/* ============================================
+   Tag Cloud SEO
+   ============================================ */
+
+.tag-cloud-seo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ds-spacing-2);
+  margin: var(--ds-spacing-6) 0;
+}
+
+.tag-cloud-seo a {
+  display: inline-block;
+  padding: var(--ds-spacing-2) var(--ds-spacing-4);
+  background: var(--ds-bg-secondary);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-full);
+  color: var(--ds-text-secondary);
+  text-decoration: none;
+  font-size: var(--ds-font-size-sm);
+  transition: all var(--ds-transition-fast);
+}
+
+.tag-cloud-seo a:hover {
+  background: var(--ds-primary);
+  color: white;
+  border-color: var(--ds-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--ds-shadow-sm);
+}
+
+/* ============================================
+   Related Content
+   ============================================ */
+
+.related-content {
+  margin-top: var(--ds-spacing-12);
+  padding-top: var(--ds-spacing-8);
+  border-top: 2px solid var(--ds-border);
+}
+
+.related-content-title {
+  font-size: var(--ds-font-size-2xl);
+  font-weight: var(--ds-font-weight-bold);
+  margin-bottom: var(--ds-spacing-6);
+  color: var(--ds-text);
+}
+
+.related-content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--ds-spacing-6);
+}
+
+.related-content-item {
+  background: var(--ds-bg);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-lg);
+  overflow: hidden;
+  transition: all var(--ds-transition-base);
+}
+
+.related-content-item:hover {
+  border-color: var(--ds-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--ds-shadow-lg);
+}
+
+.related-content-item a {
+  display: block;
+  padding: var(--ds-spacing-4);
+  text-decoration: none;
+  color: var(--ds-text);
+}
+
+.related-content-item-title {
+  font-size: var(--ds-font-size-lg);
+  font-weight: var(--ds-font-weight-semibold);
+  margin-bottom: var(--ds-spacing-2);
+  color: var(--ds-text);
+}
+
+.related-content-item-excerpt {
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text-secondary);
+  line-height: var(--ds-line-height-relaxed);
+}
+
+/* ============================================
+   Social Sharing SEO
+   ============================================ */
+
+.social-share-seo {
+  display: flex;
+  gap: var(--ds-spacing-3);
+  margin: var(--ds-spacing-6) 0;
+  flex-wrap: wrap;
+}
+
+.social-share-seo a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--ds-bg-secondary);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  color: var(--ds-text);
+  text-decoration: none;
+  transition: all var(--ds-transition-base);
+}
+
+.social-share-seo a:hover {
+  background: var(--ds-primary);
+  color: white;
+  border-color: var(--ds-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--ds-shadow-md);
+}
+
+/* ============================================
+   Print SEO
+   ============================================ */
+
+@media print {
+  .breadcrumb-seo,
+  .meta-info,
+  .tag-cloud-seo,
+  .social-share-seo {
+    display: none;
+  }
+
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+    font-size: 0.8em;
+    color: #666;
+  }
+
+  a[href^="#"]::after {
+    content: '';
+  }
+}
+
+/* ============================================
+   Accessibility for SEO
+   ============================================ */
+
+/* Ensure all interactive elements are keyboard accessible */
+a:focus,
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 3px solid var(--ds-primary);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   Mobile SEO
+   ============================================ */
+
+@media (max-width: 768px) {
+  .related-content-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .tag-cloud-seo {
+    gap: var(--ds-spacing-1);
+  }
+
+  .tag-cloud-seo a {
+    font-size: var(--ds-font-size-xs);
+    padding: var(--ds-spacing-1) var(--ds-spacing-3);
+  }
+}

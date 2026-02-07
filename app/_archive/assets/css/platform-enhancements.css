@@ -1,0 +1,457 @@
+/**
+ * Platform-Wide Enhancements
+ * Améliorations pour toute la plateforme
+ */
+
+/* ============================================
+   Global Animations
+   ============================================ */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ============================================
+   Smooth Transitions
+   ============================================ */
+* {
+  transition-property: color, background-color, border-color, transform, opacity, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+a, button {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================
+   Enhanced Focus States
+   ============================================ */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid var(--db-primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============================================
+   Loading States
+   ============================================ */
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 3px solid var(--db-border);
+  border-top-color: var(--db-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   Skeleton Loading
+   ============================================ */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--db-bg-secondary) 0%,
+    var(--db-border) 50%,
+    var(--db-bg-secondary) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+@keyframes skeleton-loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.skeleton-text {
+  height: 1em;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-title {
+  height: 1.5em;
+  width: 70%;
+  margin-bottom: 1rem;
+}
+
+.skeleton-image {
+  aspect-ratio: 16 / 9;
+  width: 100%;
+}
+
+/* ============================================
+   Enhanced Buttons
+   ============================================ */
+.btn-enhanced {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.btn-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+
+.btn-enhanced:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.btn-enhanced:active {
+  transform: scale(0.98);
+}
+
+/* ============================================
+   Enhanced Cards
+   ============================================ */
+.card-enhanced {
+  position: relative;
+  overflow: hidden;
+}
+
+.card-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.card-enhanced:hover::after {
+  left: 100%;
+}
+
+/* ============================================
+   Tooltip System
+   ============================================ */
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  padding: 0.5rem 0.75rem;
+  background: var(--db-text);
+  color: var(--db-bg);
+  font-size: 0.875rem;
+  white-space: nowrap;
+  border-radius: 6px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+[data-tooltip]::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-2px);
+  border: 5px solid transparent;
+  border-top-color: var(--db-text);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 1000;
+}
+
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ============================================
+   Badge Enhancements
+   ============================================ */
+.badge-enhanced {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--db-bg-secondary);
+  border: 1px solid var(--db-border);
+  border-radius: 24px;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--db-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.badge-enhanced::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--db-primary);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.badge-enhanced:hover {
+  color: white;
+  border-color: var(--db-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+.badge-enhanced:hover::before {
+  left: 0;
+}
+
+/* ============================================
+   Image Enhancements
+   ============================================ */
+.img-enhanced {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.img-enhanced img {
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.img-enhanced:hover img {
+  transform: scale(1.1);
+}
+
+.img-enhanced::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.img-enhanced:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   Form Enhancements
+   ============================================ */
+.form-group-enhanced {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.form-label-enhanced {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: var(--db-text);
+}
+
+.form-input-enhanced {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 2px solid var(--db-border);
+  border-radius: 8px;
+  background: var(--db-bg);
+  color: var(--db-text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.form-input-enhanced:focus {
+  outline: none;
+  border-color: var(--db-primary);
+  box-shadow: 0 0 0 4px rgba(227, 30, 36, 0.1);
+}
+
+.form-input-enhanced::placeholder {
+  color: var(--db-text-secondary);
+}
+
+/* ============================================
+   Scrollbar Enhancements
+   ============================================ */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--db-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--db-border);
+  border-radius: 6px;
+  border: 2px solid var(--db-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--db-primary);
+}
+
+/* ============================================
+   Selection Enhancements
+   ============================================ */
+::selection {
+  background: var(--db-primary);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--db-primary);
+  color: white;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  * {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+  }
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================
+   High Contrast Mode
+   ============================================ */
+@media (prefers-contrast: high) {
+  :root {
+    --db-border: #000000;
+    --db-text: #000000;
+    --db-bg: #ffffff;
+  }
+
+  .card-enhanced,
+  .blog-card-databird {
+    border-width: 2px;
+  }
+}

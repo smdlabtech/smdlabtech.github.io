@@ -1,119 +1,92 @@
-[![GitHub](https://img.shields.io/badge/GitHub-Profile-informational?style=flat&logo=github&logoColor=white&color=blue)](https://github.com/smdlabtech)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Profile-informational?style=flat&logo=linkedin&logoColor=white&color=blue)](https://www.linkedin.com/in/dayasylla/)
-[![Twitter](https://img.shields.io/badge/Twitter-Follow-informational?style=flat&logo=twitter&logoColor=white&color=1DA1F2)](https://x.com/BrainYadzo/followers)
-[![Instagram](https://img.shields.io/badge/Instagram-Connect-informational?style=flat&logo=instagram&logoColor=white&color=C13584)](https://www.instagram.com/dayalabtech/)
-[![TikTok](https://img.shields.io/badge/TikTok-Connect-informational?style=flat&logo=tiktok&logoColor=white&color=FF0050)](https://www.tiktok.com/@smdlabtech)
-[![YouTube](https://img.shields.io/badge/YouTube-Subscribe-informational?style=flat&logo=youtube&logoColor=white&color=FF0000)](https://www.youtube.com/channel/votre-chaîne)
+# 🚀 Blog Data & IA — Portfolio & Articles
+
+[![Site](https://img.shields.io/badge/🌐_Live-Site-blue?style=for-the-badge)](https://smdlabtech.github.io/)
+[![Jekyll](https://img.shields.io/badge/Jekyll-GitHub%20Pages-CC0000?style=flat&logo=jekyll)](https://jekyllrb.com/)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
+**Blog et portfolio** : Data Science, Business Intelligence, IA & Technologies.  
+Contenu informatif, tutoriels et retours d’expérience.
 
 ---
 
-<!-- Bannière colorée et titre principal -->
-<div align="center" style="background: linear-gradient(90deg,#3b5998,#00c6ff); color:white; padding:1.2em 0 0.5em 0; border-radius:14px; font-weight:bold; box-shadow:0 4px 24px rgba(60,60,100,0.10); margin-bottom:1.5em;">
-  <a href="https://github.com/smdlabtech" style="text-decoration:none;">
-  </a>
-  <div style="font-size:1.3em; color:#fff; margin-top:0.2em;">
-    🚀 Portfolio & Blog - Data Science, AI & Technologies
-  </div>
-</div>
 
-<!-- Séparateur décoratif -->
-<p align="center" style="margin:0 0 1.5em 0;">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=3b5998,00c6ff&height=80&section=header&text=Bienvenue%20!&fontColor=fff&fontSize=40&animation=twinkling" alt="bannière décorative"/>
-</p>
+## ✨ En bref
 
-<!-- Citation inspirante -->
-<blockquote align="center" style="font-size:1.15em; color:#3b5998; font-style:italic; margin-bottom:2em;">« La donnée n'a de valeur que si elle est comprise et partagée. »</blockquote>
+- **Site en ligne** : [https://smdlabtech.github.io/](https://smdlabtech.github.io/)
+- **Stack** : Jekyll (front) + Flask (API optionnelle), déployé via GitHub Actions
+- **Contenu** : articles par catégories (Data Science, IA, Data Analytics, BI, Data Engineering), newsletter, recherche
 
 ---
 
-## 📖 À Propos
+## 🎯 Points forts du repo
 
-- 👋 Hi, I'm **Daya**
-- I'm a **data scientist** with a passion for soccer and basketball.
-- This github account is the way I share my passion for programming through languages:  
- **Python**, **R**, **SQL**, **Power BI** and **Excel VBA**.
+| Domaine | Détail |
+|--------|--------|
+| **Performance** | CSS/JS en bundles, PWA (Service Worker), lazy loading |
+| **Qualité** | Tests pytest, pre-commit (black, flake8, isort), CI unifiée |
+| **Observabilité** | Prometheus, Grafana, health checks, métriques |
+| **DX** | Script de test avant prod, docs centralisées dans `docs/` |
+| **Sécurité** | Headers OWASP, CORS configurable, rate limiting |
 
-## 🌐 Site Web
+---
 
-🌍 **Site déployé** : [https://smdlabtech.github.io/](https://smdlabtech.github.io/)
-
-Le site est construit avec **Jekyll** et déployé automatiquement sur **GitHub Pages**.
-
-## 📁 Structure du Projet
+## 📁 Structure
 
 ```
-smdlabtech.github.io/
-├── app/                    # Application Jekyll (Frontend)
-│   ├── _config.yml        # Configuration Jekyll
-│   ├── _includes/         # Templates HTML réutilisables
-│   ├── _layouts/          # Layouts de pages
-│   ├── _posts/            # Articles de blog
-│   ├── assets/            # CSS, JS, images
-│   ├── index.html         # Page d'accueil
-│   └── ...
-├── src/                    # Application Flask (Backend API)
-│   ├── api/               # Endpoints API
-│   ├── routes/            # Routes Flask
-│   └── ...
-├── .github/workflows/      # GitHub Actions CI/CD
-│   ├── jekyll-pages.yml   # Déploiement Jekyll
-│   └── deploy.yml         # Déploiement Flask
-├── scripts/               # Scripts utilitaires
-├── tests/                 # Tests unitaires et d'intégration
-└── monitoring/            # Stack d'observabilité (Prometheus, Grafana)
+├── app/                 # Jekyll + Flask
+│   ├── _config.yml      # Config Jekyll
+│   ├── _layouts/        # base → bundles
+│   ├── _posts/          # Articles
+│   ├── assets/          # main.bundle.css/js
+│   ├── src/             # API Flask
+│   └── scripts/         # test-local.sh, etc.
+├── tests/               # Pytest
+├── docs/                # CONTRIBUTING, structure, env, idées
+└── .github/workflows/   # CI/CD
 ```
 
-## 🚀 Démarrage Rapide
+---
 
-### Développement Local Jekyll
+## 🧪 Lancer en local
 
 ```bash
-cd app
-bundle install
-bundle exec jekyll serve
+# Tests + build Jekyll
+./app/scripts/test-local.sh
+
+# Site Jekyll
+cd app && bundle install && bundle exec jekyll serve
+# → http://localhost:4000
 ```
 
-Le site sera accessible sur `http://localhost:4000`
-
-### Développement Local Flask
-
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Sur Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-python run.py
-```
-
-## 🛠️ Technologies
-
-- **Frontend**: Jekyll, HTML, CSS, JavaScript
-- **Backend**: Flask (Python)
-- **CI/CD**: GitHub Actions
-- **Monitoring**: Prometheus, Grafana, Loki
-- **Deployment**: GitHub Pages, Docker
-
-## 📊 Statistiques GitHub
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=smdlabtech&theme=dark&hide_border=false&include_all_commits=true&count_private=true" alt="GitHub Stats"/>
-  <br/>
-  <img src="https://nirzak-streak-stats.vercel.app/?user=smdlabtech&theme=dark&hide_border=false" alt="GitHub Streak"/>
-  <br>
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=smdlabtech&theme=dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact" alt="Top Langs"/>
-</p>
+**Environnement** : copier `env.example` en `.env` si vous utilisez Flask. Voir [docs/ENV_VARIABLES.md](docs/ENV_VARIABLES.md).
 
 ---
 
-## 🔍 Analyse de Code
+## 📖 À propos
 
-Analyse la qualité du code et des vulnérabilités sur [SonarQube.io](https://sonarcloud.io/project/overview?id=smdlabtech_smdlabtech.github.io)
+**Daya** — Data scientist, passionné par le foot et le basket.  
+Partage de la programmation en **Python**, **R**, **SQL**, **Power BI** et **Excel VBA**.
+
+---
+
+## 📚 Documentation
+
+- [Tester avant prod](docs/TESTER_AVANT_PROD.md) · [Structure](docs/STRUCTURE.md) · [Contribuer](docs/CONTRIBUTING.md)
+- [Variables d’env](docs/ENV_VARIABLES.md) · [Idées d’améliorations](docs/IDEES_AMELIORATIONS.md) · [Code de conduite](CODE_OF_CONDUCT.md)
+
+---
 
 ## 📝 Licence
 
-Ce projet est sous licence MIT. Voir le fichier [LICENSE](LICENSE) pour plus de détails.
+MIT — voir [LICENSE](LICENSE).
 
 ---
 
 <div align="center">
-  <p>Fait avec ❤️ par <a href="https://github.com/smdlabtech">smdlabtech</a></p>
+  <p><strong>Fait avec ❤️ par <a href="https://github.com/smdlabtech">smdlabtech</a></strong></p>
+  <p>
+    <a href="https://github.com/smdlabtech">GitHub</a> ·
+    <a href="https://www.linkedin.com/in/dayasylla/">LinkedIn</a> ·
+    <a href="https://smdlabtech.github.io/">Blog</a>
+  </p>
 </div>

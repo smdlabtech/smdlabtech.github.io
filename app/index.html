@@ -6,26 +6,27 @@ cover-img: /assets/img/arriere_plan_p.jpg
 
 <!-- Hero Section - Style DataBird -->
 <section class="hero-section-databird">
-  <div class="container-databird">
-    <h1 class="text-reveal">
+  <div class="container-databird hero-container">
+    <p class="hero-eyebrow" data-i18n="hero.eyebrow">Blog Data & IA</p>
+    <h1 class="hero-title text-reveal">
       <span data-i18n="hero.title.part1">Explorez le monde</span><br>
-      <span data-i18n="hero.title.part2">Business Intelligence, Data Science, AI & Technologies</span>
+      <span class="hero-title-accent" data-i18n="hero.title.part2">Business Intelligence, Data Science, AI & Technologies</span>
     </h1>
-    <p class="hero-subtitle" style="animation: fadeInUp 0.8s ease 0.5s both;" data-i18n="hero.subtitle">
+    <p class="hero-subtitle" data-i18n="hero.subtitle">
       Découvrez le monde de la donnée à travers notre blog : ses tendances, ses outils et ses opportunités.<br>
       De l'apprentissage automatique aux décisions basées sur la data, nous vous proposons un contenu informatif et captivant.
     </p>
-    
+
     <!-- Hero Search Enhanced -->
     <div class="hero-search-enhanced">
       <div class="hero-search-wrapper">
         <i class="fas fa-search hero-search-icon"></i>
-        <input 
-          type="search" 
-          id="hero-search-input" 
+        <input
+          type="search"
+          id="hero-search-input"
           class="hero-search-input"
           placeholder="Rechercher un article, un tag, une catégorie..."
-          data-i18n-placeholder="hero.search.placeholder" 
+          data-i18n-placeholder="hero.search.placeholder"
           aria-label="Rechercher un article"
           autocomplete="off"
         >
@@ -40,9 +41,9 @@ cover-img: /assets/img/arriere_plan_p.jpg
 </section>
 
 <!-- Filters Section -->
-<section class="filters-section" id="filters">
+<section class="landing-section filters-section" id="filters">
   <div class="container-databird">
-    <div class="filters-databird" id="blog-filters" role="tablist" aria-label="Filtres d'articles">
+    <div class="filters-databird filters-pills" id="blog-filters" role="tablist" aria-label="Filtres d'articles">
       <a href="/" class="filter-tag active" data-filter="all" role="tab" aria-selected="true" aria-controls="blog-posts" data-i18n="filters.all">Tous les articles</a>
       <a href="/tags/data-analytics" class="filter-tag" data-filter="data-analytics" role="tab" aria-selected="false" aria-controls="blog-posts" data-i18n="filters.dataAnalytics">Data Analytics</a>
       <a href="/tags/data-science" class="filter-tag" data-filter="data-science" role="tab" aria-selected="false" aria-controls="blog-posts" data-i18n="filters.dataScience">Data Science</a>
@@ -54,7 +55,7 @@ cover-img: /assets/img/arriere_plan_p.jpg
 </section>
 
 <!-- Latest Posts Section Enhanced -->
-<section class="latest-posts-section-enhanced" id="latest-posts">
+<section class="landing-section landing-section--alt latest-posts-section-enhanced" id="latest-posts">
   <div class="container-databird">
     <div class="latest-posts-header-enhanced">
       <h2 class="latest-posts-title-enhanced section-title" data-i18n="sections.latestPosts">Derniers Articles</h2>
@@ -63,9 +64,9 @@ cover-img: /assets/img/arriere_plan_p.jpg
         <i class="fas fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
-    <div class="blog-grid-databird stagger-container" id="blog-posts" role="tabpanel" aria-labelledby="blog-filters">
+    <div class="blog-grid-databird blog-grid--landing stagger-container" id="blog-posts" role="tabpanel" aria-labelledby="blog-filters">
       {% for post in site.posts limit: 12 %}
-      <article class="blog-card-databird">
+      <article class="blog-card-databird {% if forloop.index <= 3 %}blog-card--featured{% endif %}">
         <div class="blog-card-image-wrapper">
           {% if post.cover-img or post.thumbnail-img %}
             {% assign image = post.cover-img | default: post.thumbnail-img %}
@@ -77,24 +78,30 @@ cover-img: /assets/img/arriere_plan_p.jpg
             <div class="blog-card-image" style="background: linear-gradient(135deg, #E31E24 0%, #1E40AF 100%);"></div>
           {% endif %}
         </div>
-        
+
         <div class="blog-card-content">
           {% if post.tags %}
             <span class="blog-card-tag category-badge-enhanced">{{ post.tags[0] }}</span>
           {% endif %}
-          
+
           <h2 class="blog-card-title">
             <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
           </h2>
-          
+
           {% if post.excerpt %}
             <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
           {% endif %}
-          
+
           <div class="blog-card-meta">
             <span class="blog-card-date">
               <i class="far fa-calendar" aria-hidden="true"></i>
               {{ post.date | date: "%d/%m/%Y" }}
+            </span>
+            {% assign words = post.content | strip_html | number_of_words %}
+            {% assign read_time = words | divided_by: 200 %}{% if read_time < 1 %}{% assign read_time = 1 %}{% endif %}
+            <span class="blog-card-readtime" aria-label="Temps de lecture">
+              <i class="far fa-clock" aria-hidden="true"></i>
+              {{ read_time }} min
             </span>
             {% if post.author %}
               <span class="blog-card-author">
@@ -110,60 +117,8 @@ cover-img: /assets/img/arriere_plan_p.jpg
   </div>
 </section>
 
-<!-- Featured Posts Section -->
-<section class="featured-posts-section" id="featured-posts">
-  <div class="container-databird">
-    <h2 class="section-title" data-i18n="sections.featured">Articles à la Une</h2>
-    <p class="section-subtitle" data-i18n="sections.featuredSubtitle">
-      Découvrez nos articles les plus populaires et les plus récents
-    </p>
-    <div class="featured-posts-grid">
-      {% for post in site.posts limit: 3 %}
-      <article class="featured-post-card">
-        {% if post.cover-img or post.thumbnail-img %}
-          {% assign image = post.cover-img | default: post.thumbnail-img %}
-          {% if image.first %}
-            {% assign image = image[0].first.first %}
-          {% endif %}
-          <img src="{{ image | relative_url }}" alt="{{ post.title }}" class="featured-post-image" loading="lazy">
-        {% else %}
-          <div class="featured-post-image" style="background: linear-gradient(135deg, #E31E24 0%, #1E40AF 100%);"></div>
-        {% endif %}
-        
-        <div class="featured-post-content">
-          {% if post.tags %}
-            <span class="featured-post-tag">{{ post.tags[0] }}</span>
-          {% endif %}
-          
-          <h3 class="featured-post-title">
-            <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-          </h3>
-          
-          {% if post.excerpt %}
-            <p class="featured-post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
-          {% endif %}
-          
-          <div class="featured-post-meta">
-            <span>
-              <i class="far fa-calendar" aria-hidden="true"></i>
-              {{ post.date | date: "%d/%m/%Y" }}
-            </span>
-            {% if post.author %}
-              <span>
-                <i class="far fa-user" aria-hidden="true"></i>
-                {{ post.author }}
-              </span>
-            {% endif %}
-          </div>
-        </div>
-      </article>
-      {% endfor %}
-    </div>
-  </div>
-</section>
-
 <!-- Categories Section -->
-<section class="categories-section" id="categories">
+<section class="landing-section categories-section" id="categories">
   <div class="container-databird">
     <h2 class="section-title" data-i18n="sections.categories">Explorez par Catégorie</h2>
     <p class="section-subtitle" data-i18n="sections.categoriesSubtitle">
@@ -200,7 +155,7 @@ cover-img: /assets/img/arriere_plan_p.jpg
 </section>
 
 <!-- Stats Section Enhanced -->
-<section class="stats-section" id="stats">
+<section class="landing-section landing-section--alt stats-section" id="stats">
   <div class="container-databird">
     <h2 class="section-title sr-only">Statistiques</h2>
     <div class="stats-grid-enhanced">
@@ -225,7 +180,7 @@ cover-img: /assets/img/arriere_plan_p.jpg
 </section>
 
 <!-- CTA Section Enhanced -->
-<section class="cta-section-enhanced">
+<section class="landing-section cta-section-enhanced">
   <div class="cta-content-enhanced">
     <h2 class="cta-title-enhanced" data-i18n="sections.cta.title">Prêt à explorer le monde de la Data ?</h2>
     <p class="cta-description-enhanced" data-i18n="sections.cta.description">
@@ -243,74 +198,8 @@ cover-img: /assets/img/arriere_plan_p.jpg
   </div>
 </section>
 
-<!-- Popular Topics Section Enhanced -->
-<section class="popular-topics-section-enhanced" id="popular-topics">
-  <div class="container-databird">
-    <h2 class="popular-topics-title-enhanced section-title" data-i18n="sections.popularTopics">Sujets Populaires</h2>
-    <p class="section-subtitle" data-i18n="sections.popularTopicsSubtitle">
-      Explorez nos sujets les plus consultés et trouvez rapidement ce qui vous intéresse
-    </p>
-    <div class="topics-grid">
-      <a href="/tags/data-analytics" class="topic-card-enhanced">
-        <div class="topic-icon-enhanced">📊</div>
-        <h3 class="topic-title-enhanced" data-i18n="category.dataAnalytics">Data Analytics</h3>
-        <p class="topic-description-enhanced" data-i18n="topic.dataAnalyticsDesc">
-          Analysez vos données et transformez-les en insights actionnables pour votre entreprise.
-        </p>
-        <span class="topic-count-enhanced">
-          {{ site.tags['data-analytics'] | size }} <span data-i18n="meta.articles">articles</span>
-        </span>
-      </a>
-      
-      <a href="/tags/data-science" class="topic-card-enhanced">
-        <div class="topic-icon-enhanced">🔬</div>
-        <h3 class="topic-title-enhanced" data-i18n="category.dataScience">Data Science</h3>
-        <p class="topic-description-enhanced" data-i18n="topic.dataScienceDesc">
-          Maîtrisez la science des données, le machine learning et l'analyse prédictive.
-        </p>
-        <span class="topic-count-enhanced">
-          {{ site.tags['data-science'] | size }} <span data-i18n="meta.articles">articles</span>
-        </span>
-      </a>
-      
-      <a href="/tags/intelligence-artificielle" class="topic-card-enhanced">
-        <div class="topic-icon-enhanced">🤖</div>
-        <h3 class="topic-title-enhanced" data-i18n="category.ai">Intelligence Artificielle</h3>
-        <p class="topic-description-enhanced" data-i18n="topic.aiDesc">
-          Découvrez les dernières avancées en IA, LLM et applications génératives.
-        </p>
-        <span class="topic-count-enhanced">
-          {{ site.tags['intelligence-artificielle'] | size }} <span data-i18n="meta.articles">articles</span>
-        </span>
-      </a>
-      
-      <a href="/tags/data-engineering" class="topic-card-enhanced">
-        <div class="topic-icon-enhanced">⚙️</div>
-        <h3 class="topic-title-enhanced" data-i18n="category.dataEngineering">Data Engineering</h3>
-        <p class="topic-description-enhanced" data-i18n="topic.dataEngineeringDesc">
-          Construisez des pipelines robustes et des architectures de données scalables.
-        </p>
-        <span class="topic-count-enhanced">
-          {{ site.tags['data-engineering'] | size }} <span data-i18n="meta.articles">articles</span>
-        </span>
-      </a>
-      
-      <a href="/tags/business-intelligence" class="topic-card-enhanced">
-        <div class="topic-icon-enhanced">💼</div>
-        <h3 class="topic-title-enhanced" data-i18n="category.bi">Business Intelligence</h3>
-        <p class="topic-description-enhanced" data-i18n="topic.biDesc">
-          Utilisez la BI pour prendre des décisions stratégiques basées sur les données.
-        </p>
-        <span class="topic-count-enhanced">
-          {{ site.tags['business-intelligence'] | size }} <span data-i18n="meta.articles">articles</span>
-        </span>
-      </a>
-    </div>
-  </div>
-</section>
-
 <!-- Tags Cloud Section -->
-<section class="tags-cloud-section" id="tags-cloud">
+<section class="landing-section landing-section--alt tags-cloud-section" id="tags-cloud">
   <div class="container-databird">
     <h2 class="section-title" data-i18n="sections.tagsCloud">Tous les Sujets</h2>
     <p class="section-subtitle" data-i18n="sections.tagsCloudSubtitle">
@@ -319,7 +208,7 @@ cover-img: /assets/img/arriere_plan_p.jpg
     <div class="tags-cloud">
       {% assign all_tags = site.posts | map: 'tags' | flatten | uniq | sort %}
       {% for tag in all_tags limit: 20 %}
-        <a href="/tags/{{ tag | slugify }}" class="tag-cloud-item">
+        <a href="/tags/#{{ tag | slugify }}" class="tag-cloud-item">
           {{ tag }}
           <span class="tag-cloud-count">
             {% assign count = 0 %}
@@ -337,7 +226,7 @@ cover-img: /assets/img/arriere_plan_p.jpg
 </section>
 
 <!-- Newsletter Section -->
-<section class="newsletter-section" id="newsletter">
+<section class="landing-section newsletter-section" id="newsletter">
   <div class="container-databird">
     <div class="newsletter-content">
       <div class="newsletter-icon">
@@ -350,10 +239,10 @@ cover-img: /assets/img/arriere_plan_p.jpg
       <form class="newsletter-form" data-newsletter-form data-source="landing-page" action="#" method="post" novalidate>
         <div class="newsletter-input-wrapper">
           <i class="fas fa-envelope newsletter-input-icon"></i>
-          <input 
-            type="email" 
-            name="email" 
-            class="newsletter-input" 
+          <input
+            type="email"
+            name="email"
+            class="newsletter-input"
             placeholder="Votre adresse email"
             data-i18n-placeholder="sections.newsletter.placeholder"
             required
@@ -370,14 +259,14 @@ cover-img: /assets/img/arriere_plan_p.jpg
       </form>
       <p class="newsletter-privacy" style="font-size: 0.8125rem; color: var(--db-text-secondary); margin-top: 1rem;">
         <span data-i18n="sections.newsletter.privacy">En vous inscrivant, vous acceptez notre</span>
-        <a href="/privacy" style="color: var(--db-primary);" data-i18n="sections.newsletter.privacyLink">politique de confidentialité</a>.
+        <a href="/privacy/" style="color: var(--db-primary);" data-i18n="sections.newsletter.privacyLink">politique de confidentialité</a>.
       </p>
     </div>
   </div>
 </section>
 
 <!-- Contact Section -->
-<section class="contact-section" id="contact">
+<section class="landing-section landing-section--alt contact-section" id="contact">
   <div class="contact-container">
     <div class="contact-header">
       <h2 class="contact-title" data-i18n="sections.contact.title">Contactez-nous</h2>
@@ -436,11 +325,11 @@ cover-img: /assets/img/arriere_plan_p.jpg
         <div class="form-row">
           <div class="form-group">
             <label for="contact-name" class="form-label" data-i18n="sections.contact.form.name">Nom complet *</label>
-            <input 
-              type="text" 
-              id="contact-name" 
-              name="name" 
-              class="form-input" 
+            <input
+              type="text"
+              id="contact-name"
+              name="name"
+              class="form-input"
               placeholder="Votre nom"
               data-i18n-placeholder="sections.contact.form.namePlaceholder"
               required
@@ -449,11 +338,11 @@ cover-img: /assets/img/arriere_plan_p.jpg
           </div>
           <div class="form-group">
             <label for="contact-email" class="form-label" data-i18n="sections.contact.form.email">Email *</label>
-            <input 
-              type="email" 
-              id="contact-email" 
-              name="email" 
-              class="form-input" 
+            <input
+              type="email"
+              id="contact-email"
+              name="email"
+              class="form-input"
               placeholder="votre@email.com"
               data-i18n-placeholder="sections.contact.form.emailPlaceholder"
               required
@@ -463,11 +352,11 @@ cover-img: /assets/img/arriere_plan_p.jpg
         </div>
         <div class="form-group">
           <label for="contact-subject" class="form-label" data-i18n="sections.contact.form.subject">Sujet *</label>
-          <input 
-            type="text" 
-            id="contact-subject" 
-            name="subject" 
-            class="form-input" 
+          <input
+            type="text"
+            id="contact-subject"
+            name="subject"
+            class="form-input"
             placeholder="Sujet de votre message"
             data-i18n-placeholder="sections.contact.form.subjectPlaceholder"
             required
@@ -476,10 +365,10 @@ cover-img: /assets/img/arriere_plan_p.jpg
         </div>
         <div class="form-group">
           <label for="contact-message" class="form-label" data-i18n="sections.contact.form.message">Message *</label>
-          <textarea 
-            id="contact-message" 
-            name="message" 
-            class="form-textarea" 
+          <textarea
+            id="contact-message"
+            name="message"
+            class="form-textarea"
             placeholder="Votre message..."
             data-i18n-placeholder="sections.contact.form.messagePlaceholder"
             required
@@ -513,4 +402,3 @@ cover-img: /assets/img/arriere_plan_p.jpg
     </div>
   </div>
 </section>
-

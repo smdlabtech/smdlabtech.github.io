@@ -8,25 +8,25 @@
           <span>Accueil</span>
         </a>
       </li>
-      
+
       {% if page.categories %}
         {% for category in page.categories limit: 1 %}
           <li class="breadcrumbs-item">
-            <a href="/tags/{{ category | slugify }}" class="breadcrumbs-link">
+            <a href="/tags/#{{ category | slugify }}" class="breadcrumbs-link">
               {{ category }}
             </a>
           </li>
         {% endfor %}
       {% endif %}
-      
+
       {% if page.tag %}
         <li class="breadcrumbs-item">
-          <a href="/tags/{{ page.tag | slugify }}" class="breadcrumbs-link">
+          <a href="/tags/#{{ page.tag | slugify }}" class="breadcrumbs-link">
             {{ page.tag }}
           </a>
         </li>
       {% endif %}
-      
+
       {% if page.title %}
         <li class="breadcrumbs-item">
           <span class="breadcrumbs-current">{{ page.title }}</span>

@@ -1,0 +1,103 @@
+/**
+ * SEO Improvements
+ * Améliorations SEO pour la plateforme
+ */
+
+/* ============================================
+   Structured Data Visual Indicators
+   ============================================ */
+[itemscope] {
+  position: relative;
+}
+
+/* ============================================
+   Skip to Main Content
+   ============================================ */
+.skip-to-main {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--db-primary);
+  color: white;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  z-index: 10001;
+  border-radius: 0 0 8px 0;
+  font-weight: 600;
+  transition: top 0.3s ease;
+}
+
+.skip-to-main:focus {
+  top: 0;
+}
+
+/* ============================================
+   Semantic HTML Enhancements
+   ============================================ */
+article {
+  position: relative;
+}
+
+article time {
+  display: inline-block;
+}
+
+article address {
+  font-style: normal;
+}
+
+/* ============================================
+   Image SEO
+   ============================================ */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+img[alt=""] {
+  border: 2px dashed var(--db-border);
+}
+
+/* ============================================
+   Link SEO
+   ============================================ */
+a[href^="http"]:not([href*="localhost"]):not([href*="127.0.0.1"])::after {
+  content: ' ↗';
+  font-size: 0.75em;
+  opacity: 0.6;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+  .navbar-databird,
+  .cookie-consent-banner,
+  .fab-container,
+  .scroll-progress-indicator,
+  .search-modal-overlay {
+    display: none !important;
+  }
+
+  a[href^="http"]::after {
+    content: ' (' attr(href) ')';
+  }
+
+  article {
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+   Schema.org Microdata
+   ============================================ */
+[itemtype*="Article"] {
+  border-left: 3px solid var(--db-primary);
+  padding-left: 1rem;
+}
+
+[itemtype*="Person"] {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}

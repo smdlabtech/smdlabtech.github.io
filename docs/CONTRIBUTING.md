@@ -38,10 +38,15 @@ python run.py
 
 Assurez-vous que tous les tests passent :
 ```bash
-# Tests Python
-pytest tests/
+# Tests Python (depuis la racine du repo)
+cd app && python3 -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt -r requirements-dev.txt
+cd .. && PYTHONPATH=app python3 -m pytest tests/ -v
 
-# Tests Jekyll
+# Ou utiliser le script
+./app/scripts/test-local.sh
+
+# Build Jekyll
 cd app && bundle exec jekyll build
 ```
 

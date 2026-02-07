@@ -24,14 +24,8 @@ author: "daya (@smdlabtech)"
 # --- (1) List of links in the navigation bar --- #
 ###################################################
 
-navbar-links:
-  #Home: "home"
-  # News: "_posts/news"
-  # Use cases: "_posts/use_cases"
-  # Programming: "_posts/programming"
-  # Dataviz: "_posts/dataviz/index"
-  # Contact: "contact"
-  About Me: "about"
+# Liens entre Catégories et Tags (vide = seul le CTA "À propos" à droite)
+navbar-links: []
 
  # Resources:
  #   - Beautiful Jekyll: "https://beautifuljekyll.com"
@@ -302,6 +296,7 @@ defaults:
 
 # Exclude these files from production site
 exclude:
+  - _archive
   - CHANGELOG.md
   - CNAME
   - Gemfile
@@ -329,9 +324,6 @@ exclude:
   - .jekyll-cache/
   - _site/
   - site/
-  - ANALYSE_STRUCTURE.md
-  - NETTOYAGE_COMPLET.md
-  - PROBLEMES_Jekyll.md
 
 plugins:
   - jekyll-paginate

@@ -19,9 +19,9 @@ title: Explorer les Articles
     <div class="search-bar-enhanced">
       <div class="search-input-wrapper">
         <i class="fas fa-search search-icon-enhanced"></i>
-        <input 
-          type="search" 
-          id="explore-search-input" 
+        <input
+          type="search"
+          id="explore-search-input"
           class="search-input-enhanced"
           placeholder="Rechercher un article, un tag, une catégorie..."
           aria-label="Rechercher un article"
@@ -50,7 +50,7 @@ title: Explorer les Articles
           {{ site.tags['data-analytics'] | size }} articles
         </span>
       </a>
-      
+
       <a href="/tags/data-science" class="explore-category-card">
         <span class="explore-category-icon">🔬</span>
         <h3 class="explore-category-title">Data Science</h3>
@@ -61,7 +61,7 @@ title: Explorer les Articles
           {{ site.tags['data-science'] | size }} articles
         </span>
       </a>
-      
+
       <a href="/tags/intelligence-artificielle" class="explore-category-card">
         <span class="explore-category-icon">🤖</span>
         <h3 class="explore-category-title">Intelligence Artificielle</h3>
@@ -72,7 +72,7 @@ title: Explorer les Articles
           {{ site.tags['intelligence-artificielle'] | size }} articles
         </span>
       </a>
-      
+
       <a href="/tags/data-engineering" class="explore-category-card">
         <span class="explore-category-icon">⚙️</span>
         <h3 class="explore-category-title">Data Engineering</h3>
@@ -83,7 +83,7 @@ title: Explorer les Articles
           {{ site.tags['data-engineering'] | size }} articles
         </span>
       </a>
-      
+
       <a href="/tags/business-intelligence" class="explore-category-card">
         <span class="explore-category-icon">💼</span>
         <h3 class="explore-category-title">Business Intelligence</h3>
@@ -94,7 +94,7 @@ title: Explorer les Articles
           {{ site.tags['business-intelligence'] | size }} articles
         </span>
       </a>
-      
+
       <a href="/tags" class="explore-category-card">
         <span class="explore-category-icon">🏷️</span>
         <h3 class="explore-category-title">Toutes les Catégories</h3>
@@ -118,7 +118,7 @@ title: Explorer les Articles
       {% for tag in sorted_tags limit: 20 %}
         {% assign tag_name = tag[0] %}
         {% assign tag_posts = tag[1] %}
-        <a href="/tags/{{ tag_name | slugify }}" class="explore-topic-item">
+        <a href="/tags/#{{ tag_name | slugify }}" class="explore-topic-item">
           <div class="explore-topic-name">{{ tag_name }}</div>
           <div class="explore-topic-count">{{ tag_posts.size }} article{{ tag_posts.size | pluralize }}</div>
         </a>
@@ -133,34 +133,34 @@ title: Explorer les Articles
   const searchInput = document.getElementById('explore-search-input');
   const categoryCards = document.querySelectorAll('.explore-category-card');
   const topicItems = document.querySelectorAll('.explore-topic-item');
-  
+
   if (!searchInput) return;
-  
+
   function performSearch(query) {
     const lowerQuery = query.toLowerCase().trim();
-    
+
     if (!lowerQuery) {
       categoryCards.forEach(card => card.style.display = 'block');
       topicItems.forEach(item => item.style.display = 'block');
       return;
     }
-    
+
     // Search in categories
     categoryCards.forEach(card => {
       const title = card.querySelector('.explore-category-title')?.textContent.toLowerCase() || '';
       const description = card.querySelector('.explore-category-description')?.textContent.toLowerCase() || '';
-      
+
       if (title.includes(lowerQuery) || description.includes(lowerQuery)) {
         card.style.display = 'block';
       } else {
         card.style.display = 'none';
       }
     });
-    
+
     // Search in topics
     topicItems.forEach(item => {
       const name = item.querySelector('.explore-topic-name')?.textContent.toLowerCase() || '';
-      
+
       if (name.includes(lowerQuery)) {
         item.style.display = 'block';
       } else {
@@ -168,7 +168,7 @@ title: Explorer les Articles
       }
     });
   }
-  
+
   let debounceTimer;
   searchInput.addEventListener('input', function(e) {
     clearTimeout(debounceTimer);

@@ -1,0 +1,461 @@
+/**
+ * Final Touches
+ * Dernières touches pour une plateforme parfaite
+ */
+
+/* ============================================
+   Polish & Refinements
+   ============================================ */
+
+/* Amélioration des transitions globales */
+* {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Amélioration du text rendering */
+body {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ============================================
+   Visual Hierarchy
+   ============================================ */
+
+/* Hiérarchie visuelle améliorée */
+.primary-action {
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-primary);
+}
+
+.secondary-action {
+  font-weight: var(--ds-font-weight-medium);
+  color: var(--ds-text-secondary);
+}
+
+/* ============================================
+   Consistency Checks
+   ============================================ */
+
+/* Vérification de cohérence des espacements */
+.section-spacing {
+  padding-top: var(--ds-spacing-16);
+  padding-bottom: var(--ds-spacing-16);
+}
+
+@media (max-width: 768px) {
+  .section-spacing {
+    padding-top: var(--ds-spacing-12);
+    padding-bottom: var(--ds-spacing-12);
+  }
+}
+
+/* ============================================
+   Error States
+   ============================================ */
+
+.error-state {
+  text-align: center;
+  padding: var(--ds-spacing-12);
+  color: var(--ds-text-secondary);
+}
+
+.error-state-icon {
+  font-size: var(--ds-font-size-5xl);
+  color: var(--ds-error);
+  margin-bottom: var(--ds-spacing-4);
+  opacity: 0.5;
+}
+
+.error-state-title {
+  font-size: var(--ds-font-size-2xl);
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-text);
+  margin-bottom: var(--ds-spacing-2);
+}
+
+.error-state-message {
+  font-size: var(--ds-font-size-base);
+  color: var(--ds-text-secondary);
+  margin-bottom: var(--ds-spacing-6);
+}
+
+/* ============================================
+   Success States
+   ============================================ */
+
+.success-state {
+  text-align: center;
+  padding: var(--ds-spacing-12);
+  color: var(--ds-text-secondary);
+}
+
+.success-state-icon {
+  font-size: var(--ds-font-size-5xl);
+  color: var(--ds-success);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+.success-state-title {
+  font-size: var(--ds-font-size-2xl);
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-text);
+  margin-bottom: var(--ds-spacing-2);
+}
+
+.success-state-message {
+  font-size: var(--ds-font-size-base);
+  color: var(--ds-text-secondary);
+  margin-bottom: var(--ds-spacing-6);
+}
+
+/* ============================================
+   Loading States
+   ============================================ */
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--ds-spacing-12);
+  min-height: 300px;
+}
+
+.loading-state-spinner {
+  margin-bottom: var(--ds-spacing-4);
+}
+
+.loading-state-message {
+  font-size: var(--ds-font-size-base);
+  color: var(--ds-text-secondary);
+}
+
+/* ============================================
+   Empty States
+   ============================================ */
+
+.empty-state-enhanced {
+  text-align: center;
+  padding: var(--ds-spacing-16);
+  background-color: var(--ds-bg-secondary);
+  border-radius: var(--ds-radius-xl);
+  border: 2px dashed var(--ds-border);
+}
+
+.empty-state-enhanced-icon {
+  font-size: var(--ds-font-size-5xl);
+  color: var(--ds-text-muted);
+  margin-bottom: var(--ds-spacing-4);
+  opacity: 0.5;
+}
+
+.empty-state-enhanced-title {
+  font-size: var(--ds-font-size-xl);
+  font-weight: var(--ds-font-weight-semibold);
+  color: var(--ds-text);
+  margin-bottom: var(--ds-spacing-2);
+}
+
+.empty-state-enhanced-message {
+  font-size: var(--ds-font-size-base);
+  color: var(--ds-text-secondary);
+  margin-bottom: var(--ds-spacing-6);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   Focus Improvements
+   ============================================ */
+
+/* Amélioration des focus states pour l'accessibilité */
+*:focus-visible {
+  outline: 3px solid var(--ds-primary);
+  outline-offset: 3px;
+  border-radius: var(--ds-radius-sm);
+}
+
+/* Focus trap pour les modals */
+.focus-trap {
+  /* Utilisé par JavaScript pour gérer le focus dans les modals */
+}
+
+/* ============================================
+   Selection Colors
+   ============================================ */
+
+::selection {
+  background-color: var(--ds-primary);
+  color: white;
+}
+
+::-moz-selection {
+  background-color: var(--ds-primary);
+  color: white;
+}
+
+/* ============================================
+   Scrollbar Styling
+   ============================================ */
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--ds-bg-secondary);
+  border-radius: var(--ds-radius-full);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--ds-primary);
+  border-radius: var(--ds-radius-full);
+  border: 2px solid var(--ds-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--ds-primary-dark);
+}
+
+/* Firefox scrollbar */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ds-primary) var(--ds-bg-secondary);
+}
+
+/* ============================================
+   Print Enhancements
+   ============================================ */
+
+@media print {
+  /* Amélioration de l'impression */
+  @page {
+    margin: 2cm;
+  }
+
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    page-break-after: avoid;
+    color: #000;
+  }
+
+  a {
+    color: #000;
+    text-decoration: underline;
+  }
+
+  a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    color: #666;
+  }
+
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+  }
+
+  pre,
+  blockquote {
+    page-break-inside: avoid;
+    border: 1px solid #ccc;
+    padding: 1em;
+  }
+
+  table {
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tr {
+    page-break-inside: avoid;
+  }
+}
+
+/* ============================================
+   Accessibility Enhancements
+   ============================================ */
+
+/* Skip to main content amélioré */
+.skip-to-main-content {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background-color: var(--ds-primary);
+  color: white;
+  padding: var(--ds-spacing-3) var(--ds-spacing-6);
+  text-decoration: none;
+  border-radius: 0 0 var(--ds-radius-md) 0;
+  z-index: var(--ds-z-tooltip);
+  font-weight: var(--ds-font-weight-semibold);
+  transition: top var(--ds-transition-base);
+}
+
+.skip-to-main-content:focus {
+  top: 0;
+  outline: 3px solid var(--ds-primary);
+  outline-offset: 2px;
+}
+
+/* Amélioration des contrastes */
+.high-contrast {
+  --ds-text: #000000;
+  --ds-bg: #ffffff;
+  --ds-primary: #0000ff;
+}
+
+/* ============================================
+   Dark Mode Polish
+   ============================================ */
+
+.dark-mode {
+  /* Améliorations supplémentaires pour le dark mode */
+  color-scheme: dark;
+}
+
+.dark-mode img {
+  opacity: 0.9;
+  transition: opacity var(--ds-transition-base);
+}
+
+.dark-mode img:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   Responsive Images
+   ============================================ */
+
+.responsive-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: var(--ds-radius-lg);
+}
+
+.responsive-image-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--ds-radius-lg);
+}
+
+.responsive-image-container::before {
+  content: '';
+  display: block;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+}
+
+.responsive-image-container img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================
+   Animation Performance
+   ============================================ */
+
+/* Utilisation de will-change de manière optimale */
+.animate-on-scroll {
+  will-change: transform, opacity;
+}
+
+.animate-on-scroll.animated {
+  will-change: auto;
+}
+
+/* ============================================
+   Container Queries (Future)
+   ============================================ */
+
+@container (min-width: 600px) {
+  .container-responsive {
+    /* Styles basés sur la taille du conteneur */
+  }
+}
+
+/* ============================================
+   View Transitions (Future)
+   ============================================ */
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.3s;
+}
+
+/* ============================================
+   Final Polish
+   ============================================ */
+
+/* Dernières touches pour une expérience parfaite */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+/* Amélioration de la lisibilité */
+p, li {
+  max-width: 65ch;
+}
+
+/* Amélioration des listes */
+ul, ol {
+  padding-left: var(--ds-spacing-6);
+}
+
+li {
+  margin-bottom: var(--ds-spacing-2);
+}
+
+/* Amélioration des liens */
+a {
+  word-break: break-word;
+}
+
+/* Amélioration des tableaux */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Amélioration des formulaires */
+fieldset {
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  padding: var(--ds-spacing-4);
+  margin-bottom: var(--ds-spacing-4);
+}
+
+legend {
+  padding: 0 var(--ds-spacing-2);
+  font-weight: var(--ds-font-weight-semibold);
+  color: var(--ds-text);
+}

@@ -10,59 +10,27 @@ Ce repository contient une plateforme complète combinant :
 
 ## Structure Détaillée
 
-### `/app/` - Application Jekyll (Frontend)
+### `/app/` – Jekyll (frontend) + Flask (backend)
 
 ```
 app/
-├── _config.yml              # Configuration principale Jekyll
-├── _includes/               # Templates HTML réutilisables
-│   ├── header.html
-│   ├── footer.html
-│   ├── nav-databird.html
-│   └── ...
-├── _layouts/                # Layouts de pages
-│   ├── base.html
-│   ├── home.html
-│   ├── post.html
-│   └── ...
+├── _config.yml              # Configuration Jekyll
+├── _layouts/                # base.html → base-optimized (bundles)
+├── _includes/               # nav-databird, footer-databird, etc.
 ├── _posts/                  # Articles de blog
-│   ├── 2024/
-│   │   └── topics/
-│   │       ├── ai/
-│   │       ├── dataviz/
-│   │       └── uses_cases/
-│   └── 2025/
-│       └── topics/
-├── assets/                  # Ressources statiques
-│   ├── css/                # Styles CSS
-│   ├── js/                 # Scripts JavaScript
-│   └── img/                # Images
-├── data/                    # Données YAML
-│   ├── articles.yml
-│   ├── navigation.yml
-│   └── projects.yml
-├── index.html              # Page d'accueil
-├── about.md                # Page À propos
-├── explore.html            # Page d'exploration
-├── projects.html           # Page projets
-└── tags.html               # Page tags
-```
-
-### `/src/` - Application Flask (Backend)
-
-```
-src/
-├── __init__.py             # Factory Flask
-├── api/                    # Endpoints API
-│   ├── newsletter.py
-│   └── ...
-├── routes/                 # Routes Flask
-│   ├── main.py
-│   └── ...
-├── services/               # Services métier
-├── database/               # Modèles de données
-├── config/                 # Configuration
-└── templates/              # Templates Flask
+├── assets/                  # main.bundle.css, main.bundle.js (+ img)
+├── data/                    # articles.yml, navigation.yml, projects.yml
+├── src/                     # Backend Flask
+│   ├── api/v1/             # Endpoints API
+│   ├── routes/             # main, blog, admin
+│   ├── services/           # blog_service, cache_service, etc.
+│   ├── database/           # models, extensions
+│   ├── config/             # base, development, production, testing
+│   └── templates/          # Templates Flask
+├── scripts/                 # test-local.sh, generate_articles_yml.py
+├── run.py                   # Point d'entrée Flask
+├── requirements.txt
+└── _archive/                # Anciens CSS/JS (exclus du build)
 ```
 
 ### `/.github/workflows/` - CI/CD

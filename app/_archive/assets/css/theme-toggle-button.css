@@ -1,0 +1,171 @@
+/**
+ * Theme Toggle Button
+ * Styles pour le bouton de changement de thème
+ */
+
+/* ============================================
+   Theme Toggle Button - Synchronisé
+   ============================================ */
+
+.navbar-theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 2px solid var(--ds-primary);
+  background: white;
+  color: var(--ds-primary);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  font-weight: 600;
+  order: 2;
+}
+
+.navbar-theme-toggle::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(227, 30, 36, 0.1);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+}
+
+.navbar-theme-toggle:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.navbar-theme-toggle:hover {
+  background: rgba(227, 30, 36, 0.05);
+  color: var(--ds-primary);
+  border-color: var(--ds-primary);
+  transform: translateY(-2px);
+  box-shadow: 0 2px 8px rgba(227, 30, 36, 0.2);
+}
+
+.navbar-theme-toggle:active {
+  transform: translateY(0);
+  background: rgba(227, 30, 36, 0.1);
+}
+
+.navbar-theme-toggle .theme-toggle-icon {
+  font-size: 1rem;
+  position: relative;
+  z-index: 1;
+  color: inherit;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar-theme-toggle:hover .theme-toggle-icon {
+  transform: rotate(15deg) scale(1.1);
+}
+
+.navbar-theme-toggle[aria-pressed="true"] {
+  background: var(--ds-primary);
+  color: white;
+  border-color: var(--ds-primary);
+  box-shadow: 0 4px 16px rgba(227, 30, 36, 0.4);
+}
+
+.navbar-theme-toggle[aria-pressed="true"]:hover {
+  background: rgba(227, 30, 36, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(227, 30, 36, 0.4);
+}
+
+.navbar-theme-toggle[aria-pressed="true"] .theme-toggle-icon {
+  color: white;
+}
+
+/* ============================================
+   Focus State
+   ============================================ */
+
+.navbar-theme-toggle:focus-visible {
+  outline: 3px solid var(--ds-primary);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* ============================================
+   Dark Mode Support
+   ============================================ */
+
+.dark-mode .navbar-theme-toggle {
+  background: white;
+  color: var(--ds-primary);
+  border-color: var(--ds-primary);
+}
+
+.dark-mode .navbar-theme-toggle:hover {
+  background: rgba(227, 30, 36, 0.05);
+  color: var(--ds-primary);
+  border-color: var(--ds-primary);
+}
+
+.dark-mode .navbar-theme-toggle[aria-pressed="true"] {
+  background: var(--ds-primary);
+  color: white;
+  border-color: var(--ds-primary);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+
+@media (max-width: 992px) {
+  .navbar-theme-toggle {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-databird-actions {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .navbar-theme-toggle {
+    order: 2;
+  }
+}
+
+/* ============================================
+   Animation
+   ============================================ */
+
+@keyframes themeToggleRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+.navbar-theme-toggle.animating .theme-toggle-icon {
+  animation: themeToggleRotate 0.6s ease-in-out;
+}
+
+/* ============================================
+   Print
+   ============================================ */
+
+@media print {
+  .navbar-theme-toggle {
+    display: none;
+  }
+}

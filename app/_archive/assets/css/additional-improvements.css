@@ -1,0 +1,522 @@
+/**
+ * Améliorations Supplémentaires
+ * Améliorations supplémentaires pour la plateforme
+ */
+
+/* ============================================
+   Amélioration de la Navigation
+   ============================================ */
+
+/* Indicateur de page active amélioré */
+.navbar-databird-nav-link.active {
+  position: relative;
+  color: var(--ds-primary);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+.navbar-databird-nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--ds-primary);
+  border-radius: var(--ds-radius-full);
+}
+
+/* ============================================
+   Amélioration des Cards
+   ============================================ */
+
+/* Effet de profondeur amélioré */
+.blog-card-databird,
+.featured-post-card,
+.topic-card-enhanced,
+.category-card {
+  position: relative;
+  isolation: isolate;
+}
+
+.blog-card-databird::after,
+.featured-post-card::after,
+.topic-card-enhanced::after,
+.category-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: linear-gradient(135deg, var(--ds-primary), var(--ds-secondary));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity var(--ds-transition-base);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.blog-card-databird:hover::after,
+.featured-post-card:hover::after,
+.topic-card-enhanced:hover::after,
+.category-card:hover::after {
+  opacity: 1;
+}
+
+/* ============================================
+   Amélioration des Filtres
+   ============================================ */
+
+.filter-tag {
+  position: relative;
+  overflow: hidden;
+}
+
+.filter-tag::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.filter-tag:hover::before {
+  left: 100%;
+}
+
+.filter-tag.active {
+  background: var(--ds-primary);
+  color: white;
+  border-color: var(--ds-primary);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+/* ============================================
+   Amélioration des Images
+   ============================================ */
+
+/* Lazy loading avec placeholder amélioré */
+img[loading="lazy"] {
+  background: linear-gradient(
+    90deg,
+    var(--ds-bg-secondary) 25%,
+    var(--ds-bg-tertiary) 50%,
+    var(--ds-bg-secondary) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s ease-in-out infinite;
+}
+
+img[loading="lazy"].loaded {
+  background: none;
+  animation: none;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* ============================================
+   Amélioration des Formulaires
+   ============================================ */
+
+/* Labels flottants améliorés */
+.form-group {
+  position: relative;
+  margin-bottom: var(--ds-spacing-6);
+}
+
+.form-label {
+  position: absolute;
+  top: 50%;
+  left: var(--ds-spacing-4);
+  transform: translateY(-50%);
+  color: var(--ds-text-secondary);
+  font-size: var(--ds-font-size-base);
+  pointer-events: none;
+  transition: all var(--ds-transition-base);
+  background: var(--ds-bg);
+  padding: 0 var(--ds-spacing-2);
+}
+
+.form-input:focus + .form-label,
+.form-input:not(:placeholder-shown) + .form-label {
+  top: 0;
+  transform: translateY(-50%);
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-primary);
+}
+
+.form-input {
+  width: 100%;
+  padding: var(--ds-spacing-4);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-bg);
+  color: var(--ds-text);
+  font-size: var(--ds-font-size-base);
+  transition: all var(--ds-transition-base);
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: var(--ds-primary);
+  box-shadow: 0 0 0 3px var(--ds-primary-lighter);
+}
+
+/* ============================================
+   Amélioration des Badges
+   ============================================ */
+
+.badge-pulse {
+  position: relative;
+}
+
+.badge-pulse::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: var(--ds-primary);
+  opacity: 0.3;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+/* ============================================
+   Amélioration des Statistiques
+   ============================================ */
+
+.stat-card {
+  text-align: center;
+  padding: var(--ds-spacing-6);
+  background: var(--ds-bg);
+  border: 1px solid var(--ds-border);
+  border-radius: var(--ds-radius-xl);
+  transition: all var(--ds-transition-base);
+}
+
+.stat-card:hover {
+  border-color: var(--ds-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--ds-shadow-lg);
+}
+
+.stat-value {
+  font-size: clamp(var(--ds-font-size-3xl), 5vw, var(--ds-font-size-5xl));
+  font-weight: var(--ds-font-weight-extrabold);
+  color: var(--ds-primary);
+  line-height: 1;
+  margin-bottom: var(--ds-spacing-2);
+}
+
+.stat-label {
+  font-size: var(--ds-font-size-sm);
+  color: var(--ds-text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-letter-spacing-wide);
+  font-weight: var(--ds-font-weight-semibold);
+}
+
+/* ============================================
+   Amélioration des Tags Cloud
+   ============================================ */
+
+.tag-cloud-item {
+  position: relative;
+  transition: all var(--ds-transition-base);
+}
+
+.tag-cloud-item::before {
+  content: '#';
+  opacity: 0;
+  transition: opacity var(--ds-transition-fast);
+  margin-right: var(--ds-spacing-1);
+}
+
+.tag-cloud-item:hover::before {
+  opacity: 0.5;
+}
+
+.tag-cloud-item:hover {
+  transform: translateY(-2px) scale(1.05);
+}
+
+/* ============================================
+   Amélioration de la Newsletter
+   ============================================ */
+
+.newsletter-form {
+  display: flex;
+  gap: var(--ds-spacing-3);
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.newsletter-input {
+  flex: 1;
+  padding: var(--ds-spacing-4);
+  border: 2px solid var(--ds-border);
+  border-radius: var(--ds-radius-md);
+  background: var(--ds-bg);
+  color: var(--ds-text);
+  font-size: var(--ds-font-size-base);
+  transition: all var(--ds-transition-base);
+}
+
+.newsletter-input:focus {
+  outline: none;
+  border-color: var(--ds-primary);
+  box-shadow: 0 0 0 3px var(--ds-primary-lighter);
+}
+
+.newsletter-button {
+  padding: var(--ds-spacing-4) var(--ds-spacing-6);
+  background: var(--ds-primary);
+  color: white;
+  border: 2px solid var(--ds-primary);
+  border-radius: var(--ds-radius-md);
+  font-weight: var(--ds-font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--ds-transition-base);
+  white-space: nowrap;
+}
+
+.newsletter-button:hover {
+  background: rgba(227, 30, 36, 0.9);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+}
+
+/* ============================================
+   Amélioration du Footer
+   ============================================ */
+
+.footer-databird-column a {
+  position: relative;
+  display: inline-block;
+}
+
+.footer-databird-column a::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--ds-primary);
+  transition: width var(--ds-transition-base);
+}
+
+.footer-databird-column a:hover::before {
+  width: 100%;
+}
+
+/* ============================================
+   Amélioration des Breadcrumbs
+   ============================================ */
+
+.breadcrumb-item:not(:last-child)::after {
+  content: '›';
+  margin: 0 var(--ds-spacing-2);
+  color: var(--ds-text-muted);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+/* ============================================
+   Amélioration des Citations
+   ============================================ */
+
+blockquote {
+  position: relative;
+  padding-left: var(--ds-spacing-8);
+}
+
+blockquote::before {
+  content: '"';
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: var(--ds-font-size-5xl);
+  color: var(--ds-primary);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* ============================================
+   Amélioration des Code Blocks
+   ============================================ */
+
+pre {
+  position: relative;
+}
+
+pre::before {
+  content: 'CODE';
+  position: absolute;
+  top: var(--ds-spacing-2);
+  right: var(--ds-spacing-4);
+  font-size: var(--ds-font-size-xs);
+  font-weight: var(--ds-font-weight-bold);
+  color: var(--ds-text-muted);
+  text-transform: uppercase;
+  letter-spacing: var(--ds-letter-spacing-wide);
+  opacity: 0.5;
+}
+
+/* ============================================
+   Amélioration des Tables
+   ============================================ */
+
+table thead th {
+  position: sticky;
+  top: 0;
+  background: var(--ds-bg-secondary);
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* ============================================
+   Amélioration des Listes
+   ============================================ */
+
+ul li::marker {
+  color: var(--ds-primary);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+ol li::marker {
+  color: var(--ds-primary);
+  font-weight: var(--ds-font-weight-bold);
+}
+
+/* ============================================
+   Amélioration des Liens Externes
+   ============================================ */
+
+a[href^="http"]:not([href*="{{ site.url }}"]) {
+  position: relative;
+}
+
+a[href^="http"]:not([href*="{{ site.url }}"])::after {
+  content: '↗';
+  display: inline-block;
+  margin-left: var(--ds-spacing-1);
+  font-size: var(--ds-font-size-xs);
+  opacity: 0.6;
+  transition: all var(--ds-transition-fast);
+}
+
+a[href^="http"]:not([href*="{{ site.url }}"]):hover::after {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+
+/* ============================================
+   Amélioration des Sections
+   ============================================ */
+
+section {
+  position: relative;
+  scroll-margin-top: 80px; /* Pour la navigation avec navbar fixe */
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--ds-primary),
+    var(--ds-secondary)
+  );
+  opacity: 0;
+  transition: opacity var(--ds-transition-base);
+}
+
+section:target::before,
+section:focus-within::before {
+  opacity: 0.3;
+}
+
+/* ============================================
+   Amélioration des Animations
+   ============================================ */
+
+/* Smooth reveal animation */
+@keyframes smoothReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.smooth-reveal {
+  animation: smoothReveal 0.6s ease-out;
+}
+
+/* ============================================
+   Responsive Improvements
+   ============================================ */
+
+@media (max-width: 768px) {
+  .newsletter-form {
+    flex-direction: column;
+  }
+
+  .newsletter-button {
+    width: 100%;
+  }
+
+  .stat-value {
+    font-size: var(--ds-font-size-3xl);
+  }
+}
+
+/* ============================================
+   Print Improvements
+   ============================================ */
+
+@media print {
+  .filter-tag,
+  .badge-pulse,
+  .tag-cloud-item {
+    break-inside: avoid;
+  }
+
+  section::before {
+    display: none;
+  }
+}

@@ -1,0 +1,148 @@
+/**
+ * 404 Page Styles
+ * Page d'erreur 404 améliorée
+ * Inspiré de DataBird
+ */
+
+/* ============================================
+   404 Container
+   ============================================ */
+.error-404-container {
+  min-height: calc(100vh - 200px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: var(--db-bg);
+  text-align: center;
+}
+
+.error-404-content {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.error-404-number {
+  font-size: clamp(6rem, 15vw, 12rem);
+  font-weight: 900;
+  line-height: 1;
+  background: linear-gradient(135deg, var(--db-primary) 0%, var(--db-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 1rem;
+  letter-spacing: -0.05em;
+}
+
+.error-404-title {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--db-text);
+  letter-spacing: -0.02em;
+}
+
+.error-404-description {
+  font-size: clamp(1rem, 2vw, 1.125rem);
+  line-height: 1.7;
+  color: var(--db-text-secondary);
+  margin-bottom: 2.5rem;
+}
+
+.error-404-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.error-404-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 2rem;
+  background: var(--db-primary);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.error-404-button:hover {
+  background: var(--db-primary-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+  color: white;
+  text-decoration: none;
+}
+
+.error-404-button-secondary {
+  background: transparent;
+  color: var(--db-primary);
+  border: 2px solid var(--db-primary);
+}
+
+.error-404-button-secondary:hover {
+  background: var(--db-primary);
+  color: white;
+}
+
+.error-404-illustration {
+  max-width: 300px;
+  margin: 0 auto 2rem;
+  opacity: 0.8;
+}
+
+.error-404-search {
+  max-width: 400px;
+  margin: 2rem auto 0;
+  position: relative;
+}
+
+.error-404-search-input {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 3rem;
+  background: var(--db-bg-secondary);
+  border: 2px solid var(--db-border);
+  border-radius: 12px;
+  font-size: 1rem;
+  color: var(--db-text);
+  transition: all 0.2s ease;
+}
+
+.error-404-search-input:focus {
+  outline: none;
+  border-color: var(--db-primary);
+  box-shadow: 0 0 0 3px rgba(227, 30, 36, 0.1);
+  background: var(--db-bg);
+}
+
+.error-404-search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--db-text-muted);
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 768px) {
+  .error-404-container {
+    padding: 2rem 1rem;
+  }
+
+  .error-404-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .error-404-button {
+    width: 100%;
+    justify-content: center;
+  }
+}

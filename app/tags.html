@@ -13,18 +13,18 @@ title: 'Toutes les Catégories'
         <span class="breadcrumb-item active">Tags</span>
       </div>
     </nav>
-    
+
     <div class="tag-header-content">
       <div class="tag-icon-wrapper">
         <div class="tag-icon-large">🏷️</div>
       </div>
-      
+
       <h1 class="tag-title">Toutes les Catégories</h1>
       <p class="tag-description">
-        Explorez tous nos sujets et trouvez les articles qui vous intéressent. 
+        Explorez tous nos sujets et trouvez les articles qui vous intéressent.
         Cliquez sur une catégorie pour découvrir tous les articles associés.
       </p>
-      
+
       <div class="tag-stats">
         <div class="tag-stat-item">
           <span class="tag-stat-value">{{ site.tags.size }}</span>
@@ -57,7 +57,7 @@ title: 'Toutes les Catégories'
           <span><i class="far fa-file-alt" aria-hidden="true"></i> {{ site.tags['data-analytics'] | size | default: 0 }} Articles</span>
         </div>
       </a>
-      
+
       <a href="/tags/data-science" class="topic-card">
         <div class="topic-icon">🔬</div>
         <h3 class="topic-title">Data Science</h3>
@@ -68,7 +68,7 @@ title: 'Toutes les Catégories'
           <span><i class="far fa-file-alt" aria-hidden="true"></i> {{ site.tags['data-science'] | size | default: 0 }} Articles</span>
         </div>
       </a>
-      
+
       <a href="/tags/intelligence-artificielle" class="topic-card">
         <div class="topic-icon">🤖</div>
         <h3 class="topic-title">Intelligence Artificielle</h3>
@@ -79,7 +79,7 @@ title: 'Toutes les Catégories'
           <span><i class="far fa-file-alt" aria-hidden="true"></i> {{ site.tags['intelligence-artificielle'] | size | default: 0 }} Articles</span>
         </div>
       </a>
-      
+
       <a href="/tags/data-engineering" class="topic-card">
         <div class="topic-icon">⚙️</div>
         <h3 class="topic-title">Data Engineering</h3>
@@ -90,7 +90,7 @@ title: 'Toutes les Catégories'
           <span><i class="far fa-file-alt" aria-hidden="true"></i> {{ site.tags['data-engineering'] | size | default: 0 }} Articles</span>
         </div>
       </a>
-      
+
       <a href="/tags/business-intelligence" class="topic-card">
         <div class="topic-icon">💼</div>
         <h3 class="topic-title">Business Intelligence</h3>
@@ -112,7 +112,7 @@ title: 'Toutes les Catégories'
     <p class="section-subtitle">
       Cliquez sur une catégorie pour voir tous les articles associés
     </p>
-    
+
     {% assign date_format = site.date_format | default: "%B %-d, %Y" %}
     {%- capture site_tags -%}
         {%- for tag in site.tags -%}
@@ -120,12 +120,12 @@ title: 'Toutes les Catégories'
         {%- endfor -%}
     {%- endcapture -%}
     {%- assign tags_list = site_tags | split:',' | sort -%}
-    
+
     <div class="tags-cloud">
       {%- for tag in tags_list -%}
         {% assign tag_slug = tag | slugify %}
         {% assign tag_posts = site.tags[tag] %}
-        <a href="/tags/{{ tag_slug }}" class="tag-cloud-item">
+        <a href="/tags/#{{ tag_slug }}" class="tag-cloud-item">
           {{ tag }}
           <span class="tag-cloud-count">{{ tag_posts.size }}</span>
         </a>
@@ -138,7 +138,7 @@ title: 'Toutes les Catégories'
 <section class="tag-posts-section">
   <div class="container-databird">
     <h2 class="section-title">Articles par Catégorie</h2>
-    
+
     <div id="full-tags-list">
       {%- for tag in tags_list -%}
         <div class="tag-category-section" id="{{ tag | slugify }}">
@@ -147,12 +147,12 @@ title: 'Toutes les Catégories'
               <i class="fas fa-tag" aria-hidden="true"></i>
               {{ tag }} ({{ site.tags[tag].size }})
             </h3>
-            <a href="/tags/{{ tag | slugify }}" class="view-all-link">
+            <a href="/tags/#{{ tag | slugify }}" class="view-all-link">
               Voir tous
               <i class="fas fa-arrow-right"></i>
             </a>
           </div>
-          
+
           <div class="blog-grid-databird" style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));">
             {%- for post in site.tags[tag] limit: 6 -%}
               <article class="blog-card-databird">
@@ -165,18 +165,18 @@ title: 'Toutes les Catégories'
                 {% else %}
                   <div class="blog-card-image" style="background: linear-gradient(135deg, #E31E24 0%, #1E40AF 100%);"></div>
                 {% endif %}
-                
+
                 <div class="blog-card-content">
                   <span class="blog-card-tag">{{ tag }}</span>
-                  
+
                   <h2 class="blog-card-title">
                     <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
                   </h2>
-                  
+
                   {% if post.excerpt %}
                     <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
                   {% endif %}
-                  
+
                   <div class="blog-card-meta">
                     <span class="blog-card-date">
                       <i class="far fa-calendar" aria-hidden="true"></i>
@@ -193,10 +193,10 @@ title: 'Toutes les Catégories'
               </article>
             {%- endfor -%}
           </div>
-          
+
           {% if site.tags[tag].size > 6 %}
             <div style="text-align: center; margin-top: 2rem;">
-              <a href="/tags/{{ tag | slugify }}" class="cta-button cta-button-primary">
+              <a href="/tags/#{{ tag | slugify }}" class="cta-button cta-button-primary">
                 Voir tous les articles ({{ site.tags[tag].size }})
                 <i class="fas fa-arrow-right"></i>
               </a>
@@ -240,4 +240,3 @@ title: 'Toutes les Catégories'
   margin-right: 0.5rem;
 }
 </style>
-

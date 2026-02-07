@@ -1,0 +1,38 @@
+---
+layout: base
+title: Archive des articles
+permalink: /archive/
+---
+
+<section class="landing-section explore-header">
+  <div class="container-databird">
+    <h1 class="explore-title">Archive</h1>
+    <p class="explore-subtitle">
+      Tous les articles classés par date. {{ site.posts | size }} article{% if site.posts.size != 1 %}s{% endif %} au total.
+    </p>
+  </div>
+</section>
+
+<section class="landing-section--alt archive-section">
+  <div class="container-databird">
+    {% assign posts_by_year = site.posts | group_by_exp: "post", "post.date | date: '%Y'" %}
+    {% for year_group in posts_by_year %}
+      <div class="archive-year">
+        <h2 class="archive-year-title">{{ year_group.name }}</h2>
+        <ul class="archive-list">
+          {% for post in year_group.items %}
+            {% assign words = post.content | strip_html | number_of_words %}
+            {% assign read_time = words | divided_by: 200 %}{% if read_time < 1 %}{% assign read_time = 1 %}{% endif %}
+            <li class="archive-item">
+              <a href="{{ post.url | relative_url }}" class="archive-item-link">{{ post.title }}</a>
+              <span class="archive-item-meta">
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%-d/%-m/%Y" }}</time>
+                <span class="archive-item-readtime">{{ read_time }} min</span>
+              </span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endfor %}
+  </div>
+</section>

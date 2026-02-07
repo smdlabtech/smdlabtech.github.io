@@ -1,0 +1,255 @@
+---
+# Layout optimisé avec CSS/JS consolidés
+# Remplace les 96 fichiers CSS et 56 fichiers JS par 2 bundles
+common-css:
+  - "/assets/css/main.bundle.css"
+# Pas de Bootstrap : un seul design system (main.bundle.css) pour éviter conflits et surcharge
+common-ext-css:
+  - "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+  - "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,700;1,400&display=swap"
+common-ext-js: []
+common-js:
+  - "/assets/js/main.bundle.js"
+---
+
+<!DOCTYPE html>
+<html lang="{{ page.language | default: site.language | default: 'fr' }}">
+
+<!--
+  Plateforme Data & IA - smdlabtech
+  Version optimisée avec bundles consolidés
+  Performance: ~90% réduction du nombre de requêtes HTTP
+-->
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover">
+
+  <!-- Performance Hints -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+
+  <!-- Preload critical resources -->
+  <link rel="preload" href="/assets/css/main.bundle.css" as="style">
+  <link rel="preload" href="/assets/js/main.bundle.js" as="script">
+
+  {% capture pagetitle %}
+    {%- if page.share-title -%}
+      {{ page.share-title | strip_html | xml_escape }}
+    {%- elsif page.title -%}
+      {{ page.title | strip_html | xml_escape  }}
+    {%- else -%}
+      {{ site.title | strip_html | xml_escape }}
+    {%- endif -%}
+  {% endcapture %}
+
+  {% capture title %}
+    {%- if site.title and site["title-on-all-pages"] -%}
+      {%- if pagetitle != site.title -%}
+        {{ pagetitle }} | {{ site.title }}
+      {%- else -%}
+        {{ pagetitle }}
+      {%- endif -%}
+    {%- else -%}
+      {{ pagetitle }}
+    {%- endif -%}
+  {% endcapture %}
+
+  {% capture description %}
+    {%- if page.share-description -%}
+      {{ page.share-description | strip_html | xml_escape }}
+    {%- elsif page.description -%}
+      {{ page.description | strip_html | xml_escape }}
+    {%- elsif page.subtitle -%}
+      {{ page.subtitle | strip_html | xml_escape }}
+    {%- else -%}
+      {%- assign excerpt_length = site.excerpt_length | default: 50 -%}
+      {{ page.content | strip_html | xml_escape | truncatewords: excerpt_length | strip }}
+    {%- endif -%}
+  {% endcapture %}
+
+  <title>{{ title }}</title>
+
+  {% capture author %}
+    {%- if page.author -%}
+      {{ page.author | strip_html }}
+    {%- elsif site.author -%}
+      {{ site.author }}
+    {%- endif -%}
+  {% endcapture %}
+  {% if author != "" %}
+  <meta name="author" content="{{ author }}">
+  {% endif %}
+
+  <meta name="description" content="{{ description }}">
+
+  <!-- SEO Meta Tags -->
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="googlebot" content="index, follow">
+  <meta name="language" content="French">
+
+  <!-- Open Graph -->
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:type" content="{% if page.id %}article{% else %}website{% endif %}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:title" content="{{ title }}">
+  <meta property="og:description" content="{{ description }}">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@{{ site.social-network-links.twitter | default: 'smdlabtech' }}">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#E31E24">
+
+  <!-- PWA Manifest -->
+  <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="{{ site.title }}">
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "{% if page.id %}BlogPosting{% else %}WebSite{% endif %}",
+    "name": "{{ title }}",
+    "description": "{{ description }}",
+    "url": "{{ page.url | absolute_url }}",
+    {% if page.id %}
+    "datePublished": "{{ page.date | date_to_xmlschema }}",
+    "dateModified": "{{ page.last_modified_at | date_to_xmlschema | default: page.date | date_to_xmlschema }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ author }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "{{ site.title }}",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ site.avatar | absolute_url }}"
+      }
+    },
+    {% endif %}
+    "inLanguage": "fr-FR"
+  }
+  </script>
+
+  <!-- External CSS -->
+  {% if layout.common-ext-css %}
+    {% for css in layout.common-ext-css %}
+      {% if css.href %}
+        <link rel="stylesheet" href="{{ css.href }}" {% if css.sri %}integrity="{{ css.sri }}" crossorigin="anonymous"{% endif %}>
+      {% else %}
+        <link rel="stylesheet" href="{{ css }}">
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  <!-- Design system unique (pas de Bootstrap = pas de conflit) -->
+  {% if layout.common-css %}
+    {% for css in layout.common-css %}
+      <link rel="stylesheet" href="{{ css | relative_url }}">
+    {% endfor %}
+  {% endif %}
+
+  <!-- Nav horizontale : inline pour garantir le rendu même si le bundle ne charge pas -->
+  <style>
+    .navbar-databird ul,.navbar-databird li{list-style:none;margin:0;padding:0;}
+    .navbar-databird-content{display:flex!important;align-items:center!important;justify-content:space-between!important;flex-wrap:nowrap!important;}
+    .navbar-databird-drawer{display:flex!important;align-items:center!important;flex:1 1 auto!important;min-width:0!important;}
+    .navbar-databird-nav{display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;}
+    .navbar-databird-nav-item{display:inline-flex!important;}
+    .navbar-databird-nav-link{display:inline-flex!important;}
+    .navbar-databird-actions,.navbar-databird-toggle{flex-shrink:0!important;}
+    @media (max-width:767px){
+      .navbar-databird-drawer{position:fixed!important;top:72px!important;left:0!important;right:0!important;bottom:0!important;flex:none!important;display:block!important;transform:translateX(-100%);background:#fff;z-index:98;overflow-y:auto;}
+      .navbar-databird-drawer.active{transform:translateX(0)!important;}
+      .navbar-databird-drawer .navbar-databird-nav{display:block!important;}
+      .navbar-databird-drawer .navbar-databird-nav-item{display:block!important;}
+    }
+  </style>
+
+  <!-- Page-specific CSS -->
+  {% if page.css %}
+    {% for css in page.css %}
+      <link rel="stylesheet" href="{{ css | relative_url }}">
+    {% endfor %}
+  {% endif %}
+
+  <!-- Favicon : /favicon.ico présent pour éviter 404, fallback PNG -->
+  {% assign favicon_ico = site.static_files | where: "name", "favicon.ico" | first %}
+  {% if favicon_ico %}
+  <link rel="icon" href="{{ '/favicon.ico' | relative_url }}" type="image/png">
+  {% else %}
+  <link rel="icon" href="{{ '/assets/img/avatar-icon.png' | relative_url }}" type="image/png">
+  {% endif %}
+  <link rel="apple-touch-icon" href="{{ '/assets/img/avatar-icon.png' | relative_url }}">
+
+  <!-- Analytics -->
+  {% include gtag.html %}
+  {% include gtm_head.html %}
+</head>
+
+<body>
+  <!-- Skip to content link for accessibility -->
+  <a href="#main-content" class="skip-to-content" data-i18n="a11y.skipContent">Aller au contenu principal</a>
+
+  <!-- Google Tag Manager (noscript) -->
+  {% include gtm_body.html %}
+
+  <!-- Navigation -->
+  {% include nav-databird.html %}
+
+  <!-- Main Content -->
+  <main id="main-content">
+    {{ content }}
+  </main>
+
+  <!-- Retour en haut -->
+  <button type="button" class="back-to-top" id="back-to-top" aria-label="Retour en haut de la page">
+    <i class="fas fa-arrow-up" aria-hidden="true"></i>
+  </button>
+
+  <!-- Footer -->
+  {% include footer-databird.html %}
+
+  <!-- External JS -->
+  <!-- Main Bundle JS -->
+  {% if layout.common-js %}
+    {% for js in layout.common-js %}
+      <script src="{{ js | relative_url }}" defer></script>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Page-specific JS -->
+  {% if page.js %}
+    {% for js in page.js %}
+      <script src="{{ js | relative_url }}" defer></script>
+    {% endfor %}
+  {% endif %}
+
+  <!-- Cookie Consent -->
+  {% include cookie-consent.html %}
+
+  <script>
+  (function() {
+    var btn = document.getElementById('back-to-top');
+    if (btn) {
+      window.addEventListener('scroll', function() {
+        btn.classList.toggle('visible', window.scrollY > 400);
+      }, { passive: true });
+      btn.addEventListener('click', function() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    }
+  })();
+  </script>
+</body>
+
+</html>

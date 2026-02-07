@@ -2,8 +2,13 @@
 layout: base
 ---
 
-{% assign tag_name = page.tag | default: page.title | downcase %}
-{% assign tag_posts = site.posts | where_exp: "post", "post.tags contains tag_name" %}
+{% comment %} Posts pour ce tag : site.tags utilise le titre (ex. "Data Engineering") {% endcomment %}
+{% assign tag_posts = site.tags[page.title] %}
+
+{% comment %} Slugs des tags qui ont une page (éviter liens 404 vers /tags/machine-learning etc.) {% endcomment %}
+{% capture valid_tag_slugs %}|
+{% for p in site.pages %}{% if p.layout == "tag" and p.tag %}{{ p.tag }}|{% endif %}{% endfor %}
+{% endcapture %}
 
 <!-- Tag Header Section -->
 <section class="tag-header-section">
@@ -17,7 +22,7 @@ layout: base
         <span class="breadcrumb-item active">{{ page.title }}</span>
       </div>
     </nav>
-    
+
     <div class="tag-header-content">
       <div class="tag-icon-wrapper">
         {% if page.icon %}
@@ -26,13 +31,13 @@ layout: base
           <div class="tag-icon-large">📊</div>
         {% endif %}
       </div>
-      
+
       <h1 class="tag-title">{{ page.title }}</h1>
-      
+
       {% if page.description %}
         <p class="tag-description">{{ page.description }}</p>
       {% endif %}
-      
+
       <div class="tag-stats">
         <div class="tag-stat-item">
           <span class="tag-stat-value">{{ tag_posts.size }}</span>
@@ -78,16 +83,16 @@ layout: base
         {% else %}
           <div class="featured-post-image" style="background: linear-gradient(135deg, #E31E24 0%, #1E40AF 100%);"></div>
         {% endif %}
-        
+
         <div class="featured-post-content">
           <h3 class="featured-post-title">
             <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
           </h3>
-          
+
           {% if post.excerpt %}
             <p class="featured-post-excerpt">{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
           {% endif %}
-          
+
           <div class="featured-post-meta">
             <span>
               <i class="far fa-calendar" aria-hidden="true"></i>
@@ -114,10 +119,10 @@ layout: base
     <div class="tag-posts-header">
       <h2 class="section-title">Tous les Articles</h2>
       <p class="section-subtitle">
-        {{ tag_posts.size }} article{{ tag_posts.size | pluralize: 's' }} dans cette catégorie
+        {% if tag_posts.size == 0 %}0 article{% elsif tag_posts.size == 1 %}1 article{% else %}{{ tag_posts.size }} articles{% endif %} dans cette catégorie
       </p>
     </div>
-    
+
     {% if tag_posts.size > 0 %}
       <div class="blog-grid-databird">
         {% for post in tag_posts %}
@@ -131,20 +136,20 @@ layout: base
           {% else %}
             <div class="blog-card-image" style="background: linear-gradient(135deg, #E31E24 0%, #1E40AF 100%);"></div>
           {% endif %}
-          
+
           <div class="blog-card-content">
             {% if post.tags %}
               <span class="blog-card-tag">{{ post.tags[0] }}</span>
             {% endif %}
-            
+
             <h2 class="blog-card-title">
               <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
             </h2>
-            
+
             {% if post.excerpt %}
               <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncatewords: 25 }}</p>
             {% endif %}
-            
+
             <div class="blog-card-meta">
               <span class="blog-card-date">
                 <i class="far fa-calendar" aria-hidden="true"></i>
@@ -163,32 +168,62 @@ layout: base
       </div>
     {% else %}
       <div class="empty-state">
-        <div class="empty-state-icon">📭</div>
-        <h3 class="empty-state-title">Aucun article trouvé</h3>
+        <div class="empty-state-icon" aria-hidden="true">📭</div>
+        <h3 class="empty-state-title">Aucun article dans cette catégorie</h3>
         <p class="empty-state-description">
-          Il n'y a pas encore d'articles dans cette catégorie. Revenez bientôt !
+          Il n'y a pas encore d'articles pour <strong>{{ page.title }}</strong>. Découvrez nos autres sujets ou revenez bientôt !
         </p>
-        <a href="{{ '/' | relative_url }}" class="cta-button cta-button-primary">
-          Retour à l'accueil
-          <i class="fas fa-arrow-right"></i>
-        </a>
+        <div class="empty-state-actions">
+          <a href="{{ '/' | relative_url }}" class="btn btn-primary">
+            <i class="fas fa-home" aria-hidden="true"></i> Retour à l'accueil
+          </a>
+          <a href="{{ '/tags/' | relative_url }}" class="btn btn-secondary">
+            <i class="fas fa-tags" aria-hidden="true"></i> Toutes les catégories
+          </a>
+        </div>
+        {% if site.tags.size > 0 %}
+        <div class="empty-state-suggestions">
+          <p class="empty-state-suggestions-title">Catégories avec des articles</p>
+          <div class="tags-cloud tags-cloud-inline">
+            {% assign empty_shown = 0 %}
+            {% for tag_entry in site.tags %}
+              {% if empty_shown >= 8 %}{% break %}{% endif %}
+              {% assign t = tag_entry | first %}
+              {% assign t_slug = t | slugify %}
+              {% assign slug_check = "|" | append: t_slug | append: "|" %}
+              {% if valid_tag_slugs contains slug_check %}
+                {% assign count = tag_entry | last | size %}
+                <a href="{{ '/tags/' | relative_url }}{{ t_slug }}" class="tag-cloud-item">{{ t }} ({{ count }})</a>
+                {% assign empty_shown = empty_shown | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endif %}
       </div>
     {% endif %}
   </div>
 </section>
 
-<!-- Related Tags -->
-{% assign all_tags = site.posts | map: 'tags' | flatten | uniq | sort %}
-{% assign related_tags = all_tags | where_exp: "tag", "tag != tag_name" | limit: 5 %}
-{% if related_tags.size > 0 %}
+<!-- Related Tags : liens uniquement vers les tags qui ont une page (éviter 404) -->
+{% if site.tags.size > 0 %}
 <section class="related-tags-section">
   <div class="container-databird">
-    <h2 class="section-title">Catégories Similaires</h2>
+    <h2 class="section-title">Découvrir d'autres catégories</h2>
     <div class="tags-cloud">
-      {% for tag in related_tags %}
-        <a href="/tags/{{ tag | slugify }}" class="tag-cloud-item">
-          {{ tag }}
-        </a>
+      {% assign shown = 0 %}
+      {% for tag_entry in site.tags %}
+        {% if shown >= 12 %}{% break %}{% endif %}
+        {% assign t = tag_entry | first %}
+        {% if t != page.title %}
+          {% assign t_slug = t | slugify %}
+          {% assign slug_check = "|" | append: t_slug | append: "|" %}
+          {% if valid_tag_slugs contains slug_check %}
+            {% assign count = tag_entry | last | size %}
+            <a href="{{ '/tags/' | relative_url }}{{ t_slug }}" class="tag-cloud-item">{{ t }} ({{ count }})</a>
+            {% assign shown = shown | plus: 1 %}
+          {% endif %}
+        {% endif %}
       {% endfor %}
     </div>
   </div>

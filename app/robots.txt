@@ -1,0 +1,8 @@
+# robots.txt pour https://smdlabtech.github.io
+# Généré statiquement, copié dans _site par Jekyll
+
+User-agent: *
+Allow: /
+
+# Sitemap (jekyll-sitemap génère /sitemap.xml)
+Sitemap: https://smdlabtech.github.io/sitemap.xml
