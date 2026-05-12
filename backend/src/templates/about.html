@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block head %}<meta name="i18n-title-key" content="doc.titleAbout">{% endblock %}
+{% block title %}À propos - Portfolio{% endblock %}
+
+{% block content %}
+<style>
+  .about-wrap { display: grid; gap: .8rem; grid-template-columns: 1fr; }
+  .about-head h1 {
+    margin: 0 0 .5rem;
+    font-size: clamp(1.9rem, 6vw, 2.7rem);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+  }
+  .about-head p { margin: 0; color: #5f6f8a; line-height: 1.65; max-width: 65ch; }
+  .about-panel {
+    background: #fff;
+    border: 1px solid #dee7f7;
+    border-radius: 15px;
+    padding: .95rem;
+    box-shadow: 0 10px 24px rgba(18, 38, 71, 0.07);
+  }
+  .about-panel h2 { margin: 0 0 .45rem; font-size: 1.05rem; }
+  .about-panel p { margin: 0; color: #63728d; line-height: 1.6; }
+  .about-tags { display: flex; gap: .45rem; flex-wrap: wrap; margin-top: .55rem; }
+  .about-tag {
+    border-radius: 999px;
+    background: #eef3ff;
+    border: 1px solid #d8e3fb;
+    color: #2e4a83;
+    font-size: .75rem;
+    font-weight: 700;
+    padding: .33rem .62rem;
+  }
+</style>
+
+<section class="about-wrap">
+  <div class="about-head">
+    <h1 data-i18n="doc.aboutHeading">À propos</h1>
+    <p data-i18n="doc.aboutIntro">
+      J’aide à transformer des idées en produits digitaux robustes avec une approche design + engineering.
+    </p>
+  </div>
+
+  <article class="about-panel">
+    <h2>Vision</h2>
+    <p>Construire des interfaces lisibles, des architectures maintenables et des expériences orientées résultats.</p>
+    <div class="about-tags">
+      <span class="about-tag">Product Engineering</span>
+      <span class="about-tag">Data Systems</span>
+      <span class="about-tag">Modern UI</span>
+    </div>
+  </article>
+
+  <article class="about-panel">
+    <h2>Collaboration</h2>
+    <p>Intervention en mission ponctuelle, audit, prototypage ou accompagnement long terme.</p>
+  </article>
+</section>
+{% endblock %}

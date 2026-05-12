@@ -1,0 +1,661 @@
+# French (default) — PDE i18n
+# Copyright (C) 2026
+# This file is distributed under the same license as the PDE project.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PDE 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-14 17:22+0100\n"
+"PO-Revision-Date: 2026-01-01 00:00+0000\n"
+"Last-Translator: \n"
+"Language: fr\n"
+"Language-Team: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: main.py:116
+msgid "Ressource introuvable."
+msgstr ""
+
+#: main.py:120
+msgid "Requête invalide."
+msgstr ""
+
+#: main.py:124
+msgid "Type de fichier non supporté."
+msgstr "Type de fichier non supporté."
+
+#: main.py (405 handler)
+msgid "Méthode non autorisée."
+msgstr "Méthode non autorisée."
+
+#: main.py:133
+msgid "Une erreur interne s'est produite. Réessaie ou reviens plus tard."
+msgstr ""
+
+#: src/templates/about.html:2 src/templates/about.html:8
+#: src/templates/base.html:130 src/templates/error.html:26
+msgid "À propos"
+msgstr ""
+
+#: src/templates/about.html:3
+msgid ""
+"Plateforme PDE : quiz, notes et reviews pour préparer la certification "
+"GCP Professional Data Engineer. Par SenLab IA."
+msgstr ""
+
+#: src/templates/topics.html:5
+msgid "Fil d'Ariane"
+msgstr ""
+
+#: src/templates/search.html:6 src/templates/topics.html:6
+msgid "Accueil"
+msgstr ""
+
+#: src/templates/about.html:15
+msgid "Ressources pour préparer la certification GCP Professional Data Engineer."
+msgstr ""
+
+#: src/templates/about.html:20
+msgid "Qu'est-ce que PDE ?"
+msgstr ""
+
+#: src/templates/about.html:21
+msgid ""
+"PDE est une plateforme de révision qui regroupe des quiz (QCM), des notes"
+" et des reviews pour la certification Google Cloud Professional Data "
+"Engineer. Tu peux parcourir les thèmes, lancer des quiz par catégorie et "
+"utiliser la recherche pour retrouver rapidement un sujet."
+msgstr ""
+
+#: src/templates/about.html:24
+msgid "Certification Google Cloud"
+msgstr ""
+
+#: src/templates/about.html:25
+msgid ""
+"La certification Professional Data Engineer valide les compétences en "
+"conception de systèmes de traitement de données, pipelines, ML sur GCP. "
+"Pour les détails officiels et l'inscription à l'examen :"
+msgstr ""
+
+#: src/templates/about.html:26
+msgid "Voir la certification (Google Cloud)"
+msgstr ""
+
+#: src/templates/about.html:29
+msgid "Crédits"
+msgstr ""
+
+#: src/templates/about.html:30
+msgid "Plateforme réalisée par SenLab IA."
+msgstr ""
+
+#: src/templates/base.html:8
+msgid ""
+"Quiz, notes et reviews pour réviser la certification GCP Professional "
+"Data Engineer (PDE). Recherche unifiée, contenu structuré par thème."
+msgstr ""
+
+#: src/templates/base.html:15 src/templates/base.html:121
+msgid "PDE — GCP Professional Data Engineer"
+msgstr ""
+
+#: src/templates/base.html:11 src/templates/base.html:14
+msgid ""
+"Quiz, notes et reviews pour réviser la certification GCP Professional "
+"Data Engineer."
+msgstr ""
+
+#: src/templates/base.html:32
+msgid ""
+"Pour une meilleure expérience (recherche instantanée, thème, menu "
+"mobile), activez JavaScript."
+msgstr ""
+
+#: src/templates/base.html:35
+msgid "Aller au contenu"
+msgstr ""
+
+#: src/templates/base.html:43
+msgid "Ouvrir le menu"
+msgstr ""
+
+#: src/templates/base.html:49
+msgid "Rechercher quiz ou document"
+msgstr ""
+
+#: src/templates/base.html:55
+msgid "Rechercher… (⌘K)"
+msgstr ""
+
+#: src/templates/search.html:56
+msgid "Rechercher"
+msgstr ""
+
+#: src/templates/dashboard.html:14 src/templates/error.html:22
+msgid "Tableau de bord"
+msgstr ""
+
+#: src/templates/search.html:149
+msgid "Quiz"
+msgstr ""
+
+#: src/templates/topics.html:8
+msgid "Topics"
+msgstr ""
+
+#: src/templates/search.html:17
+msgid "Recherche"
+msgstr ""
+
+#: src/templates/base.html:94
+msgid "Choisir la langue"
+msgstr ""
+
+#: src/templates/base.html:99
+msgid "Agrandir la largeur du contenu"
+msgstr ""
+
+#: src/templates/base.html:99
+msgid "Largeur : réduite / agrandie"
+msgstr ""
+
+#: src/templates/base.html:103
+msgid "Basculer thème clair/sombre"
+msgstr ""
+
+#: src/templates/base.html:103
+msgid "Thème clair / sombre"
+msgstr ""
+
+#: src/templates/base.html:122
+msgid "Ressources pour réviser la certification GCP Professional Data Engineer."
+msgstr ""
+
+#: src/templates/base.html:124
+msgid "Pied de page"
+msgstr ""
+
+#: src/templates/base.html:136
+msgid "Retour en haut"
+msgstr ""
+
+#: src/templates/base.html:138
+msgid "Navigation mobile"
+msgstr ""
+
+#: src/templates/base.html:145
+msgid "Stats"
+msgstr ""
+
+#: src/templates/dashboard.html:3
+msgid ""
+"Statistiques et progression pour la préparation à la certification GCP "
+"Professional Data Engineer."
+msgstr ""
+
+#: src/templates/dashboard.html:13
+msgid "Statistiques"
+msgstr ""
+
+#: src/templates/dashboard.html:15
+msgid "Vue d'ensemble de ta préparation à la certification."
+msgstr ""
+
+#: src/templates/dashboard.html:20
+msgid "Niveau de préparation"
+msgstr ""
+
+#: src/templates/dashboard.html:31
+msgid "Concentre-toi sur"
+msgstr ""
+
+#: src/templates/dashboard.html:31
+msgid "pour enrichir ta préparation."
+msgstr ""
+
+#: src/templates/dashboard.html:33
+msgid "Tu disposes de"
+msgstr ""
+
+#: src/templates/dashboard.html:33
+msgid "quiz et"
+msgstr ""
+
+#: src/templates/dashboard.html:33
+msgid "documents pour réviser."
+msgstr ""
+
+#: src/templates/dashboard.html:41
+msgid "Métriques"
+msgstr ""
+
+#: src/templates/dashboard.html:46
+msgid "Contenu disponible"
+msgstr ""
+
+#: src/templates/dashboard.html:48
+msgid "quiz + documents"
+msgstr ""
+
+#: src/templates/dashboard.html:56
+msgid "catégories"
+msgstr ""
+
+#: src/templates/dashboard.html:63
+msgid "Contenu par thème"
+msgstr ""
+
+#: src/templates/quiz_home.html:26 src/templates/search.html:130
+msgid "quiz"
+msgstr ""
+
+#: src/templates/dashboard.html:81 src/templates/index.html:138
+msgid "Récemment consultés"
+msgstr ""
+
+#: src/templates/dashboard.html:82
+msgid "Voir tout"
+msgstr ""
+
+#: src/templates/dashboard.html:85
+msgid "Les quiz et documents que tu ouvres apparaîtront ici."
+msgstr ""
+
+#: src/templates/dashboard.html:93
+msgid "Points à renforcer"
+msgstr ""
+
+#: src/templates/dashboard.html:95
+msgid "Parcours les"
+msgstr ""
+
+#: src/templates/dashboard.html:95
+msgid "topics"
+msgstr ""
+
+#: src/templates/dashboard.html:95
+msgid "et les"
+msgstr ""
+
+#: src/templates/dashboard.html:95
+msgid "pour identifier les thèmes à revoir."
+msgstr ""
+
+#: src/templates/index.html:192 src/templates/search.html:120
+msgid "Voir les topics"
+msgstr ""
+
+#: src/templates/error.html:17
+msgid "Erreur"
+msgstr ""
+
+#: src/templates/error.html:3
+msgid "Page d'erreur"
+msgstr ""
+
+#: src/templates/error.html:19
+msgid "Utilisez les liens ci-dessous pour retrouver votre chemin."
+msgstr ""
+
+#: src/templates/error.html:23 src/templates/index.html:33
+msgid "Découvrir"
+msgstr ""
+
+#: src/templates/index.html:9
+msgid "GCP — Certification"
+msgstr ""
+
+#: src/templates/index.html:11
+msgid "Prépare ta certification"
+msgstr ""
+
+#: src/templates/index.html:12
+msgid ""
+"Quiz, notes et reviews pour réviser efficacement. Recherche unifiée, tout"
+" en un."
+msgstr ""
+
+#: src/templates/index.html:16
+msgid "Commencer les quiz"
+msgstr ""
+
+#: src/templates/index.html:72
+msgid "Notes & reviews"
+msgstr ""
+
+#: src/templates/index.html:28
+msgid "Quiz QCM"
+msgstr ""
+
+#: src/templates/index.html:30
+msgid "Recherche unifiée"
+msgstr ""
+
+#: src/templates/index.html:32
+msgid "Descendre vers le contenu"
+msgstr ""
+
+#: src/templates/index.html:43
+msgid "Statut de préparation"
+msgstr ""
+
+#: src/templates/index.html:46
+msgid "catégories quiz"
+msgstr ""
+
+#: src/templates/index.html:47
+msgid "documents"
+msgstr ""
+
+#: src/templates/index.html:52
+msgid "Parcours les quiz et les topics pour réviser à ton rythme."
+msgstr ""
+
+#: src/templates/index.html:52 src/templates/index.html:140
+msgid "Voir le tableau de bord"
+msgstr ""
+
+#: src/templates/index.html:58
+msgid "Accès rapide"
+msgstr ""
+
+#: src/templates/index.html:65
+msgid "QCM par thème"
+msgstr ""
+
+#: src/templates/index.html:71
+msgid "Study Docs"
+msgstr ""
+
+#: src/templates/index.html:79
+msgid "Quiz & documents"
+msgstr ""
+
+#: src/templates/index.html:85
+msgid "Parcours"
+msgstr ""
+
+#: src/templates/index.html:86
+msgid "Voir le chemin"
+msgstr ""
+
+#: src/templates/index.html:93
+msgid "Parcourir par thème"
+msgstr ""
+
+#: src/templates/topics.html:31
+msgid "Notes"
+msgstr ""
+
+#: src/templates/topics.html:62
+msgid "Reviews"
+msgstr ""
+
+#: src/templates/index.html:107 src/templates/index.html:124
+msgid "Commencer l'apprentissage"
+msgstr ""
+
+#: src/templates/index.html:108 src/templates/index.html:125
+msgid "Voir le parcours"
+msgstr ""
+
+#: src/templates/index.html:111
+msgid "Prochain"
+msgstr ""
+
+#: src/templates/index.html:113
+#, python-format
+msgid "Focus sur %(cat)s. Lance le quiz pour t'entraîner."
+msgstr ""
+
+#: src/templates/index.html:116
+msgid "Démarrer le quiz"
+msgstr ""
+
+#: src/templates/index.html:128
+msgid "À faire"
+msgstr ""
+
+#: src/templates/index.html:130
+msgid "Quiz dans cette catégorie. Clique pour lister les QCM."
+msgstr ""
+
+#: src/templates/search.html:119
+msgid "Voir les quiz"
+msgstr ""
+
+#: src/templates/index.html:145
+msgid "Contenu"
+msgstr ""
+
+#: src/templates/index.html:148
+msgid "Quiz (catégories)"
+msgstr ""
+
+#: src/templates/index.html:156
+msgid "Aucune catégorie détectée."
+msgstr ""
+
+#: src/templates/index.html:160 src/templates/quiz_list.html:35
+msgid "Toutes les catégories"
+msgstr ""
+
+#: src/templates/index.html:172
+msgid "Aucune note pour le moment."
+msgstr ""
+
+#: src/templates/index.html:188
+msgid "Aucune review pour le moment."
+msgstr ""
+
+#: src/templates/quiz_home.html:3
+msgid ""
+"QCM par catégorie pour réviser la certification GCP Professional Data "
+"Engineer."
+msgstr ""
+
+#: src/templates/quiz_home.html:15
+msgid "Choisis une catégorie pour accéder aux QCM."
+msgstr ""
+
+#: src/templates/quiz_home.html:36
+msgid "Aucune catégorie de quiz"
+msgstr ""
+
+#: src/templates/quiz_home.html:37
+msgid "Reviens plus tard ou consulte les topics."
+msgstr ""
+
+#: src/templates/quiz_home.html:38
+msgid "Retour à l'accueil"
+msgstr ""
+
+#: src/templates/quiz_list.html:2
+msgid "QCM de la catégorie %(name)s pour la certification GCP Professional Data Engineer."
+msgstr "QCM de la catégorie %(name)s pour la certification GCP Professional Data Engineer."
+
+#: src/templates/quiz_list.html:16
+msgid "QCM dans cette catégorie."
+msgstr ""
+
+#: src/templates/quiz_list.html:16
+msgid "Aucun QCM pour le moment."
+msgstr ""
+
+#: src/templates/quiz_list.html:29
+msgid "Lancer le quiz"
+msgstr ""
+
+#: src/templates/quiz_list.html:42
+msgid "Aucun QCM dans cette catégorie"
+msgstr ""
+
+#: src/templates/quiz_list.html:43
+msgid "Reviens plus tard ou choisis une autre catégorie."
+msgstr ""
+
+#: src/templates/quiz_list.html:44
+msgid "Voir les catégories"
+msgstr ""
+
+#: src/templates/topics.html:76
+msgid "Découvrir les ressources"
+msgstr ""
+
+#: src/templates/search.html:3
+msgid ""
+"Recherche parmi les quiz et documents (notes, reviews) pour la "
+"certification GCP Professional Data Engineer."
+msgstr ""
+
+#: src/templates/search.html:21
+msgid ""
+"Recherchez parmi les quiz, notes et reviews. Utilisez les filtres pour "
+"affiner."
+msgstr ""
+
+#: src/templates/search.html:27
+msgid "Raccourci global :"
+msgstr ""
+
+#: src/templates/search.html:27
+msgid "ou"
+msgstr ""
+
+#: src/templates/search.html:39
+msgid "Rechercher dans les ressources"
+msgstr ""
+
+#: src/templates/search.html:52
+msgid "Effacer la recherche"
+msgstr ""
+
+#: src/templates/search.html:52
+msgid "Effacer"
+msgstr ""
+
+#: src/templates/search.html:59
+msgid ""
+"Raccourci clavier Ctrl+K ou ⌘+K pour ouvrir la recherche depuis n'importe"
+" quelle page."
+msgstr ""
+
+#: src/templates/search.html:62
+msgid "Filtrer par type"
+msgstr ""
+
+#: src/templates/search.html:64
+msgid "Tout"
+msgstr ""
+
+#: src/templates/search.html:74
+msgid "Recherche en cours…"
+msgstr ""
+
+#: src/templates/search.html:77
+msgid "Résultats de recherche"
+msgstr ""
+
+#: src/templates/search.html:80
+msgid "résultat"
+msgstr ""
+
+#: src/templates/search.html:80
+msgid "résultats"
+msgstr ""
+
+#: src/templates/search.html:80
+msgid "pour"
+msgstr ""
+
+#: src/templates/search.html:95 src/templates/search.html:149
+msgid "Document"
+msgstr ""
+
+#: src/templates/search.html:116
+msgid "Aucun résultat pour"
+msgstr ""
+
+#: src/templates/search.html:117
+msgid ""
+"Modifiez les mots-clés ou les filtres, ou parcourez directement les "
+"contenus."
+msgstr ""
+
+#: src/templates/search.html:128
+msgid "ressource au total"
+msgstr ""
+
+#: src/templates/search.html:128
+msgid "ressources au total"
+msgstr ""
+
+#: src/templates/search.html:132
+msgid "note"
+msgstr ""
+
+#: src/templates/search.html:132
+msgid "notes"
+msgstr ""
+
+#: src/templates/search.html:134
+msgid "review"
+msgstr ""
+
+#: src/templates/search.html:134
+msgid "reviews"
+msgstr ""
+
+#: src/templates/search.html:167
+msgid "Lancer une recherche"
+msgstr ""
+
+#: src/templates/search.html:168
+msgid ""
+"Saisissez un terme dans le champ ci-dessus ou utilisez les filtres pour "
+"afficher tout le contenu (quiz, notes, reviews)."
+msgstr ""
+
+#: src/templates/search.html:170
+msgid "Parcourir les quiz"
+msgstr ""
+
+#: src/templates/search.html:171
+msgid "Parcourir les topics"
+msgstr ""
+
+#: src/templates/topics.html:2 src/templates/topics.html:14
+msgid "Notes & Reviews"
+msgstr ""
+
+#: src/templates/topics.html:3
+msgid ""
+"Notes et reviews pour réviser la certification GCP Professional Data "
+"Engineer."
+msgstr ""
+
+#: src/templates/topics.html:13
+msgid "Documents"
+msgstr ""
+
+#: src/templates/topics.html:15
+msgid "Synthèses, rapports et fiches de révision."
+msgstr ""
+
+#: src/templates/topics.html:34 src/templates/topics.html:65
+msgid "Ouvrir"
+msgstr ""
+
+#: src/templates/topics.html:44
+msgid "Aucune note"
+msgstr ""
+
+#: src/templates/topics.html:75
+msgid "Aucune review"
+msgstr ""

@@ -7,17 +7,28 @@ Pour un fichier d'exemple à copier, voir à la racine : **`env.example`** et **
 
 ## Variables principales
 
-| Variable | Description | Obligatoire |
-|----------|-------------|--------------|
-| `SECRET_KEY` | Clé secrète Flask (sessions) | ✅ Prod |
-| `JWT_SECRET_KEY` | Clé JWT | ✅ Prod |
-| `DATABASE_URL` | URL BDD (SQLite / PostgreSQL) | ✅ Prod |
-| `FLASK_ENV` | `development` / `production` | ✅ |
-| `FLASK_APP` | Point d'entrée (`run.py`) | ✅ |
-| `PORT` | Port d'écoute (défaut 8080) | ✅ |
-| `REDIS_URL` | Cache Redis | Optionnel |
-| `CORS_ORIGINS` | Origines CORS autorisées | Optionnel |
-| `LOG_LEVEL` | DEBUG / INFO / WARNING / ERROR | Optionnel |
+| Variable                | Description                                                           | Obligatoire |
+| ----------------------- | --------------------------------------------------------------------- | ----------- |
+| `SECRET_KEY`            | Clé secrète Flask (sessions)                                          | ✅ Prod     |
+| `JWT_SECRET_KEY`        | Clé JWT                                                               | ✅ Prod     |
+| `DATABASE_URL`          | URL BDD (SQLite / PostgreSQL)                                         | ✅ Prod     |
+| `FLASK_ENV`             | `development` / `production`                                          | ✅          |
+| `FLASK_APP`             | Point d'entrée (`run.py`)                                             | ✅          |
+| `PORT`                  | Port d'écoute (défaut 8080)                                           | ✅          |
+| `REDIS_URL`             | Cache Redis (et rate limiting si `RATELIMIT_STORAGE_URL` non défini)  | Optionnel   |
+| `RATELIMIT_ENABLED`     | Activer/désactiver le rate limiting (`true`/`false`)                  | Optionnel   |
+| `RATELIMIT_STORAGE_URL` | Backend rate limit (`redis://...` ou `memory://`)                     | Optionnel   |
+| `CORS_ORIGINS`          | Origines CORS autorisées                                              | Optionnel   |
+| `LOG_LEVEL`             | DEBUG / INFO / WARNING / ERROR                                        | Optionnel   |
+
+Pour les variables détaillées du rate limiting (global, IP, `chat`, `search`, `upload`, multiplicateur dev/prod et mapping endpoint->tier), voir **[docs/RATE_LIMITING.md](RATE_LIMITING.md)**.
+
+## Variables backend FastAPI (data source)
+
+| Variable                  | Description                                                  | Obligatoire |
+| ------------------------- | ------------------------------------------------------------ | ----------- |
+| `BACKEND_DATA_DIR`        | Dossier YAML forcé pour l'API FastAPI                        | Optionnel   |
+| `BACKEND_DATA_DIR_STRICT` | Si `true`, force `backend/data` (ignore fallbacks legacy)    | Optionnel   |
 
 ## Production (minimal)
 

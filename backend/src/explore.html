@@ -1,0 +1,486 @@
+---
+layout: base
+title: Explorer les Articles
+---
+
+<style>
+  .explore-app {
+    --explore-bg: #f5f7fb;
+    --explore-surface: #ffffff;
+    --explore-surface-2: #101a31;
+    --explore-text: #0f172a;
+    --explore-muted: #5b6478;
+    --explore-border: #e3e8f3;
+    --explore-primary: #1e63d6;
+    --explore-primary-dark: #144db0;
+    --explore-accent: #39a0ff;
+    background: linear-gradient(180deg, #eff3fa 0%, #f8faff 45%, #f4f6fb 100%);
+    color: var(--explore-text);
+    min-height: 100vh;
+    padding-bottom: 2rem;
+  }
+
+  .explore-shell {
+    width: min(980px, 92vw);
+    margin: 0 auto;
+  }
+
+  .explore-kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+    color: var(--explore-primary);
+    background: #e8f1ff;
+    border: 1px solid #d6e6ff;
+    border-radius: 999px;
+    padding: .35rem .7rem;
+  }
+
+  .explore-hero {
+    padding: 1.25rem 0 .75rem;
+  }
+
+  .explore-title {
+    margin: .85rem 0 .65rem;
+    font-size: clamp(2rem, 7.2vw, 3.1rem);
+    line-height: 1.03;
+    letter-spacing: -0.02em;
+    font-weight: 850;
+  }
+
+  .explore-title em {
+    font-style: normal;
+    color: var(--explore-primary);
+  }
+
+  .explore-subtitle {
+    margin: 0;
+    max-width: 62ch;
+    color: var(--explore-muted);
+    line-height: 1.65;
+    font-size: .98rem;
+  }
+
+  .explore-search-wrap {
+    margin-top: 1rem;
+    background: var(--explore-surface);
+    border: 1px solid var(--explore-border);
+    border-radius: 16px;
+    padding: .6rem;
+    box-shadow: 0 12px 30px rgba(20, 36, 68, 0.08);
+  }
+
+  .search-input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-icon-enhanced {
+    position: absolute;
+    left: .9rem;
+    color: #75819a;
+  }
+
+  .search-input-enhanced {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    background: #f7f9fe;
+    border: 1px solid #e4ebfb;
+    color: var(--explore-text);
+    border-radius: 12px;
+    font-size: .98rem;
+    padding: .8rem 2.4rem .8rem 2.35rem;
+  }
+
+  .search-input-enhanced:focus {
+    border-color: #bfd6ff;
+    box-shadow: 0 0 0 4px rgba(30, 99, 214, 0.1);
+  }
+
+  .search-clear-button {
+    border: 0;
+    background: transparent;
+    color: #7f8aa2;
+    position: absolute;
+    right: .55rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    cursor: pointer;
+  }
+
+  .search-clear-button:hover {
+    background: #eef3ff;
+    color: #2e4f95;
+  }
+
+  .explore-chip-row {
+    margin-top: .7rem;
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+  }
+
+  .explore-chip {
+    border-radius: 999px;
+    border: 1px solid #d9e5ff;
+    background: #f4f8ff;
+    color: #2f4d8e;
+    padding: .4rem .72rem;
+    font-size: .76rem;
+    font-weight: 600;
+  }
+
+  .explore-section-title {
+    margin: 1.4rem 0 .85rem;
+    font-size: 1.05rem;
+    letter-spacing: .07em;
+    text-transform: uppercase;
+    color: #76819a;
+    font-weight: 700;
+  }
+
+  .explore-categories-grid {
+    display: grid;
+    gap: .8rem;
+    grid-template-columns: 1fr;
+  }
+
+  .explore-category-card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    background: var(--explore-surface);
+    border: 1px solid var(--explore-border);
+    border-radius: 16px;
+    padding: .95rem;
+    box-shadow: 0 10px 24px rgba(17, 34, 70, 0.07);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+  }
+
+  .explore-category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 28px rgba(17, 34, 70, .12);
+    border-color: #d1def7;
+  }
+
+  .explore-category-card.featured {
+    background: radial-gradient(circle at 85% -20%, #2f63cc 0%, #101b37 56%);
+    color: #f4f8ff;
+    border: 0;
+  }
+
+  .explore-category-icon {
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+    font-size: 1rem;
+    background: #eaf1ff;
+  }
+
+  .explore-category-card.featured .explore-category-icon {
+    background: rgba(255, 255, 255, 0.16);
+  }
+
+  .explore-category-title {
+    margin: .8rem 0 .35rem;
+    font-size: 1.16rem;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .explore-category-description {
+    margin: 0 0 .78rem;
+    color: var(--explore-muted);
+    line-height: 1.48;
+    font-size: .93rem;
+  }
+
+  .explore-category-card.featured .explore-category-description {
+    color: #dce7ff;
+  }
+
+  .explore-category-count {
+    display: inline-flex;
+    align-items: center;
+    gap: .4rem;
+    border: 1px solid #dbe5fa;
+    background: #f6f9ff;
+    color: #30508f;
+    border-radius: 999px;
+    padding: .32rem .62rem;
+    font-size: .75rem;
+    font-weight: 700;
+  }
+
+  .explore-category-card.featured .explore-category-count {
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #eef4ff;
+  }
+
+  .explore-topics-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .6rem;
+  }
+
+  .explore-topic-item {
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--explore-border);
+    background: var(--explore-surface);
+    border-radius: 12px;
+    padding: .65rem;
+  }
+
+  .explore-topic-name {
+    font-weight: 700;
+    font-size: .86rem;
+    letter-spacing: .01em;
+    color: #1d2a4a;
+  }
+
+  .explore-topic-count {
+    margin-top: .2rem;
+    font-size: .72rem;
+    color: #74809a;
+  }
+
+  .explore-cta {
+    margin-top: 1.2rem;
+    background: linear-gradient(155deg, #1f6ddf, #0f4fb9);
+    color: #f6f9ff;
+    border-radius: 18px;
+    padding: 1rem;
+    box-shadow: 0 16px 32px rgba(20, 52, 106, .24);
+  }
+
+  .explore-cta h3 {
+    margin: 0 0 .4rem;
+    font-size: 1.15rem;
+    letter-spacing: -.01em;
+  }
+
+  .explore-cta p {
+    margin: 0 0 .75rem;
+    color: #d7e6ff;
+    font-size: .92rem;
+    line-height: 1.5;
+  }
+
+  .explore-cta a {
+    display: inline-block;
+    text-decoration: none;
+    color: #0c3f99;
+    background: #ffffff;
+    border-radius: 11px;
+    font-weight: 800;
+    font-size: .82rem;
+    padding: .58rem .88rem;
+  }
+
+  @media (min-width: 760px) {
+    .explore-categories-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .explore-topics-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+</style>
+
+<main class="explore-app">
+  <div class="explore-shell">
+    <section class="explore-hero">
+      <span class="explore-kicker">Selected</span>
+      <h1 class="explore-title">Build the <em>Infrastructures</em> of Tomorrow.</h1>
+      <p class="explore-subtitle">
+        Une sélection de contenus data, IA et engineering dans une expérience plus éditoriale, plus visuelle et mobile-first.
+      </p>
+
+      <div class="explore-search-wrap">
+        <div class="search-input-wrapper">
+          <i class="fas fa-search search-icon-enhanced"></i>
+          <input
+            type="search"
+            id="explore-search-input"
+            class="search-input-enhanced"
+            placeholder="Rechercher un article, un tag, une catégorie..."
+            aria-label="Rechercher un article"
+            autocomplete="off"
+          >
+          <button class="search-clear-button" aria-label="Effacer la recherche">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="explore-chip-row">
+          <span class="explore-chip">AI/ML</span>
+          <span class="explore-chip">Data Engineering</span>
+          <span class="explore-chip">Cloud</span>
+          <span class="explore-chip">Architecture</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="explore-categories-section">
+      <h2 class="explore-section-title">Explore by track</h2>
+      <div class="explore-categories-grid">
+        <a href="/tags/intelligence-artificielle" class="explore-category-card featured">
+          <span class="explore-category-icon">🤖</span>
+          <h3 class="explore-category-title">Intelligence Artificielle</h3>
+          <p class="explore-category-description">
+            LLMs, RAG, agents et cas pratiques orientés produit.
+          </p>
+          <span class="explore-category-count">
+            {{ site.tags['intelligence-artificielle'] | size }} articles
+          </span>
+        </a>
+
+        <a href="/tags/data-engineering" class="explore-category-card">
+          <span class="explore-category-icon">⚙️</span>
+          <h3 class="explore-category-title">Data Engineering</h3>
+          <p class="explore-category-description">
+            Pipelines, ETL, qualité de données et scaling.
+          </p>
+          <span class="explore-category-count">
+            {{ site.tags['data-engineering'] | size }} articles
+          </span>
+        </a>
+
+        <a href="/tags/data-science" class="explore-category-card">
+          <span class="explore-category-icon">🔬</span>
+          <h3 class="explore-category-title">Data Science</h3>
+          <p class="explore-category-description">
+            Modélisation, évaluation, expérimentation et impact.
+          </p>
+          <span class="explore-category-count">
+            {{ site.tags['data-science'] | size }} articles
+          </span>
+        </a>
+
+        <a href="/tags/business-intelligence" class="explore-category-card">
+          <span class="explore-category-icon">💼</span>
+          <h3 class="explore-category-title">Business Intelligence</h3>
+          <p class="explore-category-description">
+            Dashboards, KPIs et pilotage par la donnée.
+          </p>
+          <span class="explore-category-count">
+            {{ site.tags['business-intelligence'] | size }} articles
+          </span>
+        </a>
+
+        <a href="/tags/data-analytics" class="explore-category-card">
+          <span class="explore-category-icon">📊</span>
+          <h3 class="explore-category-title">Data Analytics</h3>
+          <p class="explore-category-description">
+            Analyse exploratoire, visualisation et storytelling.
+          </p>
+          <span class="explore-category-count">
+            {{ site.tags['data-analytics'] | size }} articles
+          </span>
+        </a>
+
+        <a href="/tags" class="explore-category-card">
+          <span class="explore-category-icon">🏷️</span>
+          <h3 class="explore-category-title">Tous les sujets</h3>
+          <p class="explore-category-description">
+            Naviguer dans tout le catalogue.
+          </p>
+          <span class="explore-category-count">
+            {{ site.posts | size }} articles
+          </span>
+        </a>
+      </div>
+    </section>
+
+    <section class="explore-topics-section">
+      <h2 class="explore-section-title">Popular tags</h2>
+      <div class="explore-topics-grid">
+        {% assign sorted_tags = site.tags | sort %}
+        {% for tag in sorted_tags limit: 18 %}
+          {% assign tag_name = tag[0] %}
+          {% assign tag_posts = tag[1] %}
+          <a href="/tags/#{{ tag_name | slugify }}" class="explore-topic-item">
+            <div class="explore-topic-name">{{ tag_name }}</div>
+            <div class="explore-topic-count">{{ tag_posts.size }} article{{ tag_posts.size | pluralize }}</div>
+          </a>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="explore-cta">
+      <h3>Have a project in mind?</h3>
+      <p>Je transforme les sujets data et IA en produits concrets, utiles et mesurables.</p>
+      <a href="/about">Start a conversation</a>
+    </section>
+  </div>
+</main>
+
+<script>
+// Explore Search Functionality
+(function() {
+  const searchInput = document.getElementById('explore-search-input');
+  const categoryCards = document.querySelectorAll('.explore-category-card');
+  const topicItems = document.querySelectorAll('.explore-topic-item');
+  const clearButton = document.querySelector('.search-clear-button');
+
+  if (!searchInput) return;
+
+  function performSearch(query) {
+    const lowerQuery = query.toLowerCase().trim();
+
+    if (!lowerQuery) {
+      categoryCards.forEach(card => card.style.display = 'block');
+      topicItems.forEach(item => item.style.display = 'block');
+      return;
+    }
+
+    // Search in categories
+    categoryCards.forEach(card => {
+      const title = card.querySelector('.explore-category-title')?.textContent.toLowerCase() || '';
+      const description = card.querySelector('.explore-category-description')?.textContent.toLowerCase() || '';
+
+      if (title.includes(lowerQuery) || description.includes(lowerQuery)) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    // Search in topics
+    topicItems.forEach(item => {
+      const name = item.querySelector('.explore-topic-name')?.textContent.toLowerCase() || '';
+
+      if (name.includes(lowerQuery)) {
+        item.style.display = 'block';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  }
+
+  let debounceTimer;
+  searchInput.addEventListener('input', function(e) {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      performSearch(e.target.value);
+    }, 200);
+  });
+
+  if (clearButton) {
+    clearButton.addEventListener('click', function() {
+      searchInput.value = '';
+      performSearch('');
+      searchInput.focus();
+    });
+  }
+})();
+</script>

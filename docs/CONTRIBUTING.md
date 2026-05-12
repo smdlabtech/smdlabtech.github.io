@@ -28,10 +28,9 @@ bundle exec jekyll serve
 
 #### Pour Flask (Backend)
 ```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-python run.py
+./scripts/dev/setup_complete.sh
+./scripts/dev/launch_app.sh
+# ou manuellement : cd app && python run.py
 ```
 
 ### 4. Tests
@@ -39,12 +38,14 @@ python run.py
 Assurez-vous que tous les tests passent :
 ```bash
 # Tests Python (depuis la racine du repo)
-cd app && python3 -m venv .venv && source .venv/bin/activate
-pip install -r requirements.txt -r requirements-dev.txt
-cd .. && PYTHONPATH=app python3 -m pytest tests/ -v
+PYTHONPATH=app python3 -m pytest tests/ -v
 
-# Ou utiliser le script
+# Ou scripts dédiés
+./scripts/quality/run_tests.sh
 ./app/scripts/test-local.sh
+
+# Tests rate limiting
+PYTHONPATH=app python3 -m pytest tests/test_rate_limiting.py -v
 
 # Build Jekyll
 cd app && bundle exec jekyll build
@@ -101,6 +102,8 @@ Puis créez une Pull Request sur GitHub.
 ## 📚 Ressources
 
 - [Structure du projet](STRUCTURE.md)
+- [Scripts (dev, quality, i18n, ops)](../scripts/README.md)
+- [Rate limiting (API)](RATE_LIMITING.md)
 - [Documentation Jekyll](https://jekyllrb.com/docs/)
 - [Documentation Flask](https://flask.palletsprojects.com/)
 

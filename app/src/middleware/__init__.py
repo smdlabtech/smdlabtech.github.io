@@ -1,4 +1,0 @@
-"""
-Middleware - Logging, sécurité, etc.
-"""
-

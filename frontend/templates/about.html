@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block head %}<meta name="i18n-title-key" content="page.about.title">{% endblock %}
+{% block title %}À propos - Portfolio{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1 data-i18n="about.title">Architecting Interfaces.</h1>
+  <p data-i18n="about.intro">
+    Cette plateforme combine un backend FastAPI fiable et un frontend Flask pensé
+    pour une navigation fluide, lisible et orientée contenu.
+  </p>
+</section>
+
+<section class="grid">
+  <article class="card">
+    <h3 data-i18n="about.card1.title">Core Philosophy</h3>
+    <p data-i18n="about.card1.body">Clarté, performance, maintenabilité et cohérence visuelle.</p>
+  </article>
+  <article class="card">
+    <h3 data-i18n="about.card2.title">The Stack</h3>
+    <p data-i18n="about.card2.body">FastAPI, Flask templates, CSS responsive et endpoints monitorés.</p>
+  </article>
+  <article class="card">
+    <h3 data-i18n="about.card3.title">Start a connection</h3>
+    <p data-i18n="about.card3.body">Le blog devient un point d’entrée produit, pas juste une liste d’articles.</p>
+    <div class="actions" style="margin-top:.6rem;">
+      <a class="btn btn-primary" href="{{ url_for('blog_list') }}" data-i18n="about.ctaArticles">Découvrir les articles</a>
+    </div>
+  </article>
+</section>
+{% endblock %}

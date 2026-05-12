@@ -1,0 +1,227 @@
+{% extends "base.html" %}
+{% block head %}<meta name="i18n-title-key" content="page.index.title">{% endblock %}
+{% block title %}Accueil - Portfolio{% endblock %}
+{% block content %}
+<section class="launch-banner">
+  <span class="launch-dot"></span>
+  <strong data-i18n="home.banner.title">Platform update</strong>
+  <span data-i18n="home.banner.body">Nouveaux parcours interactifs, UX modernisée et expérience bilingue renforcée.</span>
+</section>
+
+<section class="hero panel hero-premium">
+  <div class="hero-layout">
+    <div>
+      <span class="hero-kicker" data-i18n="home.kicker">Selected Work</span>
+      <h1 class="hero-title" data-i18n-html="home.titleHtml">Building the <em>Infrastructures</em> of Tomorrow.</h1>
+      <p class="hero-subtitle" data-i18n="home.subtitle">
+        Une expérience frontend modernisée pour notre plateforme blog, connectée au backend FastAPI.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="{{ url_for('blog_list') }}" data-i18n="home.ctaBlog">Lire le blog</a>
+        <a class="btn btn-secondary" href="{{ url_for('about') }}" data-i18n="home.ctaProfile">Voir le profil</a>
+      </div>
+    </div>
+    <aside class="snapshot-card">
+      <h3 data-i18n="home.snapshot.title">Platform Snapshot</h3>
+      <p data-i18n="home.snapshot.subtitle">Un aperçu clair des piliers produit en production.</p>
+      <div class="snapshot-items">
+        <div class="snapshot-item">
+          <span data-i18n="home.snapshot.item1.label">Frontend UX</span>
+          <strong data-i18n="home.snapshot.item1.value">Modern + bilingual</strong>
+        </div>
+        <div class="snapshot-item">
+          <span data-i18n="home.snapshot.item2.label">Delivery model</span>
+          <strong data-i18n="home.snapshot.item2.value">Iterative & measurable</strong>
+        </div>
+        <div class="snapshot-item">
+          <span data-i18n="home.snapshot.item3.label">Quality gate</span>
+          <strong data-i18n="home.snapshot.item3.value">i18n + CI checks</strong>
+        </div>
+      </div>
+    </aside>
+  </div>
+  <div class="hero-metrics">
+    <article class="metric">
+      <strong data-i18n="home.metric1.value">99.9%</strong>
+      <span data-i18n="home.metric1.label">Disponibilité cible</span>
+    </article>
+    <article class="metric">
+      <strong data-i18n="home.metric2.value">FastAPI + Flask</strong>
+      <span data-i18n="home.metric2.label">Stack plateforme</span>
+    </article>
+    <article class="metric">
+      <strong data-i18n="home.metric3.value">FR / EN</strong>
+      <span data-i18n="home.metric3.label">Interface bilingue</span>
+    </article>
+  </div>
+</section>
+
+<section class="grid">
+  <article class="card">
+    <h3 data-i18n="home.card1.title">Architecture Produit</h3>
+    <p data-i18n="home.card1.body">Un socle technique propre pour livrer vite sans sacrifier la qualité.</p>
+  </article>
+  <article class="card">
+    <h3 data-i18n="home.card2.title">Frontend Flask</h3>
+    <p data-i18n="home.card2.body">Templates server-side rapides, accessibles et SEO-friendly.</p>
+  </article>
+  <article class="card">
+    <h3 data-i18n="home.card3.title">Contenu Editorial</h3>
+    <p data-i18n="home.card3.body">Articles, retours d'expérience et guides pour la data et l'IA.</p>
+  </article>
+  <article class="card">
+    <h3 data-i18n="home.card4.title">Projects Showcase</h3>
+    <p data-i18n="home.card4.body">Mise en avant des réalisations avec stack, liens et impact.</p>
+  </article>
+</section>
+
+<section class="panel section">
+  <h2 data-i18n="home.sectionMethod.title">Comment on délivre</h2>
+  <p data-i18n="home.sectionMethod.subtitle">Une méthode simple pour transformer une idée en produit fiable.</p>
+  <div class="steps">
+    <article class="step">
+      <h3 data-i18n="home.step1.title">1. Discovery</h3>
+      <p data-i18n="home.step1.body">Cadrage des besoins, des contraintes et des indicateurs de succès.</p>
+    </article>
+    <article class="step">
+      <h3 data-i18n="home.step2.title">2. Build</h3>
+      <p data-i18n="home.step2.body">Implémentation incrémentale, tests, i18n, monitoring et sécurité.</p>
+    </article>
+    <article class="step">
+      <h3 data-i18n="home.step3.title">3. Operate</h3>
+      <p data-i18n="home.step3.body">Déploiement CI/CD, observabilité et amélioration continue.</p>
+    </article>
+  </div>
+</section>
+
+<section class="actions">
+  <a class="btn btn-secondary" href="{{ url_for('projects_list') }}" data-i18n="home.ctaProjects">Explorer les projets</a>
+  <a class="btn btn-secondary" href="{{ url_for('experiences_list') }}" data-i18n="home.ctaExperiences">Voir les expériences</a>
+</section>
+
+<section class="panel landing-cta">
+  <h2 data-i18n="home.finalCta.title">Prêt à lancer votre prochaine itération produit ?</h2>
+  <p data-i18n="home.finalCta.body">Parcourez les projets, lisez les articles techniques, puis passons à l'exécution.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="{{ url_for('projects_list') }}" data-i18n="home.finalCta.primary">Voir les réalisations</a>
+    <a class="btn btn-secondary" href="{{ url_for('blog_list') }}" data-i18n="home.finalCta.secondary">Lire les retours d'expérience</a>
+  </div>
+</section>
+
+<section class="panel section enterprise-trust">
+  <h2 data-i18n="home.enterprise.title">Conçu pour des équipes exigeantes</h2>
+  <p data-i18n="home.enterprise.subtitle">Gouvernance, sécurité et observabilité intégrées dès la conception.</p>
+  <div class="trust-grid">
+    <article class="trust-item">
+      <h3 data-i18n="home.enterprise.card1.title">Sécurité by design</h3>
+      <p data-i18n="home.enterprise.card1.body">Headers de sécurité, CORS maîtrisé, gestion propre des secrets et protections API.</p>
+    </article>
+    <article class="trust-item">
+      <h3 data-i18n="home.enterprise.card2.title">SLA opérationnel</h3>
+      <p data-i18n="home.enterprise.card2.body">Health checks, pipelines CI/CD et stratégie de rollback pour réduire les interruptions.</p>
+    </article>
+    <article class="trust-item">
+      <h3 data-i18n="home.enterprise.card3.title">Observabilité active</h3>
+      <p data-i18n="home.enterprise.card3.body">Métriques, logs et diagnostics pour comprendre un incident en quelques minutes.</p>
+    </article>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="{{ url_for('projects_list') }}" data-i18n="home.enterprise.primary">Voir les projets</a>
+    <a class="btn btn-secondary" href="{{ url_for('about') }}" data-i18n="home.enterprise.secondary">Discuter architecture</a>
+  </div>
+</section>
+
+<section class="panel section learning-hub">
+  <h2 data-i18n="home.learning.title">Montez en compétences, étape par étape</h2>
+  <p data-i18n="home.learning.subtitle">Une expérience frontend structurée autour de parcours pratiques, pour passer de la théorie à l'exécution.</p>
+  <div class="tracks-grid">
+    <article class="track-item">
+      <h3 data-i18n="home.learning.track1.title">Culture produit & delivery</h3>
+      <p data-i18n="home.learning.track1.body">Priorisation, découpage, itérations courtes et mise en production continue.</p>
+    </article>
+    <article class="track-item">
+      <h3 data-i18n="home.learning.track2.title">Data, IA et automatisation</h3>
+      <p data-i18n="home.learning.track2.body">Cas d'usage concrets : collecte, exploitation, visualisation et assistants intelligents.</p>
+    </article>
+    <article class="track-item">
+      <h3 data-i18n="home.learning.track3.title">Observabilité et fiabilité</h3>
+      <p data-i18n="home.learning.track3.body">Logs, métriques et diagnostics pour piloter la qualité de service.</p>
+    </article>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="{{ url_for('blog_list') }}" data-i18n="home.learning.primary">Commencer le parcours</a>
+    <a class="btn btn-secondary" href="{{ url_for('experiences_list') }}" data-i18n="home.learning.secondary">Voir la progression terrain</a>
+  </div>
+</section>
+
+<section class="panel section pedagogy">
+  <h2 data-i18n="home.pedagogy.title">Une approche claire : pourquoi, puis comment</h2>
+  <p data-i18n="home.pedagogy.subtitle">Chaque section privilégie la compréhension du contexte avant l'implémentation.</p>
+  <div class="pedagogy-grid">
+    <article class="pedagogy-item">
+      <h3 data-i18n="home.pedagogy.card1.title">Objectif explicite</h3>
+      <p data-i18n="home.pedagogy.card1.body">Tu sais exactement ce que la section va t'apporter avant de lire les détails.</p>
+    </article>
+    <article class="pedagogy-item">
+      <h3 data-i18n="home.pedagogy.card2.title">Exemples actionnables</h3>
+      <p data-i18n="home.pedagogy.card2.body">Contenu orienté pratique pour réutiliser rapidement les patterns dans tes projets.</p>
+    </article>
+    <article class="pedagogy-item">
+      <h3 data-i18n="home.pedagogy.card3.title">Validation continue</h3>
+      <p data-i18n="home.pedagogy.card3.body">Retours d'expérience, vérifications et amélioration incrémentale.</p>
+    </article>
+  </div>
+</section>
+
+<section class="panel section validation-zone">
+  <h2 data-i18n="home.validation.title">Validez vos acquis sur des scénarios réels</h2>
+  <p data-i18n="home.validation.subtitle">Articles techniques, projets et expériences forment une boucle d'apprentissage complète.</p>
+  <div class="actions">
+    <a class="btn btn-primary" href="{{ url_for('projects_list') }}" data-i18n="home.validation.primary">Tester sur les projets</a>
+    <a class="btn btn-secondary" href="{{ url_for('about') }}" data-i18n="home.validation.secondary">Comprendre la méthode</a>
+  </div>
+</section>
+
+<section class="panel section profile-highlight">
+  <h2 data-i18n="home.profile.title">Profil Data & IA - Daya Sylla</h2>
+  <p data-i18n="home.profile.subtitle">AI & Data Engineer avec 4+ ans d'expérience en architecture data, IA générative, industrialisation cloud et delivery produit.</p>
+
+  <div class="profile-grid">
+    <article class="profile-card">
+      <h3 data-i18n="home.profile.summary.title">Positionnement</h3>
+      <p data-i18n="home.profile.summary.body">Spécialiste des pipelines ELT/ETL, RAG, orchestration multi-LLM, FastAPI et déploiement scalable orienté impact métier.</p>
+    </article>
+    <article class="profile-card">
+      <h3 data-i18n="home.profile.core.title">Compétences clés</h3>
+      <p data-i18n="home.profile.core.body">Python, SQL, FastAPI, LangChain/LangGraph, Vertex AI, OpenAI/Gemini, Cloud Run, CI/CD GitHub Actions, monitoring LLM.</p>
+    </article>
+    <article class="profile-card">
+      <h3 data-i18n="home.profile.cloud.title">Cloud & Data Platform</h3>
+      <p data-i18n="home.profile.cloud.body">GCP (BigQuery, Dataflow, Dataproc, Vertex AI), Azure AI Studio, AWS, gouvernance data et observabilité de production.</p>
+    </article>
+  </div>
+
+  <div class="profile-grid">
+    <article class="profile-card">
+      <h3 data-i18n="home.profile.exp1.title">R&D IA - Axys (2025-...)</h3>
+      <p data-i18n="home.profile.exp1.body">Conception d'agents conversationnels, plateformes RAG, pipelines document intelligence, monitoring Langfuse et déploiement Cloud Run.</p>
+    </article>
+    <article class="profile-card">
+      <h3 data-i18n="home.profile.exp2.title">Finance Data - Carrefour (2023-2024)</h3>
+      <p data-i18n="home.profile.exp2.body">Migration ERP PeopleSoft -> SAP, architecture BigQuery, automatisation contrôles comptables, réduction significative des tâches manuelles.</p>
+    </article>
+    <article class="profile-card">
+      <h3 data-i18n="home.profile.exp3.title">Marketing & BI - Skoda / La Poste / SNCF / Air France</h3>
+      <p data-i18n="home.profile.exp3.body">Scoring ML, dashboards Power BI, data quality, optimisation de pipelines analytiques et applications décisionnelles opérationnelles.</p>
+    </article>
+  </div>
+
+  <div class="profile-badges">
+    <span class="profile-badge" data-i18n="home.profile.cert1">Certification Microsoft PL-300</span>
+    <span class="profile-badge" data-i18n="home.profile.cert2">Alteryx Designer Core</span>
+    <span class="profile-badge" data-i18n="home.profile.cert3">Master Ingénierie économique & data</span>
+    <span class="profile-badge" data-i18n="home.profile.cert4">Master Statistiques appliquées</span>
+  </div>
+</section>
+
+{% endblock %}

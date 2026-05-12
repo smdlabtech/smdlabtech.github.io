@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <script>document.documentElement.lang = localStorage.getItem('preferred-language') || 'fr';</script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <a href="#main-content" class="skip-link" data-i18n="common.skipToContent">Aller au contenu</a>
+    <header>
+        <div class="app-shell topbar">
+            <div class="brand" data-i18n="brand.title">The Digital Architect</div>
+            <nav aria-label="Navigation principale" data-i18n-aria="common.mainNavigation">
+                <a href="{{ url_for('index') }}" data-i18n="nav.home">Accueil</a>
+                <a href="{{ url_for('about') }}" data-i18n="nav.about">À propos</a>
+                <a href="{{ url_for('parcours') }}" data-i18n="nav.tracks">Parcours</a>
+                <a href="{{ url_for('blog_list') }}" data-i18n="nav.blog">Blog</a>
+                <a href="{{ url_for('projects_list') }}" data-i18n="nav.projects">Projets</a>
+                <a href="{{ url_for('experiences_list') }}" data-i18n="nav.experiences">Expériences</a>
+                <div class="i18n-toggle" role="group" aria-label="Choisir la langue" data-i18n-group-aria="common.langChooser">
+                    <button type="button" data-lang="fr" aria-pressed="true" data-i18n-btn="lang.fr">FR</button>
+                    <button type="button" data-lang="en" aria-pressed="false" data-i18n-btn="lang.en">EN</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <main id="main-content" class="app-shell">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="site-footer">
+        <div class="app-shell footer-inner">
+            <p class="footer-line">
+                <span class="footer-cr">&copy; <time datetime="{{ current_year }}">{{ current_year }}</time> Daya Sylla — SMD Lab Tech</span>
+                <span class="footer-sep" aria-hidden="true">·</span>
+                <span data-i18n="common.footerTagline">Plateforme FastAPI + Flask. Tous droits réservés.</span>
+            </p>
+        </div>
+    </footer>
+    <script>
+    (function() {
+        var STORAGE_KEY = "preferred-language";
+        var dict = {
+            fr: {
+                "lang.fr": "FR",
+                "lang.en": "EN",
+                "brand.title": "The Digital Architect",
+                "common.skipToContent": "Aller au contenu",
+                "common.mainNavigation": "Navigation principale",
+                "common.langChooser": "Choisir la langue",
+                "common.footerTagline": "Plateforme FastAPI + Flask. Tous droits réservés.",
+                "nav.home": "Accueil",
+                "nav.about": "À propos",
+                "nav.tracks": "Parcours",
+                "nav.blog": "Blog",
+                "nav.projects": "Projets",
+                "nav.experiences": "Expériences",
+                "nav.monitoring": "Monitoring",
+                "page.index.title": "Accueil - Portfolio",
+                "page.about.title": "À propos - Portfolio",
+                "page.blog.title": "Blog - Portfolio",
+                "page.projects.title": "Projets - Portfolio",
+                "page.experiences.title": "Expériences - Portfolio",
+                "page.monitoring.title": "Monitoring - Portfolio",
+                "page.tracks.title": "Parcours - Portfolio",
+                "home.kicker": "Selected Work",
+                "home.title": "Building the Infrastructures of Tomorrow.",
+                "home.titleHtml": "Building the <em>Infrastructures</em> of Tomorrow.",
+                "home.subtitle": "Une expérience frontend modernisée pour notre plateforme blog, connectée au backend FastAPI.",
+                "home.ctaBlog": "Lire le blog",
+                "home.ctaProfile": "Voir le profil",
+                "home.card1.title": "Architecture Produit",
+                "home.card1.body": "Un socle technique propre pour livrer vite sans sacrifier la qualité.",
+                "home.card2.title": "Frontend Flask",
+                "home.card2.body": "Templates server-side rapides, accessibles et SEO-friendly.",
+                "home.card3.title": "Contenu Editorial",
+                "home.card3.body": "Articles, retours d'expérience et guides pour la data et l'IA.",
+                "home.card4.title": "Projects Showcase",
+                "home.card4.body": "Mise en avant des réalisations avec stack, liens et impact.",
+                "home.ctaProjects": "Explorer les projets",
+                "home.ctaExperiences": "Voir les expériences",
+                "home.metric1.value": "99.9%",
+                "home.metric1.label": "Disponibilité cible",
+                "home.metric2.value": "FastAPI + Flask",
+                "home.metric2.label": "Stack plateforme",
+                "home.metric3.value": "FR / EN",
+                "home.metric3.label": "Interface bilingue",
+                "home.banner.title": "Platform update",
+                "home.banner.body": "Nouveaux parcours interactifs, UX modernisée et expérience bilingue renforcée.",
+                "home.snapshot.title": "Platform Snapshot",
+                "home.snapshot.subtitle": "Un aperçu clair des piliers produit en production.",
+                "home.snapshot.item1.label": "Frontend UX",
+                "home.snapshot.item1.value": "Modern + bilingual",
+                "home.snapshot.item2.label": "Delivery model",
+                "home.snapshot.item2.value": "Iterative & measurable",
+                "home.snapshot.item3.label": "Quality gate",
+                "home.snapshot.item3.value": "i18n + CI checks",
+                "home.sectionMethod.title": "Comment on délivre",
+                "home.sectionMethod.subtitle": "Une méthode simple pour transformer une idée en produit fiable.",
+                "home.step1.title": "1. Discovery",
+                "home.step1.body": "Cadrage des besoins, des contraintes et des indicateurs de succès.",
+                "home.step2.title": "2. Build",
+                "home.step2.body": "Implémentation incrémentale, tests, i18n, monitoring et sécurité.",
+                "home.step3.title": "3. Operate",
+                "home.step3.body": "Déploiement CI/CD, observabilité et amélioration continue.",
+                "home.finalCta.title": "Prêt à lancer votre prochaine itération produit ?",
+                "home.finalCta.body": "Parcourez les projets, lisez les articles techniques, puis passons à l'exécution.",
+                "home.finalCta.primary": "Voir les réalisations",
+                "home.finalCta.secondary": "Lire les retours d'expérience",
+                "home.enterprise.title": "Conçu pour des équipes exigeantes",
+                "home.enterprise.subtitle": "Gouvernance, sécurité et observabilité intégrées dès la conception.",
+                "home.enterprise.card1.title": "Sécurité by design",
+                "home.enterprise.card1.body": "Headers de sécurité, CORS maîtrisé, gestion propre des secrets et protections API.",
+                "home.enterprise.card2.title": "SLA opérationnel",
+                "home.enterprise.card2.body": "Health checks, pipelines CI/CD et stratégie de rollback pour réduire les interruptions.",
+                "home.enterprise.card3.title": "Observabilité active",
+                "home.enterprise.card3.body": "Métriques, logs et diagnostics pour comprendre un incident en quelques minutes.",
+                "home.enterprise.primary": "Voir les projets",
+                "home.enterprise.secondary": "Discuter architecture",
+                "home.learning.title": "Montez en compétences, étape par étape",
+                "home.learning.subtitle": "Une expérience frontend structurée autour de parcours pratiques, pour passer de la théorie à l'exécution.",
+                "home.learning.track1.title": "Culture produit & delivery",
+                "home.learning.track1.body": "Priorisation, découpage, itérations courtes et mise en production continue.",
+                "home.learning.track2.title": "Data, IA et automatisation",
+                "home.learning.track2.body": "Cas d'usage concrets : collecte, exploitation, visualisation et assistants intelligents.",
+                "home.learning.track3.title": "Observabilité et fiabilité",
+                "home.learning.track3.body": "Logs, métriques et diagnostics pour piloter la qualité de service.",
+                "home.learning.primary": "Commencer le parcours",
+                "home.learning.secondary": "Voir la progression terrain",
+                "home.pedagogy.title": "Une approche claire : pourquoi, puis comment",
+                "home.pedagogy.subtitle": "Chaque section privilégie la compréhension du contexte avant l'implémentation.",
+                "home.pedagogy.card1.title": "Objectif explicite",
+                "home.pedagogy.card1.body": "Tu sais exactement ce que la section va t'apporter avant de lire les détails.",
+                "home.pedagogy.card2.title": "Exemples actionnables",
+                "home.pedagogy.card2.body": "Contenu orienté pratique pour réutiliser rapidement les patterns dans tes projets.",
+                "home.pedagogy.card3.title": "Validation continue",
+                "home.pedagogy.card3.body": "Retours d'expérience, vérifications et amélioration incrémentale.",
+                "home.validation.title": "Validez vos acquis sur des scénarios réels",
+                "home.validation.subtitle": "Articles techniques, projets et expériences forment une boucle d'apprentissage complète.",
+                "home.validation.primary": "Tester sur les projets",
+                "home.validation.secondary": "Comprendre la méthode",
+                "home.profile.title": "Profil Data & IA - Daya Sylla",
+                "home.profile.subtitle": "AI & Data Engineer avec 4+ ans d'expérience en architecture data, IA générative, industrialisation cloud et delivery produit.",
+                "home.profile.summary.title": "Positionnement",
+                "home.profile.summary.body": "Spécialiste des pipelines ELT/ETL, RAG, orchestration multi-LLM, FastAPI et déploiement scalable orienté impact métier.",
+                "home.profile.core.title": "Compétences clés",
+                "home.profile.core.body": "Python, SQL, FastAPI, LangChain/LangGraph, Vertex AI, OpenAI/Gemini, Cloud Run, CI/CD GitHub Actions, monitoring LLM.",
+                "home.profile.cloud.title": "Cloud & Data Platform",
+                "home.profile.cloud.body": "GCP (BigQuery, Dataflow, Dataproc, Vertex AI), Azure AI Studio, AWS, gouvernance data et observabilité de production.",
+                "home.profile.exp1.title": "R&D IA - Axys (2025-...)",
+                "home.profile.exp1.body": "Conception d'agents conversationnels, plateformes RAG, pipelines document intelligence, monitoring Langfuse et déploiement Cloud Run.",
+                "home.profile.exp2.title": "Finance Data - Carrefour (2023-2024)",
+                "home.profile.exp2.body": "Migration ERP PeopleSoft -> SAP, architecture BigQuery, automatisation contrôles comptables, réduction significative des tâches manuelles.",
+                "home.profile.exp3.title": "Marketing & BI - Skoda / La Poste / SNCF / Air France",
+                "home.profile.exp3.body": "Scoring ML, dashboards Power BI, data quality, optimisation de pipelines analytiques et applications décisionnelles opérationnelles.",
+                "home.profile.cert1": "Certification Microsoft PL-300",
+                "home.profile.cert2": "Alteryx Designer Core",
+                "home.profile.cert3": "Master Ingénierie économique & data",
+                "home.profile.cert4": "Master Statistiques appliquées",
+                "home.proof.title": "Preuves en direct",
+                "home.proof.subtitle": "Des indicateurs techniques alimentés en temps réel depuis l'API backend.",
+                "home.proof.lastUpdate": "Dernière mise à jour :",
+                "home.proof.health.title": "Santé API",
+                "home.proof.health.link": "Santé synchronisée automatiquement",
+                "home.proof.ratelimit.title": "Backend Rate Limit",
+                "home.proof.ratelimit.link": "Mesure interne de la plateforme",
+                "home.proof.docs.title": "Documentation API",
+                "home.proof.docs.body": "Interface OpenAPI disponible pour validation rapide.",
+                "home.proof.docs.link": "Documentation gérée côté équipe technique",
+                "about.title": "Architecting Interfaces.",
+                "about.intro": "Cette plateforme combine un backend FastAPI fiable et un frontend Flask pensé pour une navigation fluide, lisible et orientée contenu.",
+                "about.card1.title": "Core Philosophy",
+                "about.card1.body": "Clarté, performance, maintenabilité et cohérence visuelle.",
+                "about.card2.title": "The Stack",
+                "about.card2.body": "FastAPI, Flask templates, CSS responsive et endpoints monitorés.",
+                "about.card3.title": "Start a connection",
+                "about.card3.body": "Le blog devient un point d'entrée produit, pas juste une liste d'articles.",
+                "about.ctaArticles": "Découvrir les articles",
+                "blog.heading": "Blog",
+                "blog.intro": "Articles rédigés en Markdown (dossiers public/posts et public/blog_content/posts), structurés par année, avec filtrage par langue.",
+                "blog.langLabel": "Langue des articles",
+                "blog.langAria": "Choisir la langue des contenus",
+                "blog.metaCategories": "Catégories",
+                "blog.metaTags": "Tags",
+                "blog.byAuthor": "Par",
+                "blog.searchPlaceholder": "Rechercher un titre, un tag...",
+                "blog.tagPlaceholder": "Tag (ex: ai)",
+                "blog.categoryPlaceholder": "Catégorie",
+                "blog.filterBtn": "Filtrer",
+                "blog.backendUnavailable": "Backend API non joignable sur",
+                "blog.errorDetail": "Détail:",
+                "blog.verifyBackend": "Vérifiez que le backend tourne correctement.",
+                "blog.empty": "Aucun article pour l'instant.",
+                "blog.paginationLabel": "Pagination blog",
+                "blog.prev": "← Précédent",
+                "blog.next": "Suivant →",
+                "blog.page": "Page",
+                "blog.of": "/",
+                "blog.backToBlog": "← Retour au blog",
+                "blog.readFull": "Lire la version complète",
+                "projects.heading": "Projets",
+                "projects.intro": "Sélection des projets exposés par l'API backend.",
+                "projects.loadError": "Impossible de charger les projets.",
+                "projects.empty": "Aucun projet trouvé.",
+                "projects.live": "Live",
+                "experiences.heading": "Expériences",
+                "experiences.intro": "Parcours, missions et compétences clés.",
+                "experiences.loadError": "Impossible de charger les expériences.",
+                "experiences.empty": "Aucune expérience disponible.",
+                "monitoring.heading": "Monitoring",
+                "monitoring.intro": "État des services backend et liens de diagnostic.",
+                "monitoring.health": "Health",
+                "monitoring.readiness": "Readiness",
+                "monitoring.docs": "API Docs",
+                "monitoring.backendHealth": "Vérification de santé intégrée",
+                "monitoring.backendReady": "Disponibilité de la plateforme",
+                "monitoring.backendDocs": "Documentation technique interne"
+                ,
+                "tracks.heading": "Parcours d'apprentissage",
+                "tracks.intro": "Choisissez votre niveau et avancez avec des contenus orientés pratique.",
+                "tracks.level.beginner": "Débutant",
+                "tracks.level.intermediate": "Intermédiaire",
+                "tracks.level.advanced": "Avancé",
+                "tracks.filters.all": "Tous",
+                "tracks.filters.aria": "Filtrer les parcours",
+                "tracks.search.placeholder": "Rechercher un thème ou une compétence",
+                "tracks.search.aria": "Recherche parcours",
+                "tracks.search.countDefault": "3 parcours",
+                "tracks.search.empty": "Aucun parcours ne correspond à votre recherche.",
+                "tracks.sort.label": "Ordre d’affichage des parcours",
+                "tracks.sort.aria": "Choisir l’ordre d’affichage des parcours",
+                "tracks.sort.rec": "Parcours recommandé",
+                "tracks.sort.tech": "Plus technique en premier",
+                "tracks.sort.ops": "Plus opérationnel en premier",
+                "tracks.beginner.title": "Bases produit & qualité",
+                "tracks.beginner.body": "Comprendre les fondamentaux: architecture, conventions, qualité de code et cycle de livraison.",
+                "tracks.intermediate.title": "Data, API et automatisation",
+                "tracks.intermediate.body": "Mettre en place des flux data, des endpoints robustes et des automatisations utiles.",
+                "tracks.advanced.title": "Ops, sécurité et observabilité",
+                "tracks.advanced.body": "Industrialiser: CI/CD, sécurité applicative, diagnostics et monitoring orientés production.",
+                "tracks.cta.blog": "Démarrer avec les articles",
+                "tracks.cta.projects": "Appliquer sur des projets",
+                "tracks.framework.title": "Cadre d'exécution",
+                "tracks.framework.step1": "1. Lire pour comprendre le contexte",
+                "tracks.framework.step2": "2. Implémenter sur un cas concret",
+                "tracks.framework.step3": "3. Vérifier avec des checks qualité",
+                "tracks.framework.step4": "4. Documenter les décisions"
+            },
+            en: {
+                "lang.fr": "FR",
+                "lang.en": "EN",
+                "brand.title": "The Digital Architect",
+                "common.skipToContent": "Skip to content",
+                "common.mainNavigation": "Main navigation",
+                "common.langChooser": "Choose language",
+                "common.footerTagline": "FastAPI + Flask platform. All rights reserved.",
+                "nav.home": "Home",
+                "nav.about": "About",
+                "nav.tracks": "Tracks",
+                "nav.blog": "Blog",
+                "nav.projects": "Projects",
+                "nav.experiences": "Experiences",
+                "nav.monitoring": "Monitoring",
+                "page.index.title": "Home - Portfolio",
+                "page.about.title": "About - Portfolio",
+                "page.blog.title": "Blog - Portfolio",
+                "page.projects.title": "Projects - Portfolio",
+                "page.experiences.title": "Experiences - Portfolio",
+                "page.monitoring.title": "Monitoring - Portfolio",
+                "page.tracks.title": "Tracks - Portfolio",
+                "home.kicker": "Selected Work",
+                "home.title": "Building the Infrastructures of Tomorrow.",
+                "home.titleHtml": "Building the <em>Infrastructures</em> of Tomorrow.",
+                "home.subtitle": "A modernized frontend experience for our blog platform, connected to the FastAPI backend.",
+                "home.ctaBlog": "Read the blog",
+                "home.ctaProfile": "View profile",
+                "home.card1.title": "Product Architecture",
+                "home.card1.body": "A clean technical foundation to deliver quickly without compromising quality.",
+                "home.card2.title": "Flask Frontend",
+                "home.card2.body": "Fast, accessible, SEO-friendly server-side templates.",
+                "home.card3.title": "Editorial Content",
+                "home.card3.body": "Articles, field feedback, and practical guides for data and AI.",
+                "home.card4.title": "Projects Showcase",
+                "home.card4.body": "Highlighting achievements with stack, links, and impact.",
+                "home.ctaProjects": "Explore projects",
+                "home.ctaExperiences": "View experiences",
+                "home.metric1.value": "99.9%",
+                "home.metric1.label": "Target availability",
+                "home.metric2.value": "FastAPI + Flask",
+                "home.metric2.label": "Platform stack",
+                "home.metric3.value": "FR / EN",
+                "home.metric3.label": "Bilingual interface",
+                "home.banner.title": "Platform update",
+                "home.banner.body": "New interactive tracks, modernized UX, and stronger bilingual experience.",
+                "home.snapshot.title": "Platform Snapshot",
+                "home.snapshot.subtitle": "A clear overview of production-ready product pillars.",
+                "home.snapshot.item1.label": "Frontend UX",
+                "home.snapshot.item1.value": "Modern + bilingual",
+                "home.snapshot.item2.label": "Delivery model",
+                "home.snapshot.item2.value": "Iterative & measurable",
+                "home.snapshot.item3.label": "Quality gate",
+                "home.snapshot.item3.value": "i18n + CI checks",
+                "home.sectionMethod.title": "How we deliver",
+                "home.sectionMethod.subtitle": "A simple method to turn an idea into a reliable product.",
+                "home.step1.title": "1. Discovery",
+                "home.step1.body": "Frame needs, constraints, and success metrics.",
+                "home.step2.title": "2. Build",
+                "home.step2.body": "Incremental implementation, tests, i18n, monitoring, and security.",
+                "home.step3.title": "3. Operate",
+                "home.step3.body": "CI/CD deployment, observability, and continuous improvement.",
+                "home.finalCta.title": "Ready to launch your next product iteration?",
+                "home.finalCta.body": "Explore projects, read technical articles, then move to execution.",
+                "home.finalCta.primary": "See projects",
+                "home.finalCta.secondary": "Read feedback stories",
+                "home.enterprise.title": "Built for demanding teams",
+                "home.enterprise.subtitle": "Governance, security, and observability integrated from day one.",
+                "home.enterprise.card1.title": "Security by design",
+                "home.enterprise.card1.body": "Security headers, controlled CORS, clean secret management, and API protections.",
+                "home.enterprise.card2.title": "Operational SLA mindset",
+                "home.enterprise.card2.body": "Health checks, CI/CD pipelines, and rollback strategy to reduce downtime.",
+                "home.enterprise.card3.title": "Active observability",
+                "home.enterprise.card3.body": "Metrics, logs, and diagnostics to understand incidents in minutes.",
+                "home.enterprise.primary": "See projects",
+                "home.enterprise.secondary": "Discuss architecture",
+                "home.learning.title": "Build skills step by step",
+                "home.learning.subtitle": "A structured frontend experience with practical tracks to move from theory to execution.",
+                "home.learning.track1.title": "Product culture & delivery",
+                "home.learning.track1.body": "Prioritization, slicing, short iterations, and continuous production delivery.",
+                "home.learning.track2.title": "Data, AI, and automation",
+                "home.learning.track2.body": "Concrete use cases: collection, analytics, visualization, and intelligent assistants.",
+                "home.learning.track3.title": "Observability and reliability",
+                "home.learning.track3.body": "Logs, metrics, and diagnostics to steer service quality.",
+                "home.learning.primary": "Start the track",
+                "home.learning.secondary": "See field progression",
+                "home.pedagogy.title": "A clear approach: why first, then how",
+                "home.pedagogy.subtitle": "Each section prioritizes context understanding before implementation details.",
+                "home.pedagogy.card1.title": "Explicit objective",
+                "home.pedagogy.card1.body": "You know exactly what value each section provides before diving deeper.",
+                "home.pedagogy.card2.title": "Actionable examples",
+                "home.pedagogy.card2.body": "Practice-oriented content so you can quickly reuse patterns in your projects.",
+                "home.pedagogy.card3.title": "Continuous validation",
+                "home.pedagogy.card3.body": "Feedback loops, checks, and incremental improvement.",
+                "home.validation.title": "Validate your skills on real scenarios",
+                "home.validation.subtitle": "Technical articles, projects, and experiences create a complete learning loop.",
+                "home.validation.primary": "Test with projects",
+                "home.validation.secondary": "Understand the method",
+                "home.profile.title": "Data & AI Profile - Daya Sylla",
+                "home.profile.subtitle": "AI & Data Engineer with 4+ years of experience in data architecture, generative AI, cloud industrialization, and product delivery.",
+                "home.profile.summary.title": "Positioning",
+                "home.profile.summary.body": "Specialist in ELT/ETL pipelines, RAG systems, multi-LLM orchestration, FastAPI backends, and scalable impact-driven delivery.",
+                "home.profile.core.title": "Core skills",
+                "home.profile.core.body": "Python, SQL, FastAPI, LangChain/LangGraph, Vertex AI, OpenAI/Gemini, Cloud Run, CI/CD with GitHub Actions, LLM monitoring.",
+                "home.profile.cloud.title": "Cloud & Data Platform",
+                "home.profile.cloud.body": "GCP (BigQuery, Dataflow, Dataproc, Vertex AI), Azure AI Studio, AWS, data governance, and production observability.",
+                "home.profile.exp1.title": "AI R&D - Axys (2025-...)",
+                "home.profile.exp1.body": "Built conversational agents, RAG platforms, document-intelligence pipelines, Langfuse monitoring, and Cloud Run deployment.",
+                "home.profile.exp2.title": "Finance Data - Carrefour (2023-2024)",
+                "home.profile.exp2.body": "PeopleSoft to SAP ERP migration, BigQuery architecture, automated accounting controls, and major manual effort reduction.",
+                "home.profile.exp3.title": "Marketing & BI - Skoda / La Poste / SNCF / Air France",
+                "home.profile.exp3.body": "ML scoring, Power BI dashboards, data quality improvements, and operational decision-support analytics.",
+                "home.profile.cert1": "Microsoft PL-300 Certification",
+                "home.profile.cert2": "Alteryx Designer Core",
+                "home.profile.cert3": "Master in Economic Engineering & Data",
+                "home.profile.cert4": "Master in Applied Statistics",
+                "home.proof.title": "Live proof points",
+                "home.proof.subtitle": "Technical indicators fetched in real time from the backend API.",
+                "home.proof.lastUpdate": "Last update:",
+                "home.proof.health.title": "API health",
+                "home.proof.health.link": "Health synced automatically",
+                "home.proof.ratelimit.title": "Rate limit backend",
+                "home.proof.ratelimit.link": "Internal platform metric",
+                "home.proof.docs.title": "API documentation",
+                "home.proof.docs.body": "OpenAPI interface available for quick validation.",
+                "home.proof.docs.link": "Documentation handled by engineering",
+                "about.title": "Architecting Interfaces.",
+                "about.intro": "This platform combines a reliable FastAPI backend with a Flask frontend designed for smooth, readable, content-first navigation.",
+                "about.card1.title": "Core Philosophy",
+                "about.card1.body": "Clarity, performance, maintainability, and visual consistency.",
+                "about.card2.title": "The Stack",
+                "about.card2.body": "FastAPI, Flask templates, responsive CSS, and monitored endpoints.",
+                "about.card3.title": "Start a connection",
+                "about.card3.body": "The blog becomes a product entry point, not just a list of articles.",
+                "about.ctaArticles": "Discover articles",
+                "blog.heading": "Blog",
+                "blog.intro": "Markdown posts (under public/posts and public/blog_content/posts), grouped by year, with language filters.",
+                "blog.langLabel": "Article language",
+                "blog.langAria": "Choose content language",
+                "blog.metaCategories": "Categories",
+                "blog.metaTags": "Tags",
+                "blog.byAuthor": "By",
+                "blog.searchPlaceholder": "Search by title, tag...",
+                "blog.tagPlaceholder": "Tag (e.g. ai)",
+                "blog.categoryPlaceholder": "Category",
+                "blog.filterBtn": "Filter",
+                "blog.backendUnavailable": "Backend API is unreachable at",
+                "blog.errorDetail": "Detail:",
+                "blog.verifyBackend": "Please ensure the backend is running.",
+                "blog.empty": "No article available yet.",
+                "blog.paginationLabel": "Blog pagination",
+                "blog.prev": "← Previous",
+                "blog.next": "Next →",
+                "blog.page": "Page",
+                "blog.of": "/",
+                "blog.backToBlog": "← Back to blog",
+                "blog.readFull": "Read full version",
+                "projects.heading": "Projects",
+                "projects.intro": "Selection of projects exposed by the backend API.",
+                "projects.loadError": "Unable to load projects.",
+                "projects.empty": "No project found.",
+                "projects.live": "Live",
+                "experiences.heading": "Experiences",
+                "experiences.intro": "Career path, missions, and key skills.",
+                "experiences.loadError": "Unable to load experiences.",
+                "experiences.empty": "No experience available.",
+                "monitoring.heading": "Monitoring",
+                "monitoring.intro": "Backend service status and diagnostic links.",
+                "monitoring.health": "Health",
+                "monitoring.readiness": "Readiness",
+                "monitoring.docs": "API Docs",
+                "monitoring.backendHealth": "Integrated health verification",
+                "monitoring.backendReady": "Platform availability",
+                "monitoring.backendDocs": "Internal technical documentation",
+                "tracks.heading": "Learning tracks",
+                "tracks.intro": "Choose your level and progress with practice-oriented content.",
+                "tracks.level.beginner": "Beginner",
+                "tracks.level.intermediate": "Intermediate",
+                "tracks.level.advanced": "Advanced",
+                "tracks.filters.all": "All",
+                "tracks.filters.aria": "Filter tracks",
+                "tracks.search.placeholder": "Search by theme or skill",
+                "tracks.search.aria": "Tracks search",
+                "tracks.search.countDefault": "3 tracks",
+                "tracks.search.empty": "No track matches your search.",
+                "tracks.sort.label": "Track display order",
+                "tracks.sort.aria": "Choose how tracks are ordered",
+                "tracks.sort.rec": "Recommended path",
+                "tracks.sort.tech": "Most technical first",
+                "tracks.sort.ops": "Most operational first",
+                "tracks.beginner.title": "Product & quality foundations",
+                "tracks.beginner.body": "Understand fundamentals: architecture, conventions, code quality, and delivery lifecycle.",
+                "tracks.intermediate.title": "Data, API, and automation",
+                "tracks.intermediate.body": "Build data flows, robust endpoints, and practical automations.",
+                "tracks.advanced.title": "Ops, security, and observability",
+                "tracks.advanced.body": "Industrialize with CI/CD, app security, diagnostics, and production monitoring.",
+                "tracks.cta.blog": "Start with articles",
+                "tracks.cta.projects": "Apply on projects",
+                "tracks.framework.title": "Execution framework",
+                "tracks.framework.step1": "1. Read to understand context",
+                "tracks.framework.step2": "2. Implement on a concrete case",
+                "tracks.framework.step3": "3. Verify with quality checks",
+                "tracks.framework.step4": "4. Document decisions"
+            }
+        };
+
+        function t(lang, key) {
+            var pack = dict[lang] || dict.fr;
+            return pack[key] || dict.fr[key] || key;
+        }
+        function applyI18n(lang) {
+            document.documentElement.lang = lang;
+            document.documentElement.setAttribute("data-lang", lang);
+            var titleMeta = document.querySelector("meta[name='i18n-title-key']");
+            if (titleMeta) document.title = t(lang, titleMeta.getAttribute("content"));
+            document.querySelectorAll("[data-i18n]").forEach(function(el) {
+                var key = el.getAttribute("data-i18n");
+                if (key) el.textContent = t(lang, key);
+            });
+            document.querySelectorAll("[data-i18n-html]").forEach(function(el) {
+                var key = el.getAttribute("data-i18n-html");
+                if (key) el.innerHTML = t(lang, key);
+            });
+            document.querySelectorAll("[data-i18n-placeholder]").forEach(function(el) {
+                var key = el.getAttribute("data-i18n-placeholder");
+                if (key) el.placeholder = t(lang, key);
+            });
+            document.querySelectorAll("[data-i18n-aria]").forEach(function(el) {
+                var key = el.getAttribute("data-i18n-aria");
+                if (key) el.setAttribute("aria-label", t(lang, key));
+            });
+            document.querySelectorAll("[data-i18n-group-aria]").forEach(function(el) {
+                var key = el.getAttribute("data-i18n-group-aria");
+                if (key) el.setAttribute("aria-label", t(lang, key));
+            });
+            document.querySelectorAll("[data-i18n-btn]").forEach(function(el) {
+                var key = el.getAttribute("data-i18n-btn");
+                if (key) el.textContent = t(lang, key);
+            });
+        }
+        function updateToggle(lang) {
+            document.querySelectorAll(".i18n-toggle [data-lang]").forEach(function(btn) {
+                var active = btn.getAttribute("data-lang") === lang;
+                btn.classList.toggle("active", active);
+                btn.setAttribute("aria-pressed", String(active));
+            });
+        }
+        function setLang(lang) {
+            if (!dict[lang]) return;
+            localStorage.setItem(STORAGE_KEY, lang);
+            applyI18n(lang);
+            updateToggle(lang);
+        }
+        function getLang() {
+            var raw = localStorage.getItem(STORAGE_KEY) || "fr";
+            return dict[raw] ? raw : "fr";
+        }
+        document.addEventListener("DOMContentLoaded", function() {
+            var lang = getLang();
+            applyI18n(lang);
+            updateToggle(lang);
+            document.querySelectorAll(".i18n-toggle [data-lang]").forEach(function(btn) {
+                btn.addEventListener("click", function() {
+                    setLang(btn.getAttribute("data-lang"));
+                });
+            });
+        });
+    })();
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

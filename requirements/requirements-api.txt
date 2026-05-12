@@ -1,0 +1,8 @@
+# Backend FastAPI uniquement (point d'entrée : backend.main:app)
+fastapi>=0.109.0
+uvicorn[standard]>=0.27.0
+pydantic>=2.0
+python-dotenv>=1.0.0
+pyyaml>=6.0
+markdown>=3.5
+redis>=5.0

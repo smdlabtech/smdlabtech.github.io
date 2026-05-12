@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block head %}<meta name="i18n-title-key" content="doc.titleMonitoring">{% endblock %}
+{% block title %}Monitoring - Portfolio{% endblock %}
+
+{% block content %}
+<h1 data-i18n="doc.monitoringTitle">État des services</h1>
+<p data-i18n="doc.monitoringIntro">Vue d'ensemble de la disponibilité des services.</p>
+<section>
+  <ul>
+    <li><a href="{{ url_for('main.index') }}">/</a> <span data-i18n="nav.home">Accueil</span></li>
+    <li><a href="/health">/health</a> <span data-i18n="doc.monitoringHealthLabel">Health check</span></li>
+    <li><a href="/metrics">/metrics</a> <span data-i18n="doc.monitoringMetricsLabel">Métriques Prometheus</span></li>
+  </ul>
+</section>
+{% endblock %}

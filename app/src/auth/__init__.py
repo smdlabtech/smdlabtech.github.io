@@ -1,4 +1,0 @@
-"""
-Authentification et autorisation
-"""
-

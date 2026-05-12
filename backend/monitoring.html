@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backend Monitoring</title>
+  <style>
+    :root {
+      --bg: #f3f6fc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #1e63d6;
+      --border: #dce7f8;
+      --ok-bg: #e9fbf3;
+      --ok-fg: #0f7a4a;
+      --warn-bg: #fff6e8;
+      --warn-fg: #995f00;
+      --shadow: 0 12px 28px rgba(18, 34, 65, 0.08);
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --surface: #162033;
+      --text: #e8eefb;
+      --muted: #9dafcb;
+      --primary: #5ea0ff;
+      --border: #2a3a56;
+      --ok-bg: #123225;
+      --ok-fg: #7be0b0;
+      --warn-bg: #3a2c13;
+      --warn-fg: #ffd18a;
+      --shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Inter", "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--text); }
+    .shell { width: min(1060px, 92vw); margin: 0 auto; }
+    .top { position: sticky; top: 0; background: color-mix(in oklab, var(--bg) 88%, transparent); border-bottom: 1px solid var(--border); backdrop-filter: blur(8px); z-index: 10; }
+    .top-row { display: flex; align-items: center; gap: .6rem; padding: .7rem 0; flex-wrap: wrap; }
+    .brand { font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #294473; }
+    .spacer { margin-left: auto; }
+    .chip, .link {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: .45rem .75rem;
+      border-radius: .65rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .84rem;
+    }
+    main { padding: 1rem 0 2rem; }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      margin-top: .9rem;
+    }
+    h1 { margin: .2rem 0 .5rem; font-size: clamp(1.6rem, 5vw, 2.3rem); }
+    p { margin: 0; color: var(--muted); }
+    .grid { margin-top: .8rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: .65rem; }
+    .card { border: 1px solid var(--border); border-radius: 12px; padding: .8rem; background: color-mix(in oklab, var(--surface) 90%, #f5f8ff); }
+    .card h3 { margin: 0 0 .35rem; font-size: 1rem; }
+    .actions { margin-top: .7rem; display: flex; gap: .45rem; flex-wrap: wrap; }
+    .badge { display: inline-block; border-radius: 999px; padding: .2rem .56rem; font-size: .75rem; font-weight: 700; margin-top: .45rem; }
+    .ok { background: var(--ok-bg); color: var(--ok-fg); }
+    .warn { background: var(--warn-bg); color: var(--warn-fg); }
+    .footer { margin: 1rem 0 2rem; color: var(--muted); font-size: .84rem; text-align: center; }
+    .proof-grid { margin-top: .8rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: .65rem; }
+    .proof-item { border: 1px solid var(--border); border-radius: 12px; padding: .8rem; background: color-mix(in oklab, var(--surface) 90%, #f5f8ff); }
+    .proof-item h3 { margin: 0 0 .35rem; font-size: 1rem; }
+    .proof-meta { margin-top: .45rem; color: var(--muted); font-size: .8rem; }
+    .badge.neutral { background: #edf3ff; color: #274a89; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="shell top-row">
+      <strong class="brand" data-i18n="brand">Backend Monitoring</strong>
+      <a class="chip" href="/backend/index.html" data-i18n="nav.home">Landing</a>
+      <span class="spacer"></span>
+      <button class="chip" id="lang-fr">FR</button>
+      <button class="chip" id="lang-en">EN</button>
+      <button class="chip" id="theme-toggle">Theme</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="panel">
+      <h1 data-i18n="hero.title">Monitoring and observability hub</h1>
+      <p data-i18n="hero.body">Acces rapide aux endpoints health/metrics du backend et aux outils de monitoring du repository.</p>
+      <div class="actions">
+        <a class="link" href="/health">/health</a>
+        <a class="link" href="/health/ready">/health/ready</a>
+        <a class="link" href="/health/live">/health/live</a>
+        <a class="link" href="/metrics">/metrics</a>
+        <a class="link" href="/api/rate-limit">/api/rate-limit</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 data-i18n="stack.title">Repository monitoring stack</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>Prometheus</h3>
+          <p data-i18n="stack.prometheus">Collecte des metriques API (latence, erreurs, debit).</p>
+          <span class="badge ok" data-i18n="state.recommended">Recommended</span>
+        </article>
+        <article class="card">
+          <h3>Grafana</h3>
+          <p data-i18n="stack.grafana">Dashboards pour lecture rapide de la sante plateforme.</p>
+          <span class="badge ok" data-i18n="state.recommended">Recommended</span>
+        </article>
+        <article class="card">
+          <h3>Loki</h3>
+          <p data-i18n="stack.loki">Centralisation logs applicatifs et troubleshooting.</p>
+          <span class="badge warn" data-i18n="state.optional">Optional</span>
+        </article>
+        <article class="card">
+          <h3>Alertmanager</h3>
+          <p data-i18n="stack.alertmanager">Routage des alertes vers les canaux d'astreinte.</p>
+          <span class="badge warn" data-i18n="state.optional">Optional</span>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 data-i18n="docs.title">Useful docs</h2>
+      <div class="actions">
+        <a class="link" href="/docs">/docs</a>
+        <a class="link" href="/redoc">/redoc</a>
+        <a class="link" href="/backend/README.md">backend/README.md</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 data-i18n="proof.title">Live status</h2>
+      <p data-i18n="proof.subtitle">Verification periodique des endpoints backend critiques.</p>
+      <div class="proof-grid">
+        <article class="proof-item">
+          <h3>/health</h3>
+          <span id="proof-health" class="badge neutral">unknown</span>
+        </article>
+        <article class="proof-item">
+          <h3>/health/ready</h3>
+          <span id="proof-ready" class="badge neutral">unknown</span>
+        </article>
+        <article class="proof-item">
+          <h3>/health/live</h3>
+          <span id="proof-live" class="badge neutral">unknown</span>
+        </article>
+        <article class="proof-item">
+          <h3>/api/rate-limit</h3>
+          <span id="proof-rate" class="badge neutral">unknown</span>
+        </article>
+      </div>
+      <div class="proof-meta">
+        <span data-i18n="proof.updated">Derniere mise a jour:</span>
+        <strong id="proof-updated">-</strong>
+      </div>
+    </section>
+  </main>
+
+  <div class="shell footer" data-i18n="footer">Monitoring page adapted to this repository (FastAPI backend + Flask frontend).</div>
+
+  <script>
+    const STORAGE_LANG = "preferred-language";
+    const STORAGE_THEME = "preferred-theme";
+    const dict = {
+      fr: {
+        "brand": "Backend Monitoring",
+        "nav.home": "Landing",
+        "hero.title": "Hub monitoring et observabilite",
+        "hero.body": "Acces rapide aux endpoints health/metrics du backend et aux outils de monitoring du repository.",
+        "stack.title": "Stack monitoring du repository",
+        "stack.prometheus": "Collecte des metriques API (latence, erreurs, debit).",
+        "stack.grafana": "Dashboards pour lecture rapide de la sante plateforme.",
+        "stack.loki": "Centralisation logs applicatifs et troubleshooting.",
+        "stack.alertmanager": "Routage des alertes vers les canaux d'astreinte.",
+        "state.recommended": "Recommended",
+        "state.optional": "Optional",
+        "docs.title": "Documentation utile",
+        "proof.title": "Statut live",
+        "proof.subtitle": "Verification periodique des endpoints backend critiques.",
+        "proof.updated": "Derniere mise a jour:",
+        "footer": "Page monitoring adaptee au repository (backend FastAPI + frontend Flask)."
+      },
+      en: {
+        "brand": "Backend Monitoring",
+        "nav.home": "Landing",
+        "hero.title": "Monitoring and observability hub",
+        "hero.body": "Quick access to backend health/metrics endpoints and repository monitoring tools.",
+        "stack.title": "Repository monitoring stack",
+        "stack.prometheus": "Collect API metrics (latency, errors, throughput).",
+        "stack.grafana": "Dashboards for fast platform health insights.",
+        "stack.loki": "Centralized application logs and troubleshooting.",
+        "stack.alertmanager": "Alert routing to on-call notification channels.",
+        "state.recommended": "Recommended",
+        "state.optional": "Optional",
+        "docs.title": "Useful docs",
+        "proof.title": "Live status",
+        "proof.subtitle": "Periodic checks of critical backend endpoints.",
+        "proof.updated": "Last update:",
+        "footer": "Monitoring page adapted to this repository (FastAPI backend + Flask frontend)."
+      }
+    };
+    function applyLang(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.setAttribute("data-lang", lang);
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        el.textContent = (dict[lang] && dict[lang][key]) || dict.fr[key] || key;
+      });
+      localStorage.setItem(STORAGE_LANG, lang);
+    }
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem(STORAGE_THEME, theme);
+    }
+    function setProofBadge(el, value) {
+      const v = String(value || "unknown").toLowerCase();
+      el.textContent = v;
+      el.classList.remove("ok", "warn", "neutral");
+      if (v === "healthy" || v === "ready" || v === "alive" || v === "memory" || v === "redis") {
+        el.classList.add("ok");
+      } else if (v === "offline") {
+        el.classList.add("warn");
+      } else {
+        el.classList.add("neutral");
+      }
+    }
+    function nowText() {
+      const lang = (document.documentElement.lang || "fr").toLowerCase();
+      const locale = lang.startsWith("en") ? "en-US" : "fr-FR";
+      return new Date().toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    }
+    async function fetchJson(path) {
+      try {
+        const r = await fetch(path, { headers: { "Accept": "application/json" } });
+        if (!r.ok) return {};
+        return await r.json();
+      } catch (_e) {
+        return {};
+      }
+    }
+    async function refreshProof() {
+      const healthEl = document.getElementById("proof-health");
+      const readyEl = document.getElementById("proof-ready");
+      const liveEl = document.getElementById("proof-live");
+      const rateEl = document.getElementById("proof-rate");
+      const updatedEl = document.getElementById("proof-updated");
+      if (!healthEl || !readyEl || !liveEl || !rateEl || !updatedEl) return;
+
+      const [health, ready, live, rate] = await Promise.all([
+        fetchJson("/health"),
+        fetchJson("/health/ready"),
+        fetchJson("/health/live"),
+        fetchJson("/api/rate-limit"),
+      ]);
+      setProofBadge(healthEl, health.status || "offline");
+      setProofBadge(readyEl, ready.status || "offline");
+      setProofBadge(liveEl, live.status || "offline");
+      setProofBadge(rateEl, rate.backend || "unknown");
+      updatedEl.textContent = nowText();
+    }
+    document.getElementById("lang-fr").addEventListener("click", () => applyLang("fr"));
+    document.getElementById("lang-en").addEventListener("click", () => applyLang("en"));
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      const next = (localStorage.getItem(STORAGE_THEME) || "light") === "light" ? "dark" : "light";
+      applyTheme(next);
+    });
+    applyLang(localStorage.getItem(STORAGE_LANG) || "fr");
+    applyTheme(localStorage.getItem(STORAGE_THEME) || "light");
+    refreshProof();
+    setInterval(refreshProof, 30000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,122 @@
+---
+# Cloud Build configuration améliorée pour le backend Flask
+# Utilisé par GitHub Actions via: gcloud builds submit --config cloudbuild/backend.yaml
+# Optimisé pour : cache, sécurité, labels, multi-stage builds
+
+substitutions:
+  _REGION: europe-west1
+  _PROJECT_ID: bq-small-corp
+  _ARTIFACT_REPO: flask-portfolio
+  _SERVICE_NAME: flask-portfolio
+  _DOCKERFILE: Dockerfile
+  _BUILD_CONTEXT: app
+  _COMMIT_SHA: ''
+  _BRANCH_NAME: ''
+  _SHORT_SHA: ''
+
+steps:
+  # Step 1: Build de l'image Docker avec cache optimisé et labels
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'docker-build'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        set -e
+
+        echo "🔨 Building Docker image with optimizations..."
+
+        # Récupérer l'image latest pour le cache
+        docker pull ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_ARTIFACT_REPO}/${_SERVICE_NAME}:latest || \
+          echo "⚠️ No cache image found, building from scratch"
+
+        # Build avec cache et labels optimisés
+        docker build \
+          --cache-from ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_ARTIFACT_REPO}/${_SERVICE_NAME}:latest \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_ARTIFACT_REPO}/${_SERVICE_NAME}:${_SHORT_SHA} \
+          -t ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_ARTIFACT_REPO}/${_SERVICE_NAME}:latest \
+          --label org.opencontainers.image.created=$(date -u +"%Y-%m-%dT%H:%M:%SZ") \
+          --label org.opencontainers.image.revision=${_SHORT_SHA} \
+          --label org.opencontainers.image.version=${_SHORT_SHA} \
+          --label org.opencontainers.image.title="Flask Portfolio Backend" \
+          --label org.opencontainers.image.description="Flask Portfolio Application Backend" \
+          --label com.github.actions.commit=${_COMMIT_SHA} \
+          --label com.github.actions.ref=${_BRANCH_NAME} \
+          --label com.github.actions.workflow=${_BRANCH_NAME} \
+          --label com.github.actions.repository=${_PROJECT_ID}/${_ARTIFACT_REPO} \
+          --build-arg BUILDKIT_INLINE_CACHE=1 \
+          -f ${_DOCKERFILE} \
+          ${_BUILD_CONTEXT}
+
+        echo "✅ Docker image built successfully"
+  # Step 2: Scan de sécurité avec Trivy (optionnel mais recommandé)
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'security-scan'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        set -e
+
+        echo "🔍 Running security scan..."
+        # Installer Trivy si disponible
+        if command -v trivy &> /dev/null; then
+          trivy image --exit-code 0 --severity CRITICAL,HIGH \
+            ${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_ARTIFACT_REPO}/${_SERVICE_NAME}:${_SHORT_SHA} || \
+          echo "⚠️ Security scan completed with warnings"
+        else
+          echo "ℹ️ Trivy not available, skipping security scan"
+        fi
+
+  # Step 3: Push vers Artifact Registry avec tous les tags
+  - name: 'gcr.io/cloud-builders/docker'
+    id: 'docker-push'
+    args:
+      - 'push'
+      - '--all-tags'
+      - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_ARTIFACT_REPO}/${_SERVICE_NAME}:${_SHORT_SHA}'
+
+# Images à pousser (utilisées par Cloud Run deploy)
+images:
+  - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_ARTIFACT_REPO}/${_SERVICE_NAME}:${_SHORT_SHA}'
+  - '${_REGION}-docker.pkg.dev/${_PROJECT_ID}/${_ARTIFACT_REPO}/${_SERVICE_NAME}:latest'
+
+# Options de build optimisées
+options:
+  # Machine type optimisée pour les builds Docker
+  machineType: 'E2_HIGHCPU_8'
+
+  # Logging uniquement dans Cloud Logging (pas de fichiers locaux)
+  logging: CLOUD_LOGGING_ONLY
+
+  # Permettre les substitutions vides (pour les builds manuels)
+  substitution_option: 'ALLOW_LOOSE'
+
+  # Variables d'environnement pour le build
+  env:
+    - 'COMMIT_SHA=${_COMMIT_SHA}'
+    - 'BRANCH_NAME=${_BRANCH_NAME}'
+    - 'SHORT_SHA=${_SHORT_SHA}'
+    - 'BUILD_TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%SZ")'
+
+  # Pool de workers pour builds parallèles (si nécessaire)
+  # workerPool: 'projects/PROJECT_ID/locations/REGION/workerPools/POOL_NAME'
+
+  # Timeout de build (20 minutes)
+  timeout: '1200s'
+
+  # Source provenance (traçabilité)
+  sourceProvenanceHash: ['SHA256']
+
+  # Pool de substitution pour builds parallèles
+  # substitution_option: 'ALLOW_LOOSE'
+
+# Timeout global du build
+timeout: '1200s'
+
+# Tags pour organisation dans Cloud Build
+tags:
+  - 'backend'
+  - 'flask'
+  - 'cloud-run'
+  - 'production'

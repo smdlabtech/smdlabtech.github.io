@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block head %}<meta name="i18n-title-key" content="page.monitoring.title">{% endblock %}
+{% block title %}Monitoring - Portfolio{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1 data-i18n="monitoring.heading">Monitoring</h1>
+  <p data-i18n="monitoring.intro">État des services backend et liens de diagnostic.</p>
+</section>
+
+<section class="grid">
+  <article class="card">
+    <h3 data-i18n="monitoring.health">Health</h3>
+    <p data-i18n="monitoring.backendHealth">Vérification de santé intégrée</p>
+  </article>
+  <article class="card">
+    <h3 data-i18n="monitoring.readiness">Readiness</h3>
+    <p data-i18n="monitoring.backendReady">Disponibilité de la plateforme</p>
+  </article>
+  <article class="card">
+    <h3 data-i18n="monitoring.docs">API Docs</h3>
+    <p data-i18n="monitoring.backendDocs">Documentation technique interne</p>
+  </article>
+</section>
+{% endblock %}

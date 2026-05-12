@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block head %}<meta name="i18n-title-key" content="page.projects.title">{% endblock %}
+{% block title %}Projets - Portfolio{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1 data-i18n="projects.heading">Projets</h1>
+  <p data-i18n="projects.intro">Sélection des projets exposés par l'API backend.</p>
+</section>
+
+{% if not backend_available %}
+<p class="notice"><span data-i18n="projects.loadError">Impossible de charger les projets.</span> {% if backend_error %}{{ backend_error }}{% endif %}</p>
+{% endif %}
+
+{% if projects %}
+<section class="grid">
+  {% for p in projects %}
+  <article class="card">
+    <h3>{{ p.get('title') or p.get('name') }}</h3>
+    {% if p.get('description') %}
+    <p>{{ p.get('description') }}</p>
+    {% endif %}
+    <div class="chips">
+      {% for t in (p.get('tags') or [])[:4] %}
+      <span class="chip">{{ t }}</span>
+      {% endfor %}
+    </div>
+    <div class="actions">
+      {% if p.get('website') or p.get('website_url') %}
+      <a class="btn btn-primary" target="_blank" rel="noopener" href="{{ p.get('website') or p.get('website_url') }}" data-i18n="projects.live">Live</a>
+      {% endif %}
+      {% if p.get('github') or p.get('github_url') %}
+      <a class="btn btn-secondary" target="_blank" rel="noopener" href="{{ p.get('github') or p.get('github_url') }}">GitHub</a>
+      {% endif %}
+    </div>
+  </article>
+  {% endfor %}
+</section>
+{% elif backend_available %}
+<p data-i18n="projects.empty">Aucun projet trouvé.</p>
+{% endif %}
+{% endblock %}

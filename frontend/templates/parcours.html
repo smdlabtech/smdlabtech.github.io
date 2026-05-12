@@ -1,0 +1,186 @@
+{% extends "base.html" %}
+{% block head %}<meta name="i18n-title-key" content="page.tracks.title">{% endblock %}
+{% block title %}Parcours - Portfolio{% endblock %}
+{% block content %}
+<section class="panel">
+  <h1 data-i18n="tracks.heading">Parcours d'apprentissage</h1>
+  <p data-i18n="tracks.intro">Choisissez votre niveau et avancez avec des contenus orientés pratique.</p>
+  <div class="tracks-tools">
+    <label class="tracks-sort-wrap">
+      <span class="tracks-sort-label visually-hidden" data-i18n="tracks.sort.label">Ordre d’affichage</span>
+      <select id="tracks-sort" class="tracks-sort" data-i18n-aria="tracks.sort.aria">
+        <option value="rec" data-i18n="tracks.sort.rec">Parcours recommandé</option>
+        <option value="tech" data-i18n="tracks.sort.tech">Plus technique</option>
+        <option value="ops" data-i18n="tracks.sort.ops">Plus opérationnel</option>
+      </select>
+    </label>
+    <input
+      id="tracks-search"
+      class="tracks-search"
+      type="search"
+      data-i18n-placeholder="tracks.search.placeholder"
+      placeholder="Rechercher un thème ou une compétence"
+      aria-label="Recherche parcours"
+      data-i18n-aria="tracks.search.aria"
+    />
+    <span id="tracks-result-count" class="tracks-count" data-i18n="tracks.search.countDefault">3 parcours</span>
+  </div>
+  <div class="track-filters" role="group" aria-label="Filtrer les parcours" data-i18n-group-aria="tracks.filters.aria">
+    <button type="button" class="track-filter is-active" data-level="all" data-i18n="tracks.filters.all">Tous</button>
+    <button type="button" class="track-filter" data-level="beginner" data-i18n="tracks.level.beginner">Débutant</button>
+    <button type="button" class="track-filter" data-level="intermediate" data-i18n="tracks.level.intermediate">Intermédiaire</button>
+    <button type="button" class="track-filter" data-level="advanced" data-i18n="tracks.level.advanced">Avancé</button>
+  </div>
+</section>
+
+<section id="tracks-grid" class="tracks-grid section">
+  <article class="track-card" data-track-level="beginner" data-track-tags="architecture qualité conventions delivery">
+    <span class="track-level" data-i18n="tracks.level.beginner">Débutant</span>
+    <h3 data-i18n="tracks.beginner.title">Bases produit & qualité</h3>
+    <p data-i18n="tracks.beginner.body">Comprendre les fondamentaux: architecture, conventions, qualité de code et cycle de livraison.</p>
+  </article>
+  <article class="track-card" data-track-level="intermediate" data-track-tags="data api automatisation flux">
+    <span class="track-level" data-i18n="tracks.level.intermediate">Intermédiaire</span>
+    <h3 data-i18n="tracks.intermediate.title">Data, API et automatisation</h3>
+    <p data-i18n="tracks.intermediate.body">Mettre en place des flux data, des endpoints robustes et des automatisations utiles.</p>
+  </article>
+  <article class="track-card" data-track-level="advanced" data-track-tags="ops sécurité observabilité ci cd monitoring">
+    <span class="track-level" data-i18n="tracks.level.advanced">Avancé</span>
+    <h3 data-i18n="tracks.advanced.title">Ops, sécurité et observabilité</h3>
+    <p data-i18n="tracks.advanced.body">Industrialiser: CI/CD, sécurité applicative, diagnostics et monitoring orientés production.</p>
+  </article>
+</section>
+<p id="tracks-empty-state" class="tracks-empty" data-i18n="tracks.search.empty" hidden>Aucun parcours ne correspond à votre recherche.</p>
+
+<section class="panel section">
+  <h2 data-i18n="tracks.framework.title">Cadre d'exécution</h2>
+  <div class="framework-list">
+    <div class="framework-item" data-i18n="tracks.framework.step1">1. Lire pour comprendre le contexte</div>
+    <div class="framework-item" data-i18n="tracks.framework.step2">2. Implémenter sur un cas concret</div>
+    <div class="framework-item" data-i18n="tracks.framework.step3">3. Vérifier avec des checks qualité</div>
+    <div class="framework-item" data-i18n="tracks.framework.step4">4. Documenter les décisions</div>
+  </div>
+  <div class="actions">
+    <a class="btn btn-primary" href="{{ url_for('blog_list') }}" data-i18n="tracks.cta.blog">Démarrer avec les articles</a>
+    <a class="btn btn-secondary" href="{{ url_for('projects_list') }}" data-i18n="tracks.cta.projects">Appliquer sur des projets</a>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function () {
+  const grid = document.getElementById("tracks-grid");
+  const buttons = Array.from(document.querySelectorAll(".track-filter"));
+  const sortSelect = document.getElementById("tracks-sort");
+  let cards = Array.from(document.querySelectorAll("#tracks-grid [data-track-level]"));
+  const searchInput = document.getElementById("tracks-search");
+  const countEl = document.getElementById("tracks-result-count");
+  const emptyEl = document.getElementById("tracks-empty-state");
+  if (!grid || !buttons.length || !cards.length || !searchInput || !countEl || !emptyEl) return;
+
+  const levelOrder = {
+    rec: ["beginner", "intermediate", "advanced"],
+    tech: ["intermediate", "advanced", "beginner"],
+    ops: ["advanced", "intermediate", "beginner"],
+  };
+  let currentLevel = "all";
+  let currentQuery = "";
+  let currentSort = "rec";
+
+  function refreshCardList() {
+    cards = Array.from(grid.querySelectorAll("[data-track-level]"));
+  }
+
+  function reorderCards() {
+    const order = levelOrder[currentSort] || levelOrder.rec;
+    const byLevel = {};
+    cards.forEach(function (c) {
+      const lv = c.getAttribute("data-track-level");
+      if (lv) byLevel[lv] = c;
+    });
+    order.forEach(function (level) {
+      if (byLevel[level]) grid.appendChild(byLevel[level]);
+    });
+    refreshCardList();
+  }
+
+  function updateUrlState() {
+    const url = new URL(window.location.href);
+    if (currentLevel && currentLevel !== "all") {
+      url.searchParams.set("level", currentLevel);
+    } else {
+      url.searchParams.delete("level");
+    }
+    if (currentQuery) {
+      url.searchParams.set("q", currentQuery);
+    } else {
+      url.searchParams.delete("q");
+    }
+    if (currentSort && currentSort !== "rec") {
+      url.searchParams.set("sort", currentSort);
+    } else {
+      url.searchParams.delete("sort");
+    }
+    window.history.replaceState({}, "", url.toString());
+  }
+
+  function parseUrlState() {
+    const url = new URL(window.location.href);
+    const level = (url.searchParams.get("level") || "all").toLowerCase();
+    const q = (url.searchParams.get("q") || "").trim().toLowerCase();
+    const sort = (url.searchParams.get("sort") || "rec").toLowerCase();
+    const known = new Set(["all", "beginner", "intermediate", "advanced"]);
+    const knownSort = new Set(["rec", "tech", "ops"]);
+    currentLevel = known.has(level) ? level : "all";
+    currentQuery = q;
+    currentSort = knownSort.has(sort) ? sort : "rec";
+    searchInput.value = q;
+    if (sortSelect) {
+      sortSelect.value = currentSort;
+    }
+  }
+
+  function applyFilter() {
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const levelMatch = currentLevel === "all" || card.getAttribute("data-track-level") === currentLevel;
+      const text = ((card.textContent || "") + " " + (card.getAttribute("data-track-tags") || "")).toLowerCase();
+      const queryMatch = !currentQuery || text.includes(currentQuery);
+      const visible = levelMatch && queryMatch;
+      card.style.display = visible ? "" : "none";
+      if (visible) visibleCount += 1;
+    });
+    buttons.forEach((btn) => {
+      btn.classList.toggle("is-active", btn.getAttribute("data-level") === currentLevel);
+    });
+    emptyEl.hidden = visibleCount !== 0;
+    const lang = (document.documentElement.lang || "fr").toLowerCase();
+    const noun = lang.startsWith("en") ? (visibleCount === 1 ? "track" : "tracks") : "parcours";
+    countEl.textContent = String(visibleCount) + " " + noun;
+    updateUrlState();
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      currentLevel = btn.getAttribute("data-level") || "all";
+      applyFilter();
+    });
+  });
+  searchInput.addEventListener("input", () => {
+    currentQuery = (searchInput.value || "").trim().toLowerCase();
+    applyFilter();
+  });
+  if (sortSelect) {
+    sortSelect.addEventListener("change", () => {
+      currentSort = sortSelect.value || "rec";
+      reorderCards();
+      applyFilter();
+    });
+  }
+  parseUrlState();
+  reorderCards();
+  applyFilter();
+})();
+</script>
+{% endblock %}

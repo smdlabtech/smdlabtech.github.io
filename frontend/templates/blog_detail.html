@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block head %}<meta name="i18n-title-key" content="page.blog.title">{% endblock %}
+{% block title %}{{ article.get('title', 'Article') }} - Blog{% endblock %}
+{% block content %}
+<article class="panel blog-article">
+  <header class="blog-article-header">
+    <h1>{{ article.get('title') }}</h1>
+    <div class="blog-article-meta">
+      {% if article.get('date') %}
+      <time class="meta" datetime="{{ article.get('date') }}">{{ article.get('date') }}</time>
+      {% endif %}
+      {% if article.get('author') %}
+      <span class="meta blog-author"><span data-i18n="blog.byAuthor">Par</span> {{ article.get('author') }}</span>
+      {% endif %}
+      {% if article.get('lang') %}
+      <span class="blog-lang-badge">{{ article.get('lang')|upper }}</span>
+      {% endif %}
+    </div>
+  </header>
+
+  {% if article.get('excerpt') and not article.get('content_html') %}
+  <p class="excerpt blog-lead">{{ article.get('excerpt') }}</p>
+  {% endif %}
+
+  {% if article.get('categories') %}
+  <div class="chips">
+    {% for c in article.get('categories') %}
+    <a class="chip" href="{{ url_for('blog_list', category=c, lang=article.get('lang') or 'fr') }}">{{ c }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if article.get('tags') %}
+  <div class="chips">
+    {% for t in article.get('tags') %}
+    <a class="chip" href="{{ url_for('blog_list', tag=t, lang=article.get('lang') or 'fr') }}">#{{ t }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  {% if article.get('content_html') %}
+  <div class="post-body rte">
+    {{ article.content_html|safe }}
+  </div>
+  {% elif article.get('excerpt') %}
+  <p class="excerpt">{{ article.get('excerpt') }}</p>
+  {% endif %}
+
+  <div class="actions">
+    <a class="btn btn-secondary" href="{{ url_for('blog_list', lang=article.get('lang') or 'fr') }}" data-i18n="blog.backToBlog">← Retour au blog</a>
+    {% if article.get('permalink') %}
+      {% set perm = article.get('permalink') %}
+      {% if perm.startswith('http://') or perm.startswith('https://') %}
+    <a class="btn btn-primary" href="{{ perm }}" target="_blank" rel="noopener" data-i18n="blog.readFull">Lire la version complète</a>
+      {% endif %}
+    {% endif %}
+  </div>
+</article>
+{% endblock %}

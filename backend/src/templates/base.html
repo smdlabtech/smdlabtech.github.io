@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <script>document.documentElement.lang = localStorage.getItem('preferred-language') || 'fr';</script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        :root {
+            --ui-bg: #f3f6fc;
+            --ui-surface: #ffffff;
+            --ui-text: #0f172a;
+            --ui-muted: #64748b;
+            --ui-primary: #1e63d6;
+            --ui-border: #dfe7f5;
+            --ui-shadow: 0 12px 28px rgba(16, 29, 56, 0.08);
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            background: linear-gradient(180deg, #eff4fe 0%, #f7f9ff 45%, #f2f5fb 100%);
+            color: var(--ui-text);
+            font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+        }
+        a { color: inherit; }
+        .app-shell {
+            width: min(980px, 92vw);
+            margin: 0 auto;
+        }
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            backdrop-filter: saturate(1.3) blur(8px);
+            background: rgba(243, 247, 255, 0.86);
+            border-bottom: 1px solid #e7edf9;
+        }
+        .i18n-toggle { display: inline-flex; align-items: center; gap: 0.5rem; margin-left: auto; }
+        .i18n-toggle button {
+            padding: 0.28rem 0.58rem;
+            cursor: pointer;
+            border: 1px solid #c8d5f0;
+            background: #f5f8ff;
+            border-radius: 8px;
+            font-weight: 600;
+            color: #2c4478;
+        }
+        .i18n-toggle button.active { background: #1e63d6; color: #fff; border-color: #1e63d6; }
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            padding: 0.65rem 0;
+            flex-wrap: wrap;
+        }
+        nav > a {
+            text-decoration: none;
+            border-radius: 9px;
+            padding: .45rem .62rem;
+            color: #31405f;
+            font-weight: 600;
+            font-size: .9rem;
+        }
+        nav > a:hover {
+            background: #e9f0ff;
+            color: #133f95;
+        }
+        main {
+            min-height: calc(100vh - 160px);
+            padding: 1.2rem 0 1.8rem;
+        }
+        footer {
+            border-top: 1px solid #e6ecf9;
+            padding: 1rem 0 2rem;
+            color: var(--ui-muted);
+            font-size: .88rem;
+        }
+        .panel {
+            background: var(--ui-surface);
+            border: 1px solid var(--ui-border);
+            border-radius: 16px;
+            box-shadow: var(--ui-shadow);
+            padding: 1rem;
+        }
+        @media (max-width: 700px) {
+            nav {
+                display: grid;
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: .35rem;
+                padding: .55rem 0;
+            }
+            nav > a {
+                text-align: center;
+                font-size: .78rem;
+                padding: .5rem .35rem;
+                background: #f7f9ff;
+                border: 1px solid #dfe8fb;
+            }
+            .i18n-toggle {
+                grid-column: 1 / -1;
+                justify-content: center;
+                margin-top: .2rem;
+            }
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <header>
+        <div class="app-shell">
+            <nav>
+                <a href="{{ url_for('main.index') }}" data-i18n="nav.home">Accueil</a>
+                <a href="{{ url_for('main.about') }}" data-i18n="nav.about">À propos</a>
+                <a href="{{ url_for('blog.blog_list') }}" data-i18n="nav.blog">Blog</a>
+                <a href="{{ url_for('main.monitoring') }}" data-i18n="nav.monitoring">Monitoring</a>
+                <div class="i18n-toggle" role="group" aria-label="Choisir la langue" data-i18n-group-aria="doc.langChooser">
+                    <button type="button" data-lang="fr" aria-pressed="true" data-i18n-btn="lang.fr">FR</button>
+                    <button type="button" data-lang="en" aria-pressed="false" data-i18n-btn="lang.en">EN</button>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="app-shell">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="app-shell">
+            <p data-i18n="doc.footerCopy">&copy; 2024 Portfolio. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+    (function() {
+        var STORAGE_KEY = 'preferred-language';
+        var dict = {
+            fr: {
+                'nav.home': 'Accueil',
+                'nav.about': 'À propos',
+                'nav.blog': 'Blog',
+                'nav.monitoring': 'Monitoring',
+                'doc.footerCopy': '© 2024 Portfolio. Tous droits réservés.',
+                'doc.titleHome': 'Accueil - Portfolio',
+                'doc.titleAbout': 'À propos - Portfolio',
+                'doc.titleMonitoring': 'Monitoring - Portfolio',
+                'doc.welcome': 'Bienvenue sur mon Portfolio',
+                'doc.homeIntro': 'Ceci est la page d\'accueil.',
+                'doc.aboutHeading': 'À propos',
+                'doc.aboutIntro': 'Informations sur moi.',
+                'doc.monitoringTitle': 'État des services',
+                'doc.monitoringIntro': 'Vue d\'ensemble de la disponibilité des services.',
+                'doc.homeKicker': 'The Digital Architect',
+                'doc.homeCard1Title': 'Architecture Produit',
+                'doc.homeCard1Body': 'Conception d\'interfaces, structuration des parcours et cohérence des composants.',
+                'doc.homeCard2Title': 'Data & IA',
+                'doc.homeCard2Body': 'Prototypage orienté valeur : analytics, pipelines, IA générative et automatisation.',
+                'doc.homeCard3Title': 'Delivery',
+                'doc.homeCard3Body': 'Approche pragmatique : itérations courtes, qualité technique, monitoring et optimisation.',
+                'doc.homeCtaBlog': 'Voir les articles',
+                'doc.homeCtaAbout': 'En savoir plus',
+                'doc.monitoringHealthLabel': 'Health check',
+                'doc.monitoringMetricsLabel': 'Métriques Prometheus',
+                'doc.langChooser': 'Choisir la langue',
+                'lang.fr': 'FR',
+                'lang.en': 'EN'
+            },
+            en: {
+                'nav.home': 'Home',
+                'nav.about': 'About',
+                'nav.blog': 'Blog',
+                'nav.monitoring': 'Monitoring',
+                'doc.footerCopy': '© 2024 Portfolio. All rights reserved.',
+                'doc.titleHome': 'Home - Portfolio',
+                'doc.titleAbout': 'About - Portfolio',
+                'doc.titleMonitoring': 'Monitoring - Portfolio',
+                'doc.welcome': 'Welcome to my Portfolio',
+                'doc.homeIntro': 'This is the home page.',
+                'doc.aboutHeading': 'About',
+                'doc.aboutIntro': 'Information about me.',
+                'doc.monitoringTitle': 'Service status',
+                'doc.monitoringIntro': 'Overview of service availability.',
+                'doc.homeKicker': 'The Digital Architect',
+                'doc.homeCard1Title': 'Product Architecture',
+                'doc.homeCard1Body': 'Interface design, user journey structuring, and component consistency.',
+                'doc.homeCard2Title': 'Data & AI',
+                'doc.homeCard2Body': 'Value-driven prototyping: analytics, pipelines, generative AI, and automation.',
+                'doc.homeCard3Title': 'Delivery',
+                'doc.homeCard3Body': 'Pragmatic approach: short iterations, technical quality, monitoring, and optimization.',
+                'doc.homeCtaBlog': 'View articles',
+                'doc.homeCtaAbout': 'Learn more',
+                'doc.monitoringHealthLabel': 'Health check',
+                'doc.monitoringMetricsLabel': 'Prometheus metrics',
+                'doc.langChooser': 'Choose language',
+                'lang.fr': 'FR',
+                'lang.en': 'EN'
+            }
+        };
+
+        function getLang() {
+            return localStorage.getItem(STORAGE_KEY) || 'fr';
+        }
+        function setLang(lang) {
+            if (dict[lang]) {
+                localStorage.setItem(STORAGE_KEY, lang);
+                document.documentElement.lang = lang;
+                document.documentElement.setAttribute('data-lang', lang);
+                applyI18n(lang);
+                updateToggle(lang);
+            }
+        }
+        function t(lang, key) {
+            var d = dict[lang];
+            return (d && d[key]) || dict.fr[key] || key;
+        }
+        function applyI18n(lang) {
+            var metaTitle = document.querySelector('meta[name="i18n-title-key"]');
+            if (metaTitle) document.title = t(lang, metaTitle.getAttribute('content'));
+            var els = document.querySelectorAll('[data-i18n]');
+            els.forEach(function(el) {
+                var key = el.getAttribute('data-i18n');
+                if (key) el.textContent = t(lang, key);
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n-placeholder');
+                if (key) el.placeholder = t(lang, key);
+            });
+            document.querySelectorAll('[data-i18n-aria]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n-aria');
+                if (key) el.setAttribute('aria-label', t(lang, key));
+            });
+            document.querySelectorAll('[data-i18n-btn]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n-btn');
+                if (key) el.textContent = t(lang, key);
+            });
+            document.querySelectorAll('[data-i18n-group-aria]').forEach(function(el) {
+                var key = el.getAttribute('data-i18n-group-aria');
+                if (key) el.setAttribute('aria-label', t(lang, key));
+            });
+        }
+        function updateToggle(lang) {
+            document.querySelectorAll('.i18n-toggle [data-lang]').forEach(function(btn) {
+                var isActive = btn.getAttribute('data-lang') === lang;
+                btn.classList.toggle('active', isActive);
+                btn.setAttribute('aria-pressed', isActive);
+            });
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            var lang = getLang();
+            applyI18n(lang);
+            updateToggle(lang);
+            document.querySelectorAll('.i18n-toggle [data-lang]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    setLang(btn.getAttribute('data-lang'));
+                });
+            });
+        });
+        window.i18nBackend = { getLang: getLang, setLang: setLang, t: function(k) { return t(getLang(), k); } };
+    })();
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

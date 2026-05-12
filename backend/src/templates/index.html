@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block head %}<meta name="i18n-title-key" content="doc.titleHome">{% endblock %}
+{% block title %}Accueil - Portfolio{% endblock %}
+
+{% block content %}
+<style>
+  .home-hero { padding: .4rem 0; }
+  .home-kicker {
+    display: inline-block;
+    font-size: .72rem;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+    color: #1e63d6;
+    background: #e7f0ff;
+    border: 1px solid #d2e4ff;
+    border-radius: 999px;
+    padding: .35rem .7rem;
+  }
+  .home-title {
+    margin: .8rem 0 .55rem;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.05;
+    letter-spacing: -.02em;
+  }
+  .home-title em { color: #1e63d6; font-style: normal; }
+  .home-sub {
+    margin: 0 0 .95rem;
+    color: #5f6c85;
+    max-width: 62ch;
+    line-height: 1.65;
+  }
+  .home-grid {
+    display: grid;
+    gap: .75rem;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  }
+  .home-card {
+    background: #fff;
+    border: 1px solid #dee8f8;
+    border-radius: 14px;
+    padding: .9rem;
+    box-shadow: 0 10px 22px rgba(17, 37, 71, .07);
+  }
+  .home-card h3 { margin: 0 0 .35rem; font-size: 1rem; }
+  .home-card p { margin: 0; color: #62708a; font-size: .92rem; line-height: 1.55; }
+  .home-actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: .9rem; }
+  .home-btn {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 700;
+    border-radius: 10px;
+    padding: .56rem .86rem;
+    font-size: .84rem;
+  }
+  .home-btn-primary { background: #1e63d6; color: #fff; }
+  .home-btn-secondary { background: #eef3ff; color: #26437a; border: 1px solid #d8e4fb; }
+</style>
+
+<section class="home-hero">
+  <span class="home-kicker" data-i18n="doc.homeKicker">The Digital Architect</span>
+  <h1 class="home-title" data-i18n="doc.welcome">Bienvenue sur mon <em>Portfolio</em></h1>
+  <p class="home-sub" data-i18n="doc.homeIntro">
+    Design, data et engineering pour créer des expériences modernes, lisibles et performantes.
+  </p>
+
+  <div class="home-grid">
+    <article class="home-card">
+      <h3 data-i18n="doc.homeCard1Title">Architecture Produit</h3>
+      <p data-i18n="doc.homeCard1Body">Conception d'interfaces, structuration des parcours et cohérence des composants.</p>
+    </article>
+    <article class="home-card">
+      <h3 data-i18n="doc.homeCard2Title">Data & IA</h3>
+      <p data-i18n="doc.homeCard2Body">Prototypage orienté valeur : analytics, pipelines, IA générative et automatisation.</p>
+    </article>
+    <article class="home-card">
+      <h3 data-i18n="doc.homeCard3Title">Delivery</h3>
+      <p data-i18n="doc.homeCard3Body">Approche pragmatique : itérations courtes, qualité technique, monitoring et optimisation.</p>
+    </article>
+  </div>
+
+  <div class="home-actions">
+    <a class="home-btn home-btn-primary" href="{{ url_for('blog.blog_list') }}" data-i18n="doc.homeCtaBlog">Voir les articles</a>
+    <a class="home-btn home-btn-secondary" href="{{ url_for('main.about') }}" data-i18n="doc.homeCtaAbout">En savoir plus</a>
+  </div>
+</section>
+{% endblock %}

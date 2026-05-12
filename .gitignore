@@ -6,7 +6,7 @@
 /cloudbuild
 /test
 # /docs - Garder la documentation
-/scripts
+# /scripts - NE PAS ignorer : scripts/ à la racine est versionné (dev, quality, i18n, etc.)
 docker-compose.yml
 .env.production
 .env.development
@@ -33,7 +33,7 @@ __pycache__/
 *$py.class
 *.so
 .Python
-.venv/
+*.venv/
 venv/
 ENV/
 env/
@@ -79,6 +79,7 @@ coverage.xml
 *.py,cover
 .hypothesis/
 .pytest_cache/
+pytest-output.txt
 
 # Virtual environments
 venv/
@@ -116,6 +117,8 @@ venv.bak/
 .jekyll-metadata
 app/_site/
 app/site/
+backend/app/_site/
+backend/app/site/
 _site/
 site/
 

@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}{{ article.meta_title or article.title }} - Portfolio{% endblock %}
+
+{% block content %}
+<style>
+  .post-wrap {
+    background: #fff;
+    border: 1px solid #dfe8f8;
+    border-radius: 16px;
+    padding: 1rem;
+    box-shadow: 0 12px 26px rgba(16, 35, 67, .08);
+  }
+  .post-wrap h1 {
+    margin: 0 0 .45rem;
+    font-size: clamp(1.85rem, 6.2vw, 2.8rem);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+  }
+  .meta {
+    margin: 0 0 .6rem;
+    color: #6a7893;
+    font-weight: 600;
+    font-size: .9rem;
+  }
+  .excerpt {
+    margin: 0 0 .85rem;
+    color: #3e4f6f;
+    line-height: 1.65;
+    font-size: 1rem;
+    border-left: 3px solid #c9ddff;
+    padding-left: .7rem;
+  }
+  .content { color: #16233f; line-height: 1.75; }
+  .content h2, .content h3 { line-height: 1.25; margin-top: 1.3rem; }
+  .content pre {
+    overflow: auto;
+    border-radius: 12px;
+    background: #0f1c36;
+    color: #e8f0ff;
+    padding: .8rem;
+  }
+  .post-back {
+    margin-top: .8rem;
+  }
+  .post-back a {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 10px;
+    border: 1px solid #d9e5fb;
+    background: #f1f6ff;
+    color: #2c4b85;
+    padding: .45rem .72rem;
+    font-weight: 700;
+    font-size: .82rem;
+  }
+</style>
+
+<article class="post-wrap blog-post">
+  <h1>{{ article.title }}</h1>
+  {% if article.published_at or article.created_at %}
+  <p class="meta">
+    {% if article.published_at %}{{ article.published_at.strftime('%d/%m/%Y') }}{% else %}{{ article.created_at.strftime('%d/%m/%Y') }}{% endif %}
+    {% if article.reading_time %} · {{ article.reading_time }} min de lecture{% endif %}
+  </p>
+  {% endif %}
+  {% if article.excerpt %}
+  <p class="excerpt">{{ article.excerpt }}</p>
+  {% endif %}
+  <div class="content">
+    {{ article.content | safe }}
+  </div>
+</article>
+<p class="post-back"><a href="{{ url_for('blog.blog_list') }}">← Retour au blog</a></p>
+{% endblock %}

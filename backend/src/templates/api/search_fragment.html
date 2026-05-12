@@ -1,0 +1,10 @@
+{# Fragment HTML pour HTMX : résultats de recherche /api/search #}
+{% if hits %}
+<ul class="search-results">
+  {% for h in hits %}
+  <li><a href="{{ h.url }}">{{ h.title or 'Sans titre' }}</a>{% if h.snippet %} — {{ h.snippet }}{% endif %}</li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>{{ empty_message }}</p>
+{% endif %}

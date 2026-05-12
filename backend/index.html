@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="fr" data-lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Backend Platform - FastAPI</title>
+  <style>
+    :root {
+      --bg: #f3f6fc;
+      --surface: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --primary: #1e63d6;
+      --primary-dark: #114aa9;
+      --border: #dce7f8;
+      --ok-bg: #e9fbf3;
+      --ok-fg: #0f7a4a;
+      --warn-bg: #fff6e8;
+      --warn-fg: #995f00;
+      --shadow: 0 12px 28px rgba(18, 34, 65, 0.08);
+    }
+    [data-theme="dark"] {
+      --bg: #0f172a;
+      --surface: #162033;
+      --text: #e8eefb;
+      --muted: #9dafcb;
+      --primary: #5ea0ff;
+      --primary-dark: #3f84ea;
+      --border: #2a3a56;
+      --ok-bg: #123225;
+      --ok-fg: #7be0b0;
+      --warn-bg: #3a2c13;
+      --warn-fg: #ffd18a;
+      --shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, #f7f9ff 100%);
+      color: var(--text);
+    }
+    .shell { width: min(1040px, 92vw); margin: 0 auto; }
+    .top {
+      position: sticky;
+      top: 0;
+      background: color-mix(in oklab, var(--bg) 88%, transparent);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      z-index: 10;
+    }
+    .top-row {
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+      padding: .7rem 0;
+      flex-wrap: wrap;
+    }
+    .brand { font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #294473; }
+    .spacer { margin-left: auto; }
+    .btn, .chip {
+      border: 1px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      padding: .45rem .75rem;
+      border-radius: .65rem;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: .84rem;
+      cursor: pointer;
+    }
+    .btn.primary { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .btn.primary:hover { background: var(--primary-dark); }
+    main { padding: 1rem 0 2rem; }
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+      padding: 1rem;
+      margin-top: .9rem;
+    }
+    .hero h1 { margin: .3rem 0 .5rem; font-size: clamp(1.7rem, 5vw, 2.5rem); line-height: 1.1; }
+    .hero p { margin: 0; color: var(--muted); max-width: 70ch; }
+    .actions { margin-top: .9rem; display: flex; gap: .55rem; flex-wrap: wrap; }
+    .grid {
+      margin-top: .8rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: .65rem;
+    }
+    .card {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .8rem;
+      background: color-mix(in oklab, var(--surface) 90%, #f5f8ff);
+    }
+    .card h3 { margin: 0 0 .3rem; font-size: 1rem; }
+    .card p { margin: 0; color: var(--muted); font-size: .91rem; }
+    .status { margin-top: .7rem; display: flex; gap: .5rem; flex-wrap: wrap; }
+    .badge { border-radius: 999px; padding: .25rem .58rem; font-size: .76rem; font-weight: 700; }
+    .ok { background: var(--ok-bg); color: var(--ok-fg); }
+    .warn { background: var(--warn-bg); color: var(--warn-fg); }
+    .endpoint { display: grid; grid-template-columns: auto 1fr; gap: .5rem; align-items: center; margin-top: .4rem; }
+    .method { font-size: .75rem; font-weight: 800; border-radius: .45rem; padding: .25rem .48rem; color: #fff; background: #168355; }
+    .footer { margin: 1rem 0 2rem; color: var(--muted); font-size: .84rem; text-align: center; }
+    .proof-grid {
+      margin-top: .8rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: .65rem;
+    }
+    .proof-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: .8rem;
+      background: color-mix(in oklab, var(--surface) 90%, #f5f8ff);
+    }
+    .proof-item h3 { margin: 0 0 .35rem; font-size: 1rem; }
+    .proof-meta { margin-top: .45rem; color: var(--muted); font-size: .8rem; }
+    .badge.neutral { background: #edf3ff; color: #274a89; }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="shell top-row">
+      <strong class="brand" data-i18n="brand">Backend Platform</strong>
+      <a class="chip" href="/backend/monitoring.html" data-i18n="nav.monitoring">Monitoring</a>
+      <span class="spacer"></span>
+      <button class="chip" id="lang-fr">FR</button>
+      <button class="chip" id="lang-en">EN</button>
+      <button class="chip" id="theme-toggle">Theme</button>
+    </div>
+  </header>
+
+  <main class="shell">
+    <section class="panel hero">
+      <h1 data-i18n="hero.title">FastAPI backend for portfolio content and platform services</h1>
+      <p data-i18n="hero.body">API canonique du repo pour les articles, projets et experiences, avec rate limiting multi-tier et endpoints de health/metrics pour l'observabilite.</p>
+      <div class="actions">
+        <a class="btn primary" href="/docs" data-i18n="hero.cta.docs">Open API docs</a>
+        <a class="btn" href="/health" data-i18n="hero.cta.health">Check health</a>
+        <a class="btn" href="/api/rate-limit" data-i18n="hero.cta.rate">Rate limit status</a>
+      </div>
+      <div class="status">
+        <span class="badge ok" data-i18n="status.stack">Stack: FastAPI + Frontend Flask</span>
+        <span class="badge warn" data-i18n="status.i18n">UI i18n: FR/EN</span>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 data-i18n="features.title">Core capabilities</h2>
+      <div class="grid">
+        <article class="card">
+          <h3 data-i18n="features.api.title">REST API v1</h3>
+          <p data-i18n="features.api.body">Endpoints /api/v1/articles, /projects, /experiences with filtering and pagination.</p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="features.rate.title">Rate limiting</h3>
+          <p data-i18n="features.rate.body">Global + IP + endpoint tiers with configurable limits and debug endpoint.</p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="features.data.title">Data loader</h3>
+          <p data-i18n="features.data.body">YAML source with cache invalidation and strict canonical mode support.</p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="features.obs.title">Observability-ready</h3>
+          <p data-i18n="features.obs.body">Health, metrics, CI summaries, and monitoring stack integration.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 data-i18n="endpoints.title">Key endpoints</h2>
+      <div class="endpoint"><span class="method">GET</span><a href="/api/v1/articles/">/api/v1/articles/</a></div>
+      <div class="endpoint"><span class="method">GET</span><a href="/api/v1/projects/">/api/v1/projects/</a></div>
+      <div class="endpoint"><span class="method">GET</span><a href="/api/v1/experiences/">/api/v1/experiences/</a></div>
+      <div class="endpoint"><span class="method">GET</span><a href="/api/rate-limit">/api/rate-limit</a></div>
+      <div class="endpoint"><span class="method">GET</span><a href="/health">/health</a></div>
+      <div class="endpoint"><span class="method">GET</span><a href="/metrics">/metrics</a></div>
+    </section>
+
+    <section class="panel">
+      <h2 data-i18n="proof.title">Live backend proof points</h2>
+      <p data-i18n="proof.subtitle">Etat courant recupere depuis /health et /api/rate-limit.</p>
+      <div class="proof-grid">
+        <article class="proof-item">
+          <h3 data-i18n="proof.health.title">API health</h3>
+          <span id="proof-health" class="badge neutral">unknown</span>
+        </article>
+        <article class="proof-item">
+          <h3 data-i18n="proof.rate.title">Rate-limit backend</h3>
+          <span id="proof-rate" class="badge neutral">unknown</span>
+        </article>
+        <article class="proof-item">
+          <h3 data-i18n="proof.updated.title">Last update</h3>
+          <span id="proof-updated" class="badge neutral">-</span>
+        </article>
+      </div>
+      <div class="proof-meta" data-i18n="proof.refresh">Auto refresh: every 30 seconds.</div>
+    </section>
+  </main>
+
+  <div class="shell footer" data-i18n="footer">Backend landing aligned with this repository architecture.</div>
+
+  <script>
+    const STORAGE_LANG = "preferred-language";
+    const STORAGE_THEME = "preferred-theme";
+    const dict = {
+      fr: {
+        "brand": "Backend Platform",
+        "nav.monitoring": "Monitoring",
+        "hero.title": "Backend FastAPI pour contenus portfolio et services plateforme",
+        "hero.body": "API canonique du repo pour les articles, projets et experiences, avec rate limiting multi-tier et endpoints de health/metrics pour l'observabilite.",
+        "hero.cta.docs": "Ouvrir la doc API",
+        "hero.cta.health": "Verifier la sante",
+        "hero.cta.rate": "Statut rate limit",
+        "status.stack": "Stack: FastAPI + Frontend Flask",
+        "status.i18n": "UI i18n: FR/EN",
+        "features.title": "Capacites principales",
+        "features.api.title": "REST API v1",
+        "features.api.body": "Endpoints /api/v1/articles, /projects, /experiences avec filtres et pagination.",
+        "features.rate.title": "Rate limiting",
+        "features.rate.body": "Tiers global + IP + endpoint avec limites configurables et endpoint de debug.",
+        "features.data.title": "Data loader",
+        "features.data.body": "Source YAML avec invalidation cache et mode strict canonique.",
+        "features.obs.title": "Observabilite",
+        "features.obs.body": "Health, metrics, resumes CI et integration stack monitoring.",
+        "endpoints.title": "Endpoints cles",
+        "proof.title": "Preuves backend en direct",
+        "proof.subtitle": "Etat courant recupere depuis /health et /api/rate-limit.",
+        "proof.health.title": "Sante API",
+        "proof.rate.title": "Backend rate-limit",
+        "proof.updated.title": "Derniere mise a jour",
+        "proof.refresh": "Rafraichissement auto: toutes les 30 secondes.",
+        "footer": "Landing backend alignee avec l'architecture actuelle du repository."
+      },
+      en: {
+        "brand": "Backend Platform",
+        "nav.monitoring": "Monitoring",
+        "hero.title": "FastAPI backend for portfolio content and platform services",
+        "hero.body": "Canonical API for articles, projects, and experiences, with multi-tier rate limiting and health/metrics endpoints.",
+        "hero.cta.docs": "Open API docs",
+        "hero.cta.health": "Check health",
+        "hero.cta.rate": "Rate limit status",
+        "status.stack": "Stack: FastAPI + Flask frontend",
+        "status.i18n": "UI i18n: FR/EN",
+        "features.title": "Core capabilities",
+        "features.api.title": "REST API v1",
+        "features.api.body": "Endpoints /api/v1/articles, /projects, /experiences with filters and pagination.",
+        "features.rate.title": "Rate limiting",
+        "features.rate.body": "Global + IP + endpoint tiers with configurable limits and debug endpoint.",
+        "features.data.title": "Data loader",
+        "features.data.body": "YAML source with cache invalidation and strict canonical mode support.",
+        "features.obs.title": "Observability-ready",
+        "features.obs.body": "Health, metrics, CI summaries, and monitoring stack integration.",
+        "endpoints.title": "Key endpoints",
+        "proof.title": "Live backend proof points",
+        "proof.subtitle": "Current status fetched from /health and /api/rate-limit.",
+        "proof.health.title": "API health",
+        "proof.rate.title": "Rate-limit backend",
+        "proof.updated.title": "Last update",
+        "proof.refresh": "Auto refresh: every 30 seconds.",
+        "footer": "Backend landing aligned with the current repository architecture."
+      }
+    };
+    function applyLang(lang) {
+      document.documentElement.lang = lang;
+      document.documentElement.setAttribute("data-lang", lang);
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        el.textContent = (dict[lang] && dict[lang][key]) || dict.fr[key] || key;
+      });
+      localStorage.setItem(STORAGE_LANG, lang);
+    }
+    function applyTheme(theme) {
+      document.documentElement.setAttribute("data-theme", theme);
+      localStorage.setItem(STORAGE_THEME, theme);
+    }
+    function setProofBadge(el, value) {
+      const v = String(value || "unknown").toLowerCase();
+      el.textContent = v;
+      el.classList.remove("ok", "warn", "neutral");
+      if (v === "healthy" || v === "ready" || v === "alive" || v === "memory" || v === "redis") {
+        el.classList.add("ok");
+      } else if (v === "offline") {
+        el.classList.add("warn");
+      } else {
+        el.classList.add("neutral");
+      }
+    }
+    function nowText() {
+      const lang = (document.documentElement.lang || "fr").toLowerCase();
+      const locale = lang.startsWith("en") ? "en-US" : "fr-FR";
+      return new Date().toLocaleTimeString(locale, { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+    }
+    async function refreshProof() {
+      const healthEl = document.getElementById("proof-health");
+      const rateEl = document.getElementById("proof-rate");
+      const updatedEl = document.getElementById("proof-updated");
+      if (!healthEl || !rateEl || !updatedEl) return;
+      try {
+        const [h, r] = await Promise.all([
+          fetch("/health", { headers: { "Accept": "application/json" } }),
+          fetch("/api/rate-limit", { headers: { "Accept": "application/json" } }),
+        ]);
+        const hData = h.ok ? await h.json() : {};
+        const rData = r.ok ? await r.json() : {};
+        setProofBadge(healthEl, hData.status || "unknown");
+        setProofBadge(rateEl, rData.backend || "unknown");
+      } catch (_e) {
+        setProofBadge(healthEl, "offline");
+        setProofBadge(rateEl, "unknown");
+      }
+      updatedEl.textContent = nowText();
+    }
+    document.getElementById("lang-fr").addEventListener("click", () => applyLang("fr"));
+    document.getElementById("lang-en").addEventListener("click", () => applyLang("en"));
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      const next = (localStorage.getItem(STORAGE_THEME) || "light") === "light" ? "dark" : "light";
+      applyTheme(next);
+    });
+    applyLang(localStorage.getItem(STORAGE_LANG) || "fr");
+    applyTheme(localStorage.getItem(STORAGE_THEME) || "light");
+    refreshProof();
+    setInterval(refreshProof, 30000);
+  </script>
+</body>
+</html>

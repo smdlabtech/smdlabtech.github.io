@@ -29,6 +29,8 @@ Le script :
 
 Si une de ces étapes échoue, corriger avant de pousser en prod.
 
+**Tests rate limiting** (optionnel) : `PYTHONPATH=app python3 -m pytest tests/test_rate_limiting.py -v`
+
 **Première fois (Python)** : créer un environnement virtuel et installer les dépendances :
 
 ```bash

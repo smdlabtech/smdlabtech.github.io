@@ -1,4 +1,0 @@
-"""
-Routes web (HTML)
-"""
-

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Blog - Portfolio{% endblock %}
+
+{% block content %}
+<style>
+  .blog-list-page h1 {
+    margin: 0 0 .35rem;
+    font-size: clamp(1.85rem, 6vw, 2.7rem);
+    line-height: 1.08;
+    letter-spacing: -.02em;
+  }
+  .blog-intro {
+    margin: 0 0 .95rem;
+    color: #61718d;
+    line-height: 1.65;
+  }
+  .blog-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: .7rem;
+  }
+  .blog-item {
+    background: #fff;
+    border: 1px solid #dfe8f8;
+    border-radius: 14px;
+    padding: .92rem;
+    box-shadow: 0 10px 24px rgba(16, 35, 66, .07);
+  }
+  .blog-item a {
+    text-decoration: none;
+    font-weight: 800;
+    color: #0f1a33;
+    letter-spacing: -.01em;
+    font-size: 1.02rem;
+  }
+  .blog-item a:hover { color: #1e63d6; }
+  .blog-item .excerpt { margin: .4rem 0 .2rem; color: #62728e; line-height: 1.6; }
+  .blog-item small { color: #73829c; font-weight: 600; }
+</style>
+
+<section class="blog-list-page">
+  <h1 data-i18n="nav.blog">Blog</h1>
+  <p class="blog-intro">Sélection d’articles autour du design d’interfaces, de la data et de l’engineering.</p>
+
+{% if articles %}
+<ul class="blog-grid">
+  {% for article in articles %}
+  <li class="blog-item">
+    <a href="{{ url_for('blog.blog_post', slug=article.slug) }}">{{ article.title }}</a>
+    {% if article.excerpt %}<p class="excerpt">{{ article.excerpt }}</p>{% endif %}
+    {% if article.created_at %}<small>{{ article.created_at.strftime('%d/%m/%Y') }}</small>{% endif %}
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p>Aucun article publié pour l'instant.</p>
+{% endif %}
+</section>
+{% endblock %}

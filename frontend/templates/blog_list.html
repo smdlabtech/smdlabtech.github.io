@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block head %}<meta name="i18n-title-key" content="page.blog.title">{% endblock %}
+{% block title %}Blog - Portfolio{% endblock %}
+{% block content %}
+<section class="panel blog-hero">
+  <h1 data-i18n="blog.heading">Blog</h1>
+  <p data-i18n="blog.intro">Contenus rédigés en Markdown, servis par l’API et structurés par année.</p>
+
+  <form method="get" class="filters blog-filters">
+    <label class="blog-lang-field">
+      <span class="visually-hidden" data-i18n="blog.langLabel">Langue du contenu</span>
+      <select name="lang" class="blog-lang-select" data-i18n-aria="blog.langAria" aria-label="Langue">
+        <option value="fr" {% if lang == "fr" %}selected{% endif %} data-i18n="lang.fr">FR</option>
+        <option value="en" {% if lang == "en" %}selected{% endif %} data-i18n="lang.en">EN</option>
+      </select>
+    </label>
+    <input type="search" name="q" value="{{ q or '' }}" placeholder="Rechercher un titre, un tag..." data-i18n-placeholder="blog.searchPlaceholder" />
+    <input type="text" name="tag" value="{{ tag_filter or '' }}" placeholder="Tag (ex: ai)" data-i18n-placeholder="blog.tagPlaceholder" />
+    <input type="text" name="category" value="{{ category_filter or '' }}" placeholder="Catégorie" data-i18n-placeholder="blog.categoryPlaceholder" />
+    <button type="submit" class="btn btn-primary" data-i18n="blog.filterBtn">Filtrer</button>
+  </form>
+
+  {% if popular_tags %}
+  <div class="chips blog-tags-cloud">
+    {% for t, _count in popular_tags %}
+    <a class="chip" href="{{ url_for('blog_list', tag=t, lang=lang) }}">{{ t }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</section>
+{% if not backend_available and not articles %}
+<p class="notice">
+  <span data-i18n="blog.backendUnavailable">Backend API non joignable sur</span> <code>{{ backend_url }}</code>.
+  {% if backend_error %}<strong data-i18n="blog.errorDetail">Détail:</strong> {{ backend_error }}.{% endif %}
+  <span data-i18n="blog.verifyBackend">Vérifiez que le backend tourne correctement.</span>
+</p>
+{% endif %}
+{% if articles %}
+<div class="blog-timeline">
+  {% for year, items in blog_sections %}
+  <section class="blog-year-block" aria-labelledby="blog-year-{{ year }}">
+    <h2 id="blog-year-{{ year }}" class="blog-year-title">{{ year }}</h2>
+    <ul class="blog-grid">
+      {% for a in items %}
+      <li class="blog-card">
+        <a class="blog-card-link" href="{{ url_for('blog_detail', article_id=a.get('id')) }}?lang={{ lang }}">
+          <span class="blog-card-title">{{ a.get('title', a) }}</span>
+        </a>
+        {% if a.get('date') %}
+        <time class="blog-card-date" datetime="{{ a.get('date') }}">{{ a.get('date') }}</time>
+        {% endif %}
+        {% if a.get('excerpt') %}
+        <p class="blog-card-excerpt">{{ a.get('excerpt') }}</p>
+        {% endif %}
+        <div class="blog-card-meta">
+          {% if a.get('categories') %}
+          <span class="blog-meta-label" data-i18n="blog.metaCategories">Catégories</span>
+          <div class="chips blog-card-chips">
+            {% for c in a.get('categories')[:3] %}
+            <a class="chip chip-muted" href="{{ url_for('blog_list', category=c, lang=lang) }}">{{ c }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% if a.get('tags') %}
+          <span class="blog-meta-label" data-i18n="blog.metaTags">Tags</span>
+          <div class="chips blog-card-chips">
+            {% for t in (a.get('tags') or [])[:5] %}
+            <a class="chip" href="{{ url_for('blog_list', tag=t, lang=lang) }}">{{ t }}</a>
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+</div>
+{% elif backend_available %}
+<p data-i18n="blog.empty">Aucun article pour l'instant.</p>
+{% endif %}
+
+{% if total_pages and total_pages > 1 %}
+<nav class="pagination" aria-label="Pagination blog" data-i18n-aria="blog.paginationLabel">
+  {% if prev_page %}
+  <a class="btn btn-secondary" href="{{ url_for('blog_list', page=prev_page, per_page=per_page, q=q, tag=tag_filter, category=category_filter, lang=lang) }}" data-i18n="blog.prev">← Précédent</a>
+  {% endif %}
+  <span><span data-i18n="blog.page">Page</span> {{ page }} / {{ total_pages }}</span>
+  {% if next_page %}
+  <a class="btn btn-secondary" href="{{ url_for('blog_list', page=next_page, per_page=per_page, q=q, tag=tag_filter, category=category_filter, lang=lang) }}" data-i18n="blog.next">Suivant →</a>
+  {% endif %}
+</nav>
+{% endif %}
+{% endblock %}
